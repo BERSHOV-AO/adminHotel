@@ -5,6 +5,7 @@ import controllers.*;
 import enums.RoomHistoryStatus;
 import enums.RoomStatus;
 import models.*;
+import storages.RoomsStorageImpl;
 
 import java.time.LocalDate;
 
@@ -129,6 +130,10 @@ public class HotelManagerImpl implements HotelManager {
         System.out.println(stringBuilder.toString());
     }
 
+    public Room getRoomByNumber(Integer roomNumber) {
+        return roomManagerImpl.getRoomByNumber(roomNumber);
+    }
+    // stayInfoManagerImpl
     @Override
     public void showFreeRoomsByDate(LocalDate date) {
         stayInfoManagerImpl.getFreeRoomsByDate(date).stream()

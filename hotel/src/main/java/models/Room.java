@@ -1,25 +1,34 @@
 package models;
 
+import enums.RoomStars;
 import enums.RoomStatus;
 
 import java.util.Objects;
 
 public class Room {
-    private int roomNumber;
+    private Integer roomNumber;
     private int stars;
+   // private RoomStars stars;
     private double price;
     private int capacity;
     private RoomStatus status;
 
-    public Room(int roomNumber, int stars, double price, int capacity, RoomStatus status) {
-        this.roomNumber = roomNumber;
-        this.stars = stars;
-        this.price = price;
-        this.capacity = capacity;
-        this.status = status;
-    }
+//    public Room(int roomNumber, RoomStars stars, double price, int capacity, RoomStatus status) {
+//        this.roomNumber = roomNumber;
+//        this.stars = stars;
+//        this.price = price;
+//        this.capacity = capacity;
+//        this.status = status;
+//    }
+public Room(Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
+    this.roomNumber = roomNumber;
+    this.stars = stars;
+    this.price = price;
+    this.capacity = capacity;
+    this.status = status;
+}
 
-    public int getRoomNumber() {
+    public Integer getRoomNumber() {
         return roomNumber;
     }
 
@@ -34,6 +43,15 @@ public class Room {
     public void setStars(int stars) {
         this.stars = stars;
     }
+
+
+//    public RoomStars getStars() {
+//        return stars;
+//    }
+//
+//    public void setStars(RoomStars stars) {
+//        this.stars = stars;
+//    }
 
     public double getPrice() {
         return price;

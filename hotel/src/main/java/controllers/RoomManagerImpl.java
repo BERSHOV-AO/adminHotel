@@ -85,5 +85,12 @@ public class RoomManagerImpl implements RoomManager {
     public int totalCountEmptyRooms() {
         return getFreeRooms(RoomsStorageImpl.getInstance().getRooms()).size();
     }
+
+    public Room getRoomByNumber(Integer roomNumber) {
+        return RoomsStorageImpl.getInstance().getRooms().stream()
+                .filter(room -> room.getRoomNumber().equals(roomNumber))
+                .findFirst()
+                .orElse(null);
+    }
 }
 

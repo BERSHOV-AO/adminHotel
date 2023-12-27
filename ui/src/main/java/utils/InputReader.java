@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class InputReader {
     public static Integer getIntegerInput(Scanner scanner, String message) {
-        //  Printer.print(message);
+        Printer.print(message);
         return getIntegerInput(scanner);
     }
 
@@ -18,7 +18,7 @@ public class InputReader {
                 input = scanner.nextInt();
                 isValid = true;
             } else {
-            //    Printer.print("Wrong input. Please, input a number.");
+                Printer.print("Wrong input. Please, input a number.");
                 scanner.nextLine();
                 continue;
             }
@@ -27,7 +27,7 @@ public class InputReader {
     }
 
     public static String getStringInput(Scanner scanner, String message) {
-     //   Printer.print(message);
+        Printer.print(message);
         return getStringInput(scanner);
     }
 
@@ -39,7 +39,7 @@ public class InputReader {
     }
 
     public static Double getDoubleInput(Scanner scanner, String message) {
-    //   Printer.print(message);
+        Printer.print(message);
         return getDoubleInput(scanner);
     }
 
@@ -53,7 +53,7 @@ public class InputReader {
                 isValid = true;
 
             } else {
-           //     Printer.print("Wrong input. Please, input a double.");
+                Printer.print("Wrong input. Please, input a double.");
                 scanner.nextLine();
                 continue;
             }
@@ -62,7 +62,7 @@ public class InputReader {
     }
 
     public static LocalDate getLocalDateInput(Scanner scanner, String message) {
-    //    Printer.print(message);
+        Printer.print(message);
 
         return getLocalDateInput(scanner);
     }
@@ -77,7 +77,7 @@ public class InputReader {
                 date = LocalDate.parse(input);
                 isValid = true;
             } else {
-         //       Printer.print("Wrong input. Please, input the date in \"YYYY-MM-DD\" format.");
+                Printer.print("Wrong input. Please, input the date in \"YYYY-MM-DD\" format.");
                 scanner.nextLine();
                 continue;
             }

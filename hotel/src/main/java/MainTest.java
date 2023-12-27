@@ -160,5 +160,10 @@ public class MainTest {
          */
         System.out.println("--printAllRoomHistories--");
         hotelManagerImpl.printAllRoomHistories();
+
+
+        System.out.println("//-------------room----------------");
+        System.out.println(hotelManagerImpl.getRoomByNumber(4));
+
     }
 }
