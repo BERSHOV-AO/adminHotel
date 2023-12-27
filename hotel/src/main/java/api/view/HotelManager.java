@@ -50,6 +50,8 @@ public interface HotelManager {
 
     public void showFreeRoomsByDate(LocalDate date);
 
+    public Room getRoomByNumber(Integer roomNumber);
+
     public void showPayAmountForRoom(Room room);
 
     public void printLastThreeGuests();

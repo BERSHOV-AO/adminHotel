@@ -11,9 +11,9 @@ public class ChangeRoomPriceImpl implements Action {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
+        HotelManagerImpl.getInstance().printAllRooms();
 
         try {
-            HotelManagerImpl.getInstance().printAllRooms();
             Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты: ");
             Double priceDay = InputReader.getDoubleInput(scanner, "Введите новую стоимость номера за сутки ");
 
@@ -22,6 +22,5 @@ public class ChangeRoomPriceImpl implements Action {
         } catch (Exception e) {
             System.out.println("Не удалось изменить цену номера " + e.getMessage());
         }
-
     }
 }

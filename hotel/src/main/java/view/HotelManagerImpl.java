@@ -130,6 +130,7 @@ public class HotelManagerImpl implements HotelManager {
         System.out.println(stringBuilder.toString());
     }
 
+    @Override
     public Room getRoomByNumber(Integer roomNumber) {
         return roomManagerImpl.getRoomByNumber(roomNumber);
     }

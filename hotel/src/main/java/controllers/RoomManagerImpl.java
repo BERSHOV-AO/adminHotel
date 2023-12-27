@@ -86,6 +86,7 @@ public class RoomManagerImpl implements RoomManager {
         return getFreeRooms(RoomsStorageImpl.getInstance().getRooms()).size();
     }
 
+    @Override
     public Room getRoomByNumber(Integer roomNumber) {
         return RoomsStorageImpl.getInstance().getRooms().stream()
                 .filter(room -> room.getRoomNumber().equals(roomNumber))
