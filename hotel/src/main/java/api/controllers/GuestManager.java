@@ -12,4 +12,6 @@ public interface GuestManager {
     public void printGuest();
 
     public List<Guest> getSortedGuestsByAlphabet();
+
+    public Guest getGuestByName(String lastName);
 }

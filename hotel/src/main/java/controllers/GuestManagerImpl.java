@@ -2,7 +2,9 @@ package controllers;
 
 import api.controllers.GuestManager;
 import models.Guest;
+import models.Room;
 import storages.GuestStorageImpl;
+import storages.RoomsStorageImpl;
 
 import java.util.Comparator;
 import java.util.List;
@@ -36,5 +38,13 @@ public class GuestManagerImpl implements GuestManager {
         return GuestStorageImpl.getInstance().getGuests().stream()
                 .sorted(Comparator.comparing(Guest::getLastName))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Guest getGuestByName(String lastName) {
+        return GuestStorageImpl.getInstance().getGuests().stream()
+                .filter(guest -> guest.getLastName().equals(lastName))
+                .findFirst()
+                .orElse(null);
     }
 }

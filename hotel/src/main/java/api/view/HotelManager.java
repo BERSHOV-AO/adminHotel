@@ -23,6 +23,8 @@ public interface HotelManager {
 
     public void sortGuestsByName();
 
+    public Guest getGuestByName(String lastName);
+
     // Room
     public void createRoom(Room room);
 

@@ -61,6 +61,11 @@ public class HotelManagerImpl implements HotelManager {
         guestManagerImpl.getSortedGuestsByAlphabet().stream().forEach(System.out::println);
     }
 
+    @Override
+    public Guest getGuestByName(String lastName) {
+      return guestManagerImpl.getGuestByName(lastName);
+    }
+
     // Room
     @Override
     public void createRoom(Room room) {
