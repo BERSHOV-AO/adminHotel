@@ -227,9 +227,11 @@ public class HotelManagerImpl implements HotelManager {
 
     @Override
     public void checkOutGuestFromRoom(Guest guest, Room room) {
-        if (stayInfoManagerImpl.searchGuestInTheRoom(guest, room) && room.getStatus() == RoomStatus.OCCUPIED) {
-            stayInfoManagerImpl.deleteStayInfo(room.getRoomNumber());
-            roomManagerImpl.changeRoomStatus(room, RoomStatus.EMPTY);
+        if (stayInfoManagerImpl.searchGuestInTheRoom(guest, room)) {
+            if (room.getStatus() == RoomStatus.OCCUPIED) {
+                stayInfoManagerImpl.deleteStayInfo(room.getRoomNumber());
+                roomManagerImpl.changeRoomStatus(room, RoomStatus.EMPTY);
+            }
         } else {
             System.out.println("В комнате " + room.getRoomNumber() + " нет посетителей");
         }

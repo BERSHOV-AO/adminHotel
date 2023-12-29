@@ -34,14 +34,12 @@ public class Test {
         addGuest.execute();
         System.out.println("---add guest---");
         addGuest.execute();
-     //   printGuests.execute();
+        //   printGuests.execute();
 
-       // printStayInfo.execute();
+        // printStayInfo.execute();
         checkIn.execute();
         checkIn.execute();
-
         checkOut.execute();
-
         printStayInfo.execute();
 
 

@@ -22,9 +22,8 @@ public class CheckOutImpl implements Action {
         try {
             HotelManagerImpl.getInstance().checkOutGuestFromRoom(HotelManagerImpl.getInstance().getGuestByName(lastName),
                     HotelManagerImpl.getInstance().getRoomByNumber(roomNumber));
-
         } catch (Exception e) {
-            System.out.println("Некорректный ввод данных" + e.getMessage());
+            System.out.println("Некорректный ввод данных " + e.getMessage());
         }
     }
 }
