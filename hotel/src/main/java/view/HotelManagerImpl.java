@@ -5,7 +5,6 @@ import controllers.*;
 import enums.RoomHistoryStatus;
 import enums.RoomStatus;
 import models.*;
-import storages.RoomsStorageImpl;
 
 import java.time.LocalDate;
 
@@ -63,7 +62,7 @@ public class HotelManagerImpl implements HotelManager {
 
     @Override
     public Guest getGuestByName(String lastName) {
-      return guestManagerImpl.getGuestByName(lastName);
+        return guestManagerImpl.getGuestByName(lastName);
     }
 
     // Room
@@ -139,6 +138,7 @@ public class HotelManagerImpl implements HotelManager {
     public Room getRoomByNumber(Integer roomNumber) {
         return roomManagerImpl.getRoomByNumber(roomNumber);
     }
+
     // stayInfoManagerImpl
     @Override
     public void showFreeRoomsByDate(LocalDate date) {
@@ -171,6 +171,10 @@ public class HotelManagerImpl implements HotelManager {
                     System.out.println("Check-in date: " + checkInDate);
                     System.out.println("Check-out date: " + checkOutDate);
                 });
+    }
+
+    public boolean containsGuestInTheRoom(Guest guest, Room room) {
+        return stayInfoManagerImpl.searchGuestInTheRoom(guest, room);
     }
 
     // Room History
@@ -223,7 +227,7 @@ public class HotelManagerImpl implements HotelManager {
 
     @Override
     public void checkOutGuestFromRoom(Guest guest, Room room) {
-        if (room.getStatus() == RoomStatus.OCCUPIED) {
+        if (stayInfoManagerImpl.searchGuestInTheRoom(guest, room) && room.getStatus() == RoomStatus.OCCUPIED) {
             stayInfoManagerImpl.deleteStayInfo(room.getRoomNumber());
             roomManagerImpl.changeRoomStatus(room, RoomStatus.EMPTY);
         } else {
@@ -231,8 +235,6 @@ public class HotelManagerImpl implements HotelManager {
         }
     }
 }
-
-
 
 
 

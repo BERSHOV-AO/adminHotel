@@ -1,6 +1,7 @@
 package controllers;
 
 import api.controllers.StayInfoManager;
+import models.Guest;
 import models.Room;
 import models.StayInfo;
 import storages.StayInfoStorageImpl;
@@ -72,4 +73,13 @@ public class StayInfoManagerImpl implements StayInfoManager {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
     }
+
+    @Override
+    public boolean searchGuestInTheRoom(Guest guest, Room room) {
+        return StayInfoStorageImpl.getInstance().getInfoStorage().entrySet().stream()
+                .filter(entry -> entry.getKey().equals(room.getRoomNumber()))
+                .map(Map.Entry::getValue)
+                .anyMatch(stayInfo -> stayInfo.getGuest().getLastName().equals(guest.getLastName()));
+    }
 }
+

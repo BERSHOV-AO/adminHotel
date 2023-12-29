@@ -1,5 +1,6 @@
 package api.controllers;
 
+import models.Guest;
 import models.Room;
 import models.StayInfo;
 
@@ -20,4 +21,6 @@ public interface StayInfoManager {
     public double getPayAmountForRoom(Room room);
 
     public LinkedHashMap<Integer, StayInfo> getLastThreeGuests();
+
+    public boolean searchGuestInTheRoom(Guest guest, Room room);
 }

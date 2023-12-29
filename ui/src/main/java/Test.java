@@ -1,5 +1,6 @@
 import guest.AddGuestImpl;
 import guest.CheckInImpl;
+import guest.CheckOutImpl;
 import guest.PrintGuestsImpl;
 import room.*;
 import stayInfo.PrintStayInfoImpl;
@@ -18,6 +19,8 @@ public class Test {
 
         PrintStayInfoImpl printStayInfo = new PrintStayInfoImpl();
 
+        CheckOutImpl checkOut = new CheckOutImpl();
+
 
         //======================================
 
@@ -33,7 +36,11 @@ public class Test {
         addGuest.execute();
      //   printGuests.execute();
 
+       // printStayInfo.execute();
         checkIn.execute();
+        checkIn.execute();
+
+        checkOut.execute();
 
         printStayInfo.execute();
 
