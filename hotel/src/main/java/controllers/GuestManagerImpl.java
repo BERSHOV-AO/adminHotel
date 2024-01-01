@@ -3,6 +3,7 @@ package controllers;
 import api.controllers.GuestManager;
 import models.Guest;
 import models.Room;
+import models.Service;
 import storages.GuestStorageImpl;
 import storages.RoomsStorageImpl;
 
@@ -46,5 +47,19 @@ public class GuestManagerImpl implements GuestManager {
                 .filter(guest -> guest.getLastName().equals(lastName))
                 .findFirst()
                 .orElse(null);
+    }
+
+// add Service to Guests
+    public void addServicesToGuest(Guest guest, Service service) {
+        List<Guest> guests = GuestStorageImpl.getInstance().getGuests();
+        guests.stream()
+                .filter(storedGuest -> storedGuest.getLastName().equals(guest.getLastName()))
+                .findFirst()
+                .ifPresent(foundGuest -> {
+                    List<Service> services = foundGuest.getServices();
+                    services.add(service);
+                    foundGuest.setServices(services);
+                });
+        GuestStorageImpl.getInstance().setGuests(guests);
     }
 }

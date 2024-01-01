@@ -1,6 +1,7 @@
 package controllers;
 
 import api.controllers.ServiceManager;
+import enums.ServiceType;
 import models.Service;
 import storages.ServicesStorageImpl;
 
@@ -45,5 +46,12 @@ public class ServiceManagerImpl implements ServiceManager {
         return ServicesStorageImpl.getInstance().getServices().stream()
                 .sorted(Comparator.comparing(service -> service.getServiceType().name()))
                 .collect(Collectors.toList());
+    }
+
+    public Service getServiceByType(ServiceType serviceType) {
+        return ServicesStorageImpl.getInstance().getServices().stream()
+                .filter(service -> service.getServiceType().equals(serviceType))
+                .findFirst()
+                .orElse(null);
     }
 }

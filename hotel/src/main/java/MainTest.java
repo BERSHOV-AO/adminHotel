@@ -114,6 +114,7 @@ public class MainTest {
         hotelManagerImpl.addGuest(guest5);
         hotelManagerImpl.addGuest(guest6);
 
+
         hotelManagerImpl.printAllGuest();
 
         System.out.println("--CheckInGuestInRoom--");

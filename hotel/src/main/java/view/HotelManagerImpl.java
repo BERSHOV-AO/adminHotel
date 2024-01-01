@@ -4,6 +4,7 @@ import api.view.HotelManager;
 import controllers.*;
 import enums.RoomHistoryStatus;
 import enums.RoomStatus;
+import enums.ServiceType;
 import models.*;
 
 import java.time.LocalDate;
@@ -39,6 +40,10 @@ public class HotelManagerImpl implements HotelManager {
         serviceManagerImpl.sortBySection().stream().forEach(System.out::println);
     }
 
+    public Service getServiceByType(ServiceType serviceType) {
+       return serviceManagerImpl.getServiceByType(serviceType);
+    }
+
     // Guest
     @Override
     public void addGuest(Guest guest) {
@@ -63,6 +68,11 @@ public class HotelManagerImpl implements HotelManager {
     @Override
     public Guest getGuestByName(String lastName) {
         return guestManagerImpl.getGuestByName(lastName);
+    }
+
+
+    public void addServicesToGuest(Guest guest, Service service) throws NullPointerException {
+        guestManagerImpl.addServicesToGuest(guest, service);
     }
 
     // Room
