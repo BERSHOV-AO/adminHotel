@@ -4,6 +4,7 @@ import api.Action;
 import enums.ServiceType;
 import models.Service;
 import utils.InputReader;
+import utils.LogicDetails;
 import view.HotelManagerImpl;
 
 import java.util.Scanner;
@@ -12,23 +13,20 @@ public class AddServiceImpl implements Action {
     @Override
     public void execute() {
 
+        System.out.println("-----Регистрация сервисов------");
+
         Scanner scanner = new Scanner(System.in);
-        ServiceType serviceType;
+        HotelManagerImpl.getInstance().printAllGuest();
+        try {
+            ServiceType serviceType = LogicDetails.integerServiceType(InputReader.getIntegerInput(scanner,
+                    "Введите число соответствующее сервису : " +
+                            "1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, 4 = LAUNDRY"));
 
-        do {
-            System.out.print("Введите название сервиса (BREAKFAST, LUNCH, DINNER или LAUNDRY): ");
-            String input = scanner.nextLine();
+            Double servicePrice = InputReader.getDoubleInput(scanner, "Введите цену сервиса: ");
+            HotelManagerImpl.getInstance().createService(new Service(serviceType, servicePrice));
 
-            try {
-                serviceType = ServiceType.valueOf(input.toUpperCase());
-                System.out.println("Вы выбрали сервис: " + serviceType);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Некорректное название сервиса!");
-                serviceType = null; // Сбрасываем значение переменной, чтобы продолжить цикл
-            }
-        } while (serviceType == null);
-
-        Double servicePrice = InputReader.getDoubleInput(scanner, "Введите цену сервиса: ");
-        HotelManagerImpl.getInstance().createService(new Service(serviceType, servicePrice));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

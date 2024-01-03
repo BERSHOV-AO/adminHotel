@@ -1,12 +1,10 @@
 package room;
 
 import api.Action;
-import enums.RoomStars;
 import enums.RoomStatus;
 import models.Room;
 import utils.InputReader;
-import utils.Printer;
-import utils.RoomDetails;
+import utils.LogicDetails;
 import view.HotelManagerImpl;
 
 import java.util.Scanner;
@@ -20,11 +18,9 @@ public class AddRoomImpl implements Action {
             Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты:  ");
             Integer capacity = InputReader.getIntegerInput(scanner, "Введите вместимость комнаты: ");
             Double priceDay = InputReader.getDoubleInput(scanner, "Введите стоимость номера за сутки ");
-            // RoomStars stars = integerRoomStar(InputReader.getIntegerInput(scanner,
-            //         "Введите количество звезд номера "));
             Integer stars = InputReader.getIntegerInput(scanner,
                     "Введите количество звезд номера от 1 до 5 звезд");
-            RoomStatus status = RoomDetails.integerRoomStatus(InputReader.getIntegerInput(scanner,
+            RoomStatus status = LogicDetails.integerRoomStatus(InputReader.getIntegerInput(scanner,
                     "Введите цифру статуса номера: 1 = EMPTY, 2 = OCCUPIED, 3 = UNDER_REPAIR, 4 = SERVICE"));
 
             HotelManagerImpl.getInstance().createRoom(new Room(roomNumber, stars, priceDay, capacity, status));

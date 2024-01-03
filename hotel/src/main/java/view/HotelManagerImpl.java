@@ -8,6 +8,7 @@ import enums.ServiceType;
 import models.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class HotelManagerImpl implements HotelManager {
 
@@ -71,8 +72,12 @@ public class HotelManagerImpl implements HotelManager {
     }
 
 
-    public void addServicesToGuest(Guest guest, Service service) throws NullPointerException {
+    public void addServicesToGuest(Guest guest, Service service) {
         guestManagerImpl.addServicesToGuest(guest, service);
+    }
+
+    public List<Service> getGuestServices(Guest guest) {
+       return guestManagerImpl.getGuestServices(guest);
     }
 
     // Room

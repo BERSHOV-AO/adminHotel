@@ -2,8 +2,9 @@ package utils;
 
 import enums.RoomStars;
 import enums.RoomStatus;
+import enums.ServiceType;
 
-public class RoomDetails {
+public class LogicDetails {
     public static RoomStatus integerRoomStatus(Integer input) {
         RoomStatus roomStatus = null;
 
@@ -49,5 +50,28 @@ public class RoomDetails {
                 Printer.print("Неправильный ввод. Пожалуйста, введите число от 1 до 5.");
         }
         return roomStar;
+    }
+
+
+    public static ServiceType integerServiceType(Integer input) {
+
+        ServiceType serviceType = null;
+        switch (input) {
+            case 1:
+                serviceType = ServiceType.BREAKFAST;
+                break;
+            case 2:
+                serviceType = ServiceType.LUNCH;
+                break;
+            case 3:
+                serviceType = ServiceType.DINNER;
+                break;
+            case 4:
+                serviceType = ServiceType.LAUNDRY;
+                break;
+            default:
+                Printer.print("Неправильный ввод. Пожалуйста, введите число от 1 до 4.");
+        }
+        return serviceType;
     }
 }

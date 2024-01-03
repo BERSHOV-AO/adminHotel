@@ -7,6 +7,7 @@ import models.Service;
 import storages.GuestStorageImpl;
 import storages.RoomsStorageImpl;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public class GuestManagerImpl implements GuestManager {
 
     @Override
     public void printGuest() {
+        System.out.println("----Список посетителей----");
         List<Guest> tempGuest = GuestStorageImpl.getInstance().getGuests();
         for (Guest guest : tempGuest) {
             System.out.println(guest);
@@ -49,17 +51,41 @@ public class GuestManagerImpl implements GuestManager {
                 .orElse(null);
     }
 
-// add Service to Guests
+    // add Service to Guests
     public void addServicesToGuest(Guest guest, Service service) {
-        List<Guest> guests = GuestStorageImpl.getInstance().getGuests();
-        guests.stream()
-                .filter(storedGuest -> storedGuest.getLastName().equals(guest.getLastName()))
-                .findFirst()
-                .ifPresent(foundGuest -> {
-                    List<Service> services = foundGuest.getServices();
-                    services.add(service);
-                    foundGuest.setServices(services);
-                });
-        GuestStorageImpl.getInstance().setGuests(guests);
+
+        System.out.println("addServicesToGuest " + service);
+        List<Guest> tempListGuests = GuestStorageImpl.getInstance().getGuests();
+
+        for (Guest tempGuest : tempListGuests) {
+            if (tempGuest.getLastName().equals(guest.getLastName())) {
+                List<Service> tempListService = new ArrayList<>();
+
+                if (tempGuest.getServices() != null) {
+                    tempListService = tempGuest.getServices();
+                }
+                tempListService.add(service);
+                tempGuest.setServices(tempListService);
+                break;
+            }
+            GuestStorageImpl.getInstance().setGuests(tempListGuests);
+        }
+    }
+
+
+    public List<Service> getGuestServices(Guest guest) {
+        List<Guest> tempListGuests = GuestStorageImpl.getInstance().getGuests();
+        List<Service> tempListService = new ArrayList<>();
+
+        for (Guest tempGuest : tempListGuests) {
+            if (tempGuest.getLastName().equals(guest.getLastName())) {
+                tempListService = guest.getServices();
+                break;
+            }
+        }
+        return tempListService;
     }
 }
+
+
+

@@ -1,8 +1,6 @@
 import guest.*;
-import room.*;
 import service.AddServiceImpl;
 import service.PrintServiceImpl;
-import stayInfo.PrintStayInfoImpl;
 
 public class Test {
     public static void main(String[] args) {
@@ -12,14 +10,45 @@ public class Test {
         AddServiceImpl addService = new AddServiceImpl();
         PrintServiceImpl printService = new PrintServiceImpl();
         AddServicesToGuestImpl addServicesToGuest = new AddServicesToGuestImpl();
+        DeleteGuestImpl deleteGuest = new DeleteGuestImpl();
+        PrintServicesOneGuestImpl printServicesOneGuest = new PrintServicesOneGuestImpl();
+
+        /**
+         * *****************************************************************************
+         */
 
         addGuest.execute();
-        addGuest.execute();
         addService.execute();
         addService.execute();
-        printService.execute();
+        addService.execute();
+        addService.execute();
+
         addServicesToGuest.execute();
-        printGuests.execute();
+        addServicesToGuest.execute();
+        addServicesToGuest.execute();
+
+        printServicesOneGuest.execute();
+
+
+
+//        addGuest.execute();
+//        addGuest.execute();
+//        addGuest.execute();
+//        addGuest.execute();
+//        deleteGuest.execute();
+//        printGuests.execute();
+
+
+
+//        addGuest.execute();
+//        addGuest.execute();
+//        addService.execute();
+//        addService.execute();
+//        printService.execute();
+//        addServicesToGuest.execute();
+//        addServicesToGuest.execute();
+//        addServicesToGuest.execute();
+//        printGuests.execute();
 
 
 

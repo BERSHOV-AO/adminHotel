@@ -5,9 +5,11 @@ import models.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ServicesStorageImpl implements ServicesStorage {
     public List<Service> services = new ArrayList<>();
+    //public Set<Service> services = new ArrayList<>();
 
     private static ServicesStorageImpl instance;
 
