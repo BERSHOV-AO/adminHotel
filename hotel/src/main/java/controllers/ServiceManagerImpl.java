@@ -48,6 +48,7 @@ public class ServiceManagerImpl implements ServiceManager {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public Service getServiceByType(ServiceType serviceType) {
         return ServicesStorageImpl.getInstance().getServices().stream()
                 .filter(service -> service.getServiceType().equals(serviceType))

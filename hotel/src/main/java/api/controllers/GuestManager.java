@@ -1,6 +1,7 @@
 package api.controllers;
 
 import models.Guest;
+import models.Service;
 
 import java.util.List;
 
@@ -14,4 +15,8 @@ public interface GuestManager {
     public List<Guest> getSortedGuestsByAlphabet();
 
     public Guest getGuestByName(String lastName);
+
+    public void addServicesToGuest(Guest guest, Service service);
+
+    public List<Service> getGuestServices(Guest guest);
 }

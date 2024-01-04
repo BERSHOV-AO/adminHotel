@@ -1,5 +1,6 @@
 package api.controllers;
 
+import enums.ServiceType;
 import models.Service;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface ServiceManager {
     public List<Service> sortByPrice();
 
     public List<Service> sortBySection();
+
+    public Service getServiceByType(ServiceType serviceType);
 }

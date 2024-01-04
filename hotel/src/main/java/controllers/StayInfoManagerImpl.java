@@ -81,5 +81,20 @@ public class StayInfoManagerImpl implements StayInfoManager {
                 .map(Map.Entry::getValue)
                 .anyMatch(stayInfo -> stayInfo.getGuest().getLastName().equals(guest.getLastName()));
     }
+
+    @Override
+    public double getBillForRoomAndGuest(Guest guest, Room room) {
+        return StayInfoStorageImpl.getInstance().getInfoStorage().entrySet().stream()
+                .filter(entry -> entry.getKey().equals(room.getRoomNumber()) && entry.getValue().getGuest().equals(guest))
+                .findFirst()
+                .map(entry -> {
+                    LocalDate checkInDate = entry.getValue().getCheckInDate();
+                    LocalDate checkOutDate = entry.getValue().getCheckOutDate();
+                    int duration = (int) checkInDate.until(checkOutDate).getDays();
+                    double pricePerNight = room.getPrice();
+                    return duration * pricePerNight;
+                })
+                .orElse(0.0);
+    }
 }
 

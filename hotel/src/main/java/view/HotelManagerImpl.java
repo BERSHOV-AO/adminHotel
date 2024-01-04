@@ -42,7 +42,7 @@ public class HotelManagerImpl implements HotelManager {
     }
 
     public Service getServiceByType(ServiceType serviceType) {
-       return serviceManagerImpl.getServiceByType(serviceType);
+        return serviceManagerImpl.getServiceByType(serviceType);
     }
 
     // Guest
@@ -77,7 +77,7 @@ public class HotelManagerImpl implements HotelManager {
     }
 
     public List<Service> getGuestServices(Guest guest) {
-       return guestManagerImpl.getGuestServices(guest);
+        return guestManagerImpl.getGuestServices(guest);
     }
 
     // Room
@@ -190,6 +190,10 @@ public class HotelManagerImpl implements HotelManager {
 
     public boolean containsGuestInTheRoom(Guest guest, Room room) {
         return stayInfoManagerImpl.searchGuestInTheRoom(guest, room);
+    }
+
+    public double getBillForRoomAndGuest(Guest guest, Room room) {
+        return stayInfoManagerImpl.getBillForRoomAndGuest(guest, room);
     }
 
     // Room History

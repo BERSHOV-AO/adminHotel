@@ -23,4 +23,6 @@ public interface StayInfoManager {
     public LinkedHashMap<Integer, StayInfo> getLastThreeGuests();
 
     public boolean searchGuestInTheRoom(Guest guest, Room room);
+
+    public double getBillForRoomAndGuest(Guest guest, Room room);
 }
