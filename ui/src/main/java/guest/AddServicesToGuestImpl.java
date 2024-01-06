@@ -1,16 +1,14 @@
 package guest;
 
-import api.Action;
+import api.IAction;
 import enums.ServiceType;
-import models.Guest;
-import models.Service;
 import utils.InputReader;
 import utils.LogicDetails;
 import view.HotelManagerImpl;
 
 import java.util.Scanner;
 
-public class AddServicesToGuestImpl implements Action {
+public class AddServicesToGuestImpl implements IAction {
     @Override
     public void execute() {
 

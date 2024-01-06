@@ -1,13 +1,13 @@
 package guest;
 
-import api.Action;
+import api.IAction;
 import utils.InputReader;
 import view.HotelManagerImpl;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class CheckInImpl implements Action {
+public class CheckInImpl implements IAction {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);

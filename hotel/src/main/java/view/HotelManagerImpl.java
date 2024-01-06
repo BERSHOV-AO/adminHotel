@@ -45,10 +45,6 @@ public class HotelManagerImpl implements HotelManager {
         return serviceManagerImpl.getServiceByType(serviceType);
     }
 
-//    public double getBillServiceOneGuest() {
-//        return serviceManagerImpl
-//    }
-
     // Guest
     @Override
     public void addGuest(Guest guest) {

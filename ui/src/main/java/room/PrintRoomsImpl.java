@@ -1,9 +1,9 @@
 package room;
 
-import api.Action;
+import api.IAction;
 import view.HotelManagerImpl;
 
-public class PrintRoomsImpl implements Action {
+public class PrintRoomsImpl implements IAction {
 
     @Override
     public void execute() {

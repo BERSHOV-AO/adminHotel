@@ -1,12 +1,12 @@
 package room;
 
-import api.Action;
+import api.IAction;
 import utils.InputReader;
 import view.HotelManagerImpl;
 
 import java.util.Scanner;
 
-public class PrintDetailsImpl implements Action {
+public class PrintDetailsImpl implements IAction {
     @Override
     public void execute() {
 

@@ -1,7 +1,7 @@
 package api;
 
 // действие
-public interface Action {
+public interface IAction {
     // выполнять
     public void execute();
 }

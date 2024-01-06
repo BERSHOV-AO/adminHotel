@@ -1,6 +1,6 @@
 package room;
 
-import api.Action;
+import api.IAction;
 import enums.RoomStatus;
 import utils.InputReader;
 import utils.LogicDetails;
@@ -8,7 +8,7 @@ import view.HotelManagerImpl;
 
 import java.util.Scanner;
 
-public class ChangeStatusImpl implements Action {
+public class ChangeStatusImpl implements IAction {
     @Override
     public void execute() {
 

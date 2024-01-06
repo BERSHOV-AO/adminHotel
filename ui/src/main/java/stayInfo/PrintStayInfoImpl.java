@@ -1,9 +1,9 @@
 package stayInfo;
 
-import api.Action;
+import api.IAction;
 import view.HotelManagerImpl;
 
-public class PrintStayInfoImpl implements Action {
+public class PrintStayInfoImpl implements IAction {
 
     @Override
     public void execute() {

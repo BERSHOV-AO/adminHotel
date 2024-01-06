@@ -1,6 +1,6 @@
 package service;
 
-import api.Action;
+import api.IAction;
 import enums.ServiceType;
 import models.Service;
 import utils.InputReader;
@@ -9,7 +9,7 @@ import view.HotelManagerImpl;
 
 import java.util.Scanner;
 
-public class AddServiceImpl implements Action {
+public class AddServiceImpl implements IAction {
     @Override
     public void execute() {
 

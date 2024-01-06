@@ -1,4 +1,4 @@
-import api.Action;
+import api.IAction;
 import guest.AddGuestImpl;
 import guest.CheckInImpl;
 import guest.CheckOutImpl;
@@ -41,20 +41,20 @@ public class HotelConsoleInterface {
     private void executeAction(int choice) {
         switch (choice) {
             case 1:
-                Action addGuestAction = new AddGuestImpl();
-                addGuestAction.execute();
+                IAction addGuestIAction = new AddGuestImpl();
+                addGuestIAction.execute();
                 break;
             case 2:
-                Action removeGuestAction = new AddRoomImpl();
-                removeGuestAction.execute();
+                IAction removeGuestIAction = new AddRoomImpl();
+                removeGuestIAction.execute();
                 break;
             case 3:
-                Action checkInAction = new CheckInImpl();
-                checkInAction.execute();
+                IAction checkInIAction = new CheckInImpl();
+                checkInIAction.execute();
                 break;
             case 4:
-                Action checkOutAction = new CheckOutImpl();
-                checkOutAction.execute();
+                IAction checkOutIAction = new CheckOutImpl();
+                checkOutIAction.execute();
                 break;
             case 5:
                 running = false;

@@ -1,12 +1,12 @@
 package guest;
 
-import api.Action;
+import api.IAction;
 import utils.InputReader;
 import view.HotelManagerImpl;
 
 import java.util.Scanner;
 
-public class DeleteGuestImpl implements Action {
+public class DeleteGuestImpl implements IAction {
     @Override
     public void execute() {
 

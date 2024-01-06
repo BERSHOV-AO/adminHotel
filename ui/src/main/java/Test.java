@@ -1,7 +1,11 @@
 import guest.*;
 import room.AddRoomImpl;
 import service.AddServiceImpl;
+import service.ChangeServiceOnPriceImpl;
 import service.PrintServiceImpl;
+import sorted.guest.GuestsSortByNameImpl;
+import sorted.service.ServicesSortByPriceImpl;
+import sorted.service.ServicesSortByNameImpl;
 
 public class Test {
     public static void main(String[] args) {
@@ -16,29 +20,59 @@ public class Test {
         AddRoomImpl addRoom = new AddRoomImpl();
         BillGuestImpl billGuest = new BillGuestImpl();
         CheckInImpl checkIn = new CheckInImpl();
+        ServicesSortByPriceImpl servicesSortByPrice = new ServicesSortByPriceImpl();
+        ServicesSortByNameImpl servicesSortBySection = new ServicesSortByNameImpl();
+        GuestsSortByNameImpl guestsSortByName = new GuestsSortByNameImpl();
+        ChangeServiceOnPriceImpl changeServiceOnPriceImpl = new ChangeServiceOnPriceImpl();
+
 
         /**
          * *****************************************************************************
          */
 
+
         addService.execute();
         addService.execute();
         addService.execute();
         addService.execute();
 
-        addGuest.execute();
+        changeServiceOnPriceImpl.execute();
 
-        addServicesToGuest.execute();
-        addServicesToGuest.execute();
-        addServicesToGuest.execute();
-        addServicesToGuest.execute();
+        printService.execute();
 
 
 
 
 
+//        addGuest.execute();
+//        addGuest.execute();
+//        addGuest.execute();
+//        addGuest.execute();
+//
+//        guestsSortByName.execute();
+
+//        addService.execute();
+//        addService.execute();
+//        addService.execute();
+//        addService.execute();
+//
+//        servicesSortBySection.execute();
+//
+//        addServicesToGuest.execute();
+//        addServicesToGuest.execute();
+//
+//        printServicesOneGuest.execute();
+
+        // servicesSortByPrice.execute();
+
+//        addGuest.execute();
+//
+//        addServicesToGuest.execute();
+//        addServicesToGuest.execute();
 
 
+//        addServicesToGuest.execute();
+//        addServicesToGuest.execute();
 
 
 //
@@ -61,10 +95,6 @@ public class Test {
 //
 //        billGuest.execute();
 
-
-
-
-
 //        addGuest.execute();
 //        addService.execute();
 //        addService.execute();
@@ -77,16 +107,12 @@ public class Test {
 //
 //        printServicesOneGuest.execute();
 
-
-
 //        addGuest.execute();
 //        addGuest.execute();
 //        addGuest.execute();
 //        addGuest.execute();
 //        deleteGuest.execute();
 //        printGuests.execute();
-
-
 
 //        addGuest.execute();
 //        addGuest.execute();
@@ -97,9 +123,6 @@ public class Test {
 //        addServicesToGuest.execute();
 //        addServicesToGuest.execute();
 //        printGuests.execute();
-
-
-
 
 //        AddServiceImpl addService = new AddServiceImpl();
 //        PrintServiceImpl printService = new PrintServiceImpl();
@@ -122,7 +145,6 @@ public class Test {
 //
 //        printGuests.execute();
 
-
 //        //------------add-------------
 //        AddRoomImpl addRoom = new AddRoomImpl();
 //        AddGuestImpl addGuest = new AddGuestImpl();
@@ -135,7 +157,6 @@ public class Test {
 //        PrintStayInfoImpl printStayInfo = new PrintStayInfoImpl();
 //
 //        CheckOutImpl checkOut = new CheckOutImpl();
-//
 //
 //        //======================================
 //
@@ -156,7 +177,6 @@ public class Test {
 //        checkIn.execute();
 //        checkOut.execute();
 //        printStayInfo.execute();
-
 
 //        ChangeRoomPriceImpl changeRoomPrice = new ChangeRoomPriceImpl();
 //        ChangeStatusImpl changeStatus = new ChangeStatusImpl();

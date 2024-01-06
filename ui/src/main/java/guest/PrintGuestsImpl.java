@@ -1,9 +1,9 @@
 package guest;
 
-import api.Action;
+import api.IAction;
 import view.HotelManagerImpl;
 
-public class PrintGuestsImpl implements Action {
+public class PrintGuestsImpl implements IAction {
 
     @Override
     public void execute() {
