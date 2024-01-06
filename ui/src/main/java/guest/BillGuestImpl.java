@@ -20,14 +20,20 @@ public class BillGuestImpl implements Action {
                 "Введите имя посетителя для выставления счета: ");
         StringBuilder str = new StringBuilder();
         Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты: ");
+        str.append("************--BILL--************" + "\n");
         str.append("Имя гостя: " + lastName + "\n");
         str.append("Номер комнаты: " + roomNumber + "\n");
-        str.append("Счет : ");
-        str.append(rubFormat.format(HotelManagerImpl.getInstance().getBillForRoomAndGuest(HotelManagerImpl.getInstance().getGuestByName(lastName),
-                HotelManagerImpl.getInstance().getRoomByNumber(roomNumber))));
-        System.out.println("******--BILL--******");
-        System.out.println(str.toString());
-        System.out.println("********************");
+        str.append("Счет за номер : ");
+        str.append(rubFormat.format(HotelManagerImpl.getInstance().getBillForRoomAndGuest(HotelManagerImpl.getInstance()
+                        .getGuestByName(lastName),
+                HotelManagerImpl.getInstance().getRoomByNumber(roomNumber))) + "\n");
+        str.append("Счет за сервис: ");
+        str.append(rubFormat.format(HotelManagerImpl.getInstance().getBillServiceOneGuest(HotelManagerImpl.getInstance()
+                .getGuestByName(lastName))) + "\n");
+        str.append("********************************");
+
+        System.out.println(str);
+
         try {
         } catch (Exception e) {
             System.out.println("Нет такого посетителя или счета");

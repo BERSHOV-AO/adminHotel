@@ -15,6 +15,7 @@ public class AddRoomImpl implements Action {
     public void execute() {
         Scanner scanner = new Scanner(System.in);
         try {
+            System.out.println("-----Добавление номеров-----");
             Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты:  ");
             Integer capacity = InputReader.getIntegerInput(scanner, "Введите вместимость комнаты: ");
             Double priceDay = InputReader.getDoubleInput(scanner, "Введите стоимость номера за сутки ");

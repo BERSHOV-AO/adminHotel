@@ -20,15 +20,46 @@ public class Test {
         /**
          * *****************************************************************************
          */
+
+        addService.execute();
+        addService.execute();
+        addService.execute();
+        addService.execute();
+
         addGuest.execute();
-     //   addGuest.execute();
-    //    addRoom.execute();
-        addRoom.execute();
 
-    //    checkIn.execute();
-        checkIn.execute();
+        addServicesToGuest.execute();
+        addServicesToGuest.execute();
+        addServicesToGuest.execute();
+        addServicesToGuest.execute();
 
-        billGuest.execute();
+
+
+
+
+
+
+
+
+//
+//        addService.execute();
+////        addService.execute();
+////        addService.execute();
+////        addService.execute();
+//
+//        addGuest.execute();
+//
+//
+////
+//        addServicesToGuest.execute();
+////        addServicesToGuest.execute();
+//     //   addGuest.execute();
+//    //    addRoom.execute();
+//        addRoom.execute();
+//
+//        checkIn.execute();
+//
+//        billGuest.execute();
 
 
 

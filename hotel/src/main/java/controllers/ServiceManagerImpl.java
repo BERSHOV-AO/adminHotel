@@ -2,6 +2,7 @@ package controllers;
 
 import api.controllers.ServiceManager;
 import enums.ServiceType;
+import models.Guest;
 import models.Service;
 import storages.ServicesStorageImpl;
 

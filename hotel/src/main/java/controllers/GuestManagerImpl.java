@@ -51,13 +51,9 @@ public class GuestManagerImpl implements GuestManager {
                 .orElse(null);
     }
 
-    // add Service to Guests
     @Override
     public void addServicesToGuest(Guest guest, Service service) {
-
-        System.out.println("addServicesToGuest " + service);
         List<Guest> tempListGuests = GuestStorageImpl.getInstance().getGuests();
-
         for (Guest tempGuest : tempListGuests) {
             if (tempGuest.getLastName().equals(guest.getLastName())) {
                 List<Service> tempListService = new ArrayList<>();
@@ -72,7 +68,6 @@ public class GuestManagerImpl implements GuestManager {
             GuestStorageImpl.getInstance().setGuests(tempListGuests);
         }
     }
-
 
     @Override
     public List<Service> getGuestServices(Guest guest) {

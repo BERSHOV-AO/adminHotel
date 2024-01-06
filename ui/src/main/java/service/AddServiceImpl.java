@@ -16,7 +16,6 @@ public class AddServiceImpl implements Action {
         System.out.println("-----Регистрация сервисов------");
 
         Scanner scanner = new Scanner(System.in);
-        HotelManagerImpl.getInstance().printAllGuest();
         try {
             ServiceType serviceType = LogicDetails.integerServiceType(InputReader.getIntegerInput(scanner,
                     "Введите число соответствующее сервису : " +

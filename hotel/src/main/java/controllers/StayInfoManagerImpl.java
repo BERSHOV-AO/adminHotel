@@ -3,10 +3,14 @@ package controllers;
 import api.controllers.StayInfoManager;
 import models.Guest;
 import models.Room;
+import models.Service;
 import models.StayInfo;
 import storages.StayInfoStorageImpl;
+import utils.Util;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +99,13 @@ public class StayInfoManagerImpl implements StayInfoManager {
                     return duration * pricePerNight;
                 })
                 .orElse(0.0);
+    }
+
+    public double getBillServiceOneGuest(Guest guest) {
+        return StayInfoStorageImpl.getInstance().getInfoStorage().values().stream()
+                .filter(stayInfo -> stayInfo.getGuest().equals(guest))
+                .mapToDouble(Util::calculateServicesCost)
+                .sum();
     }
 }
 
