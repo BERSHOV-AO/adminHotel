@@ -38,6 +38,6 @@ public class MenuController {
             navigator.printMenu();
         }
         scanner.close();
-        System.out.println("Goodbye! Your changes have been saved!");
+        System.out.println("Goodbye!");
     }
 }
