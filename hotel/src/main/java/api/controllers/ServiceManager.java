@@ -17,4 +17,6 @@ public interface ServiceManager {
     public List<Service> sortBySection();
 
     public Service getServiceByType(ServiceType serviceType);
+
+    public void deleteService(Service service);
 }

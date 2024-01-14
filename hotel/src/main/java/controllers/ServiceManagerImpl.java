@@ -42,6 +42,15 @@ public class ServiceManagerImpl implements ServiceManager {
                 .collect(Collectors.toList());
     }
 
+    public List<Service> sortByPriceOneGuest(List<Service> serviceList) {
+
+        System.out.println("serviceList: " + serviceList);
+        return serviceList.stream()
+                .sorted(Comparator.comparingDouble(Service::getPrice))
+                .collect(Collectors.toList());
+    }
+
+
     @Override
     public List<Service> sortBySection() {
         return ServicesStorageImpl.getInstance().getServices().stream()
@@ -55,5 +64,10 @@ public class ServiceManagerImpl implements ServiceManager {
                 .filter(service -> service.getServiceType().equals(serviceType))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public void deleteService(Service service) {
+        ServicesStorageImpl.getInstance().deleteService(service);
     }
 }

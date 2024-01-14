@@ -9,7 +9,6 @@ import java.util.Set;
 
 public class ServicesStorageImpl implements ServicesStorage {
     public List<Service> services = new ArrayList<>();
-    //public Set<Service> services = new ArrayList<>();
 
     private static ServicesStorageImpl instance;
 
@@ -37,4 +36,10 @@ public class ServicesStorageImpl implements ServicesStorage {
     public List<Service> getServices() {
         return services;
     }
+
+    @Override
+    public void deleteService(Service service) {
+        services.remove(service);
+    }
+
 }

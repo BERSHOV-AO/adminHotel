@@ -11,4 +11,6 @@ public interface ServicesStorage {
     public void setServices(List<Service> services);
 
     public List<Service> getServices();
+
+    public void deleteService(Service service);
 }

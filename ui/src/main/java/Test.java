@@ -2,8 +2,11 @@ import guest.*;
 import room.AddRoomImpl;
 import service.AddServiceImpl;
 import service.ChangeServiceOnPriceImpl;
+import service.DeleteServiceImpl;
 import service.PrintServiceImpl;
+import sorted.guest.GuestSortServicesByPrice;
 import sorted.guest.GuestsSortByNameImpl;
+import sorted.room.RoomsSortByCapacity;
 import sorted.service.ServicesSortByPriceImpl;
 import sorted.service.ServicesSortByNameImpl;
 
@@ -24,21 +27,39 @@ public class Test {
         ServicesSortByNameImpl servicesSortBySection = new ServicesSortByNameImpl();
         GuestsSortByNameImpl guestsSortByName = new GuestsSortByNameImpl();
         ChangeServiceOnPriceImpl changeServiceOnPriceImpl = new ChangeServiceOnPriceImpl();
+        DeleteServiceImpl deleteService = new DeleteServiceImpl();
+        GuestSortServicesByPrice guestSortServicesByPrice = new GuestSortServicesByPrice();
+        RoomsSortByCapacity roomsSortByCapacity = new RoomsSortByCapacity();
 
 
         /**
          * *****************************************************************************
          */
 
+//        addRoom.execute();
+//        addRoom.execute();
+//        addRoom.execute();
+//        addRoom.execute();
+//
+//        roomSortByCapacity.execute();
 
-        addService.execute();
-        addService.execute();
-        addService.execute();
-        addService.execute();
+//        addService.execute();
+//        addService.execute();
+//        addService.execute();
+//        addService.execute();
+//
+//
+//        addGuest.execute();
+//
+//        addServicesToGuest.execute();
+//        addServicesToGuest.execute();
+//        addServicesToGuest.execute();
+//
+//        guestSortServicesByPrice.execute();
 
-        changeServiceOnPriceImpl.execute();
+       // deleteService.execute();
 
-        printService.execute();
+       // printService.execute();
 
 
 

@@ -45,6 +45,14 @@ public class HotelManagerImpl implements HotelManager {
         return serviceManagerImpl.getServiceByType(serviceType);
     }
 
+    public void deleteService(Service service) {
+        serviceManagerImpl.deleteService(service);
+    }
+
+    public void showServiceSortByPriceOneGuest(List<Service> serviceList) {
+        serviceManagerImpl.sortByPriceOneGuest(serviceList).stream().forEach(System.out::println);
+    }
+
     // Guest
     @Override
     public void addGuest(Guest guest) {
@@ -116,27 +124,27 @@ public class HotelManagerImpl implements HotelManager {
     }
 
     @Override
-    public void sortRoomsByCapacity() {
+    public void showSortRoomsByCapacity() {
         roomManagerImpl.getSortedRoomsByCapacity().stream().forEach(System.out::println);
     }
 
     @Override
-    public void sortRoomsByStars() {
+    public void showSortRoomsByStars() {
         roomManagerImpl.getSortedRoomsByStars().stream().forEach(System.out::println);
     }
 
     @Override
-    public void sortEmptyRoomsByPrice() {
+    public void showSortEmptyRoomsByPrice() {
         roomManagerImpl.getFreeRooms(roomManagerImpl.getSortedRoomsByPrice()).stream().forEach(System.out::println);
     }
 
     @Override
-    public void sortEmptyRoomsByCapacity() {
+    public void showSortEmptyRoomsByCapacity() {
         roomManagerImpl.getFreeRooms(roomManagerImpl.getSortedRoomsByCapacity()).stream().forEach(System.out::println);
     }
 
     @Override
-    public void sortEmptyRoomsByStars() {
+    public void showSortEmptyRoomsByStars() {
         roomManagerImpl.getFreeRooms(roomManagerImpl.getSortedRoomsByStars()).stream().forEach(System.out::println);
     }
 

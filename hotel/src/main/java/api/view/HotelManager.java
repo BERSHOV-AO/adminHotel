@@ -38,15 +38,15 @@ public interface HotelManager {
 
     public void sortRoomsByPrice();
 
-    public void sortRoomsByCapacity();
+    public void showSortRoomsByCapacity();
 
-    public void sortRoomsByStars();
+    public void showSortRoomsByStars();
 
-    public void sortEmptyRoomsByPrice();
+    public void showSortEmptyRoomsByPrice();
 
-    public void sortEmptyRoomsByCapacity();
+    public void showSortEmptyRoomsByCapacity();
 
-    public void sortEmptyRoomsByStars();
+    public void showSortEmptyRoomsByStars();
 
     public void totalCountEmptyRooms();
 
