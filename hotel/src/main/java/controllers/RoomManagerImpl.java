@@ -81,6 +81,17 @@ public class RoomManagerImpl implements RoomManager {
                 .collect(Collectors.toList());
     }
 
+    public List<Room> getEmptyRooms() {
+        List<Room> emptyRooms = RoomsStorageImpl.getInstance().getRooms().stream()
+                .filter(room -> room.getStatus() == RoomStatus.EMPTY)
+                .collect(Collectors.toList());
+
+        if (emptyRooms.isEmpty()) {
+            return null;
+        }
+        return emptyRooms;
+    }
+
     @Override
     public int totalCountEmptyRooms() {
         return getFreeRooms(RoomsStorageImpl.getInstance().getRooms()).size();
@@ -93,5 +104,7 @@ public class RoomManagerImpl implements RoomManager {
                 .findFirst()
                 .orElse(null);
     }
+
+
 }
 

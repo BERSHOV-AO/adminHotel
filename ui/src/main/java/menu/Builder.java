@@ -1,6 +1,8 @@
 package menu;
 
 import room.AddRoomImpl;
+import room.PrintEmptyRoomsImpl;
+import room.PrintRoomsImpl;
 import utils.MenuTypes;
 import view.HotelManagerImpl;
 
@@ -23,6 +25,9 @@ public class Builder {
         // Room
 
         roomMenu.addMenuItem(new MenuItem("Add a Room", roomMenu, new AddRoomImpl()));
+        roomMenu.addMenuItem(new MenuItem("Print the Rooms", roomMenu, new PrintRoomsImpl()));
+        roomMenu.addMenuItem(new MenuItem("Print empty Rooms", roomMenu, new PrintEmptyRoomsImpl()));
+        roomMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
 
         // Main Menu

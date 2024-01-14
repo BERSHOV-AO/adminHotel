@@ -162,6 +162,10 @@ public class HotelManagerImpl implements HotelManager {
         return roomManagerImpl.getRoomByNumber(roomNumber);
     }
 
+    public void showEmptyRooms() {
+        roomManagerImpl.getEmptyRooms().stream().forEach(System.out::println);
+    }
+
     // stayInfoManagerImpl
     @Override
     public void showFreeRoomsByDate(LocalDate date) {

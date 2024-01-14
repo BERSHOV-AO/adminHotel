@@ -40,8 +40,4 @@ public class MenuController {
         scanner.close();
         System.out.println("Goodbye! Your changes have been saved!");
     }
-
-
-
-
 }
