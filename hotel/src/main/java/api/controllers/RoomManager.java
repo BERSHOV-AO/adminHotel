@@ -28,4 +28,6 @@ public interface RoomManager {
     public int totalCountEmptyRooms();
 
     public Room getRoomByNumber(Integer roomNumber);
+
+    public List<Room> getEmptyRooms();
 }

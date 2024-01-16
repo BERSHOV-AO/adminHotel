@@ -8,25 +8,17 @@ import java.util.Objects;
 public class Room {
     private Integer roomNumber;
     private int stars;
-   // private RoomStars stars;
     private double price;
     private int capacity;
     private RoomStatus status;
 
-//    public Room(int roomNumber, RoomStars stars, double price, int capacity, RoomStatus status) {
-//        this.roomNumber = roomNumber;
-//        this.stars = stars;
-//        this.price = price;
-//        this.capacity = capacity;
-//        this.status = status;
-//    }
-public Room(Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
-    this.roomNumber = roomNumber;
-    this.stars = stars;
-    this.price = price;
-    this.capacity = capacity;
-    this.status = status;
-}
+    public Room(Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
+        this.roomNumber = roomNumber;
+        this.stars = stars;
+        this.price = price;
+        this.capacity = capacity;
+        this.status = status;
+    }
 
     public Integer getRoomNumber() {
         return roomNumber;
@@ -43,15 +35,6 @@ public Room(Integer roomNumber, int stars, double price, int capacity, RoomStatu
     public void setStars(int stars) {
         this.stars = stars;
     }
-
-
-//    public RoomStars getStars() {
-//        return stars;
-//    }
-//
-//    public void setStars(RoomStars stars) {
-//        this.stars = stars;
-//    }
 
     public double getPrice() {
         return price;
@@ -101,30 +84,4 @@ public Room(Integer roomNumber, int stars, double price, int capacity, RoomStatu
     public int hashCode() {
         return Objects.hash(roomNumber, stars, price, capacity);
     }
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Room room = (Room) o;
-//
-//        if (roomNumber != room.roomNumber) return false;
-//        if (stars != room.stars) return false;
-//        if (Double.compare(room.price, price) != 0) return false;
-//        if (capacity != room.capacity) return false;
-//        return status == room.status;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result;
-//        long temp;
-//        result = roomNumber;
-//        result = 31 * result + stars;
-//        temp = Double.doubleToLongBits(price);
-//        result = 31 * result + (int) (temp ^ (temp >>> 32));
-//        result = 31 * result + capacity;
-//        result = 31 * result + (status != null ? status.hashCode() : 0);
-//        return result;
-//    }
 }

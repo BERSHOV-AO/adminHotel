@@ -25,4 +25,6 @@ public interface StayInfoManager {
     public boolean searchGuestInTheRoom(Guest guest, Room room);
 
     public double getBillForRoomAndGuest(Guest guest, Room room);
+
+    public double getBillServiceOneGuest(Guest guest);
 }

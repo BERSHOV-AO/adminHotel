@@ -1,20 +1,44 @@
 package api.view;
 
 import enums.RoomStatus;
+import enums.ServiceType;
 import models.Guest;
 import models.Room;
 import models.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface HotelManager {
 
-    // Service
+    /**
+     * ******************** Service ********************
+     */
     public void showServicesSortByPrice();
 
     public void showServicesSortBySection();
 
-    // Guest
+    public Service getServiceByType(ServiceType serviceType);
+
+    public void deleteService(Service service);
+
+    public void showServiceSortByPriceOneGuest(List<Service> serviceList);
+
+    public void createService(Service service);
+
+    public void changeServiceOnPrice(Service service, double price);
+
+    public void printAllService();
+
+    public void showStayInfo();
+
+    public void checkInGuestInRoom(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate);
+
+    public void checkOutGuestFromRoom(Guest guest, Room room);
+
+    /**
+     * ******************** Guest ********************
+     */
     public void addGuest(Guest guest);
 
     public void deleteGuest(Guest guest);
@@ -25,7 +49,14 @@ public interface HotelManager {
 
     public Guest getGuestByName(String lastName);
 
-    // Room
+    public void addServicesToGuest(Guest guest, Service service);
+
+    public List<Service> getGuestServices(Guest guest);
+
+    /**
+     * ******************** Room ********************
+     */
+
     public void createRoom(Room room);
 
     public void changeRoomStatus(Room room, RoomStatus roomStatus);
@@ -50,27 +81,27 @@ public interface HotelManager {
 
     public void totalCountEmptyRooms();
 
-    public void showFreeRoomsByDate(LocalDate date);
-
     public Room getRoomByNumber(Integer roomNumber);
+
+    public void showEmptyRooms();
+
+    /**
+     * ******************** StayInfo ********************
+     */
+    public void showFreeRoomsByDate(LocalDate date);
 
     public void showPayAmountForRoom(Room room);
 
     public void printLastThreeGuests();
 
-    // Room History
+    public boolean containsGuestInTheRoom(Guest guest, Room room);
+
+    public double getBillForRoomAndGuest(Guest guest, Room room);
+
+    public double getBillServiceOneGuest(Guest guest);
+
+    /**
+     * ******************** Room History ********************
+     */
     public void printAllRoomHistories();
-
-    // Service
-    public void createService(Service service);
-
-    public void changeServiceOnPrice(Service service, double price);
-
-    public void printAllService();
-
-    public void showStayInfo();
-
-    public void checkInGuestInRoom(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate);
-
-    public void checkOutGuestFromRoom(Guest guest, Room room);
 }

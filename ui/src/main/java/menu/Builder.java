@@ -70,14 +70,14 @@ public class Builder {
         guestMenu.addMenuItem(new MenuItem("Print the Guest's Services", guestMenu,
                 new PrintServicesOneGuestImpl()));
         guestMenu.addMenuItem(new MenuItem("Bill the Guest", guestMenu, new BillGuestImpl()));
-        guestMenu.addMenuItem(new MenuItem("Check-out the Visitor", guestMenu, new CheckOutImpl()));
-        //guestMenu.addMenuItem(new MenuItem("Print the quantity of the Visitors on a date", guestMenu, new ()));
-        guestMenu.addMenuItem(new MenuItem("Delete the Visitor", guestMenu, new DeleteGuestImpl()));
-        guestMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
+        guestMenu.addMenuItem(new MenuItem("Check-out the Guest", guestMenu, new CheckOutImpl()));
+        guestMenu.addMenuItem(new MenuItem("Delete the Guest", guestMenu, new DeleteGuestImpl()));
+
         // Guest sort
-        guestMenu.addMenuItem(new MenuItem("Sort the Visitors by name", guestMenu, new GuestsSortByNameImpl()));
-        guestMenu.addMenuItem(new MenuItem("Sort the Visitor's Services by price", guestMenu,
+        guestMenu.addMenuItem(new MenuItem("Sort the Guest by name", guestMenu, new GuestsSortByNameImpl()));
+        guestMenu.addMenuItem(new MenuItem("Sort the Guest's Services by price", guestMenu,
                 new GuestSortServicesByPrice()));
+        guestMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Main Menu
         mainMenu.addMenuItem(new MenuItem("Room Menu", roomMenu));

@@ -7,6 +7,7 @@ public class Menu {
 
     private String name;
     private List<MenuItem> menuItems = new ArrayList<>();
+
     public Menu(String name) {
         this.name = name;
     }

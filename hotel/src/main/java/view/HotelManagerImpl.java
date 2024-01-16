@@ -1,5 +1,6 @@
 package view;
 
+import api.controllers.*;
 import api.view.HotelManager;
 import controllers.*;
 import enums.RoomHistoryStatus;
@@ -24,13 +25,15 @@ public class HotelManagerImpl implements HotelManager {
         return instance;
     }
 
-    RoomManagerImpl roomManagerImpl = new RoomManagerImpl();
-    ServiceManagerImpl serviceManagerImpl = new ServiceManagerImpl();
-    GuestManagerImpl guestManagerImpl = new GuestManagerImpl();
-    RoomHistoryManagerImpl roomHistoryManagerImpl = new RoomHistoryManagerImpl();
-    StayInfoManagerImpl stayInfoManagerImpl = new StayInfoManagerImpl();
+    RoomManager roomManagerImpl = new RoomManagerImpl();
+    ServiceManager serviceManagerImpl = new ServiceManagerImpl();
+    GuestManager guestManagerImpl = new GuestManagerImpl();
+    RoomHistoryManager roomHistoryManagerImpl = new RoomHistoryManagerImpl();
+    StayInfoManager stayInfoManagerImpl = new StayInfoManagerImpl();
 
-    // Service
+    /**
+     * ******************** Service ********************
+     */
     @Override
     public void showServicesSortByPrice() {
         serviceManagerImpl.sortByPrice().stream().forEach(System.out::println);
@@ -41,19 +44,77 @@ public class HotelManagerImpl implements HotelManager {
         serviceManagerImpl.sortBySection().stream().forEach(System.out::println);
     }
 
+    @Override
     public Service getServiceByType(ServiceType serviceType) {
         return serviceManagerImpl.getServiceByType(serviceType);
     }
 
+    @Override
     public void deleteService(Service service) {
         serviceManagerImpl.deleteService(service);
     }
 
+    @Override
     public void showServiceSortByPriceOneGuest(List<Service> serviceList) {
         serviceManagerImpl.sortByPriceOneGuest(serviceList).stream().forEach(System.out::println);
     }
 
-    // Guest
+    @Override
+    public void createService(Service service) {
+        serviceManagerImpl.addService(service);
+    }
+
+    @Override
+    public void changeServiceOnPrice(Service service, double price) {
+        serviceManagerImpl.changeServicePrice(service, price);
+    }
+
+    @Override
+    public void printAllService() {
+        serviceManagerImpl.printService();
+    }
+
+    @Override
+    public void showStayInfo() {
+        stayInfoManagerImpl.printStayInfo();
+    }
+
+    @Override
+    public void checkInGuestInRoom(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate) {
+
+        if (room.getStatus() == RoomStatus.EMPTY) {
+            RoomHistory newRoomHistory = new RoomHistory();
+
+            newRoomHistory.setGuest(guest);
+            newRoomHistory.setRoom(room);
+            newRoomHistory.setCheckInDate(checkInDate);
+            newRoomHistory.setCheckOutDate(checkOutDate);
+            newRoomHistory.setStatus(RoomHistoryStatus.CHECKIN);
+
+            stayInfoManagerImpl.addStayInfo(room.getRoomNumber(), new StayInfo(guest, checkInDate, checkOutDate));
+            roomHistoryManagerImpl.addHistory(newRoomHistory);
+            roomManagerImpl.changeRoomStatus(room, RoomStatus.OCCUPIED);
+        } else {
+            System.out.println("Заселить в комнату " + room.getRoomNumber() + " не представляется возможным. "
+                    + "Статус комнаты = " + room.getStatus());
+        }
+    }
+
+    @Override
+    public void checkOutGuestFromRoom(Guest guest, Room room) {
+        if (stayInfoManagerImpl.searchGuestInTheRoom(guest, room)) {
+            if (room.getStatus() == RoomStatus.OCCUPIED) {
+                stayInfoManagerImpl.deleteStayInfo(room.getRoomNumber());
+                roomManagerImpl.changeRoomStatus(room, RoomStatus.EMPTY);
+            }
+        } else {
+            System.out.println("В комнате " + room.getRoomNumber() + " нет посетителей");
+        }
+    }
+
+    /**
+     * ******************** Guest ********************
+     */
     @Override
     public void addGuest(Guest guest) {
         guestManagerImpl.addOnGuest(guest);
@@ -79,16 +140,19 @@ public class HotelManagerImpl implements HotelManager {
         return guestManagerImpl.getGuestByName(lastName);
     }
 
-
+    @Override
     public void addServicesToGuest(Guest guest, Service service) {
         guestManagerImpl.addServicesToGuest(guest, service);
     }
 
+    @Override
     public List<Service> getGuestServices(Guest guest) {
         return guestManagerImpl.getGuestServices(guest);
     }
 
-    // Room
+    /**
+     * ******************** Room ********************
+     */
     @Override
     public void createRoom(Room room) {
         roomManagerImpl.addRoom(room);
@@ -162,11 +226,19 @@ public class HotelManagerImpl implements HotelManager {
         return roomManagerImpl.getRoomByNumber(roomNumber);
     }
 
+    @Override
     public void showEmptyRooms() {
-        roomManagerImpl.getEmptyRooms().stream().forEach(System.out::println);
+        if (roomManagerImpl.getEmptyRooms() == null) {
+            System.out.println("Нет свободных комнат");
+        } else {
+            roomManagerImpl.getEmptyRooms().stream().forEach(System.out::println);
+        }
     }
 
-    // stayInfoManagerImpl
+    /**
+     * ******************** StayInfo ********************
+     */
+
     @Override
     public void showFreeRoomsByDate(LocalDate date) {
         stayInfoManagerImpl.getFreeRoomsByDate(date).stream()
@@ -200,76 +272,27 @@ public class HotelManagerImpl implements HotelManager {
                 });
     }
 
+    @Override
     public boolean containsGuestInTheRoom(Guest guest, Room room) {
         return stayInfoManagerImpl.searchGuestInTheRoom(guest, room);
     }
 
+    @Override
     public double getBillForRoomAndGuest(Guest guest, Room room) {
         return stayInfoManagerImpl.getBillForRoomAndGuest(guest, room);
     }
 
+    @Override
     public double getBillServiceOneGuest(Guest guest) {
         return stayInfoManagerImpl.getBillServiceOneGuest(guest);
     }
 
-    // Room History
+    /**
+     * ******************** Room History ********************
+     */
     @Override
     public void printAllRoomHistories() {
         roomHistoryManagerImpl.printRoomHistories();
-    }
-
-    // Service
-    @Override
-    public void createService(Service service) {
-        serviceManagerImpl.addService(service);
-    }
-
-    @Override
-    public void changeServiceOnPrice(Service service, double price) {
-        serviceManagerImpl.changeServicePrice(service, price);
-    }
-
-    @Override
-    public void printAllService() {
-        serviceManagerImpl.printService();
-    }
-
-    @Override
-    public void showStayInfo() {
-        stayInfoManagerImpl.printStayInfo();
-    }
-
-    @Override
-    public void checkInGuestInRoom(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate) {
-
-        if (room.getStatus() == RoomStatus.EMPTY) {
-            RoomHistory newRoomHistory = new RoomHistory();
-
-            newRoomHistory.setGuest(guest);
-            newRoomHistory.setRoom(room);
-            newRoomHistory.setCheckInDate(checkInDate);
-            newRoomHistory.setCheckOutDate(checkOutDate);
-            newRoomHistory.setStatus(RoomHistoryStatus.CHECKIN);
-
-            stayInfoManagerImpl.addStayInfo(room.getRoomNumber(), new StayInfo(guest, checkInDate, checkOutDate));
-            roomHistoryManagerImpl.addHistory(newRoomHistory);
-            roomManagerImpl.changeRoomStatus(room, RoomStatus.OCCUPIED);
-        } else {
-            System.out.println("Заселить в комнату " + room.getRoomNumber() + " не представляется возможным. "
-                    + "Статус комнаты = " + room.getStatus());
-        }
-    }
-
-    @Override
-    public void checkOutGuestFromRoom(Guest guest, Room room) {
-        if (stayInfoManagerImpl.searchGuestInTheRoom(guest, room)) {
-            if (room.getStatus() == RoomStatus.OCCUPIED) {
-                stayInfoManagerImpl.deleteStayInfo(room.getRoomNumber());
-                roomManagerImpl.changeRoomStatus(room, RoomStatus.EMPTY);
-            }
-        } else {
-            System.out.println("В комнате " + room.getRoomNumber() + " нет посетителей");
-        }
     }
 }
 

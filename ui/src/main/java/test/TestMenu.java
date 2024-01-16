@@ -8,5 +8,4 @@ public class TestMenu {
         MenuController menuController = new MenuController();
         menuController.run();
     }
-
 }

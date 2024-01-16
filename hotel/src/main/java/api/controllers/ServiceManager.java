@@ -19,4 +19,7 @@ public interface ServiceManager {
     public Service getServiceByType(ServiceType serviceType);
 
     public void deleteService(Service service);
+
+    public List<Service> sortByPriceOneGuest(List<Service> serviceList);
+
 }

@@ -101,13 +101,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
                 .orElse(0.0);
     }
 
-//    public double getBillServiceOneGuest(Guest guest) {
-//        return StayInfoStorageImpl.getInstance().getInfoStorage().values().stream()
-//                .filter(stayInfo -> stayInfo.getGuest().equals(guest))
-//                .mapToDouble(Util::calculateServicesCost)
-//                .sum();
-//    }
-
+    @Override
     public double getBillServiceOneGuest(Guest guest) {
         return StayInfoStorageImpl.getInstance().getInfoStorage().values().stream()
                 .filter(stayInfo -> stayInfo.getGuest().equals(guest))
