@@ -1,6 +1,6 @@
 package menu;
 
-import api.IAction;
+import action.api.IAction;
 
 public class MenuItem {
 

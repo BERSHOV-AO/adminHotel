@@ -1,16 +1,17 @@
 package menu;
 
-import guest.*;
-import room.*;
-import service.AddServiceImpl;
-import service.ChangeServiceOnPriceImpl;
-import service.DeleteServiceImpl;
-import service.PrintServiceImpl;
-import sorted.guest.GuestSortServicesByPrice;
-import sorted.guest.GuestsSortByNameImpl;
-import sorted.room.*;
-import sorted.service.ServicesSortByNameImpl;
-import sorted.service.ServicesSortByPriceImpl;
+import action.guest.*;
+import action.room.*;
+import action.sorted.room.*;
+
+import action.service.AddServiceImpl;
+import action.service.ChangeServiceOnPriceImpl;
+import action.service.DeleteServiceImpl;
+import action.service.PrintServiceImpl;
+import action.sorted.guest.GuestSortServicesByPrice;
+import action.sorted.guest.GuestsSortByNameImpl;
+import action.sorted.service.ServicesSortByNameImpl;
+import action.sorted.service.ServicesSortByPriceImpl;
 import utils.MenuTypes;
 import view.HotelManagerImpl;
 

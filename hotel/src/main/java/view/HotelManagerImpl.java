@@ -1,8 +1,16 @@
 package view;
 
-import api.controllers.*;
 import api.view.HotelManager;
-import controllers.*;
+import controllers.guest.GuestManager;
+import controllers.guest.GuestManagerImpl;
+import controllers.room.RoomManager;
+import controllers.room.RoomManagerImpl;
+import controllers.room_history.RoomHistoryManager;
+import controllers.room_history.RoomHistoryManagerImpl;
+import controllers.service.ServiceManager;
+import controllers.service.ServiceManagerImpl;
+import controllers.stay_info.StayInfoManager;
+import controllers.stay_info.StayInfoManagerImpl;
 import enums.RoomHistoryStatus;
 import enums.RoomStatus;
 import enums.ServiceType;
