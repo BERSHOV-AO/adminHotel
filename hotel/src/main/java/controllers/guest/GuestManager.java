@@ -10,7 +10,7 @@ public interface GuestManager {
 
     public void deleteGuest(Guest guest);
 
-    public void printGuest();
+    public List<Guest> getAllGuests();
 
     public List<Guest> getSortedGuestsByAlphabet();
 

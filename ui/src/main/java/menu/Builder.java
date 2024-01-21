@@ -4,16 +4,21 @@ import action.guest.*;
 import action.room.*;
 import action.sorted.room.*;
 
-import action.service.AddServiceImpl;
-import action.service.ChangeServiceOnPriceImpl;
-import action.service.DeleteServiceImpl;
-import action.service.PrintServiceImpl;
-import action.sorted.guest.GuestSortServicesByPrice;
-import action.sorted.guest.GuestsSortByNameImpl;
-import action.sorted.service.ServicesSortByNameImpl;
-import action.sorted.service.ServicesSortByPriceImpl;
+import action.service.AddServiceActionImpl;
+import action.service.ChangeServiceOnPriceActionImpl;
+import action.service.DeleteServiceActionImpl;
+import action.service.PrintServiceActionImpl;
+import action.sorted.guest.GuestSortServicesByPriceActionImpl;
+import action.sorted.guest.GuestsSortByNameActionImpl;
+import action.sorted.service.ServicesSortByNameActionImpl;
+import action.sorted.service.ServicesSortByPriceActionImpl;
+import controllers.guest.GuestManagerImpl;
+import controllers.room.RoomManagerImpl;
+import controllers.room_history.RoomHistoryManagerImpl;
+import controllers.service.ServiceManagerImpl;
+import controllers.stay_info.StayInfoManagerImpl;
 import utils.MenuTypes;
-import view.HotelManagerImpl;
+//import view.HotelManagerImpl;
 
 public class Builder {
 
@@ -26,58 +31,66 @@ public class Builder {
     private Menu mainMenu = new Menu(main);
 
     public Builder() {
-        HotelManagerImpl.getInstance();
+       // HotelManagerImpl.getInstance();
+        GuestManagerImpl.getInstance();
+        RoomManagerImpl.getInstance();
+        RoomHistoryManagerImpl.getInstance();
+        ServiceManagerImpl.getInstance();
+        StayInfoManagerImpl.getInstance();
+
     }
 
     public Menu buildMenu() {
 
         // Room
-        roomMenu.addMenuItem(new MenuItem("Add a Room", roomMenu, new AddRoomImpl()));
-        roomMenu.addMenuItem(new MenuItem("Print the Rooms", roomMenu, new PrintRoomsImpl()));
-        roomMenu.addMenuItem(new MenuItem("Print empty Rooms", roomMenu, new PrintEmptyRoomsImpl()));
-        roomMenu.addMenuItem(new MenuItem("Change the Room's status", roomMenu, new ChangeStatusImpl()));
-        roomMenu.addMenuItem(new MenuItem("Print the Room details", roomMenu, new PrintDetailsImpl()));
+        roomMenu.addMenuItem(new MenuItem("Add a Room", roomMenu, new AddRoomActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Print the Rooms", roomMenu, new PrintRoomsActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Print empty Rooms", roomMenu, new PrintEmptyRoomsActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Change the Room's status", roomMenu, new ChangeStatusActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Print the Room details", roomMenu, new PrintDetailsActionImpl()));
         // Room sort
-        roomMenu.addMenuItem(new MenuItem("Sort the Rooms by capacity", roomMenu, new RoomsSortByCapacity()));
-        roomMenu.addMenuItem(new MenuItem("Sort the Rooms by price", roomMenu, new RoomsSortByPrice()));
-        roomMenu.addMenuItem(new MenuItem("Sort the Rooms by stars", roomMenu, new RoomsSortByStars()));
+        roomMenu.addMenuItem(new MenuItem("Sort the Rooms by capacity", roomMenu,
+                new RoomsSortByCapacityActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Sort the Rooms by price", roomMenu, new RoomsSortByPriceActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Sort the Rooms by stars", roomMenu, new RoomsSortByStarsActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Sort the empty Rooms by capacity", roomMenu,
-                new RoomsSortEmptyByCapacity()));
+                new RoomsSortEmptyByCapacityActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Sort the empty Rooms by price", roomMenu,
-                new RoomsSortEmptyByPrice()));
+                new RoomsSortEmptyByPriceActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Sort the empty Rooms by stars", roomMenu,
-                new RoomsSortEmptyByStars()));
+                new RoomsSortEmptyByStarsActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Service
-        serviceMenu.addMenuItem(new MenuItem("Add a Service", serviceMenu, new AddServiceImpl()));
-        serviceMenu.addMenuItem(new MenuItem("Print the Services", serviceMenu, new PrintServiceImpl()));
+        serviceMenu.addMenuItem(new MenuItem("Add a Service", serviceMenu, new AddServiceActionImpl()));
+        serviceMenu.addMenuItem(new MenuItem("Print the Services", serviceMenu, new PrintServiceActionImpl()));
         serviceMenu.addMenuItem(new MenuItem("Change the Service's price", serviceMenu,
-                new ChangeServiceOnPriceImpl()));
-        serviceMenu.addMenuItem(new MenuItem("Delete a Service", serviceMenu, new DeleteServiceImpl()));
+                new ChangeServiceOnPriceActionImpl()));
+        serviceMenu.addMenuItem(new MenuItem("Delete a Service", serviceMenu, new DeleteServiceActionImpl()));
         // Service sort
         serviceMenu.addMenuItem(new MenuItem("Sort the Services by name", serviceMenu,
-                new ServicesSortByNameImpl()));
+                new ServicesSortByNameActionImpl()));
         serviceMenu.addMenuItem(new MenuItem("Sort the Services by price", serviceMenu,
-                new ServicesSortByPriceImpl()));
+                new ServicesSortByPriceActionImpl()));
         serviceMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Guest
-        guestMenu.addMenuItem(new MenuItem("Add a Guest", guestMenu, new AddGuestImpl()));
-        guestMenu.addMenuItem(new MenuItem("Print the Guests", guestMenu, new PrintGuestsImpl()));
-        guestMenu.addMenuItem(new MenuItem("Check-in the Guest", guestMenu, new CheckInImpl()));
+        guestMenu.addMenuItem(new MenuItem("Add a Guest", guestMenu, new AddGuestActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Print the Guests", guestMenu, new PrintGuestsActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Check-in the Guest", guestMenu, new CheckInActionImpl()));
         guestMenu.addMenuItem(new MenuItem("Add a Service to the Guest", guestMenu,
-                new AddServicesToGuestImpl()));
+                new AddServicesToGuestActionImpl()));
         guestMenu.addMenuItem(new MenuItem("Print the Guest's Services", guestMenu,
-                new PrintServicesOneGuestImpl()));
-        guestMenu.addMenuItem(new MenuItem("Bill the Guest", guestMenu, new BillGuestImpl()));
-        guestMenu.addMenuItem(new MenuItem("Check-out the Guest", guestMenu, new CheckOutImpl()));
-        guestMenu.addMenuItem(new MenuItem("Delete the Guest", guestMenu, new DeleteGuestImpl()));
+                new PrintServicesOneGuestActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Bill the Guest", guestMenu, new BillGuestActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Check-out the Guest", guestMenu, new CheckOutActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Delete the Guest", guestMenu, new DeleteGuestActionImpl()));
 
         // Guest sort
-        guestMenu.addMenuItem(new MenuItem("Sort the Guest by name", guestMenu, new GuestsSortByNameImpl()));
+        guestMenu.addMenuItem(new MenuItem("Sort the Guest by name", guestMenu,
+                new GuestsSortByNameActionImpl()));
         guestMenu.addMenuItem(new MenuItem("Sort the Guest's Services by price", guestMenu,
-                new GuestSortServicesByPrice()));
+                new GuestSortServicesByPriceActionImpl()));
         guestMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Main Menu

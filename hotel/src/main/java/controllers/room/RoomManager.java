@@ -9,7 +9,7 @@ public interface RoomManager {
 
     public void addRoom(Room room);
 
-    public void printRooms();
+    public List<Room> getAllRooms();
 
     public void changeRoomStatus(Room room, RoomStatus status);
 
@@ -30,4 +30,6 @@ public interface RoomManager {
     public Room getRoomByNumber(Integer roomNumber);
 
     public List<Room> getEmptyRooms();
+
+ //   public void printDetailsOfRoom(Room room);
 }

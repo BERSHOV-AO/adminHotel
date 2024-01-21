@@ -1,22 +1,23 @@
 package action.guest;
 
 import action.api.IAction;
+import controllers.guest.GuestManagerImpl;
 import utils.InputReader;
-import view.HotelManagerImpl;
 
 import java.util.Scanner;
 
-public class DeleteGuestImpl implements IAction {
+public class DeleteGuestActionImpl implements IAction {
     @Override
     public void execute() {
 
         Scanner scanner = new Scanner(System.in);
-        HotelManagerImpl.getInstance().printAllGuest();
+        System.out.println("-------All Guests-------");
+        GuestManagerImpl.getInstance().getAllGuests().stream().forEach(System.out::println);
 
         try {
             String lastName = InputReader.getStringInput(scanner,
                     "Введите имя посетителя, для удаления: ");
-            HotelManagerImpl.getInstance().deleteGuest(HotelManagerImpl.getInstance().getGuestByName(lastName));
+            GuestManagerImpl.getInstance().deleteGuest(GuestManagerImpl.getInstance().getGuestByName(lastName));
         } catch (Exception e) {
             System.out.println("Посетитель не удален " + e.getMessage());
         }

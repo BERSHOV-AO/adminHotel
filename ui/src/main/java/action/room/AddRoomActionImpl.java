@@ -1,15 +1,15 @@
 package action.room;
 
 import action.api.IAction;
+import controllers.room.RoomManagerImpl;
 import enums.RoomStatus;
 import models.Room;
 import utils.InputReader;
 import utils.LogicDetails;
-import view.HotelManagerImpl;
 
 import java.util.Scanner;
 
-public class AddRoomImpl implements IAction {
+public class AddRoomActionImpl implements IAction {
 
     @Override
     public void execute() {
@@ -24,7 +24,7 @@ public class AddRoomImpl implements IAction {
             RoomStatus status = LogicDetails.integerRoomStatus(InputReader.getIntegerInput(scanner,
                     "Введите цифру статуса номера: 1 = EMPTY, 2 = OCCUPIED, 3 = UNDER_REPAIR, 4 = SERVICE"));
 
-            HotelManagerImpl.getInstance().createRoom(new Room(roomNumber, stars, priceDay, capacity, status));
+            RoomManagerImpl.getInstance().addRoom(new Room(roomNumber, stars, priceDay, capacity, status));
 
         } catch (Exception e) {
             System.out.println("Не удалось добавить комнату! Введите правильные параметры " + e.getMessage());

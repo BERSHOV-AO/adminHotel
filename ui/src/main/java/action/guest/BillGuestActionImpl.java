@@ -1,14 +1,17 @@
 package action.guest;
 
 import action.api.IAction;
+import controllers.guest.GuestManagerImpl;
+import controllers.room.RoomManagerImpl;
+import controllers.stay_info.StayInfoManagerImpl;
 import utils.InputReader;
-import view.HotelManagerImpl;
+import utils.Printer;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class BillGuestImpl implements IAction {
+public class BillGuestActionImpl implements IAction {
     @Override
     public void execute() {
         try {
@@ -16,7 +19,7 @@ public class BillGuestImpl implements IAction {
             Locale ruLocale = new Locale("ru", "RU");
             NumberFormat rubFormat = NumberFormat.getCurrencyInstance(ruLocale);
 
-            HotelManagerImpl.getInstance().showStayInfo();
+            Printer.printStayInfo(StayInfoManagerImpl.getInstance().getMapStayInfo());
             String lastName = InputReader.getStringInput(scanner,
                     "Введите имя посетителя для выставления счета: ");
             StringBuilder str = new StringBuilder();
@@ -25,11 +28,11 @@ public class BillGuestImpl implements IAction {
             str.append("Имя гостя: " + lastName + "\n");
             str.append("Номер комнаты: " + roomNumber + "\n");
             str.append("Счет за номер : ");
-            str.append(rubFormat.format(HotelManagerImpl.getInstance().getBillForRoomAndGuest(HotelManagerImpl
+            str.append(rubFormat.format(StayInfoManagerImpl.getInstance().getBillForRoomAndGuest(GuestManagerImpl
                             .getInstance().getGuestByName(lastName),
-                    HotelManagerImpl.getInstance().getRoomByNumber(roomNumber))) + "\n");
+                    RoomManagerImpl.getInstance().getRoomByNumber(roomNumber))) + "\n");
             str.append("Счет за сервис: ");
-            str.append(rubFormat.format(HotelManagerImpl.getInstance().getBillServiceOneGuest(HotelManagerImpl
+            str.append(rubFormat.format(StayInfoManagerImpl.getInstance().getBillServiceOneGuest(GuestManagerImpl
                     .getInstance().getGuestByName(lastName))) + "\n");
             str.append("********************************");
 

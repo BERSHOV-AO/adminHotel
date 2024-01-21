@@ -7,6 +7,7 @@ import models.StayInfo;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface StayInfoManager {
 
@@ -14,7 +15,7 @@ public interface StayInfoManager {
 
     public void deleteStayInfo(Integer roomNumber);
 
-    public void printStayInfo();
+    public Map<Integer, StayInfo> getMapStayInfo();
 
     public List<Integer> getFreeRoomsByDate(LocalDate date);
 
@@ -22,9 +23,13 @@ public interface StayInfoManager {
 
     public LinkedHashMap<Integer, StayInfo> getLastThreeGuests();
 
-    public boolean searchGuestInTheRoom(Guest guest, Room room);
+    public boolean containsGuestInTheRoom(Guest guest, Room room);
 
     public double getBillForRoomAndGuest(Guest guest, Room room);
 
     public double getBillServiceOneGuest(Guest guest);
+
+    public void checkInGuestInRoom(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate);
+
+    public void checkOutGuestFromRoom(Guest guest, Room room);
 }

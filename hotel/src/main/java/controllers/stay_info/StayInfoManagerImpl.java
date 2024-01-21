@@ -1,9 +1,11 @@
 package controllers.stay_info;
 
-import models.Guest;
-import models.Room;
-import models.Service;
-import models.StayInfo;
+import controllers.room.RoomManagerImpl;
+import controllers.room_history.RoomHistoryManagerImpl;
+import controllers.service.ServiceManagerImpl;
+import enums.RoomHistoryStatus;
+import enums.RoomStatus;
+import models.*;
 import storages.stay_info.StayInfoStorageImpl;
 
 import java.time.LocalDate;
@@ -13,6 +15,18 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StayInfoManagerImpl implements StayInfoManager {
+
+    private static StayInfoManagerImpl instance;
+
+    private StayInfoManagerImpl() {
+    }
+
+    public static StayInfoManagerImpl getInstance() {
+        if (instance == null) {
+            instance = new StayInfoManagerImpl();
+        }
+        return instance;
+    }
 
     @Override
     public void addStayInfo(Integer roomNumber, StayInfo stayInfo) {
@@ -25,17 +39,8 @@ public class StayInfoManagerImpl implements StayInfoManager {
     }
 
     @Override
-    public void printStayInfo() {
-        for (Map.Entry<Integer, StayInfo> entry : StayInfoStorageImpl.getInstance().getInfoStorage().entrySet()) {
-            Integer room = entry.getKey();
-            StayInfo stayInfo = entry.getValue();
-
-            System.out.println("Room: " + room);
-            System.out.println("Guest: " + stayInfo.getGuest().getLastName());
-            System.out.println("Check-in date: " + stayInfo.getCheckInDate());
-            System.out.println("Check-out date: " + stayInfo.getCheckOutDate());
-            System.out.println("--------------------------------------");
-        }
+    public Map<Integer, StayInfo> getMapStayInfo() {
+        return StayInfoStorageImpl.getInstance().getInfoStorage();
     }
 
     @Override
@@ -75,7 +80,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
     }
 
     @Override
-    public boolean searchGuestInTheRoom(Guest guest, Room room) {
+    public boolean containsGuestInTheRoom(Guest guest, Room room) {
         return StayInfoStorageImpl.getInstance().getInfoStorage().entrySet().stream()
                 .filter(entry -> entry.getKey().equals(room.getRoomNumber()))
                 .map(Map.Entry::getValue)
@@ -85,7 +90,8 @@ public class StayInfoManagerImpl implements StayInfoManager {
     @Override
     public double getBillForRoomAndGuest(Guest guest, Room room) {
         return StayInfoStorageImpl.getInstance().getInfoStorage().entrySet().stream()
-                .filter(entry -> entry.getKey().equals(room.getRoomNumber()) && entry.getValue().getGuest().equals(guest))
+                .filter(entry -> entry.getKey().equals(room.getRoomNumber()) && entry.getValue().getGuest()
+                        .equals(guest))
                 .findFirst()
                 .map(entry -> {
                     LocalDate checkInDate = entry.getValue().getCheckInDate();
@@ -110,5 +116,92 @@ public class StayInfoManagerImpl implements StayInfoManager {
                 .mapToDouble(Service::getPrice)
                 .sum();
     }
+
+
+    @Override
+    public void checkInGuestInRoom(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate) {
+
+        if (room.getStatus() == RoomStatus.EMPTY) {
+            RoomHistory newRoomHistory = new RoomHistory();
+
+            newRoomHistory.setGuest(guest);
+            newRoomHistory.setRoom(room);
+            newRoomHistory.setCheckInDate(checkInDate);
+            newRoomHistory.setCheckOutDate(checkOutDate);
+            newRoomHistory.setStatus(RoomHistoryStatus.CHECKIN);
+
+            addStayInfo(room.getRoomNumber(), new StayInfo(guest, checkInDate, checkOutDate));
+            RoomHistoryManagerImpl.getInstance().addHistory(newRoomHistory);
+            RoomManagerImpl.getInstance().changeRoomStatus(room, RoomStatus.OCCUPIED);
+        } else {
+            System.out.println("Заселить в комнату " + room.getRoomNumber() + " не представляется возможным. "
+                    + "Статус комнаты = " + room.getStatus());
+        }
+    }
+
+    @Override
+    public void checkOutGuestFromRoom(Guest guest, Room room) {
+        if (containsGuestInTheRoom(guest, room)) {
+            if (room.getStatus() == RoomStatus.OCCUPIED) {
+                deleteStayInfo(room.getRoomNumber());
+                RoomManagerImpl.getInstance().changeRoomStatus(room, RoomStatus.EMPTY);
+            }
+        } else {
+            System.out.println("В комнате " + room.getRoomNumber() + " нет посетителей");
+        }
+    }
+
+
+//    @Override
+//    public boolean containsGuestInTheRoom(Guest guest, Room room) {
+//        return stayInfoManagerImpl.searchGuestInTheRoom(guest, room);
+//    }
+//
+    //---------------------------------------------------------------------
+
+//    @Override
+//    public void showFreeRoomsByDate(LocalDate date) {
+//        stayInfoManagerImpl.getFreeRoomsByDate(date).stream()
+//                .forEach(item -> System.out.println("Комната с номером: " + item +
+//                        ", буде свободна - " + date.toString()));
+//    }
+
+//    @Override
+//    public void showPayAmountForRoom(Room room) {
+//        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append("Pay Amount For Room : ");
+//        stringBuilder.append(room.getRoomNumber() + " = ");
+//        stringBuilder.append(stayInfoManagerImpl.getPayAmountForRoom(room) + " руб.");
+//        System.out.println(stringBuilder.toString());
+//    }
+
+//    @Override
+//    public void printLastThreeGuests() {
+//        stayInfoManagerImpl.getLastThreeGuests().entrySet().stream()
+//                .forEach(entry -> {
+//                    Integer room = entry.getKey();
+//                    StayInfo stayInfo = entry.getValue();
+//                    LocalDate checkInDate = stayInfo.getCheckInDate();
+//                    LocalDate checkOutDate = stayInfo.getCheckOutDate();
+//                    Guest guest = stayInfo.getGuest();
+//
+//                    System.out.println("Room: " + room);
+//                    System.out.println("Guest: " + guest.getLastName());
+//                    System.out.println("Check-in date: " + checkInDate);
+//                    System.out.println("Check-out date: " + checkOutDate);
+//                });
+//    }
+
+
+//    @Override
+//    public double getBillForRoomAndGuest(Guest guest, Room room) {
+//        return stayInfoManagerImpl.getBillForRoomAndGuest(guest, room);
+//    }
+
+//    @Override
+//    public double getBillServiceOneGuest(Guest guest) {
+//        return stayInfoManagerImpl.getBillServiceOneGuest(guest);
+//    }
+
 }
 

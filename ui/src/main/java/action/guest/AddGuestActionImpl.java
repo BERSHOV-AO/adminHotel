@@ -1,13 +1,13 @@
 package action.guest;
 
 import action.api.IAction;
+import controllers.guest.GuestManagerImpl;
 import models.Guest;
 import utils.InputReader;
-import view.HotelManagerImpl;
 
 import java.util.Scanner;
 
-public class AddGuestImpl implements IAction {
+public class AddGuestActionImpl implements IAction {
 
     @Override
     public void execute() {
@@ -15,7 +15,7 @@ public class AddGuestImpl implements IAction {
 
         try {
             String lastName = InputReader.getStringInput(scanner, "Введите имя посетителя, для добавления..");
-            HotelManagerImpl.getInstance().addGuest(new Guest(lastName));
+            GuestManagerImpl.getInstance().addOnGuest(new Guest(lastName));
 
         } catch (Exception e) {
             System.out.println("Не удалось добавить посетителя. Введите допустимые параметры!" + e.getMessage());

@@ -1,19 +1,21 @@
 package action.guest;
 
 import action.api.IAction;
+import controllers.guest.GuestManagerImpl;
+import controllers.service.ServiceManagerImpl;
 import enums.ServiceType;
 import utils.InputReader;
 import utils.LogicDetails;
-import view.HotelManagerImpl;
 
 import java.util.Scanner;
 
-public class AddServicesToGuestImpl implements IAction {
+public class AddServicesToGuestActionImpl implements IAction {
     @Override
     public void execute() {
 
         Scanner scanner = new Scanner(System.in);
-        HotelManagerImpl.getInstance().printAllGuest();
+        System.out.println("----Список посетителей----");
+        GuestManagerImpl.getInstance().getAllGuests().stream().forEach(System.out::println);
         try {
             String lastName = InputReader.getStringInput(scanner,
                     "Введите имя посетителя, чтобы ему добавить сервис ");
@@ -24,8 +26,8 @@ public class AddServicesToGuestImpl implements IAction {
 
             System.out.println("Вы выбрали сервис: " + serviceType);
 
-            HotelManagerImpl.getInstance().addServicesToGuest(HotelManagerImpl.getInstance().getGuestByName(lastName),
-                    HotelManagerImpl.getInstance().getServiceByType(serviceType));
+            GuestManagerImpl.getInstance().addServicesToGuest(GuestManagerImpl.getInstance().getGuestByName(lastName),
+                    ServiceManagerImpl.getInstance().getServiceByType(serviceType));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
