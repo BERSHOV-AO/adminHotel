@@ -18,6 +18,7 @@ public class RoomHistoryManagerImpl implements RoomHistoryManager {
         }
         return instance;
     }
+
     @Override
     public void addHistory(RoomHistory roomHistory) {
         RoomHistoryStorageImpl.getInstance().addRoomHistory(roomHistory);

@@ -5,7 +5,6 @@ import controllers.room_history.RoomHistoryManagerImpl;
 import enums.RoomHistoryStatus;
 import enums.RoomStatus;
 import models.*;
-import storages.stay_info.StayInfoStorage;
 import storages.stay_info.StayInfoStorageImpl;
 
 import java.time.LocalDate;
@@ -107,21 +106,21 @@ public class StayInfoManagerImpl implements StayInfoManager {
     @Override
     public double getBillServiceOneGuest(Guest guest) {
         Map<Integer, StayInfo> infoStorage = StayInfoStorageImpl.getInstance().getInfoStorage();
-            double totalBill = 0.0;
+        double totalBill = 0.0;
 
-            for (StayInfo stayInfo : infoStorage.values()) {
-                if (stayInfo.getGuest().getLastName().equals(guest.getLastName())) {
-                    List<Service> services =  stayInfo.getGuest().getServices();
-                        if(services.size() != 0){
-                        for (Service service : services) {
-                            totalBill += service.getPrice();
-                        }
+        for (StayInfo stayInfo : infoStorage.values()) {
+            if (stayInfo.getGuest().getLastName().equals(guest.getLastName())) {
+                List<Service> services = stayInfo.getGuest().getServices();
+                if (services.size() != 0) {
+                    for (Service service : services) {
+                        totalBill += service.getPrice();
                     }
                 }
             }
-        System.out.println("totalBill: " + totalBill);
-            return totalBill;
         }
+        System.out.println("totalBill: " + totalBill);
+        return totalBill;
+    }
 
     @Override
     public void checkInGuestInRoom(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate) {

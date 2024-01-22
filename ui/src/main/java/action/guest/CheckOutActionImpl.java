@@ -14,7 +14,6 @@ public class CheckOutActionImpl implements IAction {
     public void execute() {
         Scanner scanner = new Scanner(System.in);
 
-
         Printer.printStayInfo(StayInfoManagerImpl.getInstance().getMapStayInfo());
 
         String lastName = InputReader.getStringInput(scanner,

@@ -1,6 +1,5 @@
 package models;
 
-import enums.RoomStars;
 import enums.RoomStatus;
 
 import java.util.Objects;
