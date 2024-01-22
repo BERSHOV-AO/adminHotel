@@ -84,41 +84,6 @@ public class GuestManagerImpl implements GuestManager {
         }
         return tempListService;
     }
-
- //   @Override
-//    public void addGuest(Guest guest) {
-//        guestManagerImpl.addOnGuest(guest);
-//    }
-
-//    @Override
-//    public void deleteGuest(Guest guest) {
-//        guestManagerImpl.deleteGuest(guest);
-//    }
-
- //   @Override
-//    public void printAllGuest() {
-//        guestManagerImpl.printGuest();
-//    }
-
-//    @Override
-//    public void sortGuestsByName() {
-//        guestManagerImpl.getSortedGuestsByAlphabet().stream().forEach(System.out::println);
-//    }
-
-//    @Override
-//    public Guest getGuestByName(String lastName) {
-//        return guestManagerImpl.getGuestByName(lastName);
-//    }
-
-//    @Override
-//    public void addServicesToGuest(Guest guest, Service service) {
-//        guestManagerImpl.addServicesToGuest(guest, service);
-//    }
-
-//    @Override
-//    public List<Service> getGuestServices(Guest guest) {
-//        return guestManagerImpl.getGuestServices(guest);
-//    }
 }
 
 

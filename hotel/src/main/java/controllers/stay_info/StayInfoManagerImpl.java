@@ -2,7 +2,6 @@ package controllers.stay_info;
 
 import controllers.room.RoomManagerImpl;
 import controllers.room_history.RoomHistoryManagerImpl;
-import controllers.service.ServiceManagerImpl;
 import enums.RoomHistoryStatus;
 import enums.RoomStatus;
 import models.*;
@@ -150,58 +149,5 @@ public class StayInfoManagerImpl implements StayInfoManager {
             System.out.println("В комнате " + room.getRoomNumber() + " нет посетителей");
         }
     }
-
-
-//    @Override
-//    public boolean containsGuestInTheRoom(Guest guest, Room room) {
-//        return stayInfoManagerImpl.searchGuestInTheRoom(guest, room);
-//    }
-//
-    //---------------------------------------------------------------------
-
-//    @Override
-//    public void showFreeRoomsByDate(LocalDate date) {
-//        stayInfoManagerImpl.getFreeRoomsByDate(date).stream()
-//                .forEach(item -> System.out.println("Комната с номером: " + item +
-//                        ", буде свободна - " + date.toString()));
-//    }
-
-//    @Override
-//    public void showPayAmountForRoom(Room room) {
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append("Pay Amount For Room : ");
-//        stringBuilder.append(room.getRoomNumber() + " = ");
-//        stringBuilder.append(stayInfoManagerImpl.getPayAmountForRoom(room) + " руб.");
-//        System.out.println(stringBuilder.toString());
-//    }
-
-//    @Override
-//    public void printLastThreeGuests() {
-//        stayInfoManagerImpl.getLastThreeGuests().entrySet().stream()
-//                .forEach(entry -> {
-//                    Integer room = entry.getKey();
-//                    StayInfo stayInfo = entry.getValue();
-//                    LocalDate checkInDate = stayInfo.getCheckInDate();
-//                    LocalDate checkOutDate = stayInfo.getCheckOutDate();
-//                    Guest guest = stayInfo.getGuest();
-//
-//                    System.out.println("Room: " + room);
-//                    System.out.println("Guest: " + guest.getLastName());
-//                    System.out.println("Check-in date: " + checkInDate);
-//                    System.out.println("Check-out date: " + checkOutDate);
-//                });
-//    }
-
-
-//    @Override
-//    public double getBillForRoomAndGuest(Guest guest, Room room) {
-//        return stayInfoManagerImpl.getBillForRoomAndGuest(guest, room);
-//    }
-
-//    @Override
-//    public double getBillServiceOneGuest(Guest guest) {
-//        return stayInfoManagerImpl.getBillServiceOneGuest(guest);
-//    }
-
 }
 

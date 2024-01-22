@@ -1,6 +1,5 @@
 package controllers.room;
 
-import controllers.guest.GuestManagerImpl;
 import enums.RoomStatus;
 import models.Room;
 import storages.room.RoomsStorageImpl;
@@ -30,14 +29,8 @@ public class RoomManagerImpl implements RoomManager {
 
     @Override
     public List<Room> getAllRooms() {
-//        List<Room> tempRooms = RoomsStorageImpl.getInstance().getRooms();
-//        for (Room room : tempRooms) {
-//            System.out.println(room);
-//        }
         return RoomsStorageImpl.getInstance().getRooms();
     }
-
-
 
     @Override
     public void changeRoomStatus(Room room, RoomStatus status) {
@@ -120,98 +113,5 @@ public class RoomManagerImpl implements RoomManager {
                 .findFirst()
                 .orElse(null);
     }
-
-//    @Override
-//    public void printDetailsOfRoom(Room room) {
-//
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append("Room details: ");
-//        stringBuilder.append(getRoomDetails(room));
-//        System.out.println(stringBuilder.toString());
-//    }
-
-    //-----------------------------------------------------------------------------------------
-
-//    @Override
-//    public void createRoom(Room room) {
-//        roomManagerImpl.addRoom(room);
-//    }
-
-//    @Override
-//    public void changeRoomStatus(Room room, RoomStatus roomStatus) {
-//        roomManagerImpl.changeRoomStatus(room, roomStatus);
-//    }
-
-//    @Override
-//    public void changeRoomPrice(Room room, double price) {
-//        roomManagerImpl.changeRoomPrice(room, price);
-//    }
-
-//    @Override
-//    public void printAllRooms() {
-//        roomManagerImpl.printRooms();
-//    }
-
-//    @Override
-//    public void printDetailsOfRoom(Room room) {
-//
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append("Room details: ");
-//        stringBuilder.append(roomManagerImpl.getRoomDetails(room));
-//        System.out.println(stringBuilder.toString());
-//    }
-
-//    @Override
-//    public void sortRoomsByPrice() {
-//        roomManagerImpl.getSortedRoomsByPrice().stream().forEach(System.out::println);
-//    }
-
-//    @Override
-//    public void showSortRoomsByCapacity() {
-//        roomManagerImpl.getSortedRoomsByCapacity().stream().forEach(System.out::println);
-//    }
-
-//    @Override
-//    public void showSortRoomsByStars() {
-//        roomManagerImpl.getSortedRoomsByStars().stream().forEach(System.out::println);
-//    }
-
-//    @Override
-//    public void showSortEmptyRoomsByPrice() {
-//        roomManagerImpl.getFreeRooms(roomManagerImpl.getSortedRoomsByPrice()).stream().forEach(System.out::println);
-//    }
-
-//    @Override
-//    public void showSortEmptyRoomsByCapacity() {
-//        roomManagerImpl.getFreeRooms(roomManagerImpl.getSortedRoomsByCapacity()).stream().forEach(System.out::println);
-//    }
-
-//    @Override
-//    public void showSortEmptyRoomsByStars() {
-//        roomManagerImpl.getFreeRooms(roomManagerImpl.getSortedRoomsByStars()).stream().forEach(System.out::println);
-//    }
-
-//    @Override
-//    public void totalCountEmptyRooms() {
-//
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append("total Count Empty Rooms: ");
-//        stringBuilder.append(roomManagerImpl.totalCountEmptyRooms());
-//        System.out.println(stringBuilder.toString());
-//    }
-
-//    @Override
-//    public Room getRoomByNumber(Integer roomNumber) {
-//        return roomManagerImpl.getRoomByNumber(roomNumber);
-//    }
-
-//    @Override
-//    public void showEmptyRooms() {
-//        if (roomManagerImpl.getEmptyRooms() == null) {
-//            System.out.println("Нет свободных комнат");
-//        } else {
-//            roomManagerImpl.getEmptyRooms().stream().forEach(System.out::println);
-//        }
-//    }
 }
 

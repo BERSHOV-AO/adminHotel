@@ -1,6 +1,5 @@
 package controllers.room_history;
 
-import controllers.room.RoomManagerImpl;
 import models.RoomHistory;
 import storages.room_history.RoomHistoryStorageImpl;
 

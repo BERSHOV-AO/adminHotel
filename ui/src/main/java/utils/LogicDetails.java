@@ -52,7 +52,6 @@ public class LogicDetails {
         return roomStar;
     }
 
-
     public static ServiceType integerServiceType(Integer input) {
 
         ServiceType serviceType = null;

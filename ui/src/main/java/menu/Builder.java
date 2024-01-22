@@ -18,7 +18,6 @@ import controllers.room_history.RoomHistoryManagerImpl;
 import controllers.service.ServiceManagerImpl;
 import controllers.stay_info.StayInfoManagerImpl;
 import utils.MenuTypes;
-//import view.HotelManagerImpl;
 
 public class Builder {
 
@@ -31,13 +30,11 @@ public class Builder {
     private Menu mainMenu = new Menu(main);
 
     public Builder() {
-       // HotelManagerImpl.getInstance();
         GuestManagerImpl.getInstance();
         RoomManagerImpl.getInstance();
         RoomHistoryManagerImpl.getInstance();
         ServiceManagerImpl.getInstance();
         StayInfoManagerImpl.getInstance();
-
     }
 
     public Menu buildMenu() {

@@ -2,7 +2,6 @@ package action.sorted.room;
 
 import action.api.IAction;
 import controllers.room.RoomManagerImpl;
-//import view.HotelManagerImpl;
 
 public class RoomsSortEmptyByStarsActionImpl implements IAction {
     @Override
