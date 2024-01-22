@@ -5,6 +5,7 @@ import controllers.room_history.RoomHistoryManagerImpl;
 import enums.RoomHistoryStatus;
 import enums.RoomStatus;
 import models.*;
+import storages.stay_info.StayInfoStorage;
 import storages.stay_info.StayInfoStorageImpl;
 
 import java.time.LocalDate;
@@ -97,6 +98,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
                     LocalDate checkOutDate = entry.getValue().getCheckOutDate();
                     int duration = (int) checkInDate.until(checkOutDate).getDays();
                     double pricePerNight = room.getPrice();
+                    System.out.println("duration * pricePerNight" + duration * pricePerNight);
                     return duration * pricePerNight;
                 })
                 .orElse(0.0);
@@ -104,18 +106,22 @@ public class StayInfoManagerImpl implements StayInfoManager {
 
     @Override
     public double getBillServiceOneGuest(Guest guest) {
-        return StayInfoStorageImpl.getInstance().getInfoStorage().values().stream()
-                .filter(stayInfo -> stayInfo.getGuest().equals(guest))
-                .mapToDouble(this::calculateServicesCost)
-                .sum();
-    }
+        Map<Integer, StayInfo> infoStorage = StayInfoStorageImpl.getInstance().getInfoStorage();
+            double totalBill = 0.0;
 
-    private double calculateServicesCost(StayInfo stayInfo) {
-        return stayInfo.getGuest().getServices().stream()
-                .mapToDouble(Service::getPrice)
-                .sum();
-    }
-
+            for (StayInfo stayInfo : infoStorage.values()) {
+                if (stayInfo.getGuest().getLastName().equals(guest.getLastName())) {
+                    List<Service> services =  stayInfo.getGuest().getServices();
+                        if(services.size() != 0){
+                        for (Service service : services) {
+                            totalBill += service.getPrice();
+                        }
+                    }
+                }
+            }
+        System.out.println("totalBill: " + totalBill);
+            return totalBill;
+        }
 
     @Override
     public void checkInGuestInRoom(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate) {
