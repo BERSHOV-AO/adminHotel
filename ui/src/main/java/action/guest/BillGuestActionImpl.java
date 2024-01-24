@@ -33,9 +33,6 @@ public class BillGuestActionImpl implements IAction {
             str.append("Счет за номер : ");
             str.append(rubFormat.format(stayInfoManager.getBillForRoomAndGuest(guestManager.getGuestByName(lastName),
                     RoomManagerImpl.getInstance().getRoomByNumber(roomNumber))) + "\n");
-            str.append("Счет за сервис: ");
-            str.append(rubFormat.format(stayInfoManager.getBillServiceOneGuest(guestManager.getGuestByName(lastName)))
-                    + "\n");
             str.append("********************************");
             System.out.println(str);
 

@@ -5,7 +5,6 @@ import controllers.guest.GuestManagerImpl;
 import controllers.service.ServiceManagerImpl;
 import enums.ServiceType;
 import utils.InputReader;
-import utils.LogicDetails;
 
 import java.util.Scanner;
 
@@ -21,13 +20,10 @@ public class AddServicesToGuestActionImpl implements IAction {
         try {
             String lastName = InputReader.getStringInput(scanner,
                     "Введите имя посетителя, чтобы ему добавить сервис ");
-
-            ServiceType serviceType = LogicDetails.integerServiceType(InputReader.getIntegerInput(scanner,
+            ServiceType serviceType = ServiceType.integerServiceType(InputReader.getIntegerInput(scanner,
                     "Введите число соответствующее сервису : " +
                             "1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, 4 = LAUNDRY"));
-
             System.out.println("Вы выбрали сервис: " + serviceType);
-
             guestManager.addServicesToGuest(guestManager.getGuestByName(lastName),
                     serviceManager.getServiceByType(serviceType));
         } catch (Exception e) {

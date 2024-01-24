@@ -101,7 +101,6 @@ public class StayInfoManagerImpl implements StayInfoManager {
                     LocalDate checkOutDate = entry.getValue().getCheckOutDate();
                     int duration = (int) checkInDate.until(checkOutDate).getDays();
                     double pricePerNight = room.getPrice();
-                    System.out.println("duration * pricePerNight" + duration * pricePerNight);
                     return duration * pricePerNight;
                 })
                 .orElse(0.0);

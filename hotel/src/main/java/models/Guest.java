@@ -1,7 +1,5 @@
 package models;
 
-import enums.ServiceType;
-
 import java.util.List;
 
 public class Guest {

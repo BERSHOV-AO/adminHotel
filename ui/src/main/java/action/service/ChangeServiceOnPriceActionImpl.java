@@ -4,7 +4,6 @@ import action.api.IAction;
 import controllers.service.ServiceManagerImpl;
 import enums.ServiceType;
 import utils.InputReader;
-import utils.LogicDetails;
 
 import java.util.Scanner;
 
@@ -18,8 +17,8 @@ public class ChangeServiceOnPriceActionImpl implements IAction {
         System.out.println("-------All Services-------");
         serviceManager.getAllServices().stream().forEach(System.out::println);
         try {
-            ServiceType serviceType = LogicDetails.integerServiceType(InputReader.getIntegerInput(scanner,
-                    "Для изменения цены сервиса, введите число соответствующее сервису : " +
+            ServiceType serviceType = ServiceType.integerServiceType(InputReader.getIntegerInput(scanner,
+                    "Введите число соответствующее сервису : " +
                             "1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, 4 = LAUNDRY"));
             Double servicePrice = InputReader.getDoubleInput(scanner, "Введите новую цену сервиса: ");
             serviceManager.changeServicePrice(serviceManager.getServiceByType(serviceType), servicePrice);
