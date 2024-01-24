@@ -7,6 +7,8 @@ import java.util.List;
 
 public class RoomHistoryManagerImpl implements RoomHistoryManager {
 
+    RoomHistoryStorageImpl roomHistoryStorage = RoomHistoryStorageImpl.getInstance();
+
     private static RoomHistoryManagerImpl instance;
 
     private RoomHistoryManagerImpl() {
@@ -21,12 +23,12 @@ public class RoomHistoryManagerImpl implements RoomHistoryManager {
 
     @Override
     public void addHistory(RoomHistory roomHistory) {
-        RoomHistoryStorageImpl.getInstance().addRoomHistory(roomHistory);
+        roomHistoryStorage.addRoomHistory(roomHistory);
     }
 
     @Override
     public void printRoomHistories() {
-        List<RoomHistory> tempRoomHistories = RoomHistoryStorageImpl.getInstance().getRoomHistories();
+        List<RoomHistory> tempRoomHistories = roomHistoryStorage.getRoomHistories();
         for (RoomHistory roomHistory : tempRoomHistories) {
             System.out.println(roomHistory);
         }

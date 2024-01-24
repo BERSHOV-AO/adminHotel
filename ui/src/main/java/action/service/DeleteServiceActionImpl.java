@@ -13,15 +13,16 @@ public class DeleteServiceActionImpl implements IAction {
 
     @Override
     public void execute() {
+        ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
+
         System.out.println("-----Удаление сервиса-----");
         System.out.println("-------All Services-------");
-        ServiceManagerImpl.getInstance().getAllServices().stream().forEach(System.out::println);
+        serviceManager.getAllServices().stream().forEach(System.out::println);
         try {
             ServiceType serviceType = LogicDetails.integerServiceType(InputReader.getIntegerInput(scanner,
                     "Введите число соответствующее сервису, для его удаления: " +
                             "1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, 4 = LAUNDRY"));
-
-            ServiceManagerImpl.getInstance().deleteService(ServiceManagerImpl.getInstance().getServiceByType(serviceType));
+            serviceManager.deleteService(serviceManager.getServiceByType(serviceType));
         } catch (Exception e) {
             System.out.println("Нет такой услуги для удаления");
         }

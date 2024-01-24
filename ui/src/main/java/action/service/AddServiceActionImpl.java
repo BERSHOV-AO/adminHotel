@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class AddServiceActionImpl implements IAction {
     @Override
     public void execute() {
+        ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
 
         System.out.println("-----Регистрация сервисов------");
-
         Scanner scanner = new Scanner(System.in);
         try {
             ServiceType serviceType = LogicDetails.integerServiceType(InputReader.getIntegerInput(scanner,
@@ -22,7 +22,7 @@ public class AddServiceActionImpl implements IAction {
                             "1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, 4 = LAUNDRY"));
 
             Double servicePrice = InputReader.getDoubleInput(scanner, "Введите цену сервиса: ");
-            ServiceManagerImpl.getInstance().addService(new Service(serviceType, servicePrice));
+            serviceManager.addService(new Service(serviceType, servicePrice));
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

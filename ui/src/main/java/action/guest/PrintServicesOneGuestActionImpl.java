@@ -12,16 +12,17 @@ import java.util.Scanner;
 public class PrintServicesOneGuestActionImpl implements IAction {
     @Override
     public void execute() {
+        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("-------All Guests-------");
-        GuestManagerImpl.getInstance().getAllGuests().stream().forEach(System.out::println);
+        guestManager.getAllGuests().stream().forEach(System.out::println);
         List<Service> listService = new ArrayList<>();
-
         try {
             String lastName = InputReader.getStringInput(scanner,
                     "Введите имя посетителя, для просмотра его сервисов: ");
-            listService = GuestManagerImpl.getInstance().getGuestServices(
-                    GuestManagerImpl.getInstance().getGuestByName(lastName));
+            listService = guestManager.getGuestServices(
+                    guestManager.getGuestByName(lastName));
 
             StringBuilder str = new StringBuilder();
             str.append("Имя гостя: " + lastName + "\n");

@@ -9,14 +9,14 @@ import java.util.Scanner;
 public class PrintDetailsActionImpl implements IAction {
     @Override
     public void execute() {
+        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("-------All Rooms-------");
-        RoomManagerImpl.getInstance().getAllRooms().stream().forEach(System.out::println);
+        roomManager.getAllRooms().stream().forEach(System.out::println);
         try {
             Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты: ");
-            RoomManagerImpl.getInstance().getRoomDetails(RoomManagerImpl.getInstance()
-                    .getRoomByNumber(roomNumber));
+            roomManager.getRoomDetails(roomManager.getRoomByNumber(roomNumber));
         } catch (Exception e) {
             System.out.println("Нет возможности показать детали номера " + e.getMessage());
         }

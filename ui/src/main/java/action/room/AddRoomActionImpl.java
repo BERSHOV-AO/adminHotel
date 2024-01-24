@@ -13,8 +13,11 @@ public class AddRoomActionImpl implements IAction {
 
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
+
         try {
+            RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+
+            Scanner scanner = new Scanner(System.in);
             System.out.println("-----Добавление номеров-----");
             Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты:  ");
             Integer capacity = InputReader.getIntegerInput(scanner, "Введите вместимость комнаты: ");
@@ -23,9 +26,7 @@ public class AddRoomActionImpl implements IAction {
                     "Введите количество звезд номера от 1 до 5 звезд");
             RoomStatus status = LogicDetails.integerRoomStatus(InputReader.getIntegerInput(scanner,
                     "Введите цифру статуса номера: 1 = EMPTY, 2 = OCCUPIED, 3 = UNDER_REPAIR, 4 = SERVICE"));
-
-            RoomManagerImpl.getInstance().addRoom(new Room(roomNumber, stars, priceDay, capacity, status));
-
+            roomManager.addRoom(new Room(roomNumber, stars, priceDay, capacity, status));
         } catch (Exception e) {
             System.out.println("Не удалось добавить комнату! Введите правильные параметры " + e.getMessage());
         }

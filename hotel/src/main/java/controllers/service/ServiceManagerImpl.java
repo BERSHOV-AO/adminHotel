@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class ServiceManagerImpl implements ServiceManager {
 
+    ServicesStorageImpl servicesStorage = ServicesStorageImpl.getInstance();
+
     private static ServiceManagerImpl instance;
 
     private ServiceManagerImpl() {
@@ -24,17 +26,17 @@ public class ServiceManagerImpl implements ServiceManager {
 
     @Override
     public void addService(Service service) {
-        ServicesStorageImpl.getInstance().addService(service);
+        servicesStorage.addService(service);
     }
 
     @Override
     public List<Service> getAllServices() {
-        return ServicesStorageImpl.getInstance().getServices();
+        return servicesStorage.getServices();
     }
 
     @Override
     public void changeServicePrice(Service service, double price) {
-        ServicesStorageImpl.getInstance().getServices().stream()
+        servicesStorage.getServices().stream()
                 .filter(r -> r.getServiceType() == service.getServiceType())
                 .findFirst()
                 .ifPresent(r -> {
@@ -44,7 +46,7 @@ public class ServiceManagerImpl implements ServiceManager {
 
     @Override
     public List<Service> getListSortByPrice() {
-        return ServicesStorageImpl.getInstance().getServices().stream()
+        return servicesStorage.getServices().stream()
                 .sorted(Comparator.comparingDouble(Service::getPrice))
                 .collect(Collectors.toList());
     }
@@ -60,14 +62,14 @@ public class ServiceManagerImpl implements ServiceManager {
 
     @Override
     public List<Service> getListSortBySection() {
-        return ServicesStorageImpl.getInstance().getServices().stream()
+        return servicesStorage.getServices().stream()
                 .sorted(Comparator.comparing(service -> service.getServiceType().name()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public Service getServiceByType(ServiceType serviceType) {
-        return ServicesStorageImpl.getInstance().getServices().stream()
+        return servicesStorage.getServices().stream()
                 .filter(service -> service.getServiceType().equals(serviceType))
                 .findFirst()
                 .orElse(null);
@@ -75,6 +77,6 @@ public class ServiceManagerImpl implements ServiceManager {
 
     @Override
     public void deleteService(Service service) {
-        ServicesStorageImpl.getInstance().deleteService(service);
+        servicesStorage.deleteService(service);
     }
 }

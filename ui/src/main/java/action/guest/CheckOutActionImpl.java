@@ -12,19 +12,19 @@ import java.util.Scanner;
 public class CheckOutActionImpl implements IAction {
     @Override
     public void execute() {
+        StayInfoManagerImpl stayInfoManager = StayInfoManagerImpl.getInstance();
+        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+
         Scanner scanner = new Scanner(System.in);
-
-        Printer.printStayInfo(StayInfoManagerImpl.getInstance().getMapStayInfo());
-
+        Printer.printStayInfo(stayInfoManager.getMapStayInfo());
         String lastName = InputReader.getStringInput(scanner,
                 "Введите имя посетителя, чтобы выселить ");
-
         Integer roomNumber = InputReader.getIntegerInput(scanner,
                 "Введите номер комнаты: ");
-
         try {
-            StayInfoManagerImpl.getInstance().checkOutGuestFromRoom(GuestManagerImpl.getInstance().getGuestByName(lastName),
-                    RoomManagerImpl.getInstance().getRoomByNumber(roomNumber));
+            stayInfoManager.checkOutGuestFromRoom(guestManager.getGuestByName(lastName),
+                    roomManager.getRoomByNumber(roomNumber));
         } catch (Exception e) {
             System.out.println("Некорректный ввод данных " + e.getMessage());
         }

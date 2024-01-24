@@ -9,15 +9,15 @@ import java.util.Scanner;
 public class DeleteGuestActionImpl implements IAction {
     @Override
     public void execute() {
+        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("-------All Guests-------");
-        GuestManagerImpl.getInstance().getAllGuests().stream().forEach(System.out::println);
-
+        guestManager.getAllGuests().stream().forEach(System.out::println);
         try {
             String lastName = InputReader.getStringInput(scanner,
                     "Введите имя посетителя, для удаления: ");
-            GuestManagerImpl.getInstance().deleteGuest(GuestManagerImpl.getInstance().getGuestByName(lastName));
+            guestManager.deleteGuest(guestManager.getGuestByName(lastName));
         } catch (Exception e) {
             System.out.println("Посетитель не удален " + e.getMessage());
         }

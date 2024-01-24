@@ -12,28 +12,27 @@ import java.util.Scanner;
 public class CheckInActionImpl implements IAction {
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
+        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+        StayInfoManagerImpl stayInfoManager = StayInfoManagerImpl.getInstance();
 
+        Scanner scanner = new Scanner(System.in);
         System.out.println("-------All Guests-------");
-        GuestManagerImpl.getInstance().getAllGuests().stream().forEach(System.out::println);
+        guestManager.getAllGuests().stream().forEach(System.out::println);
         System.out.println("-------All Rooms-------");
-        RoomManagerImpl.getInstance().getAllRooms().stream().forEach(System.out::println);
+        roomManager.getAllRooms().stream().forEach(System.out::println);
 
         String lastName = InputReader.getStringInput(scanner,
                 "Введите имя посетителя, чтобы зарегистрироваться ");
-
         Integer roomNumber = InputReader.getIntegerInput(scanner,
                 "Введите номер комнаты: ");
-
         LocalDate inDate = InputReader.getLocalDateInput(scanner,
                 "Введите дату заселения в номер, пример \"YYYY-MM-DD\" ");
         LocalDate outDate = InputReader.getLocalDateInput(scanner,
                 "Введите дату выселения из номера, пример \"YYYY-MM-DD\" ");
-
         try {
-            StayInfoManagerImpl.getInstance().checkInGuestInRoom(GuestManagerImpl.getInstance().getGuestByName(lastName),
-                    RoomManagerImpl.getInstance().getRoomByNumber(roomNumber), inDate, outDate);
-
+            stayInfoManager.checkInGuestInRoom(guestManager.getGuestByName(lastName),
+                    roomManager.getRoomByNumber(roomNumber), inDate, outDate);
         } catch (Exception e) {
             System.out.println("Не удалось зарегистрировать посетителя! " + e.getMessage());
         }

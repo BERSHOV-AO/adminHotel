@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class RoomManagerImpl implements RoomManager {
 
+    RoomsStorageImpl roomsStorage = RoomsStorageImpl.getInstance();
+
     private static RoomManagerImpl instance;
 
     private RoomManagerImpl() {
@@ -24,17 +26,17 @@ public class RoomManagerImpl implements RoomManager {
 
     @Override
     public void addRoom(Room room) {
-        RoomsStorageImpl.getInstance().addRoom(room);
+        roomsStorage.addRoom(room);
     }
 
     @Override
     public List<Room> getAllRooms() {
-        return RoomsStorageImpl.getInstance().getRooms();
+        return roomsStorage.getRooms();
     }
 
     @Override
     public void changeRoomStatus(Room room, RoomStatus status) {
-        RoomsStorageImpl.getInstance().getRooms().stream()
+        roomsStorage.getRooms().stream()
                 .filter(r -> r.getRoomNumber() == room.getRoomNumber())
                 .findFirst()
                 .ifPresent(r -> {
@@ -44,7 +46,7 @@ public class RoomManagerImpl implements RoomManager {
 
     @Override
     public void changeRoomPrice(Room room, double price) {
-        RoomsStorageImpl.getInstance().getRooms().stream()
+        roomsStorage.getRooms().stream()
                 .filter(r -> r.getRoomNumber() == room.getRoomNumber())
                 .findFirst()
                 .ifPresent(r -> {
@@ -54,7 +56,7 @@ public class RoomManagerImpl implements RoomManager {
 
     @Override
     public String getRoomDetails(Room room) {
-        return RoomsStorageImpl.getInstance().getRooms().stream()
+        return roomsStorage.getRooms().stream()
                 .filter(r -> r.equals(room))
                 .findFirst()
                 .map(Room::toString)
@@ -63,21 +65,21 @@ public class RoomManagerImpl implements RoomManager {
 
     @Override
     public List<Room> getSortedRoomsByPrice() {
-        return RoomsStorageImpl.getInstance().getRooms().stream()
+        return roomsStorage.getRooms().stream()
                 .sorted(Comparator.comparingDouble(Room::getPrice))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Room> getSortedRoomsByCapacity() {
-        return RoomsStorageImpl.getInstance().getRooms().stream()
+        return roomsStorage.getRooms().stream()
                 .sorted(Comparator.comparingInt(Room::getCapacity))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Room> getSortedRoomsByStars() {
-        return RoomsStorageImpl.getInstance().getRooms().stream()
+        return roomsStorage.getRooms().stream()
                 .sorted(Comparator.comparingInt(Room::getStars))
                 .collect(Collectors.toList());
     }
@@ -91,7 +93,7 @@ public class RoomManagerImpl implements RoomManager {
 
     @Override
     public List<Room> getEmptyRooms() {
-        List<Room> emptyRooms = RoomsStorageImpl.getInstance().getRooms().stream()
+        List<Room> emptyRooms = roomsStorage.getRooms().stream()
                 .filter(room -> room.getStatus() == RoomStatus.EMPTY)
                 .collect(Collectors.toList());
 
@@ -103,12 +105,12 @@ public class RoomManagerImpl implements RoomManager {
 
     @Override
     public int totalCountEmptyRooms() {
-        return getFreeRooms(RoomsStorageImpl.getInstance().getRooms()).size();
+        return getFreeRooms(roomsStorage.getRooms()).size();
     }
 
     @Override
     public Room getRoomByNumber(Integer roomNumber) {
-        return RoomsStorageImpl.getInstance().getRooms().stream()
+        return roomsStorage.getRooms().stream()
                 .filter(room -> room.getRoomNumber().equals(roomNumber))
                 .findFirst()
                 .orElse(null);

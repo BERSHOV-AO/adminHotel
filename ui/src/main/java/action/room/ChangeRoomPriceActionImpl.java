@@ -10,15 +10,15 @@ public class ChangeRoomPriceActionImpl implements IAction {
 
     @Override
     public void execute() {
+        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("-------All Rooms-------");
-        RoomManagerImpl.getInstance().getAllRooms().stream().forEach(System.out::println);
-
+        roomManager.getAllRooms().stream().forEach(System.out::println);
         try {
             Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты: ");
             Double priceDay = InputReader.getDoubleInput(scanner, "Введите новую стоимость номера за сутки ");
-
-            RoomManagerImpl.getInstance().changeRoomPrice(RoomManagerImpl.getInstance().getRoomByNumber(roomNumber),
+            roomManager.changeRoomPrice(roomManager.getRoomByNumber(roomNumber),
                     priceDay);
         } catch (Exception e) {
             System.out.println("Не удалось изменить цену номера " + e.getMessage());

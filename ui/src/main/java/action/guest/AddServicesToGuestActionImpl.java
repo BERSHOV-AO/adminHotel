@@ -12,10 +12,12 @@ import java.util.Scanner;
 public class AddServicesToGuestActionImpl implements IAction {
     @Override
     public void execute() {
+        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+        ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("----Список посетителей----");
-        GuestManagerImpl.getInstance().getAllGuests().stream().forEach(System.out::println);
+        guestManager.getAllGuests().stream().forEach(System.out::println);
         try {
             String lastName = InputReader.getStringInput(scanner,
                     "Введите имя посетителя, чтобы ему добавить сервис ");
@@ -26,8 +28,8 @@ public class AddServicesToGuestActionImpl implements IAction {
 
             System.out.println("Вы выбрали сервис: " + serviceType);
 
-            GuestManagerImpl.getInstance().addServicesToGuest(GuestManagerImpl.getInstance().getGuestByName(lastName),
-                    ServiceManagerImpl.getInstance().getServiceByType(serviceType));
+            guestManager.addServicesToGuest(guestManager.getGuestByName(lastName),
+                    serviceManager.getServiceByType(serviceType));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

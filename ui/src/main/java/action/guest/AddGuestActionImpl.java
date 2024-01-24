@@ -14,8 +14,10 @@ public class AddGuestActionImpl implements IAction {
         Scanner scanner = new Scanner(System.in);
 
         try {
+            GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+
             String lastName = InputReader.getStringInput(scanner, "Введите имя посетителя, для добавления..");
-            GuestManagerImpl.getInstance().addOnGuest(new Guest(lastName));
+            guestManager.addOnGuest(new Guest(lastName));
 
         } catch (Exception e) {
             System.out.println("Не удалось добавить посетителя. Введите допустимые параметры!" + e.getMessage());

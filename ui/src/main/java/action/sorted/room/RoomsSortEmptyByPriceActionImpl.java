@@ -6,8 +6,9 @@ import controllers.room.RoomManagerImpl;
 public class RoomsSortEmptyByPriceActionImpl implements IAction {
     @Override
     public void execute() {
+        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+
         System.out.println("-------Sorted empty rooms by price-------");
-        RoomManagerImpl.getInstance().getFreeRooms(RoomManagerImpl.getInstance().getSortedRoomsByPrice())
-                .stream().forEach(System.out::println);
+        roomManager.getFreeRooms(roomManager.getSortedRoomsByPrice()).stream().forEach(System.out::println);
     }
 }

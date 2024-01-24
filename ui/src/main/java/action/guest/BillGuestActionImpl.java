@@ -15,11 +15,14 @@ public class BillGuestActionImpl implements IAction {
     @Override
     public void execute() {
         try {
+            StayInfoManagerImpl stayInfoManager = StayInfoManagerImpl.getInstance();
+            GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+
             Scanner scanner = new Scanner(System.in);
             Locale ruLocale = new Locale("ru", "RU");
             NumberFormat rubFormat = NumberFormat.getCurrencyInstance(ruLocale);
 
-            Printer.printStayInfo(StayInfoManagerImpl.getInstance().getMapStayInfo());
+            Printer.printStayInfo(stayInfoManager.getMapStayInfo());
             String lastName = InputReader.getStringInput(scanner,
                     "Введите имя посетителя для выставления счета: ");
             StringBuilder str = new StringBuilder();
@@ -28,14 +31,12 @@ public class BillGuestActionImpl implements IAction {
             str.append("Имя гостя: " + lastName + "\n");
             str.append("Номер комнаты: " + roomNumber + "\n");
             str.append("Счет за номер : ");
-            str.append(rubFormat.format(StayInfoManagerImpl.getInstance().getBillForRoomAndGuest(GuestManagerImpl
-                            .getInstance().getGuestByName(lastName),
+            str.append(rubFormat.format(stayInfoManager.getBillForRoomAndGuest(guestManager.getGuestByName(lastName),
                     RoomManagerImpl.getInstance().getRoomByNumber(roomNumber))) + "\n");
             str.append("Счет за сервис: ");
-            str.append(rubFormat.format(StayInfoManagerImpl.getInstance().getBillServiceOneGuest(GuestManagerImpl
-                    .getInstance().getGuestByName(lastName))) + "\n");
+            str.append(rubFormat.format(stayInfoManager.getBillServiceOneGuest(guestManager.getGuestByName(lastName)))
+                    + "\n");
             str.append("********************************");
-
             System.out.println(str);
 
         } catch (Exception e) {

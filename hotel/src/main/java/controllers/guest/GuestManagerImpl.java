@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public class GuestManagerImpl implements GuestManager {
 
+    GuestStorageImpl guestStorage = GuestStorageImpl.getInstance();
+
     private static GuestManagerImpl instance;
 
     private GuestManagerImpl() {
@@ -25,29 +27,29 @@ public class GuestManagerImpl implements GuestManager {
 
     @Override
     public void addOnGuest(Guest guest) {
-        GuestStorageImpl.getInstance().addGuest(guest);
+        guestStorage.addGuest(guest);
     }
 
     @Override
     public void deleteGuest(Guest guest) {
-        GuestStorageImpl.getInstance().deleteGuest(guest);
+        guestStorage.deleteGuest(guest);
     }
 
     @Override
     public List<Guest> getAllGuests() {
-        return GuestStorageImpl.getInstance().getGuests();
+        return guestStorage.getGuests();
     }
 
     @Override
     public List<Guest> getSortedGuestsByAlphabet() {
-        return GuestStorageImpl.getInstance().getGuests().stream()
+        return guestStorage.getGuests().stream()
                 .sorted(Comparator.comparing(Guest::getLastName))
                 .collect(Collectors.toList());
     }
 
     @Override
     public Guest getGuestByName(String lastName) {
-        return GuestStorageImpl.getInstance().getGuests().stream()
+        return guestStorage.getGuests().stream()
                 .filter(guest -> guest.getLastName().equals(lastName))
                 .findFirst()
                 .orElse(null);
@@ -55,7 +57,7 @@ public class GuestManagerImpl implements GuestManager {
 
     @Override
     public void addServicesToGuest(Guest guest, Service service) {
-        List<Guest> tempListGuests = GuestStorageImpl.getInstance().getGuests();
+        List<Guest> tempListGuests = guestStorage.getGuests();
         for (Guest tempGuest : tempListGuests) {
             if (tempGuest.getLastName().equals(guest.getLastName())) {
                 List<Service> tempListService = new ArrayList<>();
@@ -67,13 +69,13 @@ public class GuestManagerImpl implements GuestManager {
                 tempGuest.setServices(tempListService);
                 break;
             }
-            GuestStorageImpl.getInstance().setGuests(tempListGuests);
+            guestStorage.setGuests(tempListGuests);
         }
     }
 
     @Override
     public List<Service> getGuestServices(Guest guest) {
-        List<Guest> tempListGuests = GuestStorageImpl.getInstance().getGuests();
+        List<Guest> tempListGuests = guestStorage.getGuests();
         List<Service> tempListService = new ArrayList<>();
 
         for (Guest tempGuest : tempListGuests) {

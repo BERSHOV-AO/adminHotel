@@ -11,14 +11,15 @@ public class GuestSortServicesByPriceActionImpl implements IAction {
 
     @Override
     public void execute() {
+        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+        ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("-------All Guests-------");
-        GuestManagerImpl.getInstance().getAllGuests().stream().forEach(System.out::println);
-
+        guestManager.getAllGuests().stream().forEach(System.out::println);
         String lastName = InputReader.getStringInput(scanner, "Введите имя посетителя : ");
-
         System.out.println("У посетителя с именем " + lastName + " сортированные сервисы по цене: " + "\n");
-        ServiceManagerImpl.getInstance().getListServicesSortByPriceOneGuest(GuestManagerImpl.getInstance()
-                .getGuestServices(GuestManagerImpl.getInstance().getGuestByName(lastName)));
+        serviceManager.getListServicesSortByPriceOneGuest(guestManager
+                .getGuestServices(guestManager.getGuestByName(lastName)));
     }
 }

@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
 
 public class StayInfoManagerImpl implements StayInfoManager {
 
+    StayInfoStorageImpl stayInfoStorage = StayInfoStorageImpl.getInstance();
+    RoomHistoryManagerImpl roomHistoryManager = RoomHistoryManagerImpl.getInstance();
+    RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+
     private static StayInfoManagerImpl instance;
 
     private StayInfoManagerImpl() {
@@ -29,22 +33,22 @@ public class StayInfoManagerImpl implements StayInfoManager {
 
     @Override
     public void addStayInfo(Integer roomNumber, StayInfo stayInfo) {
-        StayInfoStorageImpl.getInstance().addStayInfo(roomNumber, stayInfo);
+        stayInfoStorage.addStayInfo(roomNumber, stayInfo);
     }
 
     @Override
     public void deleteStayInfo(Integer roomNumber) {
-        StayInfoStorageImpl.getInstance().deleteStayInfo(roomNumber);
+        stayInfoStorage.deleteStayInfo(roomNumber);
     }
 
     @Override
     public Map<Integer, StayInfo> getMapStayInfo() {
-        return StayInfoStorageImpl.getInstance().getInfoStorage();
+        return stayInfoStorage.getInfoStorage();
     }
 
     @Override
     public List<Integer> getFreeRoomsByDate(LocalDate date) {
-        return StayInfoStorageImpl.getInstance().getInfoStorage().entrySet().stream()
+        return stayInfoStorage.getInfoStorage().entrySet().stream()
                 .filter(entry -> entry.getValue().getCheckInDate().isAfter(date)
                         || entry.getValue().getCheckOutDate().isBefore(date)
                         || entry.getValue().getCheckInDate().isEqual(date)
@@ -55,7 +59,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
 
     @Override
     public double getPayAmountForRoom(Room room) {
-        return StayInfoStorageImpl.getInstance().getInfoStorage().entrySet().stream()
+        return stayInfoStorage.getInfoStorage().entrySet().stream()
                 .filter(entry -> entry.getKey().equals(room.getRoomNumber()))
                 .findFirst()
                 .map(entry -> {
@@ -71,7 +75,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
     @Override
     public LinkedHashMap<Integer, StayInfo> getLastThreeGuests() {
         LinkedHashMap<Integer, StayInfo> infoStorage = (LinkedHashMap<Integer, StayInfo>)
-                StayInfoStorageImpl.getInstance().getInfoStorage();
+                stayInfoStorage.getInfoStorage();
         return infoStorage.entrySet().stream()
                 .skip(Math.max(0, infoStorage.size() - 3))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
@@ -80,7 +84,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
 
     @Override
     public boolean containsGuestInTheRoom(Guest guest, Room room) {
-        return StayInfoStorageImpl.getInstance().getInfoStorage().entrySet().stream()
+        return stayInfoStorage.getInfoStorage().entrySet().stream()
                 .filter(entry -> entry.getKey().equals(room.getRoomNumber()))
                 .map(Map.Entry::getValue)
                 .anyMatch(stayInfo -> stayInfo.getGuest().getLastName().equals(guest.getLastName()));
@@ -88,7 +92,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
 
     @Override
     public double getBillForRoomAndGuest(Guest guest, Room room) {
-        return StayInfoStorageImpl.getInstance().getInfoStorage().entrySet().stream()
+        return stayInfoStorage.getInfoStorage().entrySet().stream()
                 .filter(entry -> entry.getKey().equals(room.getRoomNumber()) && entry.getValue().getGuest()
                         .equals(guest))
                 .findFirst()
@@ -105,7 +109,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
 
     @Override
     public double getBillServiceOneGuest(Guest guest) {
-        Map<Integer, StayInfo> infoStorage = StayInfoStorageImpl.getInstance().getInfoStorage();
+        Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
         double totalBill = 0.0;
 
         for (StayInfo stayInfo : infoStorage.values()) {
@@ -135,8 +139,8 @@ public class StayInfoManagerImpl implements StayInfoManager {
             newRoomHistory.setStatus(RoomHistoryStatus.CHECKIN);
 
             addStayInfo(room.getRoomNumber(), new StayInfo(guest, checkInDate, checkOutDate));
-            RoomHistoryManagerImpl.getInstance().addHistory(newRoomHistory);
-            RoomManagerImpl.getInstance().changeRoomStatus(room, RoomStatus.OCCUPIED);
+            roomHistoryManager.addHistory(newRoomHistory);
+            roomManager.changeRoomStatus(room, RoomStatus.OCCUPIED);
         } else {
             System.out.println("Заселить в комнату " + room.getRoomNumber() + " не представляется возможным. "
                     + "Статус комнаты = " + room.getStatus());
@@ -148,7 +152,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
         if (containsGuestInTheRoom(guest, room)) {
             if (room.getStatus() == RoomStatus.OCCUPIED) {
                 deleteStayInfo(room.getRoomNumber());
-                RoomManagerImpl.getInstance().changeRoomStatus(room, RoomStatus.EMPTY);
+                roomManager.changeRoomStatus(room, RoomStatus.EMPTY);
             }
         } else {
             System.out.println("В комнате " + room.getRoomNumber() + " нет посетителей");
