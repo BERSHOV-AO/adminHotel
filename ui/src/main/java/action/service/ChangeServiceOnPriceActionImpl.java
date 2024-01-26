@@ -17,9 +17,9 @@ public class ChangeServiceOnPriceActionImpl implements IAction {
         System.out.println("-------All Services-------");
         serviceManager.getAllServices().stream().forEach(System.out::println);
         try {
-            ServiceType serviceType = ServiceType.integerServiceType(InputReader.getIntegerInput(scanner,
-                    "Введите число соответствующее сервису : " +
-                            "1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, 4 = LAUNDRY"));
+            ServiceType serviceType = InputReader.getServiceTypeByInput(scanner,
+                    "Введите число соответствующее сервису : 1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, " +
+                            "4 = LAUNDRY");
             Double servicePrice = InputReader.getDoubleInput(scanner, "Введите новую цену сервиса: ");
             serviceManager.changeServicePrice(serviceManager.getServiceByType(serviceType), servicePrice);
         } catch (Exception e) {

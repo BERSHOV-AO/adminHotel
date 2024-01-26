@@ -17,8 +17,8 @@ public class ChangeStatusActionImpl implements IAction {
         roomManager.getAllRooms().stream().forEach(System.out::println);
         try {
             Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты: ");
-            RoomStatus status = RoomStatus.integerRoomStatus(InputReader.getIntegerInput(scanner,
-                    "Введите цифру статуса номера: 1 = EMPTY, 2 = OCCUPIED, 3 = UNDER_REPAIR, 4 = SERVICE"));
+            RoomStatus status = InputReader.getRoomStatusByInput(scanner, "Введите цифру статуса номера: " +
+                    "1 = EMPTY, 2 = OCCUPIED, 3 = UNDER_REPAIR, 4 = SERVICE");
             roomManager.changeRoomStatus(roomManager.getRoomByNumber(roomNumber), status);
         } catch (Exception e) {
             System.out.println("Не удалось изменить статус номера " + e.getMessage());

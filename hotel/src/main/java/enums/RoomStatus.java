@@ -25,13 +25,6 @@ public enum RoomStatus {
                 break;
             }
         }
-
-        if (roomStatus == null) {
-            System.out.println("Неправильный ввод. Пожалуйста, " +
-                    "введите цифру статуса номера: 1 = EMPTY, 2 = OCCUPIED, 3 = UNDER_REPAIR, 4 = SERVICE");
-        }
         return roomStatus;
     }
-
-
 }

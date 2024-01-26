@@ -25,11 +25,6 @@ public enum ServiceType {
                 break;
             }
         }
-
-        if (serviceType == null) {
-            System.out.println("Неправильный ввод. Пожалуйста, введите число соответствующее сервису: " +
-                    "1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, 4 = LAUNDRY");
-        }
         return serviceType;
     }
 }

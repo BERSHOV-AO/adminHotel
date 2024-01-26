@@ -1,5 +1,8 @@
 package utils;
 
+import enums.RoomStatus;
+import enums.ServiceType;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -83,5 +86,39 @@ public class InputReader {
             }
         }
         return date;
+    }
+
+    public static RoomStatus getRoomStatusByInput(Scanner scanner, String message) {
+        while (true) {
+            System.out.println(message);
+            if (scanner.hasNextInt()) {
+                int input = scanner.nextInt();
+                RoomStatus status = RoomStatus.integerRoomStatus(input);
+
+                if (status != null) {
+                    return status;
+                }
+            } else {
+                scanner.next();
+            }
+            System.out.println("Ввод не соответствует статусу комнаты!");
+        }
+    }
+
+    public static ServiceType getServiceTypeByInput(Scanner scanner, String message) {
+        while (true) {
+            System.out.println(message);
+            if (scanner.hasNextInt()) {
+                int input = scanner.nextInt();
+                ServiceType type = ServiceType.integerServiceType(input);
+
+                if (type != null) {
+                    return type;
+                }
+            } else {
+                scanner.next();
+            }
+            System.out.println("Ввод не соответствует сервису!");
+        }
     }
 }

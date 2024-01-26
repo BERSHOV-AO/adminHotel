@@ -20,9 +20,9 @@ public class AddServicesToGuestActionImpl implements IAction {
         try {
             String lastName = InputReader.getStringInput(scanner,
                     "Введите имя посетителя, чтобы ему добавить сервис ");
-            ServiceType serviceType = ServiceType.integerServiceType(InputReader.getIntegerInput(scanner,
-                    "Введите число соответствующее сервису : " +
-                            "1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, 4 = LAUNDRY"));
+            ServiceType serviceType = InputReader.getServiceTypeByInput(scanner,
+                    "Введите число соответствующее сервису : 1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, " +
+                            "4 = LAUNDRY");
             System.out.println("Вы выбрали сервис: " + serviceType);
             guestManager.addServicesToGuest(guestManager.getGuestByName(lastName),
                     serviceManager.getServiceByType(serviceType));

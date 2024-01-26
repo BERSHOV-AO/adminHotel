@@ -23,8 +23,8 @@ public class AddRoomActionImpl implements IAction {
             Double priceDay = InputReader.getDoubleInput(scanner, "Введите стоимость номера за сутки ");
             Integer stars = InputReader.getIntegerInput(scanner,
                     "Введите количество звезд номера от 1 до 5 звезд");
-            RoomStatus status = RoomStatus.integerRoomStatus(InputReader.getIntegerInput(scanner,
-                    "Введите цифру статуса номера: 1 = EMPTY, 2 = OCCUPIED, 3 = UNDER_REPAIR, 4 = SERVICE"));
+            RoomStatus status = InputReader.getRoomStatusByInput(scanner, "Введите цифру статуса номера: " +
+                    "1 = EMPTY, 2 = OCCUPIED, 3 = UNDER_REPAIR, 4 = SERVICE");
             roomManager.addRoom(new Room(roomNumber, stars, priceDay, capacity, status));
         } catch (Exception e) {
             System.out.println("Не удалось добавить комнату! Введите правильные параметры " + e.getMessage());

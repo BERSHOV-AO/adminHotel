@@ -16,9 +16,9 @@ public class AddServiceActionImpl implements IAction {
         System.out.println("-----Регистрация сервисов------");
         Scanner scanner = new Scanner(System.in);
         try {
-            ServiceType serviceType = ServiceType.integerServiceType(InputReader.getIntegerInput(scanner,
-                    "Введите число соответствующее сервису : " +
-                            "1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, 4 = LAUNDRY"));
+            ServiceType serviceType = InputReader.getServiceTypeByInput(scanner,
+                    "Введите число соответствующее сервису : 1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, " +
+                            "4 = LAUNDRY");
             Double servicePrice = InputReader.getDoubleInput(scanner, "Введите цену сервиса: ");
             serviceManager.addService(new Service(serviceType, servicePrice));
 
