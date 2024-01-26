@@ -1,7 +1,6 @@
 package storages;
 
 import models.Guest;
-import models.Room;
 
 import java.util.ArrayList;
 import java.util.List;

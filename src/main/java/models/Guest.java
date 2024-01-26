@@ -1,7 +1,6 @@
 package models;
 
 public class Guest {
-
     private int id = 0;
     private String lastName;
 

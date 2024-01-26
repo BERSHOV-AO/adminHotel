@@ -3,7 +3,9 @@ package managers;
 import models.Guest;
 import storages.GuestStorage;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GuestManager {
 
@@ -24,4 +26,9 @@ public class GuestManager {
         }
     }
 
+    public List<Guest> getSortedGuestsByAlphabet() {
+        return guestStorage.getGuests().stream()
+                .sorted(Comparator.comparing(Guest::getLastName))
+                .collect(Collectors.toList());
+    }
 }

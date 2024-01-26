@@ -2,10 +2,11 @@ package managers;
 
 import enums.RoomStatus;
 import models.Room;
-import models.RoomHistory;
 import storages.RoomsStorage;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RoomManager {
     public RoomsStorage roomsStorage = new RoomsStorage();
@@ -39,4 +40,40 @@ public class RoomManager {
                 });
     }
 
+    public String getRoomDetails(Room room) {
+        return roomsStorage.getRooms().stream()
+                .filter(r -> r.equals(room))
+                .findFirst()
+                .map(Room::toString)
+                .orElse("Комната не найдена");
+    }
+
+    public List<Room> getSortedRoomsByPrice() {
+        return roomsStorage.getRooms().stream()
+                .sorted(Comparator.comparingDouble(Room::getPrice))
+                .collect(Collectors.toList());
+    }
+
+    public List<Room> getSortedRoomsByCapacity() {
+        return roomsStorage.getRooms().stream()
+                .sorted(Comparator.comparingInt(Room::getCapacity))
+                .collect(Collectors.toList());
+    }
+
+    public List<Room> getSortedRoomsByStars() {
+        return roomsStorage.getRooms().stream()
+                .sorted(Comparator.comparingInt(Room::getStars))
+                .collect(Collectors.toList());
+    }
+
+    public List<Room> getFreeRooms(List<Room> list) {
+        return list.stream()
+                .filter(room -> room.getStatus() == RoomStatus.EMPTY)
+                .collect(Collectors.toList());
+    }
+
+    public int totalCountEmptyRooms() {
+        return getFreeRooms(roomsStorage.getRooms()).size();
+    }
 }
+
