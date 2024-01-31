@@ -5,6 +5,8 @@ import enums.RoomStatus;
 import java.util.Objects;
 
 public class Room {
+
+    private int id = 0;
     private Integer roomNumber;
     private int stars;
     private double price;
@@ -17,6 +19,14 @@ public class Room {
         this.price = price;
         this.capacity = capacity;
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Integer getRoomNumber() {

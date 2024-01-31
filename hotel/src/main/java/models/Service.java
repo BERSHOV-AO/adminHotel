@@ -3,8 +3,18 @@ package models;
 import enums.ServiceType;
 
 public class Service {
+
+    private int id = 0;
     private ServiceType serviceType;
     private double price;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Service(ServiceType serviceType, double price) {
         this.serviceType = serviceType;

@@ -3,9 +3,19 @@ package models;
 import java.time.LocalDate;
 
 public class StayInfo {
+
+    private int id = 0;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private Guest guest;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public StayInfo(Guest guest, LocalDate checkInDate, LocalDate checkOutDate) {
         this.checkInDate = checkInDate;
