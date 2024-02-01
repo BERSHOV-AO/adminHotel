@@ -16,10 +16,20 @@ public class ChangeRoomPriceActionImpl implements IAction {
         System.out.println("-------All Rooms-------");
         roomManager.getAllRooms().stream().forEach(System.out::println);
         try {
-            Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты: ");
-            Double priceDay = InputReader.getDoubleInput(scanner, "Введите новую стоимость номера за сутки ");
-            roomManager.changeRoomPrice(roomManager.getRoomByNumber(roomNumber),
-                    priceDay);
+            boolean roomExists = true;
+            while (roomExists) {
+                Integer roomId = InputReader.getIntegerInput(scanner, "Введите id комнаты:  ");
+                boolean roomNumberExists = roomManager.checkRoomIDExists(roomId);
+                if (!roomNumberExists) {
+                    System.out.println("Комнаты с id: " + roomId + " не существует! Введите корректный id!");
+                } else {
+                    Double priceDay = InputReader.getDoubleInput(scanner,
+                            "Введите новую стоимость номера за сутки ");
+                    roomManager.changeRoomPrice(roomManager.getRoomById(roomId),
+                            priceDay);
+                    roomExists = false;
+                }
+            }
         } catch (Exception e) {
             System.out.println("Не удалось изменить цену номера " + e.getMessage());
         }

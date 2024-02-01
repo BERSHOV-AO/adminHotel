@@ -115,5 +115,22 @@ public class RoomManagerImpl implements RoomManager {
                 .findFirst()
                 .orElse(null);
     }
+
+    public Room getRoomById(int id) {
+        return roomsStorage.getRooms().stream()
+                .filter(room -> (room.getId() == id))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public boolean checkRoomNumberExists(int roomNumber) {
+        return roomsStorage.getRooms().stream()
+                .anyMatch(room -> room.getRoomNumber().equals(roomNumber));
+    }
+
+    public boolean checkRoomIDExists(int roomID) {
+        return roomsStorage.getRooms().stream()
+                .anyMatch(room -> room.getId() == roomID);
+    }
 }
 

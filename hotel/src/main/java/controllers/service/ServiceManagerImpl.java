@@ -75,6 +75,18 @@ public class ServiceManagerImpl implements ServiceManager {
                 .orElse(null);
     }
 
+
+    public Service getServiceById(int id) {
+        return servicesStorage.getServices().stream()
+                .filter(service -> (service.getId() == id))
+                .findFirst()
+                .orElse(null);
+    }
+
+
+
+
+
     @Override
     public void deleteService(Service service) {
         servicesStorage.deleteService(service);

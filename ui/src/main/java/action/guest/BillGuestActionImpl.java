@@ -23,15 +23,18 @@ public class BillGuestActionImpl implements IAction {
             NumberFormat rubFormat = NumberFormat.getCurrencyInstance(ruLocale);
 
             Printer.printStayInfo(stayInfoManager.getMapStayInfo());
-            String lastName = InputReader.getStringInput(scanner,
-                    "Введите имя посетителя для выставления счета: ");
+//            String lastName = InputReader.getStringInput(scanner,
+//                    "Введите имя посетителя для выставления счета: ");
+            Integer idGuest = InputReader.getIntegerInput(scanner,
+                    "Введите id посетителя для выставления счета: ");
+
             StringBuilder str = new StringBuilder();
             Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты: ");
             str.append("************--BILL--************" + "\n");
-            str.append("Имя гостя: " + lastName + "\n");
+            str.append("Имя гостя: " + guestManager.getGuestById(idGuest).getLastName() + "\n");
             str.append("Номер комнаты: " + roomNumber + "\n");
             str.append("Счет за номер : ");
-            str.append(rubFormat.format(stayInfoManager.getBillForRoomAndGuest(guestManager.getGuestByName(lastName),
+            str.append(rubFormat.format(stayInfoManager.getBillForRoomAndGuest(guestManager.getGuestById(idGuest),
                     RoomManagerImpl.getInstance().getRoomByNumber(roomNumber))) + "\n");
             str.append("********************************");
             System.out.println(str);

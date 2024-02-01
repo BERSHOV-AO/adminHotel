@@ -1,10 +1,11 @@
 package models;
 
 import enums.ServiceType;
+import utils.RandomNumber;
 
 public class Service {
 
-    private int id = 0;
+    private int id;
     private ServiceType serviceType;
     private double price;
 
@@ -19,6 +20,7 @@ public class Service {
     public Service(ServiceType serviceType, double price) {
         this.serviceType = serviceType;
         this.price = price;
+        this.id = RandomNumber.getRandomID();
     }
 
     public ServiceType getServiceType() {
@@ -40,7 +42,8 @@ public class Service {
     @Override
     public String toString() {
         return "Service{" +
-                "serviceType=" + serviceType +
+                "id=" + id +
+                ", serviceType=" + serviceType +
                 ", price=" + price +
                 '}';
     }

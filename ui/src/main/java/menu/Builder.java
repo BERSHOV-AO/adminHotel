@@ -43,6 +43,7 @@ public class Builder {
         roomMenu.addMenuItem(new MenuItem("Add a Room", roomMenu, new AddRoomActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Print the Rooms", roomMenu, new PrintRoomsActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Print empty Rooms", roomMenu, new PrintEmptyRoomsActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Change Room Price", roomMenu, new ChangeRoomPriceActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Change the Room's status", roomMenu, new ChangeStatusActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Print the Room details", roomMenu, new PrintDetailsActionImpl()));
         // Room sort

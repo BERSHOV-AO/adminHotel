@@ -23,6 +23,7 @@ public class GuestStorageImpl implements GuestStorage {
 
     @Override
     public void addGuest(Guest guest) {
+        //guest.setId(guests.size() + 1);
         guests.add(guest);
     }
 
@@ -34,6 +35,7 @@ public class GuestStorageImpl implements GuestStorage {
     @Override
     public List<Guest> getGuests() {
         return guests;
+
     }
 
     @Override

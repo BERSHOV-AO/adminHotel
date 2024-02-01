@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Room {
 
-    private int id = 0;
+    private int id;
     private Integer roomNumber;
     private int stars;
     private double price;
@@ -19,6 +19,7 @@ public class Room {
         this.price = price;
         this.capacity = capacity;
         this.status = status;
+        this.id = roomNumber;
     }
 
     public int getId() {
@@ -69,11 +70,11 @@ public class Room {
         this.status = status;
     }
 
-
     @Override
     public String toString() {
         return "Room{" +
-                "roomNumber=" + roomNumber +
+                "id=" + id +
+                ", roomNumber=" + roomNumber +
                 ", stars=" + stars +
                 ", price=" + price +
                 ", capacity=" + capacity +

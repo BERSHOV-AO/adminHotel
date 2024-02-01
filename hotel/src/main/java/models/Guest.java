@@ -1,14 +1,18 @@
 package models;
 
+import utils.RandomNumber;
+
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 public class Guest {
-    private int id = 0;
+    private int id;
     private String lastName;
     private List<Service> services;
-
     public Guest(String lastName) {
         this.lastName = lastName;
+        this.id = RandomNumber.getRandomID();
     }
 
     public int getId() {
@@ -39,7 +43,8 @@ public class Guest {
     @Override
     public String toString() {
         return "Guest{" +
-                "lastName='" + lastName + '\'' +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
                 ", services=" + services +
                 '}';
     }

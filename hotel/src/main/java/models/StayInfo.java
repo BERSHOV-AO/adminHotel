@@ -1,5 +1,7 @@
 package models;
 
+import utils.RandomNumber;
+
 import java.time.LocalDate;
 
 public class StayInfo {
@@ -21,6 +23,7 @@ public class StayInfo {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.guest = guest;
+        this.id = RandomNumber.getRandomID();
     }
 
     public LocalDate getCheckInDate() {

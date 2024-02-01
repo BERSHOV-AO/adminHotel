@@ -17,15 +17,15 @@ public class AddServicesToGuestActionImpl implements IAction {
         Scanner scanner = new Scanner(System.in);
         System.out.println("----Список посетителей----");
         guestManager.getAllGuests().stream().forEach(System.out::println);
+        System.out.println("----Список доступных сервисов----");
+        serviceManager.getAllServices().stream().forEach(System.out::println);
         try {
-            String lastName = InputReader.getStringInput(scanner,
-                    "Введите имя посетителя, чтобы ему добавить сервис ");
-            ServiceType serviceType = InputReader.getServiceTypeByInput(scanner,
-                    "Введите число соответствующее сервису : 1 = BREAKFAST, 2 = LUNCH, 3 = DINNER, " +
-                            "4 = LAUNDRY");
-            System.out.println("Вы выбрали сервис: " + serviceType);
-            guestManager.addServicesToGuest(guestManager.getGuestByName(lastName),
-                    serviceManager.getServiceByType(serviceType));
+            Integer idGuest = InputReader.getIntegerInput(scanner,
+                    "Введите id посетителя, чтобы ему добавить сервис ");
+            Integer idService = InputReader.getIntegerInput(scanner,
+                    "Введите id сервиса");
+            guestManager.addServicesToGuest(guestManager.getGuestById(idGuest),
+                    serviceManager.getServiceById(idService));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

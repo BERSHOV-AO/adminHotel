@@ -55,6 +55,16 @@ public class GuestManagerImpl implements GuestManager {
                 .orElse(null);
     }
 
+
+    public Guest getGuestById(int id) {
+        return guestStorage.getGuests().stream()
+                .filter(guest -> (guest.getId() == id))
+                .findFirst()
+                .orElse(null);
+    }
+
+
+
     @Override
     public void addServicesToGuest(Guest guest, Service service) {
         List<Guest> tempListGuests = guestStorage.getGuests();
