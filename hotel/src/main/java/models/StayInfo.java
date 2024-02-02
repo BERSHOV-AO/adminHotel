@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class StayInfo {
 
-    private int id = 0;
+    private int id;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private Guest guest;

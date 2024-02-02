@@ -4,6 +4,7 @@ import action.api.IAction;
 import controllers.guest.GuestManagerImpl;
 import controllers.room.RoomManagerImpl;
 import controllers.stay_info.StayInfoManagerImpl;
+import utils.ExistsEntity;
 import utils.InputReader;
 import utils.Printer;
 
@@ -16,15 +17,13 @@ public class CheckOutActionImpl implements IAction {
         GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
         RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
 
-        Scanner scanner = new Scanner(System.in);
         Printer.printStayInfo(stayInfoManager.getMapStayInfo());
-        String lastName = InputReader.getStringInput(scanner,
-                "Введите имя посетителя, чтобы выселить ");
-        Integer roomNumber = InputReader.getIntegerInput(scanner,
-                "Введите номер комнаты: ");
+        int guestId = ExistsEntity.getExistsGuestID();
+        int roomId = ExistsEntity.getExistsRoomID();
+
         try {
-            stayInfoManager.checkOutGuestFromRoom(guestManager.getGuestByName(lastName),
-                    roomManager.getRoomByNumber(roomNumber));
+            stayInfoManager.checkOutGuestFromRoom(guestManager.getGuestById(guestId),
+                    roomManager.getRoomByNumber(roomId));
         } catch (Exception e) {
             System.out.println("Некорректный ввод данных " + e.getMessage());
         }

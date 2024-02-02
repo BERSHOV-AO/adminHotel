@@ -83,12 +83,19 @@ public class ServiceManagerImpl implements ServiceManager {
                 .orElse(null);
     }
 
-
-
-
-
     @Override
     public void deleteService(Service service) {
         servicesStorage.deleteService(service);
     }
+
+    public boolean checkServiceIDExists(int serviceId) {
+        return servicesStorage.getServices().stream()
+                .anyMatch(service -> service.getId() == serviceId);
+    }
+
+    public boolean existsServices() {
+        List<Service> services = servicesStorage.getServices();
+        return !services.isEmpty();
+    }
+
 }

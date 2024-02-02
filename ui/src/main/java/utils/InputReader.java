@@ -1,5 +1,6 @@
 package utils;
 
+import controllers.room.RoomManagerImpl;
 import enums.RoomStatus;
 import enums.ServiceType;
 
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class InputReader {
+
     public static Integer getIntegerInput(Scanner scanner, String message) {
         Printer.print(message);
         return getIntegerInput(scanner);
@@ -122,3 +124,5 @@ public class InputReader {
         }
     }
 }
+
+

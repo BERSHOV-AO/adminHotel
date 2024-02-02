@@ -8,6 +8,8 @@ import models.*;
 import storages.stay_info.StayInfoStorageImpl;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +108,36 @@ public class StayInfoManagerImpl implements StayInfoManager {
                 .orElse(0.0);
     }
 
+    public double getBillForRoomGuest(Guest guest, Room room) {
+
+
+        Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
+
+        StayInfo stayInfo = infoStorage.get(room.getRoomNumber());
+
+        Period period = Period.between(stayInfo.getCheckInDate(),
+                stayInfo.getCheckOutDate());
+        int days = period.getDays();
+
+        double payment = room.getPrice() * days;
+
+        return payment;
+    }
+       // List<StayInfo> stayInfo; = new ArrayList<>();
+//        Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
+//
+//        stayInfo = infoStorage.get(room.getRoomNumber());
+//
+//
+//        for (StayInfo stayInfo : infoStorage.values()) {
+//            if(stayInfo.getGuest().getLastName().equals(guest.getLastName())) {
+//                srvicesList =  stayInfo.getGuest().getServices();
+//            }
+//        }
+//        return srvicesList;
+
+  //  }
+
     @Override
     public double getBillServiceOneGuest(Guest guest) {
         Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
@@ -156,6 +188,35 @@ public class StayInfoManagerImpl implements StayInfoManager {
         } else {
             System.out.println("В комнате " + room.getRoomNumber() + " нет посетителей");
         }
+    }
+
+    public boolean checkStayInfIDExists(int stayInfoId) {
+        return stayInfoStorage.getInfoStorage().values().stream()
+                .anyMatch(stayInfo -> stayInfo.getId() == stayInfoId);
+    }
+
+
+
+    public List<Service> getListStayInfoOneGuest(Guest guest) {
+        List<Service> srvicesList = new ArrayList<>();
+        Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
+
+        for (StayInfo stayInfo : infoStorage.values()) {
+            if(stayInfo.getGuest().getLastName().equals(guest.getLastName())) {
+                srvicesList =  stayInfo.getGuest().getServices();
+            }
+        }
+        return srvicesList;
+    }
+
+
+    public double getBillServiceByGuest(Guest guest) {
+        List<Service> srvicesList = getListStayInfoOneGuest(guest);
+        double allPrice = 0.0;
+        for (Service service : srvicesList) {
+            allPrice =  service.getPrice();
+        }
+        return allPrice;
     }
 }
 

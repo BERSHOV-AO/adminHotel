@@ -3,6 +3,7 @@ package action.guest;
 import action.api.IAction;
 import controllers.guest.GuestManagerImpl;
 import models.Service;
+import utils.ExistsEntity;
 import utils.InputReader;
 
 import java.util.ArrayList;
@@ -13,19 +14,16 @@ public class PrintServicesOneGuestActionImpl implements IAction {
     @Override
     public void execute() {
         GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
-
-        Scanner scanner = new Scanner(System.in);
         System.out.println("-------All Guests-------");
         guestManager.getAllGuests().stream().forEach(System.out::println);
-        List<Service> listService = new ArrayList<>();
+        List<Service> listService;
         try {
-            String lastName = InputReader.getStringInput(scanner,
-                    "Введите имя посетителя, для просмотра его сервисов: ");
+            int guestId = ExistsEntity.getExistsGuestID();
             listService = guestManager.getGuestServices(
-                    guestManager.getGuestByName(lastName));
+                    guestManager.getGuestById(guestId));
 
             StringBuilder str = new StringBuilder();
-            str.append("Имя гостя: " + lastName + "\n");
+            str.append("Имя гостя: " + guestManager.getGuestById(guestId).getLastName() + "\n");
             str.append("Воспользовался услугами: " + "\n");
             str.append(listService.toString());
             System.out.println(str);

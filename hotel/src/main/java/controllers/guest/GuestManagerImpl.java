@@ -96,6 +96,11 @@ public class GuestManagerImpl implements GuestManager {
         }
         return tempListService;
     }
+
+    public boolean checkGuestIDExists(int guestId) {
+        return guestStorage.getGuests().stream()
+                .anyMatch(guest -> guest.getId() == guestId);
+    }
 }
 
 

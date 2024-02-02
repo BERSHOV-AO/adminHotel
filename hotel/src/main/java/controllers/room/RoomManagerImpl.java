@@ -128,9 +128,9 @@ public class RoomManagerImpl implements RoomManager {
                 .anyMatch(room -> room.getRoomNumber().equals(roomNumber));
     }
 
-    public boolean checkRoomIDExists(int roomID) {
+    public boolean checkRoomIDExists(int roomId) {
         return roomsStorage.getRooms().stream()
-                .anyMatch(room -> room.getId() == roomID);
+                .anyMatch(room -> room.getId() == roomId);
     }
 }
 

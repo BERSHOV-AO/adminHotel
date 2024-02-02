@@ -4,6 +4,7 @@ import action.api.IAction;
 import controllers.guest.GuestManagerImpl;
 import controllers.room.RoomManagerImpl;
 import controllers.stay_info.StayInfoManagerImpl;
+import utils.ExistsEntity;
 import utils.InputReader;
 import utils.Printer;
 
@@ -17,28 +18,32 @@ public class BillGuestActionImpl implements IAction {
         try {
             StayInfoManagerImpl stayInfoManager = StayInfoManagerImpl.getInstance();
             GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+            RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
 
-            Scanner scanner = new Scanner(System.in);
             Locale ruLocale = new Locale("ru", "RU");
             NumberFormat rubFormat = NumberFormat.getCurrencyInstance(ruLocale);
 
             Printer.printStayInfo(stayInfoManager.getMapStayInfo());
-//            String lastName = InputReader.getStringInput(scanner,
-//                    "Введите имя посетителя для выставления счета: ");
-            Integer idGuest = InputReader.getIntegerInput(scanner,
-                    "Введите id посетителя для выставления счета: ");
+            int guestId = ExistsEntity.getExistsGuestID();
+            int roomId = ExistsEntity.getExistsRoomID();
 
             StringBuilder str = new StringBuilder();
-            Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты: ");
-            str.append("************--BILL--************" + "\n");
-            str.append("Имя гостя: " + guestManager.getGuestById(idGuest).getLastName() + "\n");
-            str.append("Номер комнаты: " + roomNumber + "\n");
-            str.append("Счет за номер : ");
-            str.append(rubFormat.format(stayInfoManager.getBillForRoomAndGuest(guestManager.getGuestById(idGuest),
-                    RoomManagerImpl.getInstance().getRoomByNumber(roomNumber))) + "\n");
-            str.append("********************************");
-            System.out.println(str);
 
+            str.append("************--BILL--************" + "\n");
+            str.append("Имя гостя: " + guestManager.getGuestById(guestId).getLastName() + "\n");
+            str.append("Номер комнаты: " + roomManager.getRoomById(roomId).getRoomNumber() + "\n");
+            str.append("Счет за номер : ");
+            str.append(rubFormat.format(stayInfoManager.getBillForRoomGuest(guestManager.getGuestById(guestId),
+                    roomManager.getRoomById(roomId))) + "\n");
+            str.append("********************************");
+            System.out.println("size: " + stayInfoManager.getListStayInfoOneGuest(guestManager.getGuestById(guestId)).size());
+//            if(stayInfoManager.getListStayInfoOneGuest(guestManager.getGuestById(guestId)).size() != 0){
+//               str.append("Счет за сервис : ");
+//                str.append(rubFormat.format(stayInfoManager.getBillServiceByGuest(
+//                        guestManager.getGuestById(guestId))));
+//                str.append("********************************");
+//           }
+            System.out.println(str);
         } catch (Exception e) {
             System.out.println("Нет такого посетителя или счета");
         }
