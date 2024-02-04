@@ -4,7 +4,7 @@ import enums.RoomStatus;
 
 import java.util.Objects;
 
-public class Room {
+public class Room implements Entity{
 
     private int id;
     private Integer roomNumber;
@@ -20,6 +20,15 @@ public class Room {
         this.capacity = capacity;
         this.status = status;
         this.id = roomNumber;
+    }
+
+    public Room(int id, Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
+        this.roomNumber = roomNumber;
+        this.stars = stars;
+        this.price = price;
+        this.capacity = capacity;
+        this.status = status;
+        this.id = id;
     }
 
     public int getId() {

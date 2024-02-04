@@ -38,6 +38,10 @@ public class StayInfoManagerImpl implements StayInfoManager {
         stayInfoStorage.addStayInfo(roomNumber, stayInfo);
     }
 
+    public void setStayInfo(Map<Integer, StayInfo> infoStorage) {
+        stayInfoStorage.setStayInfo(infoStorage);
+    }
+
     @Override
     public void deleteStayInfo(Integer roomNumber) {
         stayInfoStorage.deleteStayInfo(roomNumber);
@@ -109,34 +113,14 @@ public class StayInfoManagerImpl implements StayInfoManager {
     }
 
     public double getBillForRoomGuest(Guest guest, Room room) {
-
-
         Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
-
         StayInfo stayInfo = infoStorage.get(room.getRoomNumber());
-
         Period period = Period.between(stayInfo.getCheckInDate(),
                 stayInfo.getCheckOutDate());
         int days = period.getDays();
-
         double payment = room.getPrice() * days;
-
         return payment;
     }
-       // List<StayInfo> stayInfo; = new ArrayList<>();
-//        Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
-//
-//        stayInfo = infoStorage.get(room.getRoomNumber());
-//
-//
-//        for (StayInfo stayInfo : infoStorage.values()) {
-//            if(stayInfo.getGuest().getLastName().equals(guest.getLastName())) {
-//                srvicesList =  stayInfo.getGuest().getServices();
-//            }
-//        }
-//        return srvicesList;
-
-  //  }
 
     @Override
     public double getBillServiceOneGuest(Guest guest) {
@@ -196,14 +180,13 @@ public class StayInfoManagerImpl implements StayInfoManager {
     }
 
 
-
     public List<Service> getListStayInfoOneGuest(Guest guest) {
         List<Service> srvicesList = new ArrayList<>();
         Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
 
         for (StayInfo stayInfo : infoStorage.values()) {
-            if(stayInfo.getGuest().getLastName().equals(guest.getLastName())) {
-                srvicesList =  stayInfo.getGuest().getServices();
+            if (stayInfo.getGuest().getLastName().equals(guest.getLastName())) {
+                srvicesList = stayInfo.getGuest().getServices();
             }
         }
         return srvicesList;
@@ -214,7 +197,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
         List<Service> srvicesList = getListStayInfoOneGuest(guest);
         double allPrice = 0.0;
         for (Service service : srvicesList) {
-            allPrice =  service.getPrice();
+            allPrice += service.getPrice();
         }
         return allPrice;
     }

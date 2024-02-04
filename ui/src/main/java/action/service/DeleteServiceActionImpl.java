@@ -9,7 +9,6 @@ import utils.InputReader;
 import java.util.Scanner;
 
 public class DeleteServiceActionImpl implements IAction {
-    Scanner scanner = new Scanner(System.in);
 
     @Override
     public void execute() {

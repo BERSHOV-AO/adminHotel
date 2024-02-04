@@ -1,5 +1,6 @@
 package controllers.room;
 
+import csv_utils.RoomImporterExporter;
 import enums.RoomStatus;
 import models.Room;
 import storages.room.RoomsStorageImpl;
@@ -27,6 +28,11 @@ public class RoomManagerImpl implements RoomManager {
     @Override
     public void addRoom(Room room) {
         roomsStorage.addRoom(room);
+    }
+
+    @Override
+    public void setRooms(List<Room> rooms) {
+        roomsStorage.setRooms(rooms);
     }
 
     @Override
@@ -131,6 +137,14 @@ public class RoomManagerImpl implements RoomManager {
     public boolean checkRoomIDExists(int roomId) {
         return roomsStorage.getRooms().stream()
                 .anyMatch(room -> room.getId() == roomId);
+    }
+
+    public void exportRoomsToFileCSV() {
+        RoomImporterExporter.exportRooms(roomsStorage.getRooms());
+    }
+
+    public void importCSVFilesToRooms() {
+        roomsStorage.setRooms(RoomImporterExporter.importRooms());
     }
 }
 

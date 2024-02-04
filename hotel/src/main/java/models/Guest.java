@@ -3,16 +3,19 @@ package models;
 import utils.RandomNumber;
 
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
 
-public class Guest {
+public class Guest implements Entity {
     private int id;
     private String lastName;
     private List<Service> services;
     public Guest(String lastName) {
         this.lastName = lastName;
         this.id = RandomNumber.getRandomID();
+    }
+
+    public Guest(String lastName, int id) {
+        this.lastName = lastName;
+        this.id = id;
     }
 
     public int getId() {

@@ -35,14 +35,17 @@ public class BillGuestActionImpl implements IAction {
             str.append("Счет за номер : ");
             str.append(rubFormat.format(stayInfoManager.getBillForRoomGuest(guestManager.getGuestById(guestId),
                     roomManager.getRoomById(roomId))) + "\n");
-            str.append("********************************");
-            System.out.println("size: " + stayInfoManager.getListStayInfoOneGuest(guestManager.getGuestById(guestId)).size());
-//            if(stayInfoManager.getListStayInfoOneGuest(guestManager.getGuestById(guestId)).size() != 0){
-//               str.append("Счет за сервис : ");
-//                str.append(rubFormat.format(stayInfoManager.getBillServiceByGuest(
-//                        guestManager.getGuestById(guestId))));
-//                str.append("********************************");
-//           }
+            str.append("********************************" + "\n");
+
+            if (stayInfoManager.getListStayInfoOneGuest(guestManager.getGuestById(guestId)) != null) {
+                str.append("Счет за сервис : ");
+                str.append(rubFormat.format(stayInfoManager.getBillServiceByGuest(
+                        guestManager.getGuestById(guestId))) + "\n");
+                str.append("********************************" + "\n");
+            } else {
+                str.append("Гость " + guestManager.getGuestById(guestId).getLastName() + " сервисами не пользовался!" + "\n");
+                str.append("********************************");
+            }
             System.out.println(str);
         } catch (Exception e) {
             System.out.println("Нет такого посетителя или счета");

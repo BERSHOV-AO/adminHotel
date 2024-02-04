@@ -1,6 +1,9 @@
 package controllers.guest;
 
+import csv_utils.GuestImporterExporter;
+import csv_utils.RoomImporterExporter;
 import models.Guest;
+import models.Room;
 import models.Service;
 import storages.guest.GuestStorageImpl;
 
@@ -29,6 +32,11 @@ public class GuestManagerImpl implements GuestManager {
     public void addOnGuest(Guest guest) {
         guestStorage.addGuest(guest);
     }
+
+    public void setGuests(List<Guest> guests) {
+        guestStorage.setGuests(guests);
+    }
+
 
     @Override
     public void deleteGuest(Guest guest) {
@@ -100,6 +108,14 @@ public class GuestManagerImpl implements GuestManager {
     public boolean checkGuestIDExists(int guestId) {
         return guestStorage.getGuests().stream()
                 .anyMatch(guest -> guest.getId() == guestId);
+    }
+
+    public void exportGuestsToFileCSV() {
+        GuestImporterExporter.exportGuest(guestStorage.getGuests());
+    }
+
+    public void importCSVFilesToGuests() {
+        guestStorage.setGuests(GuestImporterExporter.importGuests());
     }
 }
 

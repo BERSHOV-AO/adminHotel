@@ -20,9 +20,10 @@ public class Printer {
             Integer room = entry.getKey();
             StayInfo stayInfo = entry.getValue();
 
-            System.out.println("Room number: " + room + ". Room id: " + room);
-            System.out.println("Guest name: " + stayInfo.getGuest().getLastName() +
-                    ". Guest id: " + stayInfo.getGuest().getId());
+            System.out.println("Room id: " + room + ", Room number: " + room);
+            System.out.println("Guest id: " + stayInfo.getGuest().getId() +
+                    ", Guest name: " + stayInfo.getGuest().getLastName());
+
             System.out.println("Check-in date: " + stayInfo.getCheckInDate());
             System.out.println("Check-out date: " + stayInfo.getCheckOutDate());
             System.out.println("--------------------------------------");

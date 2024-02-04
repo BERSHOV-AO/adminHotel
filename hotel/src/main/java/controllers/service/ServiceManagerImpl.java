@@ -1,5 +1,6 @@
 package controllers.service;
 
+import csv_utils.ServiceImporterExporter;
 import enums.ServiceType;
 import models.*;
 import storages.service.ServicesStorageImpl;
@@ -27,6 +28,10 @@ public class ServiceManagerImpl implements ServiceManager {
     @Override
     public void addService(Service service) {
         servicesStorage.addService(service);
+    }
+
+    public void setServices(List<Service> services) {
+        servicesStorage.setServices(services);
     }
 
     @Override
@@ -98,4 +103,11 @@ public class ServiceManagerImpl implements ServiceManager {
         return !services.isEmpty();
     }
 
+    public void exportServicesToFileCSV() {
+        ServiceImporterExporter.exportServices(servicesStorage.getServices());
+    }
+
+    public void importCSVFilesToServices() {
+        servicesStorage.setServices(ServiceImporterExporter.importServices());
+    }
 }

@@ -4,7 +4,7 @@ import utils.RandomNumber;
 
 import java.time.LocalDate;
 
-public class StayInfo {
+public class StayInfo implements Entity {
 
     private int id;
     private LocalDate checkInDate;
@@ -24,6 +24,13 @@ public class StayInfo {
         this.checkOutDate = checkOutDate;
         this.guest = guest;
         this.id = RandomNumber.getRandomID();
+    }
+
+    public StayInfo(int id, Guest guest, LocalDate checkInDate, LocalDate checkOutDate) {
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.guest = guest;
+        this.id = id;
     }
 
     public LocalDate getCheckInDate() {
