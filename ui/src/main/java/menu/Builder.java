@@ -9,6 +9,9 @@ import action.sorted.guest.GuestSortServicesByPriceActionImpl;
 import action.sorted.guest.GuestsSortByNameActionImpl;
 import action.sorted.service.ServicesSortByNameActionImpl;
 import action.sorted.service.ServicesSortByPriceActionImpl;
+import action.stayInfo.ExportStayInfoActionImpl;
+import action.stayInfo.ImportStayInfoActionImpl;
+import action.stayInfo.PrintStayInfoActionImpl;
 import controllers.guest.GuestManagerImpl;
 import controllers.room.RoomManagerImpl;
 import controllers.room_history.RoomHistoryManagerImpl;
@@ -56,7 +59,7 @@ public class Builder {
                 new RoomsSortEmptyByStarsActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Export rooms to file CSV", roomMenu,
                 new ExportRoomsActionImpl()));
-        roomMenu.addMenuItem(new MenuItem("Import CSV files to rooms", roomMenu,
+        roomMenu.addMenuItem(new MenuItem("Import CSV files to Storage Rooms", roomMenu,
                 new ImportRoomsActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
@@ -73,7 +76,7 @@ public class Builder {
                 new ServicesSortByPriceActionImpl()));
         serviceMenu.addMenuItem(new MenuItem("Export services to file CSV", serviceMenu,
                 new ExportServicesActionImpl()));
-        serviceMenu.addMenuItem(new MenuItem("Import CSV files to services", serviceMenu,
+        serviceMenu.addMenuItem(new MenuItem("Import CSV files to Storage Services", serviceMenu,
                 new ImportServicesActionImpl()));
         serviceMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
@@ -95,7 +98,15 @@ public class Builder {
         guestMenu.addMenuItem(new MenuItem("Sort the Guest's Services by price", guestMenu,
                 new GuestSortServicesByPriceActionImpl()));
         guestMenu.addMenuItem(new MenuItem("Export guests to file CSV", guestMenu, new ExportGuestsActionImpl()));
-        guestMenu.addMenuItem(new MenuItem("Import CSV files to guests", guestMenu, new ImportGuestsActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Import CSV files to Storage Guests", guestMenu,
+                new ImportGuestsActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Export StayInfo to File CSV", guestMenu,
+                new ExportStayInfoActionImpl()));
+//        guestMenu.addMenuItem(new MenuItem("Import CSV Files To StayInfo", guestMenu,
+//                new ImportStayInfoActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Print StayInfo", guestMenu,
+                new PrintStayInfoActionImpl()));
+
         guestMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Main Menu

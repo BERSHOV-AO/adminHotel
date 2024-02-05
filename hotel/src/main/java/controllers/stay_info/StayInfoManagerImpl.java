@@ -2,6 +2,8 @@ package controllers.stay_info;
 
 import controllers.room.RoomManagerImpl;
 import controllers.room_history.RoomHistoryManagerImpl;
+import csv_utils.ServiceImporterExporter;
+import csv_utils.StayInfoImporterExporter;
 import enums.RoomHistoryStatus;
 import enums.RoomStatus;
 import models.*;
@@ -200,6 +202,13 @@ public class StayInfoManagerImpl implements StayInfoManager {
             allPrice += service.getPrice();
         }
         return allPrice;
+    }
+    public void exportStayInfoToFileCSV() {
+        StayInfoImporterExporter.exportStayInfo(stayInfoStorage.getInfoStorage());
+    }
+
+    public void importCSVFilesToStayInfo() {
+        stayInfoStorage.setStayInfo(StayInfoImporterExporter.importStayInfo());
     }
 }
 
