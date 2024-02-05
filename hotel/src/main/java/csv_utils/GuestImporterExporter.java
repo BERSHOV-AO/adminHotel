@@ -1,12 +1,15 @@
 package csv_utils;
 
+import controllers.guest.GuestManagerImpl;
 import models.Guest;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class GuestImporterExporter {
+
+    private static GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
 
     private static final String FILE_PATH = "resources/guest.csv";
 
@@ -24,11 +27,20 @@ public class GuestImporterExporter {
     }
 
     public static List<Guest> importGuests() {
-        List<Guest> guests = new ArrayList<>();
+        List<Guest> guests = guestManager.getAllGuests();
+
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Guest guest = convertFromCsv(line);
+                Iterator<Guest> iterator = guests.iterator();
+                while (iterator.hasNext()) {
+                    Guest tempGuest = iterator.next();
+                    if (tempGuest.getId() == guest.getId()) {
+                        iterator.remove();
+                        break;
+                    }
+                }
                 guests.add(guest);
             }
         } catch (IOException e) {
@@ -36,7 +48,6 @@ public class GuestImporterExporter {
         }
         return guests;
     }
-
 
     private static String convertToCsv(Guest guest) {
         StringBuilder sb = new StringBuilder();

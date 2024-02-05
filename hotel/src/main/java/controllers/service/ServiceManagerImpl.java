@@ -56,6 +56,7 @@ public class ServiceManagerImpl implements ServiceManager {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<Service> getListServicesSortByPriceOneGuest(List<Service> serviceList) {
 
         System.out.println("serviceList: " + serviceList);
@@ -81,6 +82,7 @@ public class ServiceManagerImpl implements ServiceManager {
     }
 
 
+    @Override
     public Service getServiceById(int id) {
         return servicesStorage.getServices().stream()
                 .filter(service -> (service.getId() == id))
@@ -98,15 +100,18 @@ public class ServiceManagerImpl implements ServiceManager {
                 .anyMatch(service -> service.getId() == serviceId);
     }
 
+    @Override
     public boolean existsServices() {
         List<Service> services = servicesStorage.getServices();
         return !services.isEmpty();
     }
 
+    @Override
     public void exportServicesToFileCSV() {
         ServiceImporterExporter.exportServices(servicesStorage.getServices());
     }
 
+    @Override
     public void importCSVFilesToServices() {
         servicesStorage.setServices(ServiceImporterExporter.importServices());
     }

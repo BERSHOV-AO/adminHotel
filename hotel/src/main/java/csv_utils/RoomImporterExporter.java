@@ -1,15 +1,17 @@
 package csv_utils;
 
+import controllers.room.RoomManagerImpl;
 import enums.RoomStatus;
 import models.Room;
-import models.StayInfo;
 
 import java.io.*;
-import java.util.ArrayList;
+
+import java.util.Iterator;
 import java.util.List;
 
 public class RoomImporterExporter {
     private static final String FILE_PATH = "resources/rooms.csv";
+    private static RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
 
     public static void exportRooms(List<Room> rooms) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
@@ -25,11 +27,19 @@ public class RoomImporterExporter {
     }
 
     public static List<Room> importRooms() {
-        List<Room> rooms = new ArrayList<>();
+        List<Room> rooms = roomManager.getAllRooms();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Room room = convertFromCsv(line);
+                Iterator<Room> iterator = rooms.iterator();
+                while (iterator.hasNext()) {
+                    Room tempRoom = iterator.next();
+                    if (tempRoom.getId() == room.getId()) {
+                        iterator.remove();
+                        break;
+                    }
+                }
                 rooms.add(room);
             }
         } catch (IOException e) {
@@ -37,32 +47,6 @@ public class RoomImporterExporter {
         }
         return rooms;
     }
-
-
-//            List<Room> rooms = new ArrayList<>();
-//            try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-//                String line;
-//                while ((line = reader.readLine()) != null) {
-//                    Room room = convertFromCsv(line);
-//                    int index = -1;
-//                    for (int i = 0; i < rooms.size(); i++) {
-//                        if (rooms.get(i).getId() == room.getId()) {
-//                            index = i;
-//                            break;
-//                        }
-//                    }
-//                    if (index != -1) {
-//                        rooms.set(index, room); // Обновление записи с совпавшим ID
-//                    } else {
-//                        rooms.add(room); // Добавление новой записи
-//                    }
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return rooms;
-//        }
-    //   }
 
     private static String convertToCsv(Room room) {
         StringBuilder sb = new StringBuilder();

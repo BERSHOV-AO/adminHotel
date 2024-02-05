@@ -33,4 +33,15 @@ public interface RoomManager {
     public Room getRoomByNumber(Integer roomNumber);
 
     public List<Room> getEmptyRooms();
+
+    public Room getRoomById(int id);
+
+    public boolean checkRoomNumberExists(int roomNumber);
+
+    public boolean checkRoomIDExists(int roomId);
+
+    public void exportRoomsToFileCSV();
+
+    public void importCSVFilesToRooms();
+
 }

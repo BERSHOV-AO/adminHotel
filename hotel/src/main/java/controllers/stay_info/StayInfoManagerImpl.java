@@ -40,6 +40,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
         stayInfoStorage.addStayInfo(roomNumber, stayInfo);
     }
 
+    @Override
     public void setStayInfo(Map<Integer, StayInfo> infoStorage) {
         stayInfoStorage.setStayInfo(infoStorage);
     }
@@ -176,12 +177,14 @@ public class StayInfoManagerImpl implements StayInfoManager {
         }
     }
 
+    @Override
     public boolean checkStayInfIDExists(int stayInfoId) {
         return stayInfoStorage.getInfoStorage().values().stream()
                 .anyMatch(stayInfo -> stayInfo.getId() == stayInfoId);
     }
 
 
+    @Override
     public List<Service> getListStayInfoOneGuest(Guest guest) {
         List<Service> srvicesList = new ArrayList<>();
         Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
@@ -195,6 +198,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
     }
 
 
+    @Override
     public double getBillServiceByGuest(Guest guest) {
         List<Service> srvicesList = getListStayInfoOneGuest(guest);
         double allPrice = 0.0;
@@ -203,10 +207,12 @@ public class StayInfoManagerImpl implements StayInfoManager {
         }
         return allPrice;
     }
+    @Override
     public void exportStayInfoToFileCSV() {
         StayInfoImporterExporter.exportStayInfo(stayInfoStorage.getInfoStorage());
     }
 
+    @Override
     public void importCSVFilesToStayInfo() {
         stayInfoStorage.setStayInfo(StayInfoImporterExporter.importStayInfo());
     }

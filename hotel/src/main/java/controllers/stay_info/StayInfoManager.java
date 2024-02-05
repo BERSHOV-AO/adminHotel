@@ -2,6 +2,7 @@ package controllers.stay_info;
 
 import models.Guest;
 import models.Room;
+import models.Service;
 import models.StayInfo;
 
 import java.time.LocalDate;
@@ -12,6 +13,8 @@ import java.util.Map;
 public interface StayInfoManager {
 
     public void addStayInfo(Integer roomNumber, StayInfo stayInfo);
+
+    public void setStayInfo(Map<Integer, StayInfo> infoStorage);
 
     public void deleteStayInfo(Integer roomNumber);
 
@@ -32,4 +35,14 @@ public interface StayInfoManager {
     public void checkInGuestInRoom(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate);
 
     public void checkOutGuestFromRoom(Guest guest, Room room);
+
+    public boolean checkStayInfIDExists(int stayInfoId);
+
+    public List<Service> getListStayInfoOneGuest(Guest guest);
+
+    public double getBillServiceByGuest(Guest guest);
+
+    public void exportStayInfoToFileCSV();
+
+    public void importCSVFilesToStayInfo();
 }

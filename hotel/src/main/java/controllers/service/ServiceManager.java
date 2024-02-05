@@ -22,4 +22,11 @@ public interface ServiceManager {
 
     public List<Service> getListServicesSortByPriceOneGuest(List<Service> serviceList);
 
+    public Service getServiceById(int id);
+
+    public boolean existsServices();
+
+    public void exportServicesToFileCSV();
+
+    public void importCSVFilesToServices();
 }

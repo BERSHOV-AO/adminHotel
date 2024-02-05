@@ -122,6 +122,7 @@ public class RoomManagerImpl implements RoomManager {
                 .orElse(null);
     }
 
+    @Override
     public Room getRoomById(int id) {
         return roomsStorage.getRooms().stream()
                 .filter(room -> (room.getId() == id))
@@ -129,20 +130,24 @@ public class RoomManagerImpl implements RoomManager {
                 .orElse(null);
     }
 
+    @Override
     public boolean checkRoomNumberExists(int roomNumber) {
         return roomsStorage.getRooms().stream()
                 .anyMatch(room -> room.getRoomNumber().equals(roomNumber));
     }
 
+    @Override
     public boolean checkRoomIDExists(int roomId) {
         return roomsStorage.getRooms().stream()
                 .anyMatch(room -> room.getId() == roomId);
     }
 
+    @Override
     public void exportRoomsToFileCSV() {
         RoomImporterExporter.exportRooms(roomsStorage.getRooms());
     }
 
+    @Override
     public void importCSVFilesToRooms() {
         roomsStorage.setRooms(RoomImporterExporter.importRooms());
     }

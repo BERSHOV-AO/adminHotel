@@ -33,10 +33,10 @@ public class GuestManagerImpl implements GuestManager {
         guestStorage.addGuest(guest);
     }
 
+    @Override
     public void setGuests(List<Guest> guests) {
         guestStorage.setGuests(guests);
     }
-
 
     @Override
     public void deleteGuest(Guest guest) {
@@ -63,15 +63,12 @@ public class GuestManagerImpl implements GuestManager {
                 .orElse(null);
     }
 
-
     public Guest getGuestById(int id) {
         return guestStorage.getGuests().stream()
                 .filter(guest -> (guest.getId() == id))
                 .findFirst()
                 .orElse(null);
     }
-
-
 
     @Override
     public void addServicesToGuest(Guest guest, Service service) {
@@ -105,15 +102,18 @@ public class GuestManagerImpl implements GuestManager {
         return tempListService;
     }
 
+    @Override
     public boolean checkGuestIDExists(int guestId) {
         return guestStorage.getGuests().stream()
                 .anyMatch(guest -> guest.getId() == guestId);
     }
 
+    @Override
     public void exportGuestsToFileCSV() {
         GuestImporterExporter.exportGuest(guestStorage.getGuests());
     }
 
+    @Override
     public void importCSVFilesToGuests() {
         guestStorage.setGuests(GuestImporterExporter.importGuests());
     }

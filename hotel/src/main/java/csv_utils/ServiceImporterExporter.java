@@ -1,14 +1,18 @@
 package csv_utils;
 
+import controllers.service.ServiceManagerImpl;
 import enums.ServiceType;
+import models.Room;
 import models.Service;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ServiceImporterExporter {
     private static final String FILE_PATH = "resources/service.csv";
+    private static ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
 
     public static void exportServices(List<Service> services) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
@@ -24,11 +28,19 @@ public class ServiceImporterExporter {
     }
 
     public static List<Service> importServices() {
-        List<Service> services = new ArrayList<>();
+        List<Service> services = serviceManager.getAllServices();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Service service = convertFromCsv(line);
+                Iterator<Service> iterator = services.iterator();
+                while (iterator.hasNext()) {
+                    Service tempService = iterator.next();
+                    if (tempService.getId() == service.getId()) {
+                        iterator.remove();
+                        break;
+                    }
+                }
                 services.add(service);
             }
         } catch (IOException e) {
@@ -51,7 +63,6 @@ public class ServiceImporterExporter {
         ServiceType serviceType = ServiceType.valueOf(fields[1]);
         double price = Double.parseDouble(fields[2]);
 
-        //public Service(int id, ServiceType serviceType, double price) {
         Service service = new Service(id, serviceType, price);
         return service;
     }
