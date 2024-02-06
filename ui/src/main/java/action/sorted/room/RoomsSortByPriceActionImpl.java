@@ -6,7 +6,12 @@ import controllers.room.RoomManagerImpl;
 public class RoomsSortByPriceActionImpl implements IAction {
     @Override
     public void execute() {
+        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+        if (roomManager.getAllRooms().size() == 0) {
+            System.out.println("Нет доступных комнат!");
+            return;
+        }
         System.out.println("-------Sorted rooms by price-------");
-        RoomManagerImpl.getInstance().getSortedRoomsByPrice().stream().forEach(System.out::println);
+        roomManager.getSortedRoomsByPrice().stream().forEach(System.out::println);
     }
 }

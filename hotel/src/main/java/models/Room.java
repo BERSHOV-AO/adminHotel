@@ -4,7 +4,7 @@ import enums.RoomStatus;
 
 import java.util.Objects;
 
-public class Room implements Entity{
+public class Room implements Entity {
 
     private int id;
     private Integer roomNumber;
@@ -31,10 +31,12 @@ public class Room implements Entity{
         this.id = id;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }

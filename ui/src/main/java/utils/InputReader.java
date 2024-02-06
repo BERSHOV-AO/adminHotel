@@ -1,10 +1,10 @@
 package utils;
 
-import controllers.room.RoomManagerImpl;
 import enums.RoomStatus;
 import enums.ServiceType;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class InputReader {
@@ -79,12 +79,14 @@ public class InputReader {
         while (!isValid) {
             if (scanner.hasNext()) {
                 input = scanner.next();
-                date = LocalDate.parse(input);
-                isValid = true;
-            } else {
-                Printer.print("Wrong input. Please, input the date in \"YYYY-MM-DD\" format.");
-                scanner.nextLine();
-                continue;
+                try {
+                    date = LocalDate.parse(input);
+                    isValid = true;
+                } catch (DateTimeParseException e) {
+                    Printer.print("Wrong input. Please, input the date in \"YYYY-MM-DD\" format." + e.getMessage());
+                    scanner.nextLine();
+                    continue;
+                }
             }
         }
         return date;

@@ -11,7 +11,6 @@ public interface RoomManager {
 
     public void setRooms(List<Room> rooms);
 
-
     public List<Room> getAllRooms();
 
     public void changeRoomStatus(Room room, RoomStatus status);
@@ -43,5 +42,4 @@ public interface RoomManager {
     public void exportRoomsToFileCSV();
 
     public void importCSVFilesToRooms();
-
 }

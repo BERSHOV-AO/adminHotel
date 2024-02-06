@@ -20,7 +20,6 @@ public class AddGuestActionImpl implements IAction {
 
         } catch (Exception e) {
             System.out.println("Не удалось добавить посетителя. Введите допустимые параметры!" + e.getMessage());
-
         }
     }
 }

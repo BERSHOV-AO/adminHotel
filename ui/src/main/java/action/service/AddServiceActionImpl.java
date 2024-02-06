@@ -23,7 +23,7 @@ public class AddServiceActionImpl implements IAction {
             serviceManager.addService(new Service(serviceType, servicePrice));
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Не удалось добавить услугу. Введите действительные параметры!" + e.getMessage());
         }
     }
 }

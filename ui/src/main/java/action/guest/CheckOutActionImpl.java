@@ -3,17 +3,16 @@ package action.guest;
 import action.api.IAction;
 import controllers.guest.GuestManagerImpl;
 import controllers.room.RoomManagerImpl;
+import controllers.room_history.RoomHistoryManagerImpl;
 import controllers.stay_info.StayInfoManagerImpl;
 import utils.ExistsEntity;
-import utils.InputReader;
 import utils.Printer;
-
-import java.util.Scanner;
 
 public class CheckOutActionImpl implements IAction {
     @Override
     public void execute() {
         StayInfoManagerImpl stayInfoManager = StayInfoManagerImpl.getInstance();
+
         GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
         RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
 

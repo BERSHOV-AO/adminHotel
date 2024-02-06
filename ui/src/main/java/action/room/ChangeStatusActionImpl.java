@@ -12,6 +12,10 @@ public class ChangeStatusActionImpl implements IAction {
     @Override
     public void execute() {
         RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+        if (roomManager.getAllRooms().size() == 0) {
+            System.out.println("Нет доступных комнат!");
+            return;
+        }
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("-------All Rooms-------");

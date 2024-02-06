@@ -6,7 +6,12 @@ import controllers.guest.GuestManagerImpl;
 public class GuestsSortByNameActionImpl implements IAction {
     @Override
     public void execute() {
+        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+        if (guestManager.getAllGuests().size() == 0) {
+            System.out.println("Нет доступных гостей!");
+            return;
+        }
         System.out.println("-----Сортировка гостей по имени-----");
-        GuestManagerImpl.getInstance().getSortedGuestsByAlphabet().stream().forEach(System.out::println);
+        guestManager.getSortedGuestsByAlphabet().stream().forEach(System.out::println);
     }
 }

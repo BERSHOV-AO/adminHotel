@@ -58,7 +58,7 @@ public class StayInfoImporterExporter {
         return sb.toString();
     }
 
-        private static StayInfo convertFromCsv(String csvLine) {
+    private static StayInfo convertFromCsv(String csvLine) {
         String[] fields = csvLine.split(",");
         Integer numberRoomKey = Integer.parseInt(fields[0]);
         int idStayInfo = Integer.parseInt(fields[1]);
@@ -68,10 +68,9 @@ public class StayInfoImporterExporter {
         LocalDate checkOutDate = LocalDate.parse(fields[5]);
 
         if (guestManager.getGuestById(idGuest) == null) {
-          return new StayInfo(idStayInfo, new Guest(lastNameGuest, idGuest),checkInDate, checkOutDate);
+            return new StayInfo(idStayInfo, new Guest(lastNameGuest, idGuest), checkInDate, checkOutDate);
 
         } else {
-
             return new StayInfo(idStayInfo, guestManager.getGuestById(idGuest), checkInDate, checkOutDate);
         }
     }

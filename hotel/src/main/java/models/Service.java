@@ -9,10 +9,12 @@ public class Service implements Entity {
     private ServiceType serviceType;
     private double price;
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }

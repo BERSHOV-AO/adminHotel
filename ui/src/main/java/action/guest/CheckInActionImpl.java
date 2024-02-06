@@ -3,6 +3,7 @@ package action.guest;
 import action.api.IAction;
 import controllers.guest.GuestManagerImpl;
 import controllers.room.RoomManagerImpl;
+import controllers.room_history.RoomHistoryManagerImpl;
 import controllers.stay_info.StayInfoManagerImpl;
 import utils.ExistsEntity;
 import utils.InputReader;
@@ -15,13 +16,19 @@ public class CheckInActionImpl implements IAction {
     public void execute() {
 
         RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+        RoomHistoryManagerImpl roomHistoryManager = RoomHistoryManagerImpl.getInstance();
 
         if (roomManager.getEmptyRooms() == null) {
             System.out.println("Нет свободных номеров!");
             return;
         }
-        StayInfoManagerImpl stayInfoManager = StayInfoManagerImpl.getInstance();
         GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+        if (guestManager.getAllGuests().size() == 0) {
+            System.out.println("Нет доступных гостей!");
+            return;
+        }
+        StayInfoManagerImpl stayInfoManager = StayInfoManagerImpl.getInstance();
+
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("-------All Guests-------");

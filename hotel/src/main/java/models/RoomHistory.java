@@ -3,17 +3,27 @@ package models;
 import enums.RoomHistoryStatus;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-public class RoomHistory {
 
+public class RoomHistory implements Entity {
+
+
+    private int id;
     private Room room;
     private Guest guest;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-    private List<Service> services = new ArrayList<>();
     private RoomHistoryStatus status;
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Room getRoom() {
         return room;
@@ -47,14 +57,6 @@ public class RoomHistory {
         this.checkOutDate = checkOutDate;
     }
 
-    public List<Service> getServices() {
-        return services;
-    }
-
-    public void setServices(List<Service> services) {
-        this.services = services;
-    }
-
     public RoomHistoryStatus getStatus() {
         return status;
     }
@@ -66,12 +68,13 @@ public class RoomHistory {
     @Override
     public String toString() {
         return "RoomHistory{" +
-                "room=" + room +
+                "id=" + id +
+                ", room=" + room +
                 ", guest=" + guest +
                 ", checkInDate=" + checkInDate +
                 ", checkOutDate=" + checkOutDate +
-                ", services=" + services +
                 ", status=" + status +
                 '}';
     }
 }
+

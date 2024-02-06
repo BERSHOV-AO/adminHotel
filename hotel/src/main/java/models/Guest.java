@@ -8,6 +8,7 @@ public class Guest implements Entity {
     private int id;
     private String lastName;
     private List<Service> services;
+
     public Guest(String lastName) {
         this.lastName = lastName;
         this.id = RandomNumber.getRandomID();
@@ -18,10 +19,12 @@ public class Guest implements Entity {
         this.id = id;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
@@ -41,7 +44,6 @@ public class Guest implements Entity {
     public void setServices(List<Service> services) {
         this.services = services;
     }
-
 
     @Override
     public String toString() {

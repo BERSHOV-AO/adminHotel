@@ -6,7 +6,12 @@ import controllers.service.ServiceManagerImpl;
 public class PrintServiceActionImpl implements IAction {
     @Override
     public void execute() {
+        ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
+        if (serviceManager.getAllServices().size() == 0) {
+            System.out.println("Нет доступных сервисов!");
+            return;
+        }
         System.out.println("-------All Services-------");
-        ServiceManagerImpl.getInstance().getAllServices().stream().forEach(System.out::println);
+        serviceManager.getAllServices().stream().forEach(System.out::println);
     }
 }

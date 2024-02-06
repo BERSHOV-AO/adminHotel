@@ -2,17 +2,17 @@ package action.service;
 
 import action.api.IAction;
 import controllers.service.ServiceManagerImpl;
-import enums.ServiceType;
 import utils.ExistsEntity;
-import utils.InputReader;
-
-import java.util.Scanner;
 
 public class DeleteServiceActionImpl implements IAction {
 
     @Override
     public void execute() {
         ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
+        if (serviceManager.getAllServices().size() == 0) {
+            System.out.println("Нет доступных сервисов!");
+            return;
+        }
 
         System.out.println("-----Удаление сервиса-----");
         System.out.println("-------All Services-------");

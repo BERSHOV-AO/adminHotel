@@ -48,7 +48,7 @@ public class BillGuestActionImpl implements IAction {
             }
             System.out.println(str);
         } catch (Exception e) {
-            System.out.println("Нет такого посетителя или счета");
+            System.out.println("Нет такого посетителя или счета" + e.getMessage());
         }
     }
 }

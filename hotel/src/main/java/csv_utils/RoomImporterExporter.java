@@ -68,7 +68,6 @@ public class RoomImporterExporter {
         int stars = Integer.parseInt(fields[4]);
         RoomStatus roomStatus = RoomStatus.valueOf(fields[5]);
 
-        // public Room(int id, Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
         Room room = new Room(id, roomNumber, stars, price, capacity, roomStatus);
         return room;
     }

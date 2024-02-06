@@ -9,13 +9,16 @@ public class AddServicesToGuestActionImpl implements IAction {
     @Override
     public void execute() {
         ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
+        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
         if (!serviceManager.existsServices()) {
             System.out.println("Нет доступных сервисов!");
             return;
         }
-
-        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
-
+        if (guestManager.getAllGuests().size() == 0) {
+            System.out.println("Нет доступных гостей!");
+            return;
+        }
+        
         System.out.println("----Список посетителей----");
         guestManager.getAllGuests().stream().forEach(System.out::println);
         System.out.println("----Список доступных сервисов----");
