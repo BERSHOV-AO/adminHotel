@@ -1,18 +1,22 @@
 package utils;
 
-import controllers.guest.GuestManagerImpl;
-import controllers.room.RoomManagerImpl;
-import controllers.service.ServiceManagerImpl;
+import controllers.guest.GuestManager;
+import controllers.room.RoomManager;
+import controllers.service.ServiceManager;
+import models.Guest;
+import models.Room;
+import models.Service;
+import models.StayInfo;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ExistsEntity {
-    private static RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
-    private static GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
-    private static ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
+
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int getExistsRoomID() {
+    public static int getExistsRoomID(RoomManager roomManager) {
         int roomId;
         boolean roomExists;
         do {
@@ -25,7 +29,7 @@ public class ExistsEntity {
         return roomId;
     }
 
-    public static int getExistsGuestID() {
+    public static int getExistsGuestID(GuestManager guestManager) {
         int guestId;
         boolean roomExists;
         do {
@@ -38,7 +42,7 @@ public class ExistsEntity {
         return guestId;
     }
 
-    public static int getExistsServiceID() {
+    public static int getExistsServiceID(ServiceManager serviceManager) {
 
         int serviceId;
         boolean serviceExists;
@@ -50,5 +54,37 @@ public class ExistsEntity {
             }
         } while (!serviceExists);
         return serviceId;
+    }
+
+    public static boolean noExistGuests(List<Guest> guestList) {
+        if (guestList.size() == 0) {
+            System.out.println("Нет доступных гостей!");
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean noExistRooms(List<Room> roomList) {
+        if (roomList.size() == 0) {
+            System.out.println("Нет доступных комнат!");
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean noExistServices(List<Service> serviceList) {
+        if (serviceList.size() == 0) {
+            System.out.println("Нет доступных сервисов!");
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean noExistStayInfo(Map<Integer, StayInfo> mapStayInfo) {
+        if (mapStayInfo.size() == 0) {
+            System.out.println("Нет доступной информации о проживании!");
+            return true;
+        }
+        return false;
     }
 }

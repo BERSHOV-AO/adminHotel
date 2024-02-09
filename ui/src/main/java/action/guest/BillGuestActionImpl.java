@@ -1,31 +1,35 @@
 package action.guest;
 
 import action.api.IAction;
+import controllers.guest.GuestManager;
 import controllers.guest.GuestManagerImpl;
+import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
+import controllers.stay_info.StayInfoManager;
 import controllers.stay_info.StayInfoManagerImpl;
 import utils.ExistsEntity;
-import utils.InputReader;
 import utils.Printer;
 
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.Scanner;
 
 public class BillGuestActionImpl implements IAction {
     @Override
     public void execute() {
         try {
-            StayInfoManagerImpl stayInfoManager = StayInfoManagerImpl.getInstance();
-            GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
-            RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+            StayInfoManager stayInfoManager = StayInfoManagerImpl.getInstance();
+            GuestManager guestManager = GuestManagerImpl.getInstance();
+            RoomManager roomManager = RoomManagerImpl.getInstance();
 
+            if (ExistsEntity.noExistStayInfo(stayInfoManager.getMapStayInfo())) {
+                return;
+            }
             Locale ruLocale = new Locale("ru", "RU");
             NumberFormat rubFormat = NumberFormat.getCurrencyInstance(ruLocale);
 
             Printer.printStayInfo(stayInfoManager.getMapStayInfo());
-            int guestId = ExistsEntity.getExistsGuestID();
-            int roomId = ExistsEntity.getExistsRoomID();
+            int guestId = ExistsEntity.getExistsGuestID(guestManager);
+            int roomId = ExistsEntity.getExistsRoomID(roomManager);
 
             StringBuilder str = new StringBuilder();
 
@@ -43,7 +47,8 @@ public class BillGuestActionImpl implements IAction {
                         guestManager.getGuestById(guestId))) + "\n");
                 str.append("********************************" + "\n");
             } else {
-                str.append("Гость " + guestManager.getGuestById(guestId).getLastName() + " сервисами не пользовался!" + "\n");
+                str.append("Гость " + guestManager.getGuestById(guestId).getLastName() +
+                        " сервисами не пользовался!" + "\n");
                 str.append("********************************");
             }
             System.out.println(str);

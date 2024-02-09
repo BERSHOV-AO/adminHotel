@@ -1,17 +1,17 @@
 package action.sorted.room;
 
 import action.api.IAction;
+import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
+import utils.ExistsEntity;
 
 public class RoomsSortByCapacityActionImpl implements IAction {
     @Override
     public void execute() {
-        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
-        if (roomManager.getAllRooms().size() == 0) {
-            System.out.println("Нет доступных комнат!");
+        RoomManager roomManager = RoomManagerImpl.getInstance();
+        if (ExistsEntity.noExistRooms(roomManager.getAllRooms())) {
             return;
         }
-
         System.out.println("-------Sorted rooms by capacity-------");
         roomManager.getSortedRoomsByCapacity().stream().forEach(System.out::println);
     }

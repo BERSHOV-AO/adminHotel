@@ -1,6 +1,7 @@
 package action.room;
 
 import action.api.IAction;
+import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
 import utils.ExistsEntity;
 import utils.InputReader;
@@ -12,9 +13,8 @@ public class ChangeRoomPriceActionImpl implements IAction {
     @Override
     public void execute() {
 
-        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
-        if (roomManager.getAllRooms().size() == 0) {
-            System.out.println("Нет доступных комнат!");
+        RoomManager roomManager = RoomManagerImpl.getInstance();
+        if (ExistsEntity.noExistRooms(roomManager.getAllRooms())) {
             return;
         }
 
@@ -23,7 +23,7 @@ public class ChangeRoomPriceActionImpl implements IAction {
         roomManager.getAllRooms().stream().forEach(System.out::println);
 
         try {
-            int roomId = ExistsEntity.getExistsRoomID();
+            int roomId = ExistsEntity.getExistsRoomID(roomManager);
             Double priceDay = InputReader.getDoubleInput(scanner,
                     "Введите новую стоимость номера за сутки ");
             roomManager.changeRoomPrice(roomManager.getRoomById(roomId),

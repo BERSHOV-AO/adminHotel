@@ -4,6 +4,7 @@ import csv_utils.RoomHistoryExporter;
 import models.Guest;
 import models.Room;
 import models.RoomHistory;
+import storages.room_history.RoomHistoryStorage;
 import storages.room_history.RoomHistoryStorageImpl;
 
 import java.util.Iterator;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class RoomHistoryManagerImpl implements RoomHistoryManager {
 
-    RoomHistoryStorageImpl roomHistoryStorage = RoomHistoryStorageImpl.getInstance();
+    RoomHistoryStorage roomHistoryStorage = RoomHistoryStorageImpl.getInstance();
 
     private static RoomHistoryManagerImpl instance;
 

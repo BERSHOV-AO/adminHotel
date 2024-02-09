@@ -1,8 +1,9 @@
 package controllers.service;
 
-import csv_utils.ServiceImporterExporter;
+import csv_utils.ServiceImportExport;
 import enums.ServiceType;
 import models.*;
+import storages.service.ServicesStorage;
 import storages.service.ServicesStorageImpl;
 
 import java.util.Comparator;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ServiceManagerImpl implements ServiceManager {
 
-    ServicesStorageImpl servicesStorage = ServicesStorageImpl.getInstance();
+    ServicesStorage servicesStorage = ServicesStorageImpl.getInstance();
 
     private static ServiceManagerImpl instance;
 
@@ -30,6 +31,7 @@ public class ServiceManagerImpl implements ServiceManager {
         servicesStorage.addService(service);
     }
 
+    @Override
     public void setServices(List<Service> services) {
         servicesStorage.setServices(services);
     }
@@ -95,6 +97,7 @@ public class ServiceManagerImpl implements ServiceManager {
         servicesStorage.deleteService(service);
     }
 
+    @Override
     public boolean checkServiceIDExists(int serviceId) {
         return servicesStorage.getServices().stream()
                 .anyMatch(service -> service.getId() == serviceId);
@@ -108,11 +111,11 @@ public class ServiceManagerImpl implements ServiceManager {
 
     @Override
     public void exportServicesToFileCSV() {
-        ServiceImporterExporter.exportServices(servicesStorage.getServices());
+        ServiceImportExport.exportServices(servicesStorage.getServices());
     }
 
     @Override
     public void importCSVFilesToServices() {
-        servicesStorage.setServices(ServiceImporterExporter.importServices());
+        servicesStorage.setServices(ServiceImportExport.importServices());
     }
 }

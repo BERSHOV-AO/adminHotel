@@ -2,8 +2,8 @@ package action.guest;
 
 import action.api.IAction;
 import controllers.guest.GuestManagerImpl;
+import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
-import controllers.room_history.RoomHistoryManagerImpl;
 import controllers.stay_info.StayInfoManagerImpl;
 import utils.ExistsEntity;
 import utils.InputReader;
@@ -15,8 +15,7 @@ public class CheckInActionImpl implements IAction {
     @Override
     public void execute() {
 
-        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
-        RoomHistoryManagerImpl roomHistoryManager = RoomHistoryManagerImpl.getInstance();
+        RoomManager roomManager = RoomManagerImpl.getInstance();
 
         if (roomManager.getEmptyRooms() == null) {
             System.out.println("Нет свободных номеров!");
@@ -36,8 +35,8 @@ public class CheckInActionImpl implements IAction {
         System.out.println("-------All Rooms-------");
         roomManager.getAllRooms().stream().forEach(System.out::println);
 
-        int guestId = ExistsEntity.getExistsGuestID();
-        int roomId = ExistsEntity.getExistsRoomID();
+        int guestId = ExistsEntity.getExistsGuestID(guestManager);
+        int roomId = ExistsEntity.getExistsRoomID(roomManager);
         LocalDate inDate = InputReader.getLocalDateInput(scanner,
                 "Введите дату заселения в номер, пример \"YYYY-MM-DD\" ");
         LocalDate outDate = InputReader.getLocalDateInput(scanner,

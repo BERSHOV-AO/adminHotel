@@ -1,6 +1,7 @@
 package action.room;
 
 import action.api.IAction;
+import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
 import enums.RoomStatus;
 import utils.ExistsEntity;
@@ -11,9 +12,9 @@ import java.util.Scanner;
 public class ChangeStatusActionImpl implements IAction {
     @Override
     public void execute() {
-        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
-        if (roomManager.getAllRooms().size() == 0) {
-            System.out.println("Нет доступных комнат!");
+        RoomManager roomManager = RoomManagerImpl.getInstance();
+
+        if (ExistsEntity.noExistRooms(roomManager.getAllRooms())) {
             return;
         }
 
@@ -22,7 +23,7 @@ public class ChangeStatusActionImpl implements IAction {
         roomManager.getAllRooms().stream().forEach(System.out::println);
 
         try {
-            int roomId = ExistsEntity.getExistsRoomID();
+            int roomId = ExistsEntity.getExistsRoomID(roomManager);
             RoomStatus status = InputReader.getRoomStatusByInput(scanner,
                     "Введите цифру статуса номера: " +
                             "1 = EMPTY, 2 = OCCUPIED, 3 = UNDER_REPAIR, 4 = SERVICE");

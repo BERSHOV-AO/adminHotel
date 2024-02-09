@@ -1,6 +1,7 @@
 package action.service;
 
 import action.api.IAction;
+import controllers.service.ServiceManager;
 import controllers.service.ServiceManagerImpl;
 import utils.ExistsEntity;
 import utils.InputReader;
@@ -10,9 +11,8 @@ import java.util.Scanner;
 public class ChangeServiceOnPriceActionImpl implements IAction {
     @Override
     public void execute() {
-        ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
-        if (serviceManager.getAllServices().size() == 0) {
-            System.out.println("Нет доступных сервисов!");
+        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
+        if (ExistsEntity.noExistServices(serviceManager.getAllServices())) {
             return;
         }
 
@@ -21,7 +21,7 @@ public class ChangeServiceOnPriceActionImpl implements IAction {
         System.out.println("-------All Services-------");
         serviceManager.getAllServices().stream().forEach(System.out::println);
         try {
-            int serviceId = ExistsEntity.getExistsServiceID();
+            int serviceId = ExistsEntity.getExistsServiceID(serviceManager);
             Double servicePrice = InputReader.getDoubleInput(scanner, "Введите новую цену сервиса: ");
             serviceManager.changeServicePrice(serviceManager.getServiceById(serviceId), servicePrice);
         } catch (Exception e) {

@@ -1,6 +1,7 @@
 package action.service;
 
 import action.api.IAction;
+import controllers.service.ServiceManager;
 import controllers.service.ServiceManagerImpl;
 import utils.ExistsEntity;
 
@@ -8,9 +9,8 @@ public class DeleteServiceActionImpl implements IAction {
 
     @Override
     public void execute() {
-        ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
-        if (serviceManager.getAllServices().size() == 0) {
-            System.out.println("Нет доступных сервисов!");
+        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
+        if (ExistsEntity.noExistServices(serviceManager.getAllServices())) {
             return;
         }
 
@@ -18,7 +18,7 @@ public class DeleteServiceActionImpl implements IAction {
         System.out.println("-------All Services-------");
         serviceManager.getAllServices().stream().forEach(System.out::println);
         try {
-            int serviceId = ExistsEntity.getExistsServiceID();
+            int serviceId = ExistsEntity.getExistsServiceID(serviceManager);
             serviceManager.deleteService(serviceManager.getServiceById(serviceId));
         } catch (Exception e) {
             System.out.println("Нет такой услуги для удаления");

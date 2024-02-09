@@ -1,13 +1,15 @@
 package controllers.stay_info;
 
+import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
+import controllers.room_history.RoomHistoryManager;
 import controllers.room_history.RoomHistoryManagerImpl;
 import csv_utils.RoomHistoryExporter;
-import csv_utils.ServiceImporterExporter;
-import csv_utils.StayInfoImporterExporter;
+import csv_utils.StayInfoExporter;
 import enums.RoomHistoryStatus;
 import enums.RoomStatus;
 import models.*;
+import storages.stay_info.StayInfoStorage;
 import storages.stay_info.StayInfoStorageImpl;
 import utils.RandomNumber;
 
@@ -21,9 +23,9 @@ import java.util.stream.Collectors;
 
 public class StayInfoManagerImpl implements StayInfoManager {
 
-    StayInfoStorageImpl stayInfoStorage = StayInfoStorageImpl.getInstance();
-    RoomHistoryManagerImpl roomHistoryManager = RoomHistoryManagerImpl.getInstance();
-    RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+    StayInfoStorage stayInfoStorage = StayInfoStorageImpl.getInstance();
+    RoomHistoryManager roomHistoryManager = RoomHistoryManagerImpl.getInstance();
+    RoomManager roomManager = RoomManagerImpl.getInstance();
 
     private static StayInfoManagerImpl instance;
 
@@ -117,6 +119,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
                 .orElse(0.0);
     }
 
+    @Override
     public double getBillForRoomGuest(Guest guest, Room room) {
         Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
         StayInfo stayInfo = infoStorage.get(room.getRoomNumber());
@@ -222,13 +225,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
 
     @Override
     public void exportStayInfoToFileCSV() {
-        StayInfoImporterExporter.exportStayInfo(stayInfoStorage.getInfoStorage());
+        StayInfoExporter.exportStayInfo(stayInfoStorage.getInfoStorage());
     }
-
-    @Override
-    public void importCSVFilesToStayInfo() {
-        stayInfoStorage.setStayInfo(StayInfoImporterExporter.importStayInfo());
-    }
-
 }
 

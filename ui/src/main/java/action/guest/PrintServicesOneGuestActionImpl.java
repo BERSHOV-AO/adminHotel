@@ -1,6 +1,7 @@
 package action.guest;
 
 import action.api.IAction;
+import controllers.guest.GuestManager;
 import controllers.guest.GuestManagerImpl;
 import models.Service;
 import utils.ExistsEntity;
@@ -10,16 +11,16 @@ import java.util.List;
 public class PrintServicesOneGuestActionImpl implements IAction {
     @Override
     public void execute() {
-        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
-        if (guestManager.getAllGuests().size() == 0) {
-            System.out.println("Нет доступных гостей!");
+        GuestManager guestManager = GuestManagerImpl.getInstance();
+
+        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
             return;
         }
         System.out.println("-------All Guests-------");
         guestManager.getAllGuests().stream().forEach(System.out::println);
         List<Service> listService;
         try {
-            int guestId = ExistsEntity.getExistsGuestID();
+            int guestId = ExistsEntity.getExistsGuestID(guestManager);
             listService = guestManager.getGuestServices(
                     guestManager.getGuestById(guestId));
 

@@ -28,6 +28,8 @@ public interface StayInfoManager {
 
     public boolean containsGuestInTheRoom(Guest guest, Room room);
 
+    public double getBillForRoomGuest(Guest guest, Room room);
+
     public double getBillForRoomAndGuest(Guest guest, Room room);
 
     public double getBillServiceOneGuest(Guest guest);
@@ -43,6 +45,4 @@ public interface StayInfoManager {
     public double getBillServiceByGuest(Guest guest);
 
     public void exportStayInfoToFileCSV();
-
-    public void importCSVFilesToStayInfo();
 }

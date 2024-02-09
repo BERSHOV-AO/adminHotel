@@ -1,10 +1,8 @@
 package storages.stay_info;
 
-import models.Service;
 import models.StayInfo;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class StayInfoStorageImpl implements StayInfoStorage {
@@ -38,6 +36,7 @@ public class StayInfoStorageImpl implements StayInfoStorage {
         return infoStorage;
     }
 
+    @Override
     public void setStayInfo(Map<Integer, StayInfo> infoStorage) {
         this.infoStorage = infoStorage;
     }

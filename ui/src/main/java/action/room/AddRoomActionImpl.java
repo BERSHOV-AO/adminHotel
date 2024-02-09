@@ -1,6 +1,7 @@
 package action.room;
 
 import action.api.IAction;
+import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
 import enums.RoomStatus;
 import models.Room;
@@ -14,7 +15,7 @@ public class AddRoomActionImpl implements IAction {
     public void execute() {
 
         try {
-            RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+            RoomManager roomManager = RoomManagerImpl.getInstance();
             Scanner scanner = new Scanner(System.in);
 
             int roomNumber;

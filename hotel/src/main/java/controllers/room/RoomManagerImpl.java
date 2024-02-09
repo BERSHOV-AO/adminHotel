@@ -1,8 +1,9 @@
 package controllers.room;
 
-import csv_utils.RoomImporterExporter;
+import csv_utils.RoomImportExport;
 import enums.RoomStatus;
 import models.Room;
+import storages.room.RoomsStorage;
 import storages.room.RoomsStorageImpl;
 
 import java.util.Comparator;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class RoomManagerImpl implements RoomManager {
 
-    RoomsStorageImpl roomsStorage = RoomsStorageImpl.getInstance();
+    RoomsStorage roomsStorage = RoomsStorageImpl.getInstance();
 
     private static RoomManagerImpl instance;
 
@@ -144,12 +145,12 @@ public class RoomManagerImpl implements RoomManager {
 
     @Override
     public void exportRoomsToFileCSV() {
-        RoomImporterExporter.exportRooms(roomsStorage.getRooms());
+        RoomImportExport.exportRooms(roomsStorage.getRooms());
     }
 
     @Override
     public void importCSVFilesToRooms() {
-        roomsStorage.setRooms(RoomImporterExporter.importRooms());
+        roomsStorage.setRooms(RoomImportExport.importRooms());
     }
 }
 

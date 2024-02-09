@@ -10,7 +10,6 @@ import action.sorted.guest.GuestsSortByNameActionImpl;
 import action.sorted.service.ServicesSortByNameActionImpl;
 import action.sorted.service.ServicesSortByPriceActionImpl;
 import action.stayInfo.ExportStayInfoActionImpl;
-import action.stayInfo.ImportStayInfoActionImpl;
 import action.stayInfo.PrintStayInfoActionImpl;
 import controllers.guest.GuestManagerImpl;
 import controllers.room.RoomManagerImpl;
@@ -102,8 +101,6 @@ public class Builder {
                 new ImportGuestsActionImpl()));
         guestMenu.addMenuItem(new MenuItem("Export StayInfo to File CSV", guestMenu,
                 new ExportStayInfoActionImpl()));
-//        guestMenu.addMenuItem(new MenuItem("Import CSV Files To StayInfo", guestMenu,
-//                new ImportStayInfoActionImpl()));
         guestMenu.addMenuItem(new MenuItem("Print StayInfo", guestMenu,
                 new PrintStayInfoActionImpl()));
 
