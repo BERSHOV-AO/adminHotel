@@ -7,10 +7,13 @@ import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
 import controllers.stay_info.StayInfoManager;
 import controllers.stay_info.StayInfoManagerImpl;
+import org.apache.log4j.Logger;
 import utils.ExistsEntity;
 import utils.Printer;
 
 public class CheckOutActionImpl implements IAction {
+
+    final static Logger logger = Logger.getLogger(CheckOutActionImpl.class);
     @Override
     public void execute() {
         StayInfoManager stayInfoManager = StayInfoManagerImpl.getInstance();
@@ -29,6 +32,7 @@ public class CheckOutActionImpl implements IAction {
                     roomManager.getRoomByNumber(roomId));
         } catch (Exception e) {
             System.out.println("Некорректный ввод данных " + e.getMessage());
+            logger.error("Не удалось выселить посетителя ", e);
         }
     }
 }

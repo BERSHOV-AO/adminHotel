@@ -4,11 +4,14 @@ import action.api.IAction;
 import controllers.guest.GuestManager;
 import controllers.guest.GuestManagerImpl;
 import models.Guest;
+import org.apache.log4j.Logger;
 import utils.InputReader;
 
 import java.util.Scanner;
 
 public class AddGuestActionImpl implements IAction {
+
+    final static Logger logger = Logger.getLogger(AddGuestActionImpl.class);
 
     @Override
     public void execute() {
@@ -21,6 +24,7 @@ public class AddGuestActionImpl implements IAction {
 
         } catch (Exception e) {
             System.out.println("Не удалось добавить посетителя. Введите допустимые параметры!" + e.getMessage());
+            logger.error("Не удалось добавить посетителя. Введите допустимые параметры!", e);
         }
     }
 }

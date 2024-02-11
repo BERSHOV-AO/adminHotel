@@ -5,6 +5,7 @@ import controllers.guest.GuestManagerImpl;
 import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
 import controllers.stay_info.StayInfoManagerImpl;
+import org.apache.log4j.Logger;
 import utils.ExistsEntity;
 import utils.InputReader;
 
@@ -12,6 +13,8 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class CheckInActionImpl implements IAction {
+
+    final static Logger logger = Logger.getLogger(CheckInActionImpl.class);
     @Override
     public void execute() {
 
@@ -46,6 +49,7 @@ public class CheckInActionImpl implements IAction {
                     roomManager.getRoomById(roomId), inDate, outDate);
         } catch (Exception e) {
             System.out.println("Не удалось зарегистрировать посетителя! " + e.getMessage());
+            logger.error("Не удалось зарегистрировать посетителя! ", e);
         }
     }
 }

@@ -7,6 +7,7 @@ import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
 import controllers.stay_info.StayInfoManager;
 import controllers.stay_info.StayInfoManagerImpl;
+import org.apache.log4j.Logger;
 import utils.ExistsEntity;
 import utils.Printer;
 
@@ -14,6 +15,8 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class BillGuestActionImpl implements IAction {
+
+    final static Logger logger = Logger.getLogger(BillGuestActionImpl.class);
     @Override
     public void execute() {
         try {
@@ -54,6 +57,7 @@ public class BillGuestActionImpl implements IAction {
             System.out.println(str);
         } catch (Exception e) {
             System.out.println("Нет такого посетителя или счета" + e.getMessage());
+            logger.error("Нет такого посетителя или счета ", e);
         }
     }
 }

@@ -5,9 +5,12 @@ import controllers.guest.GuestManager;
 import controllers.guest.GuestManagerImpl;
 import controllers.service.ServiceManager;
 import controllers.service.ServiceManagerImpl;
+import org.apache.log4j.Logger;
 import utils.ExistsEntity;
 
 public class AddServicesToGuestActionImpl implements IAction {
+    final static Logger logger = Logger.getLogger(AddServicesToGuestActionImpl.class);
+
     @Override
     public void execute() {
 
@@ -31,7 +34,8 @@ public class AddServicesToGuestActionImpl implements IAction {
             guestManager.addServicesToGuest(guestManager.getGuestById(guestId),
                     serviceManager.getServiceById(serviceId));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Не удалось добавить сервис посетителю " + e.getMessage());
+            logger.error("Не удалось добавить сервис посетителю ", e);
         }
     }
 }

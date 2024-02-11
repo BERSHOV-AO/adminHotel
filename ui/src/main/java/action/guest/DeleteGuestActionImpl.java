@@ -3,9 +3,12 @@ package action.guest;
 import action.api.IAction;
 import controllers.guest.GuestManager;
 import controllers.guest.GuestManagerImpl;
+import org.apache.log4j.Logger;
 import utils.ExistsEntity;
 
 public class DeleteGuestActionImpl implements IAction {
+    final static Logger logger = Logger.getLogger(DeleteGuestActionImpl.class);
+
     @Override
     public void execute() {
         GuestManager guestManager = GuestManagerImpl.getInstance();
@@ -20,7 +23,8 @@ public class DeleteGuestActionImpl implements IAction {
             int guestId = ExistsEntity.getExistsGuestID(guestManager);
             guestManager.deleteGuest(guestManager.getGuestById(guestId));
         } catch (Exception e) {
-            System.out.println("Посетитель не удален " + e.getMessage());
+            System.out.println("Не удалось удалить посетителя " + e.getMessage());
+            logger.error("Не удалось удалить посетителя ", e);
         }
     }
 }
