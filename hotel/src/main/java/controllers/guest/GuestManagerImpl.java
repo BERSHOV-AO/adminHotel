@@ -1,7 +1,10 @@
 package controllers.guest;
 
+import csv_utils.GuestImportExport;
 import models.Guest;
+import models.Room;
 import models.Service;
+import storages.guest.GuestStorage;
 import storages.guest.GuestStorageImpl;
 
 import java.util.ArrayList;
@@ -11,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class GuestManagerImpl implements GuestManager {
 
-    GuestStorageImpl guestStorage = GuestStorageImpl.getInstance();
+    GuestStorage guestStorage = GuestStorageImpl.getInstance();
 
     private static GuestManagerImpl instance;
 
@@ -28,6 +31,11 @@ public class GuestManagerImpl implements GuestManager {
     @Override
     public void addOnGuest(Guest guest) {
         guestStorage.addGuest(guest);
+    }
+
+    @Override
+    public void setGuests(List<Guest> guests) {
+        guestStorage.setGuests(guests);
     }
 
     @Override
@@ -51,6 +59,14 @@ public class GuestManagerImpl implements GuestManager {
     public Guest getGuestByName(String lastName) {
         return guestStorage.getGuests().stream()
                 .filter(guest -> guest.getLastName().equals(lastName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public Guest getGuestById(int id) {
+        return guestStorage.getGuests().stream()
+                .filter(guest -> (guest.getId() == id))
                 .findFirst()
                 .orElse(null);
     }
@@ -86,7 +102,20 @@ public class GuestManagerImpl implements GuestManager {
         }
         return tempListService;
     }
+
+    @Override
+    public boolean checkGuestIDExists(int guestId) {
+        return guestStorage.getGuests().stream()
+                .anyMatch(guest -> guest.getId() == guestId);
+    }
+
+    @Override
+    public void exportGuestsToFileCSV() {
+        GuestImportExport.exportGuests(guestStorage.getGuests());
+    }
+
+    @Override
+    public void importCSVFilesToGuests() {
+        guestStorage.setGuests(GuestImportExport.importGuests());
+    }
 }
-
-
-

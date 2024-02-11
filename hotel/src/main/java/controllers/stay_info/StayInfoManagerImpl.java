@@ -1,13 +1,21 @@
 package controllers.stay_info;
 
+import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
+import controllers.room_history.RoomHistoryManager;
 import controllers.room_history.RoomHistoryManagerImpl;
+import csv_utils.RoomHistoryExporter;
+import csv_utils.StayInfoExporter;
 import enums.RoomHistoryStatus;
 import enums.RoomStatus;
 import models.*;
+import storages.stay_info.StayInfoStorage;
 import storages.stay_info.StayInfoStorageImpl;
+import utils.RandomNumber;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +23,9 @@ import java.util.stream.Collectors;
 
 public class StayInfoManagerImpl implements StayInfoManager {
 
-    StayInfoStorageImpl stayInfoStorage = StayInfoStorageImpl.getInstance();
-    RoomHistoryManagerImpl roomHistoryManager = RoomHistoryManagerImpl.getInstance();
-    RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+    StayInfoStorage stayInfoStorage = StayInfoStorageImpl.getInstance();
+    RoomHistoryManager roomHistoryManager = RoomHistoryManagerImpl.getInstance();
+    RoomManager roomManager = RoomManagerImpl.getInstance();
 
     private static StayInfoManagerImpl instance;
 
@@ -34,6 +42,11 @@ public class StayInfoManagerImpl implements StayInfoManager {
     @Override
     public void addStayInfo(Integer roomNumber, StayInfo stayInfo) {
         stayInfoStorage.addStayInfo(roomNumber, stayInfo);
+    }
+
+    @Override
+    public void setStayInfo(Map<Integer, StayInfo> infoStorage) {
+        stayInfoStorage.setStayInfo(infoStorage);
     }
 
     @Override
@@ -107,6 +120,17 @@ public class StayInfoManagerImpl implements StayInfoManager {
     }
 
     @Override
+    public double getBillForRoomGuest(Guest guest, Room room) {
+        Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
+        StayInfo stayInfo = infoStorage.get(room.getRoomNumber());
+        Period period = Period.between(stayInfo.getCheckInDate(),
+                stayInfo.getCheckOutDate());
+        int days = period.getDays();
+        double payment = room.getPrice() * days;
+        return payment;
+    }
+
+    @Override
     public double getBillServiceOneGuest(Guest guest) {
         Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
         double totalBill = 0.0;
@@ -131,6 +155,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
         if (room.getStatus() == RoomStatus.EMPTY) {
             RoomHistory newRoomHistory = new RoomHistory();
 
+            newRoomHistory.setId(RandomNumber.getRandomID());
             newRoomHistory.setGuest(guest);
             newRoomHistory.setRoom(room);
             newRoomHistory.setCheckInDate(checkInDate);
@@ -140,6 +165,7 @@ public class StayInfoManagerImpl implements StayInfoManager {
             addStayInfo(room.getRoomNumber(), new StayInfo(guest, checkInDate, checkOutDate));
             roomHistoryManager.addHistory(newRoomHistory);
             roomManager.changeRoomStatus(room, RoomStatus.OCCUPIED);
+            RoomHistoryExporter.exportOneRoomsHistory(newRoomHistory);
         } else {
             System.out.println("Заселить в комнату " + room.getRoomNumber() + " не представляется возможным. "
                     + "Статус комнаты = " + room.getStatus());
@@ -148,14 +174,58 @@ public class StayInfoManagerImpl implements StayInfoManager {
 
     @Override
     public void checkOutGuestFromRoom(Guest guest, Room room) {
+
         if (containsGuestInTheRoom(guest, room)) {
+            RoomHistory roomHistory = new RoomHistory();
             if (room.getStatus() == RoomStatus.OCCUPIED) {
                 deleteStayInfo(room.getRoomNumber());
                 roomManager.changeRoomStatus(room, RoomStatus.EMPTY);
+                roomHistory = roomHistoryManager.getRoomHistoryByGuestAndRoom(guest, room);
+                roomHistory.setId(RandomNumber.getRandomID());
+                roomHistory.setStatus(RoomHistoryStatus.CHECKOUT);
+                roomHistoryManager.addHistory(roomHistory);
+                RoomHistoryExporter.exportOneRoomsHistory(roomHistory);
             }
         } else {
             System.out.println("В комнате " + room.getRoomNumber() + " нет посетителей");
         }
+    }
+
+
+    @Override
+    public boolean checkStayInfIDExists(int stayInfoId) {
+        return stayInfoStorage.getInfoStorage().values().stream()
+                .anyMatch(stayInfo -> stayInfo.getId() == stayInfoId);
+    }
+
+
+    @Override
+    public List<Service> getListStayInfoOneGuest(Guest guest) {
+        List<Service> srvicesList = new ArrayList<>();
+        Map<Integer, StayInfo> infoStorage = stayInfoStorage.getInfoStorage();
+
+        for (StayInfo stayInfo : infoStorage.values()) {
+            if (stayInfo.getGuest().getLastName().equals(guest.getLastName())) {
+                srvicesList = stayInfo.getGuest().getServices();
+            }
+        }
+        return srvicesList;
+    }
+
+
+    @Override
+    public double getBillServiceByGuest(Guest guest) {
+        List<Service> srvicesList = getListStayInfoOneGuest(guest);
+        double allPrice = 0.0;
+        for (Service service : srvicesList) {
+            allPrice += service.getPrice();
+        }
+        return allPrice;
+    }
+
+    @Override
+    public void exportStayInfoToFileCSV() {
+        StayInfoExporter.exportStayInfo(stayInfoStorage.getInfoStorage());
     }
 }
 

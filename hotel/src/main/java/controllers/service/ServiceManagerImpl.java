@@ -1,7 +1,9 @@
 package controllers.service;
 
+import csv_utils.ServiceImportExport;
 import enums.ServiceType;
 import models.*;
+import storages.service.ServicesStorage;
 import storages.service.ServicesStorageImpl;
 
 import java.util.Comparator;
@@ -10,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ServiceManagerImpl implements ServiceManager {
 
-    ServicesStorageImpl servicesStorage = ServicesStorageImpl.getInstance();
+    ServicesStorage servicesStorage = ServicesStorageImpl.getInstance();
 
     private static ServiceManagerImpl instance;
 
@@ -27,6 +29,11 @@ public class ServiceManagerImpl implements ServiceManager {
     @Override
     public void addService(Service service) {
         servicesStorage.addService(service);
+    }
+
+    @Override
+    public void setServices(List<Service> services) {
+        servicesStorage.setServices(services);
     }
 
     @Override
@@ -51,6 +58,7 @@ public class ServiceManagerImpl implements ServiceManager {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<Service> getListServicesSortByPriceOneGuest(List<Service> serviceList) {
 
         System.out.println("serviceList: " + serviceList);
@@ -75,8 +83,39 @@ public class ServiceManagerImpl implements ServiceManager {
                 .orElse(null);
     }
 
+
+    @Override
+    public Service getServiceById(int id) {
+        return servicesStorage.getServices().stream()
+                .filter(service -> (service.getId() == id))
+                .findFirst()
+                .orElse(null);
+    }
+
     @Override
     public void deleteService(Service service) {
         servicesStorage.deleteService(service);
+    }
+
+    @Override
+    public boolean checkServiceIDExists(int serviceId) {
+        return servicesStorage.getServices().stream()
+                .anyMatch(service -> service.getId() == serviceId);
+    }
+
+    @Override
+    public boolean existsServices() {
+        List<Service> services = servicesStorage.getServices();
+        return !services.isEmpty();
+    }
+
+    @Override
+    public void exportServicesToFileCSV() {
+        ServiceImportExport.exportServices(servicesStorage.getServices());
+    }
+
+    @Override
+    public void importCSVFilesToServices() {
+        servicesStorage.setServices(ServiceImportExport.importServices());
     }
 }

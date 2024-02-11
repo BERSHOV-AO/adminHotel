@@ -1,25 +1,28 @@
 package action.sorted.guest;
 
 import action.api.IAction;
+import controllers.guest.GuestManager;
 import controllers.guest.GuestManagerImpl;
+import controllers.service.ServiceManager;
 import controllers.service.ServiceManagerImpl;
-import utils.InputReader;
-
-import java.util.Scanner;
+import utils.ExistsEntity;
 
 public class GuestSortServicesByPriceActionImpl implements IAction {
 
     @Override
     public void execute() {
-        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
-        ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
+        GuestManager guestManager = GuestManagerImpl.getInstance();
+        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
 
-        Scanner scanner = new Scanner(System.in);
+        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
+            return;
+        }
         System.out.println("-------All Guests-------");
         guestManager.getAllGuests().stream().forEach(System.out::println);
-        String lastName = InputReader.getStringInput(scanner, "Введите имя посетителя : ");
-        System.out.println("У посетителя с именем " + lastName + " сортированные сервисы по цене: " + "\n");
+        int guestId = ExistsEntity.getExistsGuestID(guestManager);
+        System.out.println("У посетителя с именем " + guestManager.getGuestById(guestId).getLastName() +
+                " сортированные сервисы по цене: " + "\n");
         serviceManager.getListServicesSortByPriceOneGuest(guestManager
-                .getGuestServices(guestManager.getGuestByName(lastName)));
+                .getGuestServices(guestManager.getGuestById(guestId)));
     }
 }

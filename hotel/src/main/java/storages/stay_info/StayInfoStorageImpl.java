@@ -35,4 +35,9 @@ public class StayInfoStorageImpl implements StayInfoStorage {
     public Map<Integer, StayInfo> getInfoStorage() {
         return infoStorage;
     }
+
+    @Override
+    public void setStayInfo(Map<Integer, StayInfo> infoStorage) {
+        this.infoStorage = infoStorage;
+    }
 }

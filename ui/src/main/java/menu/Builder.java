@@ -2,16 +2,15 @@ package menu;
 
 import action.guest.*;
 import action.room.*;
+import action.service.*;
 import action.sorted.room.*;
 
-import action.service.AddServiceActionImpl;
-import action.service.ChangeServiceOnPriceActionImpl;
-import action.service.DeleteServiceActionImpl;
-import action.service.PrintServiceActionImpl;
 import action.sorted.guest.GuestSortServicesByPriceActionImpl;
 import action.sorted.guest.GuestsSortByNameActionImpl;
 import action.sorted.service.ServicesSortByNameActionImpl;
 import action.sorted.service.ServicesSortByPriceActionImpl;
+import action.stayInfo.ExportStayInfoActionImpl;
+import action.stayInfo.PrintStayInfoActionImpl;
 import controllers.guest.GuestManagerImpl;
 import controllers.room.RoomManagerImpl;
 import controllers.room_history.RoomHistoryManagerImpl;
@@ -43,6 +42,7 @@ public class Builder {
         roomMenu.addMenuItem(new MenuItem("Add a Room", roomMenu, new AddRoomActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Print the Rooms", roomMenu, new PrintRoomsActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Print empty Rooms", roomMenu, new PrintEmptyRoomsActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Change Room Price", roomMenu, new ChangeRoomPriceActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Change the Room's status", roomMenu, new ChangeStatusActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Print the Room details", roomMenu, new PrintDetailsActionImpl()));
         // Room sort
@@ -56,6 +56,10 @@ public class Builder {
                 new RoomsSortEmptyByPriceActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Sort the empty Rooms by stars", roomMenu,
                 new RoomsSortEmptyByStarsActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Export rooms to file CSV", roomMenu,
+                new ExportRoomsActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Import CSV files to Storage Rooms", roomMenu,
+                new ImportRoomsActionImpl()));
         roomMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Service
@@ -69,6 +73,10 @@ public class Builder {
                 new ServicesSortByNameActionImpl()));
         serviceMenu.addMenuItem(new MenuItem("Sort the Services by price", serviceMenu,
                 new ServicesSortByPriceActionImpl()));
+        serviceMenu.addMenuItem(new MenuItem("Export services to file CSV", serviceMenu,
+                new ExportServicesActionImpl()));
+        serviceMenu.addMenuItem(new MenuItem("Import CSV files to Storage Services", serviceMenu,
+                new ImportServicesActionImpl()));
         serviceMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Guest
@@ -88,6 +96,14 @@ public class Builder {
                 new GuestsSortByNameActionImpl()));
         guestMenu.addMenuItem(new MenuItem("Sort the Guest's Services by price", guestMenu,
                 new GuestSortServicesByPriceActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Export guests to file CSV", guestMenu, new ExportGuestsActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Import CSV files to Storage Guests", guestMenu,
+                new ImportGuestsActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Export StayInfo to File CSV", guestMenu,
+                new ExportStayInfoActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Print StayInfo", guestMenu,
+                new PrintStayInfoActionImpl()));
+
         guestMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Main Menu

@@ -10,4 +10,6 @@ public interface StayInfoStorage {
     public void deleteStayInfo(Integer roomNumber);
 
     public Map<Integer, StayInfo> getInfoStorage();
+
+    public void setStayInfo(Map<Integer, StayInfo> infoStorage);
 }

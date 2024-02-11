@@ -1,23 +1,24 @@
 package action.guest;
 
 import action.api.IAction;
+import controllers.guest.GuestManager;
 import controllers.guest.GuestManagerImpl;
-import utils.InputReader;
-
-import java.util.Scanner;
+import utils.ExistsEntity;
 
 public class DeleteGuestActionImpl implements IAction {
     @Override
     public void execute() {
-        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
+        GuestManager guestManager = GuestManagerImpl.getInstance();
 
-        Scanner scanner = new Scanner(System.in);
+        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
+            return;
+        }
+
         System.out.println("-------All Guests-------");
         guestManager.getAllGuests().stream().forEach(System.out::println);
         try {
-            String lastName = InputReader.getStringInput(scanner,
-                    "Введите имя посетителя, для удаления: ");
-            guestManager.deleteGuest(guestManager.getGuestByName(lastName));
+            int guestId = ExistsEntity.getExistsGuestID(guestManager);
+            guestManager.deleteGuest(guestManager.getGuestById(guestId));
         } catch (Exception e) {
             System.out.println("Посетитель не удален " + e.getMessage());
         }

@@ -1,6 +1,7 @@
 package action.guest;
 
 import action.api.IAction;
+import controllers.guest.GuestManager;
 import controllers.guest.GuestManagerImpl;
 import models.Guest;
 import utils.InputReader;
@@ -14,8 +15,7 @@ public class AddGuestActionImpl implements IAction {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
-
+            GuestManager guestManager = GuestManagerImpl.getInstance();
             String lastName = InputReader.getStringInput(scanner, "Введите имя посетителя, для добавления..");
             guestManager.addOnGuest(new Guest(lastName));
 

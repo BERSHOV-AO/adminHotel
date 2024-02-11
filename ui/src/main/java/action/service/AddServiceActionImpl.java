@@ -1,6 +1,7 @@
 package action.service;
 
 import action.api.IAction;
+import controllers.service.ServiceManager;
 import controllers.service.ServiceManagerImpl;
 import enums.ServiceType;
 import models.Service;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 public class AddServiceActionImpl implements IAction {
     @Override
     public void execute() {
-        ServiceManagerImpl serviceManager = ServiceManagerImpl.getInstance();
+        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
 
         System.out.println("-----Регистрация сервисов------");
         Scanner scanner = new Scanner(System.in);
@@ -23,7 +24,7 @@ public class AddServiceActionImpl implements IAction {
             serviceManager.addService(new Service(serviceType, servicePrice));
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Не удалось добавить услугу. Введите действительные параметры!" + e.getMessage());
         }
     }
 }

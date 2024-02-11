@@ -1,22 +1,24 @@
 package action.room;
 
 import action.api.IAction;
+import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
-import utils.InputReader;
-
-import java.util.Scanner;
+import utils.ExistsEntity;
 
 public class PrintDetailsActionImpl implements IAction {
     @Override
     public void execute() {
-        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+        RoomManager roomManager = RoomManagerImpl.getInstance();
+        if (ExistsEntity.noExistRooms(roomManager.getAllRooms())) {
+            return;
+        }
 
-        Scanner scanner = new Scanner(System.in);
         System.out.println("-------All Rooms-------");
         roomManager.getAllRooms().stream().forEach(System.out::println);
+
         try {
-            Integer roomNumber = InputReader.getIntegerInput(scanner, "Введите номер комнаты: ");
-            roomManager.getRoomDetails(roomManager.getRoomByNumber(roomNumber));
+            int roomId = ExistsEntity.getExistsRoomID(roomManager);
+            System.out.println(roomManager.getRoomDetails(roomManager.getRoomById(roomId)));
         } catch (Exception e) {
             System.out.println("Нет возможности показать детали номера " + e.getMessage());
         }

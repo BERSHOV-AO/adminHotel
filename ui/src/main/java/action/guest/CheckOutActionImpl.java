@@ -1,30 +1,32 @@
 package action.guest;
 
 import action.api.IAction;
+import controllers.guest.GuestManager;
 import controllers.guest.GuestManagerImpl;
+import controllers.room.RoomManager;
 import controllers.room.RoomManagerImpl;
+import controllers.stay_info.StayInfoManager;
 import controllers.stay_info.StayInfoManagerImpl;
-import utils.InputReader;
+import utils.ExistsEntity;
 import utils.Printer;
-
-import java.util.Scanner;
 
 public class CheckOutActionImpl implements IAction {
     @Override
     public void execute() {
-        StayInfoManagerImpl stayInfoManager = StayInfoManagerImpl.getInstance();
-        GuestManagerImpl guestManager = GuestManagerImpl.getInstance();
-        RoomManagerImpl roomManager = RoomManagerImpl.getInstance();
+        StayInfoManager stayInfoManager = StayInfoManagerImpl.getInstance();
+        GuestManager guestManager = GuestManagerImpl.getInstance();
+        RoomManager roomManager = RoomManagerImpl.getInstance();
+        if (ExistsEntity.noExistStayInfo(stayInfoManager.getMapStayInfo())) {
+            return;
+        }
 
-        Scanner scanner = new Scanner(System.in);
         Printer.printStayInfo(stayInfoManager.getMapStayInfo());
-        String lastName = InputReader.getStringInput(scanner,
-                "Введите имя посетителя, чтобы выселить ");
-        Integer roomNumber = InputReader.getIntegerInput(scanner,
-                "Введите номер комнаты: ");
+        int guestId = ExistsEntity.getExistsGuestID(guestManager);
+        int roomId = ExistsEntity.getExistsRoomID(roomManager);
+
         try {
-            stayInfoManager.checkOutGuestFromRoom(guestManager.getGuestByName(lastName),
-                    roomManager.getRoomByNumber(roomNumber));
+            stayInfoManager.checkOutGuestFromRoom(guestManager.getGuestById(guestId),
+                    roomManager.getRoomByNumber(roomId));
         } catch (Exception e) {
             System.out.println("Некорректный ввод данных " + e.getMessage());
         }

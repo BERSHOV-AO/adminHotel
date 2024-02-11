@@ -9,6 +9,8 @@ public interface RoomManager {
 
     public void addRoom(Room room);
 
+    public void setRooms(List<Room> rooms);
+
     public List<Room> getAllRooms();
 
     public void changeRoomStatus(Room room, RoomStatus status);
@@ -30,4 +32,14 @@ public interface RoomManager {
     public Room getRoomByNumber(Integer roomNumber);
 
     public List<Room> getEmptyRooms();
+
+    public Room getRoomById(int id);
+
+    public boolean checkRoomNumberExists(int roomNumber);
+
+    public boolean checkRoomIDExists(int roomId);
+
+    public void exportRoomsToFileCSV();
+
+    public void importCSVFilesToRooms();
 }

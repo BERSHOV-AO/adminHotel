@@ -1,7 +1,9 @@
 package controllers.room;
 
+import csv_utils.RoomImportExport;
 import enums.RoomStatus;
 import models.Room;
+import storages.room.RoomsStorage;
 import storages.room.RoomsStorageImpl;
 
 import java.util.Comparator;
@@ -10,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class RoomManagerImpl implements RoomManager {
 
-    RoomsStorageImpl roomsStorage = RoomsStorageImpl.getInstance();
+    RoomsStorage roomsStorage = RoomsStorageImpl.getInstance();
 
     private static RoomManagerImpl instance;
 
@@ -27,6 +29,11 @@ public class RoomManagerImpl implements RoomManager {
     @Override
     public void addRoom(Room room) {
         roomsStorage.addRoom(room);
+    }
+
+    @Override
+    public void setRooms(List<Room> rooms) {
+        roomsStorage.setRooms(rooms);
     }
 
     @Override
@@ -114,6 +121,36 @@ public class RoomManagerImpl implements RoomManager {
                 .filter(room -> room.getRoomNumber().equals(roomNumber))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public Room getRoomById(int id) {
+        return roomsStorage.getRooms().stream()
+                .filter(room -> (room.getId() == id))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public boolean checkRoomNumberExists(int roomNumber) {
+        return roomsStorage.getRooms().stream()
+                .anyMatch(room -> room.getRoomNumber().equals(roomNumber));
+    }
+
+    @Override
+    public boolean checkRoomIDExists(int roomId) {
+        return roomsStorage.getRooms().stream()
+                .anyMatch(room -> room.getId() == roomId);
+    }
+
+    @Override
+    public void exportRoomsToFileCSV() {
+        RoomImportExport.exportRooms(roomsStorage.getRooms());
+    }
+
+    @Override
+    public void importCSVFilesToRooms() {
+        roomsStorage.setRooms(RoomImportExport.importRooms());
     }
 }
 
