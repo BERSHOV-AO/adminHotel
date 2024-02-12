@@ -21,10 +21,10 @@ public class AddGuestActionImpl implements IAction {
             GuestManager guestManager = GuestManagerImpl.getInstance();
             String lastName = InputReader.getStringInput(scanner, "Введите имя посетителя, для добавления..");
             guestManager.addOnGuest(new Guest(lastName));
-
+            logger.info(String.format("Добавлен посетитель: %s", lastName));
         } catch (Exception e) {
             System.out.println("Не удалось добавить посетителя. Введите допустимые параметры!" + e.getMessage());
-            logger.error("Не удалось добавить посетителя. Введите допустимые параметры!", e);
+            logger.warn("Не удалось добавить посетителя. Введите допустимые параметры!", e);
         }
     }
 }

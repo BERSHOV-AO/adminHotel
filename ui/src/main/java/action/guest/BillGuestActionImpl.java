@@ -17,6 +17,7 @@ import java.util.Locale;
 public class BillGuestActionImpl implements IAction {
 
     final static Logger logger = Logger.getLogger(BillGuestActionImpl.class);
+
     @Override
     public void execute() {
         try {
@@ -53,11 +54,14 @@ public class BillGuestActionImpl implements IAction {
                 str.append("Гость " + guestManager.getGuestById(guestId).getLastName() +
                         " сервисами не пользовался!" + "\n");
                 str.append("********************************");
+                logger.info(String.format("Гость с id: %d, номер с id: %d, счет за проживание равен: %.2f руб.",
+                        guestId, roomId, stayInfoManager.getBillForRoomGuest(
+                                guestManager.getGuestById(guestId), roomManager.getRoomById(roomId))));
             }
             System.out.println(str);
         } catch (Exception e) {
             System.out.println("Нет такого посетителя или счета" + e.getMessage());
-            logger.error("Нет такого посетителя или счета ", e);
+            logger.warn("Нет такого посетителя или счета ", e);
         }
     }
 }

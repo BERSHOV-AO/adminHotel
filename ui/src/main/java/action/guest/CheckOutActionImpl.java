@@ -14,6 +14,7 @@ import utils.Printer;
 public class CheckOutActionImpl implements IAction {
 
     final static Logger logger = Logger.getLogger(CheckOutActionImpl.class);
+
     @Override
     public void execute() {
         StayInfoManager stayInfoManager = StayInfoManagerImpl.getInstance();
@@ -30,9 +31,10 @@ public class CheckOutActionImpl implements IAction {
         try {
             stayInfoManager.checkOutGuestFromRoom(guestManager.getGuestById(guestId),
                     roomManager.getRoomByNumber(roomId));
+            logger.info(String.format("Выселение гостя c id: %d, из номера с id: %d", guestId, roomId));
         } catch (Exception e) {
             System.out.println("Некорректный ввод данных " + e.getMessage());
-            logger.error("Не удалось выселить посетителя ", e);
+            logger.warn("Не удалось выселить посетителя ", e);
         }
     }
 }

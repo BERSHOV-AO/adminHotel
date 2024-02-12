@@ -4,11 +4,15 @@ import action.api.IAction;
 import controllers.guest.GuestManager;
 import controllers.guest.GuestManagerImpl;
 import models.Service;
+import org.apache.log4j.Logger;
 import utils.ExistsEntity;
 
 import java.util.List;
 
 public class PrintServicesOneGuestActionImpl implements IAction {
+
+    final static Logger logger = Logger.getLogger(PrintServicesOneGuestActionImpl.class);
+
     @Override
     public void execute() {
         GuestManager guestManager = GuestManagerImpl.getInstance();
@@ -30,7 +34,8 @@ public class PrintServicesOneGuestActionImpl implements IAction {
             str.append(listService.toString());
             System.out.println(str);
         } catch (Exception e) {
-            System.out.println("Не возможности распечатать сервис " + e.getMessage());
+            System.out.println("Нет возможности распечатать сервис " + e.getMessage());
+            logger.warn("Нет возможности распечатать сервис ", e);
         }
     }
 }

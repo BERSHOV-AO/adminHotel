@@ -19,7 +19,7 @@ public class ImportGuestsActionImpl implements IAction {
             logger.info("Посетители успешно импортированы!");
         } catch (Exception e) {
             System.out.println("Посетители не импортированы!" + e.getMessage());
-            logger.error("Посетители не импортированы!" + e.getMessage());
+            logger.warn("Посетители не импортированы!" + e.getMessage());
         }
     }
 }

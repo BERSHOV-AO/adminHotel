@@ -1,1 +1,53 @@
 2024-02-11 15:47:54 INFO  ImportGuestsActionImpl:19 - Посетители успешно импортированы!
+2024-02-12 08:43:05 INFO  ImportGuestsActionImpl:19 - Посетители успешно импортированы!
+2024-02-12 08:43:42 INFO  ExportGuestsActionImpl:22 - Посетители успешно экспортированы!
+2024-02-12 08:44:54 INFO  ExportGuestsActionImpl:22 - Посетители успешно экспортированы!
+2024-02-12 09:09:46 ERROR ChangeRoomPriceActionImpl:37 - Не удалось изменить цену номера 
+java.util.IllegalFormatConversionException: d != java.lang.Double
+	at java.base/java.util.Formatter$FormatSpecifier.failConversion(Formatter.java:4442)
+	at java.base/java.util.Formatter$FormatSpecifier.printInteger(Formatter.java:2963)
+	at java.base/java.util.Formatter$FormatSpecifier.print(Formatter.java:2918)
+	at java.base/java.util.Formatter.format(Formatter.java:2689)
+	at java.base/java.util.Formatter.format(Formatter.java:2625)
+	at java.base/java.lang.String.format(String.java:4147)
+	at action.room.ChangeRoomPriceActionImpl.execute(ChangeRoomPriceActionImpl.java:34)
+	at menu.MenuItem.act(MenuItem.java:27)
+	at menu.Navigator.navigate(Navigator.java:28)
+	at menu.MenuController.run(MenuController.java:29)
+	at test.TestMenu.main(TestMenu.java:9)
+2024-02-12 09:16:55 INFO  ChangeRoomPriceActionImpl:34 - Стоимость номера с id 4, изменена на: 7777,00
+2024-02-12 09:22:31 WARN  ChangeStatusActionImpl:38 - Не удалось изменить статус номера 
+java.util.MissingFormatArgumentException: Format specifier '%d'
+	at java.base/java.util.Formatter.format(Formatter.java:2688)
+	at java.base/java.util.Formatter.format(Formatter.java:2625)
+	at java.base/java.lang.String.format(String.java:4147)
+	at action.room.ChangeStatusActionImpl.execute(ChangeStatusActionImpl.java:35)
+	at menu.MenuItem.act(MenuItem.java:27)
+	at menu.Navigator.navigate(Navigator.java:28)
+	at menu.MenuController.run(MenuController.java:29)
+	at test.TestMenu.main(TestMenu.java:9)
+2024-02-12 09:23:26 INFO  ChangeStatusActionImpl:35 - Статус номера с id 3, изменена на: SERVICE
+2024-02-12 09:28:12 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
+2024-02-12 09:53:10 INFO  AddRoomActionImpl:44 - Добавлена комната, номер: 57, количество звезд: 5, цена: 4700,00, вместимость: 3, статус: EMPTY
+2024-02-12 09:55:49 INFO  AddGuestActionImpl:24 - Добавлен посетитель: Adelina
+2024-02-12 10:03:11 INFO  AddServiceActionImpl:30 - Добавлен сервис: BREAKFAST, цена: 570,00
+2024-02-12 10:10:22 INFO  ChangeServiceOnPriceActionImpl:31 - Стоимость сервиса с id 401563, изменена на: 557,00
+2024-02-12 10:10:47 INFO  ChangeServiceOnPriceActionImpl:31 - Стоимость сервиса с id 401563, изменена на: 575,00
+2024-02-12 10:14:23 INFO  ChangeServiceOnPriceActionImpl:31 - Стоимость сервиса с id 187245, изменена на: 555,00
+2024-02-12 10:21:24 INFO  DeleteServiceActionImpl:26 - Удален сервис с id: 418316
+2024-02-12 10:24:58 INFO  ImportServicesActionImpl:19 - Услуги(Сервис) успешно импортированы!
+2024-02-12 10:33:40 INFO  ImportServicesActionImpl:19 - Услуги(Сервис) успешно импортированы!
+2024-02-12 10:33:50 INFO  ImportGuestsActionImpl:19 - Посетители успешно импортированы!
+2024-02-12 10:34:09 INFO  AddServicesToGuestActionImpl:36 - Посетителю с id: 437147 добавлена услуга с id: 187245 
+2024-02-12 10:40:28 INFO  ImportGuestsActionImpl:19 - Посетители успешно импортированы!
+2024-02-12 10:40:33 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
+2024-02-12 10:40:48 INFO  ImportServicesActionImpl:19 - Услуги(Сервис) успешно импортированы!
+2024-02-12 10:41:09 INFO  AddServicesToGuestActionImpl:36 - Посетителю с id: 437147 добавлена услуга с id: 736713 
+2024-02-12 10:41:57 INFO  CheckInActionImpl:51 - Заселение гостя с id: 437147, в номер с id: 1, дата заселения 2024-02-12, дата выселения 2024-02-17
+2024-02-12 10:49:36 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
+2024-02-12 10:49:43 INFO  ImportGuestsActionImpl:19 - Посетители успешно импортированы!
+2024-02-12 10:50:18 INFO  CheckInActionImpl:51 - Заселение гостя с id: 170817, в номер с id: 4, дата заселения 2024-02-14, дата выселения 2024-02-22
+2024-02-12 10:50:52 INFO  BillGuestActionImpl:57 - Гость с id: 170817, номер с id: 4, счет за проживание равен: 48800,00 руб.
+2024-02-12 10:52:35 INFO  CheckOutActionImpl:34 - Выселение гостя c id: 170817, из номера с id: 4
+2024-02-12 10:54:59 INFO  ImportGuestsActionImpl:19 - Посетители успешно импортированы!
+2024-02-12 10:55:10 INFO  DeleteGuestActionImpl:25 - Удален посетитель с id: 437147 

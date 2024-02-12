@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class CheckInActionImpl implements IAction {
 
     final static Logger logger = Logger.getLogger(CheckInActionImpl.class);
+
     @Override
     public void execute() {
 
@@ -47,9 +48,11 @@ public class CheckInActionImpl implements IAction {
         try {
             stayInfoManager.checkInGuestInRoom(guestManager.getGuestById(guestId),
                     roomManager.getRoomById(roomId), inDate, outDate);
+            logger.info(String.format("Заселение гостя с id: %d, в номер с id: %d, дата заселения %s, дата выселения %s"
+                    , guestId, roomId, inDate.toString(), outDate.toString()));
         } catch (Exception e) {
             System.out.println("Не удалось зарегистрировать посетителя! " + e.getMessage());
-            logger.error("Не удалось зарегистрировать посетителя! ", e);
+            logger.warn("Не удалось зарегистрировать посетителя! ", e);
         }
     }
 }

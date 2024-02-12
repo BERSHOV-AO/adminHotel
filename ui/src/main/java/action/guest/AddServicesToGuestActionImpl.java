@@ -33,9 +33,10 @@ public class AddServicesToGuestActionImpl implements IAction {
 
             guestManager.addServicesToGuest(guestManager.getGuestById(guestId),
                     serviceManager.getServiceById(serviceId));
+            logger.info(String.format("Посетителю с id: %d добавлена услуга с id: %d ", guestId, serviceId));
         } catch (Exception e) {
             System.out.println("Не удалось добавить сервис посетителю " + e.getMessage());
-            logger.error("Не удалось добавить сервис посетителю ", e);
+            logger.warn("Не удалось добавить сервис посетителю ", e);
         }
     }
 }

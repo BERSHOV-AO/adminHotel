@@ -22,9 +22,10 @@ public class DeleteGuestActionImpl implements IAction {
         try {
             int guestId = ExistsEntity.getExistsGuestID(guestManager);
             guestManager.deleteGuest(guestManager.getGuestById(guestId));
+            logger.info(String.format("Удален посетитель с id: %d ", guestId));
         } catch (Exception e) {
             System.out.println("Не удалось удалить посетителя " + e.getMessage());
-            logger.error("Не удалось удалить посетителя ", e);
+            logger.warn("Не удалось удалить посетителя ", e);
         }
     }
 }

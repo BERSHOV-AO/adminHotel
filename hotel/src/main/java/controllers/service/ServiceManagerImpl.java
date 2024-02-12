@@ -46,9 +46,7 @@ public class ServiceManagerImpl implements ServiceManager {
         servicesStorage.getServices().stream()
                 .filter(r -> r.getServiceType() == service.getServiceType())
                 .findFirst()
-                .ifPresent(r -> {
-                    r.setPrice(price);
-                });
+                .ifPresent(r -> r.setPrice(price));
     }
 
     @Override

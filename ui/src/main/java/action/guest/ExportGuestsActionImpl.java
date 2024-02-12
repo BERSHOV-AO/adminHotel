@@ -22,8 +22,7 @@ public class ExportGuestsActionImpl implements IAction {
             logger.info("Посетители успешно экспортированы!");
         } catch (Exception e) {
             System.out.println("Посетители не экспортированы!" + e.getMessage());
-            logger.error("Посетители не экспортированы!", e);
-            e.printStackTrace();
+            logger.warn("Посетители не экспортированы!", e);
         }
     }
 }
