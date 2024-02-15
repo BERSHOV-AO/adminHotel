@@ -1,7 +1,7 @@
 package utils;
 
-import models.StayInfo;
-import storages.stay_info.StayInfoStorageImpl;
+
+import ru.senla.entities.StayInfo;
 
 import java.util.Map;
 

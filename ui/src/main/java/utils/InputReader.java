@@ -1,7 +1,6 @@
 package utils;
-
-import enums.RoomStatus;
-import enums.ServiceType;
+import ru.senla.enums.RoomStatus;
+import ru.senla.enums.ServiceType;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

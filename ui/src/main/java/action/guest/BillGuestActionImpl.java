@@ -1,13 +1,15 @@
 package action.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
-import controllers.room.RoomManager;
-import controllers.room.RoomManagerImpl;
-import controllers.stay_info.StayInfoManager;
-import controllers.stay_info.StayInfoManagerImpl;
 import org.apache.log4j.Logger;
+import ru.senla.repository.guest.GuestsRepositoryImpl;
+import ru.senla.repository.guest.IGuestsRepository;
+import ru.senla.repository.room.IRoomsRepository;
+import ru.senla.repository.room.RoomsRepositoryImpl;
+import ru.senla.repository.service.IServicesRepository;
+import ru.senla.repository.service.ServicesRepositoryImpl;
+import ru.senla.repository.stay_info.IStayInfoRepository;
+import ru.senla.repository.stay_info.StayInfoRepositoryImpl;
 import utils.ExistsEntity;
 import utils.Printer;
 
@@ -17,46 +19,46 @@ import java.util.Locale;
 public class BillGuestActionImpl implements IAction {
 
     final static Logger logger = Logger.getLogger(BillGuestActionImpl.class);
+    private IStayInfoRepository stayInfoRepository = StayInfoRepositoryImpl.getInstance();
+    private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
+    private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
 
     @Override
     public void execute() {
         try {
-            StayInfoManager stayInfoManager = StayInfoManagerImpl.getInstance();
-            GuestManager guestManager = GuestManagerImpl.getInstance();
-            RoomManager roomManager = RoomManagerImpl.getInstance();
-
-            if (ExistsEntity.noExistStayInfo(stayInfoManager.getMapStayInfo())) {
+            if (ExistsEntity.noExistStayInfo(stayInfoRepository.getMapStayInfo())) {
                 return;
             }
+
             Locale ruLocale = new Locale("ru", "RU");
             NumberFormat rubFormat = NumberFormat.getCurrencyInstance(ruLocale);
 
-            Printer.printStayInfo(stayInfoManager.getMapStayInfo());
-            int guestId = ExistsEntity.getExistsGuestID(guestManager);
-            int roomId = ExistsEntity.getExistsRoomID(roomManager);
+            Printer.printStayInfo(stayInfoRepository.getMapStayInfo());
+            int guestId = ExistsEntity.getExistsGuestID(guestsRepository);
+            int roomId = ExistsEntity.getExistsRoomID(roomsRepository);
 
             StringBuilder str = new StringBuilder();
 
             str.append("************--BILL--************" + "\n");
-            str.append("Имя гостя: " + guestManager.getGuestById(guestId).getLastName() + "\n");
-            str.append("Номер комнаты: " + roomManager.getRoomById(roomId).getRoomNumber() + "\n");
+            str.append("Имя гостя: " + guestsRepository.getGuestById(guestId).getLastName() + "\n");
+            str.append("Номер комнаты: " + roomsRepository.getRoomById(roomId).getRoomNumber() + "\n");
             str.append("Счет за номер : ");
-            str.append(rubFormat.format(stayInfoManager.getBillForRoomGuest(guestManager.getGuestById(guestId),
-                    roomManager.getRoomById(roomId))) + "\n");
+            str.append(rubFormat.format(stayInfoRepository.getBillForRoomGuest(guestsRepository.getGuestById(guestId),
+                    roomsRepository.getRoomById(roomId))) + "\n");
             str.append("********************************" + "\n");
 
-            if (stayInfoManager.getListStayInfoOneGuest(guestManager.getGuestById(guestId)) != null) {
+            if (stayInfoRepository.getListStayInfoOneGuest(guestsRepository.getGuestById(guestId)) != null) {
                 str.append("Счет за сервис : ");
-                str.append(rubFormat.format(stayInfoManager.getBillServiceByGuest(
-                        guestManager.getGuestById(guestId))) + "\n");
+                str.append(rubFormat.format(stayInfoRepository.getBillServiceByGuest(
+                        guestsRepository.getGuestById(guestId))) + "\n");
                 str.append("********************************" + "\n");
             } else {
-                str.append("Гость " + guestManager.getGuestById(guestId).getLastName() +
+                str.append("Гость " + guestsRepository.getGuestById(guestId).getLastName() +
                         " сервисами не пользовался!" + "\n");
                 str.append("********************************");
                 logger.info(String.format("Гость с id: %d, номер с id: %d, счет за проживание равен: %.2f руб.",
-                        guestId, roomId, stayInfoManager.getBillForRoomGuest(
-                                guestManager.getGuestById(guestId), roomManager.getRoomById(roomId))));
+                        guestId, roomId, stayInfoRepository.getBillForRoomGuest(
+                                guestsRepository.getGuestById(guestId), roomsRepository.getRoomById(roomId))));
             }
             System.out.println(str);
         } catch (Exception e) {

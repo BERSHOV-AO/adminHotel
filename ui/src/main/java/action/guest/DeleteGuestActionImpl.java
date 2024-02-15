@@ -1,27 +1,26 @@
 package action.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
 import org.apache.log4j.Logger;
+import ru.senla.repository.guest.GuestsRepositoryImpl;
+import ru.senla.repository.guest.IGuestsRepository;
 import utils.ExistsEntity;
 
 public class DeleteGuestActionImpl implements IAction {
     final static Logger logger = Logger.getLogger(DeleteGuestActionImpl.class);
+    private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
 
     @Override
     public void execute() {
-        GuestManager guestManager = GuestManagerImpl.getInstance();
-
-        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
+        if (ExistsEntity.noExistGuests(guestsRepository.getAllGuests())) {
             return;
         }
 
         System.out.println("-------All Guests-------");
-        guestManager.getAllGuests().stream().forEach(System.out::println);
+        guestsRepository.getAllGuests().stream().forEach(System.out::println);
         try {
-            int guestId = ExistsEntity.getExistsGuestID(guestManager);
-            guestManager.deleteGuest(guestManager.getGuestById(guestId));
+            int guestId = ExistsEntity.getExistsGuestID(guestsRepository);
+            guestsRepository.deleteGuest(guestsRepository.getGuestById(guestId));
             logger.info(String.format("Удален посетитель с id: %d ", guestId));
         } catch (Exception e) {
             System.out.println("Не удалось удалить посетителя " + e.getMessage());

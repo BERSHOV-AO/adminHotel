@@ -11,11 +11,11 @@ import action.sorted.service.ServicesSortByNameActionImpl;
 import action.sorted.service.ServicesSortByPriceActionImpl;
 import action.stayInfo.ExportStayInfoActionImpl;
 import action.stayInfo.PrintStayInfoActionImpl;
-import controllers.guest.GuestManagerImpl;
-import controllers.room.RoomManagerImpl;
-import controllers.room_history.RoomHistoryManagerImpl;
-import controllers.service.ServiceManagerImpl;
-import controllers.stay_info.StayInfoManagerImpl;
+import ru.senla.repository.guest.GuestsRepositoryImpl;
+import ru.senla.repository.room.RoomsRepositoryImpl;
+import ru.senla.repository.room_history.RoomsHistoryRepositoryImpl;
+import ru.senla.repository.service.ServicesRepositoryImpl;
+import ru.senla.repository.stay_info.StayInfoRepositoryImpl;
 import utils.MenuTypes;
 
 public class Builder {
@@ -29,11 +29,11 @@ public class Builder {
     private Menu mainMenu = new Menu(main);
 
     public Builder() {
-        GuestManagerImpl.getInstance();
-        RoomManagerImpl.getInstance();
-        RoomHistoryManagerImpl.getInstance();
-        ServiceManagerImpl.getInstance();
-        StayInfoManagerImpl.getInstance();
+        GuestsRepositoryImpl.getInstance();
+        RoomsRepositoryImpl.getInstance();
+        RoomsHistoryRepositoryImpl.getInstance();
+        ServicesRepositoryImpl.getInstance();
+        StayInfoRepositoryImpl.getInstance();
     }
 
     public Menu buildMenu() {

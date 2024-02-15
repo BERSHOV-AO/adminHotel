@@ -11,6 +11,8 @@
     <modules>
         <module>hotel</module>
         <module>ui</module>
+        <module>data</module>
+        <module>service</module>
     </modules>
 
     <properties>

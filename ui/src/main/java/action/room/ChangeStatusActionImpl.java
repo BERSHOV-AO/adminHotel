@@ -1,22 +1,21 @@
 package action.room;
 
 import action.api.IAction;
-import controllers.room.RoomManager;
-import controllers.room.RoomManagerImpl;
-import enums.RoomStatus;
 import org.apache.log4j.Logger;
+import ru.senla.enums.RoomStatus;
+import ru.senla.repository.room.IRoomsRepository;
+import ru.senla.repository.room.RoomsRepositoryImpl;
 import utils.ExistsEntity;
 import utils.InputReader;
 
 import java.util.Scanner;
 
 public class ChangeStatusActionImpl implements IAction {
-
     final static Logger logger = Logger.getLogger(ChangeStatusActionImpl.class);
+    private IRoomsRepository roomManager = RoomsRepositoryImpl.getInstance();
 
     @Override
     public void execute() {
-        RoomManager roomManager = RoomManagerImpl.getInstance();
 
         if (ExistsEntity.noExistRooms(roomManager.getAllRooms())) {
             return;

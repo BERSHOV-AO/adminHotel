@@ -1,15 +1,15 @@
 package action.room;
 
 import action.api.IAction;
-import controllers.room.RoomManager;
-import controllers.room.RoomManagerImpl;
+import ru.senla.repository.room.IRoomsRepository;
+import ru.senla.repository.room.RoomsRepositoryImpl;
 import utils.ExistsEntity;
 
 public class PrintEmptyRoomsActionImpl implements IAction {
+    private IRoomsRepository roomManager = RoomsRepositoryImpl.getInstance();
     @Override
     public void execute() {
 
-        RoomManager roomManager = RoomManagerImpl.getInstance();
         if (ExistsEntity.noExistRooms(roomManager.getAllRooms())) {
             return;
         }

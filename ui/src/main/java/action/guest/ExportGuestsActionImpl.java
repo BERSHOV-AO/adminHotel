@@ -1,23 +1,23 @@
 package action.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
 import org.apache.log4j.Logger;
+import ru.senla.repository.guest.GuestsRepositoryImpl;
+import ru.senla.repository.guest.IGuestsRepository;
 import utils.ExistsEntity;
 
 public class ExportGuestsActionImpl implements IAction {
-
     final static Logger logger = Logger.getLogger(ExportGuestsActionImpl.class);
+    private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
 
     @Override
     public void execute() {
-        GuestManager guestManager = GuestManagerImpl.getInstance();
-        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
+
+        if (ExistsEntity.noExistGuests(guestsRepository.getAllGuests())) {
             return;
         }
         try {
-            guestManager.exportGuestsToFileCSV();
+            guestsRepository.exportGuestsToFileCSV();
             System.out.println("Посетители успешно экспортированы!");
             logger.info("Посетители успешно экспортированы!");
         } catch (Exception e) {

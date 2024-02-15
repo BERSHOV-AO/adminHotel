@@ -1,20 +1,19 @@
 package action.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
 import org.apache.log4j.Logger;
+import ru.senla.repository.guest.GuestsRepositoryImpl;
+import ru.senla.repository.guest.IGuestsRepository;
 
 public class ImportGuestsActionImpl implements IAction {
-
     final static Logger logger = Logger.getLogger(ImportGuestsActionImpl.class);
+    private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
 
     @Override
     public void execute() {
-        GuestManager guestManager = GuestManagerImpl.getInstance();
 
         try {
-            guestManager.importCSVFilesToGuests();
+            guestsRepository.importCSVFilesToGuests();
             System.out.println("Посетители успешно импортированы!");
             logger.info("Посетители успешно импортированы!");
         } catch (Exception e) {

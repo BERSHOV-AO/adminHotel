@@ -1,12 +1,13 @@
 package utils;
 
-import controllers.guest.GuestManager;
-import controllers.room.RoomManager;
-import controllers.service.ServiceManager;
-import models.Guest;
-import models.Room;
-import models.Service;
-import models.StayInfo;
+import ru.senla.entities.Guest;
+import ru.senla.entities.Room;
+import ru.senla.entities.Service;
+import ru.senla.entities.StayInfo;
+import ru.senla.repository.guest.GuestsRepositoryImpl;
+import ru.senla.repository.guest.IGuestsRepository;
+import ru.senla.repository.room.IRoomsRepository;
+import ru.senla.repository.service.IServicesRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -16,12 +17,12 @@ public class ExistsEntity {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int getExistsRoomID(RoomManager roomManager) {
+    public static int getExistsRoomID(IRoomsRepository roomsRepository) {
         int roomId;
         boolean roomExists;
         do {
             roomId = InputReader.getIntegerInput(scanner, "Введите id комнаты: ");
-            roomExists = roomManager.checkRoomIDExists(roomId);
+            roomExists = roomsRepository.checkRoomIDExists(roomId);
             if (!roomExists) {
                 System.out.println("Комнаты с id: " + roomId + " не существует! Введите корректный id!");
             }
@@ -29,12 +30,12 @@ public class ExistsEntity {
         return roomId;
     }
 
-    public static int getExistsGuestID(GuestManager guestManager) {
+    public static int getExistsGuestID(IGuestsRepository guestsRepository) {
         int guestId;
         boolean roomExists;
         do {
             guestId = InputReader.getIntegerInput(scanner, "Введите id посетителя: ");
-            roomExists = guestManager.checkGuestIDExists(guestId);
+            roomExists = guestsRepository.checkGuestIDExists(guestId);
             if (!roomExists) {
                 System.out.println("Посетителя с id: " + guestId + " не существует! Введите корректный id!");
             }
@@ -42,13 +43,13 @@ public class ExistsEntity {
         return guestId;
     }
 
-    public static int getExistsServiceID(ServiceManager serviceManager) {
+    public static int getExistsServiceID(IServicesRepository servicesRepository) {
 
         int serviceId;
         boolean serviceExists;
         do {
             serviceId = InputReader.getIntegerInput(scanner, "Введите id сервиса ");
-            serviceExists = serviceManager.checkServiceIDExists(serviceId);
+            serviceExists = servicesRepository.checkServiceIDExists(serviceId);
             if (!serviceExists) {
                 System.out.println("Сервиса с id: " + serviceId + " не существует! Введите корректный id!");
             }
