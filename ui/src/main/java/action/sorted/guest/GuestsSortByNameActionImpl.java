@@ -1,18 +1,19 @@
 package action.sorted.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
+import ru.senla.repository.guest.GuestsRepositoryImpl;
+import ru.senla.repository.guest.IGuestsRepository;
 import utils.ExistsEntity;
 
 public class GuestsSortByNameActionImpl implements IAction {
+    private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
     @Override
     public void execute() {
-        GuestManager guestManager = GuestManagerImpl.getInstance();
-        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
+
+        if (ExistsEntity.noExistGuests(guestsRepository.getAllGuests())) {
             return;
         }
         System.out.println("-----Сортировка гостей по имени-----");
-        guestManager.getSortedGuestsByAlphabet().stream().forEach(System.out::println);
+        guestsRepository.getSortedGuestsByAlphabet().stream().forEach(System.out::println);
     }
 }

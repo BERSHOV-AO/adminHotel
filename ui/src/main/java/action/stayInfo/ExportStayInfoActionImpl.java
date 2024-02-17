@@ -1,24 +1,24 @@
 package action.stayInfo;
 
 import action.api.IAction;
-import action.service.ExportServicesActionImpl;
-import controllers.stay_info.StayInfoManager;
-import controllers.stay_info.StayInfoManagerImpl;
 import org.apache.log4j.Logger;
+import ru.senla.repository.stay_info.IStayInfoRepository;
+import ru.senla.repository.stay_info.StayInfoRepositoryImpl;
 import utils.ExistsEntity;
 
 public class ExportStayInfoActionImpl implements IAction {
 
     final static Logger logger = Logger.getLogger(ExportStayInfoActionImpl.class);
+    private IStayInfoRepository stayInfoRepository = StayInfoRepositoryImpl.getInstance();
 
     @Override
     public void execute() {
-        StayInfoManager stayInfoManager = StayInfoManagerImpl.getInstance();
-        if (ExistsEntity.noExistStayInfo(stayInfoManager.getMapStayInfo())) {
+
+        if (ExistsEntity.noExistStayInfo(stayInfoRepository.getMapStayInfo())) {
             return;
         }
         try {
-            stayInfoManager.exportStayInfoToFileCSV();
+            stayInfoRepository.exportStayInfoToFileCSV();
             System.out.println("Информация о пребывании успешно экспортированы!");
             logger.info("Информация о пребывании успешно экспортированы!");
         } catch (Exception e) {

@@ -1,18 +1,20 @@
 package action.sorted.service;
 
 import action.api.IAction;
-import controllers.service.ServiceManager;
-import controllers.service.ServiceManagerImpl;
+import ru.senla.repository.service.IServicesRepository;
+import ru.senla.repository.service.ServicesRepositoryImpl;
 import utils.ExistsEntity;
 
 public class ServicesSortByPriceActionImpl implements IAction {
+    private IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
+
     @Override
     public void execute() {
-        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
-        if (ExistsEntity.noExistServices(serviceManager.getAllServices())) {
+
+        if (ExistsEntity.noExistServices(servicesRepository.getAllServices())) {
             return;
         }
         System.out.println("-----Сортировка сервисов по цене-----");
-        serviceManager.getListSortByPrice().stream().forEach(System.out::println);
+        servicesRepository.getListSortByPrice().stream().forEach(System.out::println);
     }
 }

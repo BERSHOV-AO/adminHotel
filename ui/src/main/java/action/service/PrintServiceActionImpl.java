@@ -1,18 +1,20 @@
 package action.service;
 
 import action.api.IAction;
-import controllers.service.ServiceManager;
-import controllers.service.ServiceManagerImpl;
+import ru.senla.repository.service.IServicesRepository;
+import ru.senla.repository.service.ServicesRepositoryImpl;
 import utils.ExistsEntity;
 
 public class PrintServiceActionImpl implements IAction {
+
+    private IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
     @Override
     public void execute() {
-        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
-        if (ExistsEntity.noExistServices(serviceManager.getAllServices())) {
+
+        if (ExistsEntity.noExistServices(servicesRepository.getAllServices())) {
             return;
         }
         System.out.println("-------All Services-------");
-        serviceManager.getAllServices().stream().forEach(System.out::println);
+        servicesRepository.getAllServices().stream().forEach(System.out::println);
     }
 }

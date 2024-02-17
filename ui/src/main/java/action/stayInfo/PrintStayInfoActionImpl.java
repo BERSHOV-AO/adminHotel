@@ -1,19 +1,19 @@
 package action.stayInfo;
 
 import action.api.IAction;
-import controllers.stay_info.StayInfoManager;
-import controllers.stay_info.StayInfoManagerImpl;
+import ru.senla.repository.stay_info.IStayInfoRepository;
+import ru.senla.repository.stay_info.StayInfoRepositoryImpl;
 import utils.ExistsEntity;
 import utils.Printer;
 
 public class PrintStayInfoActionImpl implements IAction {
-
+    private IStayInfoRepository stayInfoRepository = StayInfoRepositoryImpl.getInstance();
     @Override
     public void execute() {
-        StayInfoManager stayInfoManager = StayInfoManagerImpl.getInstance();
-        if (ExistsEntity.noExistStayInfo(stayInfoManager.getMapStayInfo())) {
+
+        if (ExistsEntity.noExistStayInfo(stayInfoRepository.getMapStayInfo())) {
             return;
         }
-        Printer.printStayInfo(StayInfoManagerImpl.getInstance().getMapStayInfo());
+        Printer.printStayInfo(stayInfoRepository.getMapStayInfo());
     }
 }

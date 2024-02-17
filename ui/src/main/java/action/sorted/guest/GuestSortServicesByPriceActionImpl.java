@@ -1,28 +1,29 @@
 package action.sorted.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
-import controllers.service.ServiceManager;
-import controllers.service.ServiceManagerImpl;
+import ru.senla.repository.guest.GuestsRepositoryImpl;
+import ru.senla.repository.guest.IGuestsRepository;
+import ru.senla.repository.service.IServicesRepository;
+import ru.senla.repository.service.ServicesRepositoryImpl;
 import utils.ExistsEntity;
 
 public class GuestSortServicesByPriceActionImpl implements IAction {
 
+    private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
+    private IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
+
     @Override
     public void execute() {
-        GuestManager guestManager = GuestManagerImpl.getInstance();
-        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
 
-        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
+        if (ExistsEntity.noExistGuests(guestsRepository.getAllGuests())) {
             return;
         }
         System.out.println("-------All Guests-------");
-        guestManager.getAllGuests().stream().forEach(System.out::println);
-        int guestId = ExistsEntity.getExistsGuestID(guestManager);
-        System.out.println("У посетителя с именем " + guestManager.getGuestById(guestId).getLastName() +
+        guestsRepository.getAllGuests().stream().forEach(System.out::println);
+        int guestId = ExistsEntity.getExistsGuestID(guestsRepository);
+        System.out.println("У посетителя с именем " + guestsRepository.getGuestById(guestId).getLastName() +
                 " сортированные сервисы по цене: " + "\n");
-        serviceManager.getListServicesSortByPriceOneGuest(guestManager
-                .getGuestServices(guestManager.getGuestById(guestId)));
+        servicesRepository.getListServicesSortByPriceOneGuest(guestsRepository
+                .getGuestServices(guestsRepository.getGuestById(guestId)));
     }
 }

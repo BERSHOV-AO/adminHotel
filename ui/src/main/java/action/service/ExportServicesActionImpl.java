@@ -1,9 +1,9 @@
 package action.service;
 
 import action.api.IAction;
-import controllers.service.ServiceManager;
-import controllers.service.ServiceManagerImpl;
 import org.apache.log4j.Logger;
+import ru.senla.repository.service.IServicesRepository;
+import ru.senla.repository.service.ServicesRepositoryImpl;
 import utils.ExistsEntity;
 
 public class ExportServicesActionImpl implements IAction {
@@ -12,13 +12,13 @@ public class ExportServicesActionImpl implements IAction {
 
     @Override
     public void execute() {
-        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
-        if (ExistsEntity.noExistServices(serviceManager.getAllServices())) {
+        IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
+        if (ExistsEntity.noExistServices(servicesRepository.getAllServices())) {
             return;
         }
 
         try {
-            serviceManager.exportServicesToFileCSV();
+            servicesRepository.exportServicesToFileCSV();
             System.out.println("Услуги успешно экспортированы!");
             logger.info("Услуги(Сервис) успешно экспортированы!");
         } catch (Exception e) {
