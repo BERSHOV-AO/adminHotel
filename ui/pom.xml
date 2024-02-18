@@ -18,12 +18,6 @@
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>ru.senla</groupId>-->
-<!--            <artifactId>hotel</artifactId>-->
-<!--            <version>1.0-SNAPSHOT</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>ru.senla</groupId>
             <artifactId>data</artifactId>
