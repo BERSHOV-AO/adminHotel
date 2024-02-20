@@ -16,26 +16,19 @@ import java.util.Scanner;
 public class AddServicesToGuestActionImpl implements IAction {
 
     private static Scanner scanner = new Scanner(System.in);
-    final static Logger logger = Logger.getLogger(AddServicesToGuestActionImpl.class);
-    private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
-    private IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
-
+   // final static Logger logger = Logger.getLogger(AddServicesToGuestActionImpl.class);
+    //private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
+   // private IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
     private IGuestsService guestsService = GuestsServiceImpl.getInstance();
 
     @Override
     public void execute() {
 
-//        if (ExistsEntity.noExistGuests(guestsRepository.getAllGuests())) {
-//            return;
-//        }
-//        if (ExistsEntity.noExistServices(servicesRepository.getAllServices())) {
-//            return;
-//        }
-
-        int roomId = InputReader.getIntegerInput(scanner, "Введите id комнаты: ");
+        int guestId = InputReader.getIntegerInput(scanner, "Введите id комнаты: ");
         int serviceId = InputReader.getIntegerInput(scanner, "Введите id сервиса ");
 
-        boolean resul = guestsService.AddServicesToGuest(roomId, serviceId );
+       // boolean resul = guestsService.AddServicesToGuest(guestId, serviceId);
+        System.out.println(guestsService.AddServicesToGuest(guestId, serviceId));
 
 
 //        System.out.println("----Список посетителей----");
