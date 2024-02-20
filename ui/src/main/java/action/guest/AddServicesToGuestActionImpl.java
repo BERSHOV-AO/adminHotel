@@ -1,14 +1,8 @@
 package action.guest;
 
 import action.api.IAction;
-import org.apache.log4j.Logger;
 import ru.senla.guest.GuestsServiceImpl;
 import ru.senla.guest.IGuestsService;
-import ru.senla.repository.guest.GuestsRepositoryImpl;
-import ru.senla.repository.guest.IGuestsRepository;
-import ru.senla.repository.service.IServicesRepository;
-import ru.senla.repository.service.ServicesRepositoryImpl;
-import utils.ExistsEntity;
 import utils.InputReader;
 
 import java.util.Scanner;
@@ -16,18 +10,17 @@ import java.util.Scanner;
 public class AddServicesToGuestActionImpl implements IAction {
 
     private static Scanner scanner = new Scanner(System.in);
-   // final static Logger logger = Logger.getLogger(AddServicesToGuestActionImpl.class);
-    //private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
-   // private IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
     private IGuestsService guestsService = GuestsServiceImpl.getInstance();
 
     @Override
     public void execute() {
 
+        System.out.println(guestsService.getListGuests());
+
         int guestId = InputReader.getIntegerInput(scanner, "Введите id комнаты: ");
         int serviceId = InputReader.getIntegerInput(scanner, "Введите id сервиса ");
 
-       // boolean resul = guestsService.AddServicesToGuest(guestId, serviceId);
+        // boolean resul = guestsService.AddServicesToGuest(guestId, serviceId);
         System.out.println(guestsService.AddServicesToGuest(guestId, serviceId));
 
 

@@ -1,5 +1,6 @@
 package ru.senla.guest;
 
+import ru.senla.entities.Guest;
 import ru.senla.enums.GuestResponse;
 import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
@@ -7,6 +8,8 @@ import ru.senla.repository.service.IServicesRepository;
 import ru.senla.repository.service.ServicesRepositoryImpl;
 
 import org.apache.log4j.Logger;
+
+import java.util.List;
 
 public class GuestsServiceImpl implements IGuestsService {
 
@@ -35,9 +38,13 @@ public class GuestsServiceImpl implements IGuestsService {
             logger.info(String.format("Посетителю с id: %d добавлена услуга с id: %d ", guestId, serviceId));
             return GuestResponse.SERVICE_ADDED.toString();
         } else {
-            return GuestResponse.GUEST_NOT_ADDED.toString();
+            return GuestResponse.SERVICE_NOT_ADDED.toString();
         }
-
     }
 
+
+    @Override
+    public List<Guest> getListGuests() {
+        return guestsRepository.getAllGuests();
+    }
 }

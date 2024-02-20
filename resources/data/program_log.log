@@ -52,3 +52,4 @@ java.util.MissingFormatArgumentException: Format specifier '%d'
 2024-02-12 10:54:59 INFO  ImportGuestsActionImpl:19 - Посетители успешно импортированы!
 2024-02-12 10:55:10 INFO  DeleteGuestActionImpl:25 - Удален посетитель с id: 437147 
 2024-02-17 17:22:53 INFO  AddRoomActionImpl:42 - Добавлена комната, номер: 1, количество звезд: 4, цена: 4000,00, вместимость: 3, статус: EMPTY
+2024-02-20 14:10:47 INFO  ImportGuestsActionImpl:18 - Посетители успешно импортированы!
