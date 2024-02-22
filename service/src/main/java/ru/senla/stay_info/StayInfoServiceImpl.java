@@ -3,6 +3,9 @@ package ru.senla.stay_info;
 import org.apache.log4j.Logger;
 import ru.senla.entities.Service;
 import ru.senla.entities.StayInfo;
+import ru.senla.enums.GuestResponse;
+import ru.senla.enums.RoomResponse;
+import ru.senla.enums.StayInfoResponse;
 import ru.senla.guest.GuestsServiceImpl;
 import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
@@ -40,8 +43,24 @@ public class StayInfoServiceImpl implements IStayInfoService {
         return stayInfoRepository.getMapStayInfo();
     }
 
+
+    @Override
     public String getBillForIdRoomAndIdGuest(int guestId, int roomId) {
-        stayInfoRepository.getBillForRoomGuest(
-                guestsRepository.getGuestById(guestId), roomsRepository.getRoomById(roomId));
+
+        if (!roomsRepository.checkRoomIDExists(roomId)) {
+            return RoomResponse.ROOM_WITH_ID_DOES_NOT_EXIST.getMessage();
+        }
+        if (!guestsRepository.checkGuestIDExists(guestId)) {
+            return GuestResponse.GUEST_WITH_ID_DOES_NOT_EXIST.getMessage();
+        }
+
+//        if (stayInfoRepository.isMapStayInfoEmpty()) {
+//            return StayInfoResponse.NO_INFORMATION_STAY_INFO.getMessage();
+//        } else {
+//            Double bell = stayInfoRepository.getBillForRoomGuest(
+//                    guestsRepository.getGuestById(guestId), roomsRepository.getRoomById(roomId));
+//            return bell.toString();
+//        }
+        return null;
     }
 }

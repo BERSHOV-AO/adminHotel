@@ -44,4 +44,6 @@ public interface IStayInfoRepository {
     public double getBillServiceByGuest(Guest guest);
 
     public void exportStayInfoToFileCSV();
+
+    public boolean isMapStayInfoEmpty();
 }

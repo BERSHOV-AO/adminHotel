@@ -26,41 +26,17 @@ public class BillGuestActionImpl implements IAction {
     @Override
     public void execute() {
         try {
-
             Printer.printStayInfo(stayInfoService.getMapStayInfo());
             int guestId = InputReader.getIntegerInput(scanner, "Введите id посетителя: ");
             int roomId = InputReader.getIntegerInput(scanner, "Введите id комнаты: ");
-
-            Locale ruLocale = new Locale("ru", "RU");
-            NumberFormat rubFormat = NumberFormat.getCurrencyInstance(ruLocale);
-
-
-//            int guestId = ExistsEntity.getExistsGuestID(guestsRepository);
-//            int roomId = ExistsEntity.getExistsRoomID(roomsRepository);
-
             StringBuilder str = new StringBuilder();
 
             str.append("************--BILL--************" + "\n");
             str.append("Имя гостя: " + guestsService.getLastNameGuestById(guestId) + "\n");
-            str.append("Номер комнаты: " + roomsService.getRoomNumberById(roomId)+ "\n");
+            str.append("Номер комнаты: " + roomsService.getRoomNumberById(roomId) + "\n");
             str.append("Счет за номер : ");
-            str.append(rubFormat.format(stayInfoRepository.getBillForRoomGuest(guestsRepository.getGuestById(guestId),
-                    roomsRepository.getRoomById(roomId))) + "\n");
-            str.append("********************************" + "\n");
-
-            if (stayInfoRepository.getListStayInfoOneGuest(guestsRepository.getGuestById(guestId)) != null) {
-                str.append("Счет за сервис : ");
-                str.append(rubFormat.format(stayInfoRepository.getBillServiceByGuest(
-                        guestsRepository.getGuestById(guestId))) + "\n");
-                str.append("********************************" + "\n");
-            } else {
-                str.append("Гость " + guestsRepository.getGuestById(guestId).getLastName() +
-                        " сервисами не пользовался!" + "\n");
-                str.append("********************************");
-                logger.info(String.format("Гость с id: %d, номер с id: %d, счет за проживание равен: %.2f руб.",
-                        guestId, roomId, stayInfoRepository.getBillForRoomGuest(
-                                guestsRepository.getGuestById(guestId), roomsRepository.getRoomById(roomId))));
-            }
+            str.append(stayInfoService.getBillForIdRoomAndIdGuest(guestId, roomId) + "руб." + "\n");
+            str.append("********************************");
             System.out.println(str);
         } catch (Exception e) {
             System.out.println("Нет такого посетителя или счета" + e.getMessage());

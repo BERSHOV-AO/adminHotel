@@ -227,4 +227,9 @@ public class StayInfoRepositoryImpl implements IStayInfoRepository{
     public void exportStayInfoToFileCSV() {
         StayInfoExporter.exportStayInfo(stayInfoDatasource.getInfoStorage());
     }
+
+    @Override
+    public boolean isMapStayInfoEmpty() {
+        return stayInfoDatasource.getInfoStorage().isEmpty();
+    }
 }

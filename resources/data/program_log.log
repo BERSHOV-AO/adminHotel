@@ -65,3 +65,19 @@ java.util.MissingFormatArgumentException: Format specifier '%d'
 2024-02-22 09:46:31 INFO  ImportGuestsActionImpl:18 - Посетители успешно импортированы!
 2024-02-22 09:47:14 INFO  GuestsServiceImpl:84 - Заселение гостя с id: 928268, в номер с id: 2, дата заселения 2024-02-25, дата выселения 2024-02-282024-02-22 09:50:52 INFO  ImportGuestsActionImpl:18 - Посетители успешно импортированы!
 2024-02-22 09:51:00 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
+2024-02-22 16:39:28 WARN  BillGuestActionImpl:43 - Нет такого посетителя или счета 
+java.lang.NullPointerException: Cannot invoke "ru.senla.entities.Guest.getLastName()" because the return value of "ru.senla.repository.guest.IGuestsRepository.getGuestById(int)" is null
+	at ru.senla.guest.GuestsServiceImpl.getLastNameGuestById(GuestsServiceImpl.java:106)
+	at action.guest.BillGuestActionImpl.execute(BillGuestActionImpl.java:35)
+	at menu.MenuItem.act(MenuItem.java:27)
+	at menu.Navigator.navigate(Navigator.java:28)
+	at menu.MenuController.run(MenuController.java:29)
+	at test.TestMenu.main(TestMenu.java:9)
+2024-02-22 16:42:04 WARN  BillGuestActionImpl:43 - Нет такого посетителя или счета 
+java.lang.NullPointerException: Cannot invoke "ru.senla.entities.Guest.getLastName()" because the return value of "ru.senla.repository.guest.IGuestsRepository.getGuestById(int)" is null
+	at ru.senla.guest.GuestsServiceImpl.getLastNameGuestById(GuestsServiceImpl.java:106)
+	at action.guest.BillGuestActionImpl.execute(BillGuestActionImpl.java:35)
+	at menu.MenuItem.act(MenuItem.java:27)
+	at menu.Navigator.navigate(Navigator.java:28)
+	at menu.MenuController.run(MenuController.java:29)
+	at test.TestMenu.main(TestMenu.java:9)
