@@ -2,46 +2,47 @@ package action.guest;
 
 import action.api.IAction;
 import org.apache.log4j.Logger;
-import ru.senla.repository.guest.GuestsRepositoryImpl;
-import ru.senla.repository.guest.IGuestsRepository;
-import ru.senla.repository.room.IRoomsRepository;
-import ru.senla.repository.room.RoomsRepositoryImpl;
-import ru.senla.repository.service.IServicesRepository;
-import ru.senla.repository.service.ServicesRepositoryImpl;
-import ru.senla.repository.stay_info.IStayInfoRepository;
-import ru.senla.repository.stay_info.StayInfoRepositoryImpl;
-import utils.ExistsEntity;
+import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.guest.IGuestsService;
+import ru.senla.room.IRoomsService;
+import ru.senla.room.RoomsServiceImpl;
+import ru.senla.stay_info.IStayInfoService;
+import ru.senla.stay_info.StayInfoServiceImpl;
+import utils.InputReader;
 import utils.Printer;
 
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class BillGuestActionImpl implements IAction {
-
     final static Logger logger = Logger.getLogger(BillGuestActionImpl.class);
-    private IStayInfoRepository stayInfoRepository = StayInfoRepositoryImpl.getInstance();
-    private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
-    private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
+    private static Scanner scanner = new Scanner(System.in);
+    private IStayInfoService stayInfoService = StayInfoServiceImpl.getInstance();
+    private IGuestsService guestsService = GuestsServiceImpl.getInstance();
+    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
+
 
     @Override
     public void execute() {
         try {
-            if (ExistsEntity.noExistStayInfo(stayInfoRepository.getMapStayInfo())) {
-                return;
-            }
+
+            Printer.printStayInfo(stayInfoService.getMapStayInfo());
+            int guestId = InputReader.getIntegerInput(scanner, "Введите id посетителя: ");
+            int roomId = InputReader.getIntegerInput(scanner, "Введите id комнаты: ");
 
             Locale ruLocale = new Locale("ru", "RU");
             NumberFormat rubFormat = NumberFormat.getCurrencyInstance(ruLocale);
 
-            Printer.printStayInfo(stayInfoRepository.getMapStayInfo());
-            int guestId = ExistsEntity.getExistsGuestID(guestsRepository);
-            int roomId = ExistsEntity.getExistsRoomID(roomsRepository);
+
+//            int guestId = ExistsEntity.getExistsGuestID(guestsRepository);
+//            int roomId = ExistsEntity.getExistsRoomID(roomsRepository);
 
             StringBuilder str = new StringBuilder();
 
             str.append("************--BILL--************" + "\n");
-            str.append("Имя гостя: " + guestsRepository.getGuestById(guestId).getLastName() + "\n");
-            str.append("Номер комнаты: " + roomsRepository.getRoomById(roomId).getRoomNumber() + "\n");
+            str.append("Имя гостя: " + guestsService.getLastNameGuestById(guestId) + "\n");
+            str.append("Номер комнаты: " + roomsService.getRoomNumberById(roomId)+ "\n");
             str.append("Счет за номер : ");
             str.append(rubFormat.format(stayInfoRepository.getBillForRoomGuest(guestsRepository.getGuestById(guestId),
                     roomsRepository.getRoomById(roomId))) + "\n");

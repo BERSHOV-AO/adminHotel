@@ -53,3 +53,15 @@ java.util.MissingFormatArgumentException: Format specifier '%d'
 2024-02-12 10:55:10 INFO  DeleteGuestActionImpl:25 - Удален посетитель с id: 437147 
 2024-02-17 17:22:53 INFO  AddRoomActionImpl:42 - Добавлена комната, номер: 1, количество звезд: 4, цена: 4000,00, вместимость: 3, статус: EMPTY
 2024-02-20 14:10:47 INFO  ImportGuestsActionImpl:18 - Посетители успешно импортированы!
+2024-02-21 10:02:40 INFO  GuestsServiceImpl:48 - Гость с именем zus добавлен
+2024-02-21 11:10:17 INFO  ImportGuestsActionImpl:18 - Посетители успешно импортированы!
+2024-02-21 11:13:40 INFO  ImportGuestsActionImpl:18 - Посетители успешно импортированы!
+2024-02-21 11:14:28 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
+2024-02-21 11:14:33 INFO  ImportGuestsActionImpl:18 - Посетители успешно импортированы!
+2024-02-22 08:15:53 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
+2024-02-22 08:16:01 INFO  ImportGuestsActionImpl:18 - Посетители успешно импортированы!
+2024-02-22 08:16:49 INFO  GuestsServiceImpl:84 - Заселение гостя с id: 437147, в номер с id: 2, дата заселения 2024-02-22, дата выселения 2024-02-25
+2024-02-22 09:46:25 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
+2024-02-22 09:46:31 INFO  ImportGuestsActionImpl:18 - Посетители успешно импортированы!
+2024-02-22 09:47:14 INFO  GuestsServiceImpl:84 - Заселение гостя с id: 928268, в номер с id: 2, дата заселения 2024-02-25, дата выселения 2024-02-282024-02-22 09:50:52 INFO  ImportGuestsActionImpl:18 - Посетители успешно импортированы!
+2024-02-22 09:51:00 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
