@@ -21,8 +21,8 @@ public class CheckInActionImpl implements IAction {
     public void execute() {
 
         try {
-            System.out.println(guestsService.getListGuests());
-            System.out.println(roomsService.getListRooms());
+            guestsService.getListGuests().stream().forEach(System.out::println);
+            roomsService.getListRooms().stream().forEach(System.out::println);
 
             int guestId = InputReader.getIntegerInput(scanner, "Введите id посетителя: ");
             int roomId = InputReader.getIntegerInput(scanner, "Введите id комнаты: ");

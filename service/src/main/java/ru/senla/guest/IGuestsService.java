@@ -20,4 +20,12 @@ public interface IGuestsService {
     public String checkOutGuest(int guestId, int roomId);
 
     public String getLastNameGuestById(int guestId);
+
+    public String deletedGuestById(int guestId);
+
+    public String exportGuestsToFileCSV();
+
+    public String importCSVFilesToGuests();
+
+    public String printServicesOneGuest(int guestId);
 }

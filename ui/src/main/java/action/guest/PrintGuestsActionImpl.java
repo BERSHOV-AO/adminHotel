@@ -1,20 +1,16 @@
 package action.guest;
 
 import action.api.IAction;
-import ru.senla.repository.guest.GuestsRepositoryImpl;
-import ru.senla.repository.guest.IGuestsRepository;
-import utils.ExistsEntity;
+import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.guest.IGuestsService;
 
 public class PrintGuestsActionImpl implements IAction {
-    IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
+    private IGuestsService guestsService = GuestsServiceImpl.getInstance();
 
     @Override
     public void execute() {
 
-        if (ExistsEntity.noExistGuests(guestsRepository.getAllGuests())) {
-            return;
-        }
         System.out.println("-------All Guests-------");
-        guestsRepository.getAllGuests().stream().forEach(System.out::println);
+        guestsService.getListGuests().stream().forEach(System.out::println);
     }
 }

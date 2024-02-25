@@ -1,7 +1,9 @@
 package ru.senla.room;
 
 import org.apache.log4j.Logger;
+import ru.senla.entities.Guest;
 import ru.senla.entities.Room;
+import ru.senla.enums.GuestResponse;
 import ru.senla.guest.GuestsServiceImpl;
 import ru.senla.repository.room.IRoomsRepository;
 import ru.senla.repository.room.RoomsRepositoryImpl;
@@ -35,6 +37,13 @@ public class RoomsServiceImpl implements IRoomsService {
     @Override
     public int getRoomNumberById(int roomId) {
        return roomsRepository.getRoomById(roomId).getRoomNumber();
+    }
+
+    @Override
+    public String addRoom(int roomNumber;) {
+        guestsRepository.addOnGuest(new Guest(lastName));
+        logger.info(String.format("Гость с именем %s добавлен", lastName));
+        return GuestResponse.GUEST_ADDED.getMessage();
     }
 
 }

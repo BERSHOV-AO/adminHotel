@@ -1,6 +1,7 @@
 package ru.senla.guest;
 
 import ru.senla.entities.Guest;
+import ru.senla.entities.Service;
 import ru.senla.enums.GuestResponse;
 import ru.senla.enums.RoomResponse;
 import ru.senla.repository.guest.GuestsRepositoryImpl;
@@ -106,7 +107,60 @@ public class GuestsServiceImpl implements IGuestsService {
         return guestsRepository.getGuestById(guestId).getLastName();
     }
 
-    public void billGuest(int guestId, int roomId) {
+    @Override
+    public String deletedGuestById(int guestId) {
 
+        if (!guestsRepository.checkGuestIDExists(guestId)) {
+            return GuestResponse.GUEST_WITH_ID_DOES_NOT_EXIST.getMessage();
+        } else {
+            guestsRepository.deleteGuest(guestsRepository.getGuestById(guestId));
+            logger.info(String.format("Удален посетитель с id: %d ", guestId));
+            return GuestResponse.GUEST_DELETED.getMessage();
+        }
+    }
+
+    @Override
+    public String exportGuestsToFileCSV() {
+        if (guestsRepository.getAllGuests().isEmpty()) {
+            logger.info(GuestResponse.EXPORT_GUESTS_NOK.getMessage());
+            return GuestResponse.EXPORT_GUESTS_NOK.getMessage();
+        } else {
+            guestsRepository.exportGuestsToFileCSV();
+            logger.info(GuestResponse.EXPORT_GUESTS_OK.getMessage());
+            return GuestResponse.EXPORT_GUESTS_OK.getMessage();
+        }
+    }
+
+    @Override
+    public String importCSVFilesToGuests() {
+        try {
+            guestsRepository.importCSVFilesToGuests();
+            logger.info(GuestResponse.IMPORT_GUESTS_OK.getMessage());
+            return GuestResponse.IMPORT_GUESTS_OK.getMessage();
+        } catch (Exception e) {
+            logger.warn(GuestResponse.IMPORT_GUESTS_NOK.getMessage(), e);
+            return GuestResponse.IMPORT_GUESTS_NOK.getMessage();
+        }
+    }
+
+    @Override
+    public String printServicesOneGuest(int guestId) {
+        try {
+            if (guestsRepository.checkGuestIDExists(guestId)) {
+                StringBuilder str = new StringBuilder();
+                List<Service> listService = guestsRepository.getGuestServices(
+                        guestsRepository.getGuestById(guestId));
+
+                str.append("Имя гостя: " + guestsRepository.getGuestById(guestId).getLastName() + "\n");
+                str.append("Воспользовался услугами: " + "\n");
+                str.append(listService.toString());
+                return str.toString();
+            } else {
+                return GuestResponse.GUEST_WITH_ID_DOES_NOT_EXIST.getMessage();
+            }
+        } catch (Exception e) {
+            System.out.println(GuestResponse.ERROR_PRINTING_GUEST_SERVICES.getMessage() + e.getMessage());
+            return GuestResponse.ERROR_PRINTING_GUEST_SERVICES.getMessage();
+        }
     }
 }
