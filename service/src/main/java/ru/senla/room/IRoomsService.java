@@ -14,4 +14,14 @@ public interface IRoomsService {
     public String addRoom(int roomId, Integer capacity, Double priceDay, Integer stars, RoomStatus status);
 
     public String changeRoomPrice(int roomId, Double newPrice);
+
+    public String changeRoomStatus(int roomId, RoomStatus status);
+
+    public String exportRoomsToFileCSV();
+
+    public String importCSVFilesToRooms();
+
+    public String printDetailsOneRoom(int roomId);
+
+    public List<Room> printEmptyRooms();
 }

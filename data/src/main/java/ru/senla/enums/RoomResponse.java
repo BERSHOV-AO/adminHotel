@@ -8,7 +8,21 @@ public enum RoomResponse {
     ERROR_ADDING_ROOM("Ошибка добавления номера!"),
     ROOM_PRICE_CHANGE_OK("Цена номера изменена"),
     ROOM_PRICE_CHANGE_NOK("Номер не найден, цена номера не изменена"),
-    ERROR_ROOM_PRICE_CHANGE("Ошибка изменения цены номера!");
+    ERROR_ROOM_PRICE_CHANGE("Ошибка изменения цены номера!"),
+    ROOM_STATUS_CHANGED_OK("Статус номера изменен!"),
+    ERROR_CHANGING_ROOM_STATUS("Ошибка изменения статуса номера!"),
+    EXPORT_ROOMS_OK("Номера успешно экспортированы!"),
+    EXPORT_ROOMS_NOK("Номера не экспортированы!"),
+    ERROR_EXPORT_ROOMS("Ошибка экспорта номеров"),
+    IMPORT_ROOMS_OK("Номера успешно импортированы!"),
+    IMPORT_ROOMS_NOK("Номера не импортированы!"),
+    ERROR_IMPORT_ROOMS("Ошибка импорта номеров"),
+    ERROR_PRINT_ROOM_INFO("Ошибка печати информации о номере");
+
+
+
+
+
 
     private final String message;
 

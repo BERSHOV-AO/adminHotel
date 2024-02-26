@@ -115,3 +115,12 @@ java.lang.NullPointerException: Cannot invoke "ru.senla.entities.Guest.getLastNa
 2024-02-26 15:43:23 INFO  RoomsServiceImpl:51 - Добавлена комната, номер: 15, количество звезд: 4, цена: 4000,00, вместимость: 3, статус: EMPTY
 2024-02-26 15:45:38 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
 2024-02-26 15:45:51 INFO  RoomsServiceImpl:65 - Стоимость номера с id 3, изменена на: 7000,00
+2024-02-26 21:03:56 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
+2024-02-26 21:04:12 INFO  RoomsServiceImpl:62 - Стоимость номера с id 2, изменена на: 7777,00
+2024-02-26 21:04:39 INFO  RoomsServiceImpl:78 - Статус номера с id 2, изменена на: SERVICE
+2024-02-26 21:06:11 INFO  ImportRoomsActionImpl:18 - Комнаты успешно импортированы!
+2024-02-26 21:06:36 INFO  RoomsServiceImpl:78 - Статус номера с id 2, изменена на: OCCUPIED
+2024-02-26 21:21:52 INFO  RoomsServiceImpl:94 - Номера не экспортированы!
+2024-02-26 21:34:19 INFO  RoomsServiceImpl:110 - Номера успешно импортированы!
+2024-02-26 21:51:41 INFO  RoomsServiceImpl:110 - Номера успешно импортированы!
+2024-02-26 21:54:27 INFO  RoomsServiceImpl:110 - Номера успешно импортированы!

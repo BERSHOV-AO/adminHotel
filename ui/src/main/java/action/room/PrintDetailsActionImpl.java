@@ -1,31 +1,22 @@
 package action.room;
 
 import action.api.IAction;
-import org.apache.log4j.Logger;
-import ru.senla.repository.room.IRoomsRepository;
-import ru.senla.repository.room.RoomsRepositoryImpl;
-import utils.ExistsEntity;
+import ru.senla.room.IRoomsService;
+import ru.senla.room.RoomsServiceImpl;
+import utils.InputReader;
+
+import java.util.Scanner;
 
 public class PrintDetailsActionImpl implements IAction {
-    final static Logger logger = Logger.getLogger(PrintDetailsActionImpl.class);
-    private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
+
+    private static Scanner scanner = new Scanner(System.in);
+    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
 
     @Override
     public void execute() {
 
-        if (ExistsEntity.noExistRooms(roomsRepository.getAllRooms())) {
-            return;
-        }
-
-        System.out.println("-------All Rooms-------");
-        roomsRepository.getAllRooms().stream().forEach(System.out::println);
-
-        try {
-            int roomId = ExistsEntity.getExistsRoomID(roomsRepository);
-            System.out.println(roomsRepository.getRoomDetails(roomsRepository.getRoomById(roomId)));
-        } catch (Exception e) {
-            System.out.println("Нет возможности показать детали номера " + e.getMessage());
-            logger.warn("Нет возможности показать детали номера ", e);
-        }
+        roomsService.getListRooms().stream().forEach(System.out::println);
+        int roomId = InputReader.getIntegerInput(scanner, "Введите id комнаты: ");
+        System.out.println(roomsService.printDetailsOneRoom(roomId));
     }
 }

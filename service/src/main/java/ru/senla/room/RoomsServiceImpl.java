@@ -2,6 +2,7 @@ package ru.senla.room;
 
 import org.apache.log4j.Logger;
 import ru.senla.entities.Room;
+import ru.senla.enums.GuestResponse;
 import ru.senla.enums.RoomResponse;
 import ru.senla.enums.RoomStatus;
 import ru.senla.repository.room.IRoomsRepository;
@@ -14,7 +15,6 @@ public class RoomsServiceImpl implements IRoomsService {
     final static Logger logger = Logger.getLogger(RoomsServiceImpl.class);
 
     private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
-
 
     private static RoomsServiceImpl instance;
 
@@ -68,6 +68,70 @@ public class RoomsServiceImpl implements IRoomsService {
             logger.warn(RoomResponse.ERROR_ROOM_PRICE_CHANGE.getMessage(), e);
             return RoomResponse.ERROR_ROOM_PRICE_CHANGE.getMessage();
         }
+    }
+
+    @Override
+    public String changeRoomStatus(int roomId, RoomStatus status) {
+        try {
+            if (roomsRepository.checkRoomIDExists(roomId)) {
+                roomsRepository.changeRoomStatus(roomsRepository.getRoomById(roomId), status);
+                logger.info(String.format("Статус номера с id %d, изменена на: " + status, roomId));
+                return RoomResponse.ROOM_STATUS_CHANGED_OK.getMessage();
+            } else {
+                return RoomResponse.ROOM_WITH_ID_DOES_NOT_EXIST.getMessage();
+            }
+        } catch (Exception e) {
+            logger.warn(RoomResponse.ERROR_CHANGING_ROOM_STATUS.getMessage(), e);
+            return RoomResponse.ERROR_CHANGING_ROOM_STATUS.getMessage();
+        }
+    }
+
+    @Override
+    public String exportRoomsToFileCSV() {
+        try {
+            if (roomsRepository.getAllRooms().isEmpty()) {
+                logger.info(RoomResponse.EXPORT_ROOMS_NOK.getMessage());
+                return RoomResponse.EXPORT_ROOMS_NOK.getMessage();
+            } else {
+                roomsRepository.exportRoomsToFileCSV();
+                logger.info(RoomResponse.EXPORT_ROOMS_OK.getMessage());
+                return RoomResponse.EXPORT_ROOMS_OK.getMessage();
+            }
+        } catch (Exception e) {
+            logger.warn(RoomResponse.ERROR_EXPORT_ROOMS.getMessage(), e);
+            return RoomResponse.ERROR_EXPORT_ROOMS.getMessage();
+        }
+    }
+
+    @Override
+    public String importCSVFilesToRooms() {
+        try {
+            roomsRepository.importCSVFilesToRooms();
+            logger.info(RoomResponse.IMPORT_ROOMS_OK.getMessage());
+            return RoomResponse.IMPORT_ROOMS_OK.getMessage();
+        } catch (Exception e) {
+            logger.warn(RoomResponse.ERROR_IMPORT_ROOMS.getMessage(), e);
+            return RoomResponse.ERROR_IMPORT_ROOMS.getMessage();
+        }
+    }
+
+    @Override
+    public String printDetailsOneRoom(int roomId) {
+        try {
+            if (roomsRepository.checkRoomIDExists(roomId)) {
+                return roomsRepository.getRoomDetails(roomsRepository.getRoomById(roomId));
+            } else {
+                return RoomResponse.ROOM_WITH_ID_DOES_NOT_EXIST.getMessage();
+            }
+        } catch (Exception e) {
+            logger.warn(RoomResponse.ERROR_PRINT_ROOM_INFO.getMessage(), e);
+            return RoomResponse.ERROR_PRINT_ROOM_INFO.getMessage();
+        }
+    }
+
+    @Override
+    public List<Room> printEmptyRooms() {
+        return roomsRepository.getEmptyRooms();
     }
 }
 

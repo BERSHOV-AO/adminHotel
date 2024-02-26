@@ -1,19 +1,16 @@
 package action.room;
 
 import action.api.IAction;
-import ru.senla.repository.room.IRoomsRepository;
-import ru.senla.repository.room.RoomsRepositoryImpl;
-import utils.ExistsEntity;
+
+import ru.senla.room.IRoomsService;
+import ru.senla.room.RoomsServiceImpl;
 
 public class PrintRoomsActionImpl implements IAction {
-    private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
+    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
 
     @Override
     public void execute() {
-        if (ExistsEntity.noExistRooms(roomsRepository.getAllRooms())) {
-            return;
-        }
         System.out.println("-------All Rooms-------");
-        roomsRepository.getAllRooms().stream().forEach(System.out::println);
+        roomsService.getListRooms().stream().forEach(System.out::println);
     }
 }
