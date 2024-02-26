@@ -1,10 +1,9 @@
 package ru.senla.room;
 
 import org.apache.log4j.Logger;
-import ru.senla.entities.Guest;
 import ru.senla.entities.Room;
-import ru.senla.enums.GuestResponse;
-import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.enums.RoomResponse;
+import ru.senla.enums.RoomStatus;
 import ru.senla.repository.room.IRoomsRepository;
 import ru.senla.repository.room.RoomsRepositoryImpl;
 
@@ -36,14 +35,39 @@ public class RoomsServiceImpl implements IRoomsService {
 
     @Override
     public int getRoomNumberById(int roomId) {
-       return roomsRepository.getRoomById(roomId).getRoomNumber();
+        return roomsRepository.getRoomById(roomId).getRoomNumber();
     }
 
     @Override
-    public String addRoom(int roomNumber;) {
-        guestsRepository.addOnGuest(new Guest(lastName));
-        logger.info(String.format("Гость с именем %s добавлен", lastName));
-        return GuestResponse.GUEST_ADDED.getMessage();
+    public String addRoom(int roomId, Integer capacity, Double priceDay, Integer stars, RoomStatus status) {
+        try {
+            if (roomsRepository.checkRoomIDExists(roomId)) {
+                return RoomResponse.NUMBER_EXISTS_PLEASE_ENTER_ANOTHER_NUMBER.getMessage();
+            }
+            roomsRepository.addRoom(new Room(roomId, stars, priceDay, capacity, status));
+            logger.info(String.format("Добавлена комната, номер: %d, количество звезд: %d, цена: %.2f," +
+                    " вместимость: %d, статус: " + status, roomId, stars, priceDay, capacity));
+            return RoomResponse.ROOM_ADDED.getMessage();
+        } catch (Exception e) {
+            logger.warn(RoomResponse.ERROR_ADDING_ROOM.getMessage(), e);
+            return RoomResponse.ERROR_ADDING_ROOM.getMessage();
+        }
     }
 
+    @Override
+    public String changeRoomPrice(int roomId, Double priceNew) {
+        try {
+            if (roomsRepository.checkRoomIDExists(roomId)) {
+                roomsRepository.changeRoomPrice(roomsRepository.getRoomById(roomId), priceNew);
+                logger.info(String.format("Стоимость номера с id %d, изменена на: %.2f", roomId, priceNew));
+                return RoomResponse.ROOM_PRICE_CHANGE_OK.getMessage();
+            } else {
+                return RoomResponse.ROOM_WITH_ID_DOES_NOT_EXIST.getMessage();
+            }
+        } catch (Exception e) {
+            logger.warn(RoomResponse.ERROR_ROOM_PRICE_CHANGE.getMessage(), e);
+            return RoomResponse.ERROR_ROOM_PRICE_CHANGE.getMessage();
+        }
+    }
 }
+

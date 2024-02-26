@@ -1,14 +1,10 @@
 package action.guest;
 
 import action.api.IAction;
-import org.apache.log4j.Logger;
-import ru.senla.entities.Service;
 import ru.senla.guest.GuestsServiceImpl;
 import ru.senla.guest.IGuestsService;
-import utils.ExistsEntity;
 import utils.InputReader;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class PrintServicesOneGuestActionImpl implements IAction {
