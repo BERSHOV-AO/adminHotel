@@ -1,22 +1,16 @@
 package ru.senla.stay_info;
 
 import org.apache.log4j.Logger;
-import ru.senla.entities.Service;
 import ru.senla.entities.StayInfo;
-import ru.senla.enums.GuestResponse;
-import ru.senla.enums.RoomResponse;
-import ru.senla.enums.StayInfoResponse;
-import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.enums.response.GuestResponse;
+import ru.senla.enums.response.RoomResponse;
 import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
 import ru.senla.repository.room.IRoomsRepository;
 import ru.senla.repository.room.RoomsRepositoryImpl;
 import ru.senla.repository.stay_info.IStayInfoRepository;
 import ru.senla.repository.stay_info.StayInfoRepositoryImpl;
-import ru.senla.service.IServicesService;
-import ru.senla.service.ServicesServiceImpl;
 
-import java.util.List;
 import java.util.Map;
 
 public class StayInfoServiceImpl implements IStayInfoService {

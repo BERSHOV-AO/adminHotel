@@ -1,4 +1,4 @@
-package ru.senla.enums;
+package ru.senla.enums.response;
 
 public enum StayInfoResponse {
 

@@ -1,7 +1,7 @@
-package ru.senla.enums;
+package ru.senla.enums.response;
 
 public enum RoomResponse {
-    NO_GUESTS_AVAILABLE("Нет доступных номеров!"),
+    NO_ROOMS_AVAILABLE("Нет доступных номеров!"),
     ROOM_WITH_ID_DOES_NOT_EXIST("Комнаты с данным id не существует!"),
     NUMBER_EXISTS_PLEASE_ENTER_ANOTHER_NUMBER("Номер существует, введите другой номер!"),
     ROOM_ADDED("Номер добавлен!"),
@@ -16,8 +16,8 @@ public enum RoomResponse {
     ERROR_EXPORT_ROOMS("Ошибка экспорта номеров"),
     IMPORT_ROOMS_OK("Номера успешно импортированы!"),
     IMPORT_ROOMS_NOK("Номера не импортированы!"),
-    ERROR_IMPORT_ROOMS("Ошибка импорта номеров"),
-    ERROR_PRINT_ROOM_INFO("Ошибка печати информации о номере");
+    ERROR_IMPORT_ROOMS("Ошибка импорта номеров!"),
+    ERROR_PRINT_ROOM_INFO("Ошибка печати информации о номере!");
 
 
 

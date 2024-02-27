@@ -2,8 +2,8 @@ package ru.senla.guest;
 
 import ru.senla.entities.Guest;
 import ru.senla.entities.Service;
-import ru.senla.enums.GuestResponse;
-import ru.senla.enums.RoomResponse;
+import ru.senla.enums.response.GuestResponse;
+import ru.senla.enums.response.RoomResponse;
 import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
 import ru.senla.repository.room.IRoomsRepository;

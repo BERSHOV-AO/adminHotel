@@ -2,8 +2,7 @@ package ru.senla.room;
 
 import org.apache.log4j.Logger;
 import ru.senla.entities.Room;
-import ru.senla.enums.GuestResponse;
-import ru.senla.enums.RoomResponse;
+import ru.senla.enums.response.RoomResponse;
 import ru.senla.enums.RoomStatus;
 import ru.senla.repository.room.IRoomsRepository;
 import ru.senla.repository.room.RoomsRepositoryImpl;

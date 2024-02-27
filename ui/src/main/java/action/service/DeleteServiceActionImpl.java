@@ -1,33 +1,22 @@
 package action.service;
 
 import action.api.IAction;
-import org.apache.log4j.Logger;
-import ru.senla.repository.service.IServicesRepository;
-import ru.senla.repository.service.ServicesRepositoryImpl;
-import utils.ExistsEntity;
+import ru.senla.service.IServicesService;
+import ru.senla.service.ServicesServiceImpl;
+import utils.InputReader;
+
+import java.util.Scanner;
 
 public class DeleteServiceActionImpl implements IAction {
-
-    final static Logger logger = Logger.getLogger(DeleteServiceActionImpl.class);
-    private IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
+    private static Scanner scanner = new Scanner(System.in);
+    private IServicesService servicesService = ServicesServiceImpl.getInstance();
 
     @Override
     public void execute() {
 
-        if (ExistsEntity.noExistServices(servicesRepository.getAllServices())) {
-            return;
-        }
-
-        System.out.println("-----Удаление сервиса-----");
         System.out.println("-------All Services-------");
-        servicesRepository.getAllServices().stream().forEach(System.out::println);
-        try {
-            int serviceId = ExistsEntity.getExistsServiceID(servicesRepository);
-            servicesRepository.deleteService(servicesRepository.getServiceById(serviceId));
-            logger.info(String.format("Удален сервис с id: %d", serviceId));
-        } catch (Exception e) {
-            System.out.println("Сервис не удален" + e.getMessage());
-            logger.warn("Сервис не удален", e);
-        }
+        servicesService.getListServices().stream().forEach(System.out::println);
+        int serviceId = InputReader.getIntegerInput(scanner, "Введите id сервиса ");
+        System.out.println(servicesService.deleteService(serviceId));
     }
 }
