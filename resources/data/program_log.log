@@ -136,3 +136,4 @@ java.lang.NullPointerException: Cannot invoke "ru.senla.entities.Guest.getLastNa
 2024-02-27 12:10:33 INFO  ImportServicesActionImpl:19 - Услуги(Сервис) успешно импортированы!
 2024-02-27 12:10:53 INFO  ServicesServiceImpl:75 - Удален сервис с id: 646999
 2024-02-27 12:22:59 INFO  ServicesServiceImpl:91 - Услуги(сервисы) не экспортированы!
+2024-02-27 12:41:46 INFO  ServicesServiceImpl:39 - Добавлен сервис: BREAKFAST, цена: 7777,00
