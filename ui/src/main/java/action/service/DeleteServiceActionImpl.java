@@ -13,7 +13,6 @@ public class DeleteServiceActionImpl implements IAction {
 
     @Override
     public void execute() {
-
         System.out.println("-------All Services-------");
         servicesService.getListServices().stream().forEach(System.out::println);
         int serviceId = InputReader.getIntegerInput(scanner, "Введите id сервиса ");

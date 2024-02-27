@@ -59,6 +59,11 @@ public class GuestsServiceImpl implements IGuestsService {
     }
 
     @Override
+    public Guest getGuestByID(int guestId) {
+        return guestsRepository.getGuestById(guestId);
+    }
+
+    @Override
     public String billGuest() {
         return null;
     }
@@ -162,5 +167,16 @@ public class GuestsServiceImpl implements IGuestsService {
             System.out.println(GuestResponse.ERROR_PRINTING_GUEST_SERVICES.getMessage() + e.getMessage());
             return GuestResponse.ERROR_PRINTING_GUEST_SERVICES.getMessage();
         }
+    }
+
+    @Override
+    public List<Service> getListServicesOneGuestSortPriceByGuestId(int guestId) {
+        return servicesRepository.getListServicesSortByPriceOneGuest(
+                guestsRepository.getGuestServices(guestsRepository.getGuestById(guestId)));
+    }
+
+    @Override
+    public List<Guest> getListSortedGuestsByAlphabet() {
+        return guestsRepository.getSortedGuestsByAlphabet();
     }
 }

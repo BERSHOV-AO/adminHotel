@@ -1,6 +1,7 @@
 package ru.senla.guest;
 
 import ru.senla.entities.Guest;
+import ru.senla.entities.Service;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,6 +13,8 @@ public interface IGuestsService {
     public List<Guest> getListGuests();
 
     public String addGuest(String lastName);
+
+    public Guest getGuestByID(int guestId);
 
     public String billGuest();
 
@@ -28,4 +31,8 @@ public interface IGuestsService {
     public String importCSVFilesToGuests();
 
     public String printServicesOneGuest(int guestId);
+
+    public List<Service> getListServicesOneGuestSortPriceByGuestId(int guestId);
+
+    public List<Guest> getListSortedGuestsByAlphabet();
 }

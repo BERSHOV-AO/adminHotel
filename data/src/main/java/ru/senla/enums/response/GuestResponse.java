@@ -17,12 +17,6 @@ public enum GuestResponse {
     GUEST_EVICTED_FROM_ROOM("Гость выселен из номера"),
     ERROR_PRINTING_GUEST_SERVICES("Ошибка печати услуг у гостя!");
 
-
-
-
-
-
-
     private final String message;
 
     GuestResponse(String message) {

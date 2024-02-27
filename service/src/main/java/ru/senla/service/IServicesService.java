@@ -21,4 +21,9 @@ public interface IServicesService {
     public String importCSVFilesToServices();
 
     public List<Service> printServices();
+
+    public List<Service> getListSortedServiceByAlphabet();
+
+    public List<Service> getListSortedServiceByPrice();
+
 }

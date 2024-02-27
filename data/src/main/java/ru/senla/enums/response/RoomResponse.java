@@ -19,11 +19,6 @@ public enum RoomResponse {
     ERROR_IMPORT_ROOMS("Ошибка импорта номеров!"),
     ERROR_PRINT_ROOM_INFO("Ошибка печати информации о номере!");
 
-
-
-
-
-
     private final String message;
 
     RoomResponse(String message) {

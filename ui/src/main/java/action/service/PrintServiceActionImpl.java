@@ -10,7 +10,6 @@ public class PrintServiceActionImpl implements IAction {
 
     @Override
     public void execute() {
-
         System.out.println("-------All Services-------");
         servicesService.printServices().stream().forEach(System.out::println);
     }

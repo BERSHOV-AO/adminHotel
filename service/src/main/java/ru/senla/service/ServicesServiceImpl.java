@@ -117,4 +117,14 @@ public class ServicesServiceImpl implements IServicesService {
     public List<Service> printServices() {
         return servicesRepository.getAllServices();
     }
+
+    @Override
+    public List<Service> getListSortedServiceByAlphabet() {
+        return servicesRepository.getListSortBySection();
+    }
+    @Override
+    public List<Service> getListSortedServiceByPrice() {
+        return servicesRepository.getListSortByPrice();
+    }
+
 }

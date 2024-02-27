@@ -24,4 +24,16 @@ public interface IRoomsService {
     public String printDetailsOneRoom(int roomId);
 
     public List<Room> printEmptyRooms();
+
+    public List<Room> getListSortedRoomsByCapacity();
+
+    public List<Room> getListSortedRoomsByPrice();
+
+    public List<Room> getListSortedRoomsByStars();
+
+    public List<Room> getListSortedEmptyRoomsByCapacity();
+
+    public List<Room> getListSortedEmptyRoomsByPrice();
+
+    public List<Room> getListSortedEmptyRoomsByStars();
 }

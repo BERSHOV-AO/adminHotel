@@ -132,5 +132,35 @@ public class RoomsServiceImpl implements IRoomsService {
     public List<Room> printEmptyRooms() {
         return roomsRepository.getEmptyRooms();
     }
+
+    @Override
+    public List<Room> getListSortedRoomsByCapacity() {
+        return roomsRepository.getSortedRoomsByCapacity();
+    }
+
+    @Override
+    public List<Room> getListSortedRoomsByPrice() {
+        return roomsRepository.getSortedRoomsByPrice();
+    }
+
+    @Override
+    public List<Room> getListSortedRoomsByStars() {
+        return roomsRepository.getSortedRoomsByStars();
+    }
+
+    @Override
+    public List<Room> getListSortedEmptyRoomsByCapacity() {
+        return roomsRepository.getFreeRooms(roomsRepository.getSortedRoomsByCapacity());
+    }
+
+    @Override
+    public List<Room> getListSortedEmptyRoomsByPrice() {
+        return roomsRepository.getFreeRooms(roomsRepository.getSortedRoomsByPrice());
+    }
+
+    @Override
+    public List<Room> getListSortedEmptyRoomsByStars() {
+        return roomsRepository.getFreeRooms(roomsRepository.getSortedRoomsByStars());
+    }
 }
 

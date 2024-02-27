@@ -1,19 +1,20 @@
 package action.sorted.room;
 
 import action.api.IAction;
-import ru.senla.repository.room.IRoomsRepository;
-import ru.senla.repository.room.RoomsRepositoryImpl;
-import utils.ExistsEntity;
+import ru.senla.room.IRoomsService;
+import ru.senla.room.RoomsServiceImpl;
 
 public class RoomsSortByPriceActionImpl implements IAction {
-    private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
+    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
 
     @Override
     public void execute() {
-        if (ExistsEntity.noExistRooms(roomsRepository.getAllRooms())) {
-            return;
+
+        try {
+            System.out.println("-------Sorted rooms by price-------");
+            roomsService.getListSortedRoomsByPrice().stream().forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("Error sorted rooms by price " + e.getMessage());
         }
-        System.out.println("-------Sorted rooms by price-------");
-        roomsRepository.getSortedRoomsByPrice().stream().forEach(System.out::println);
     }
 }

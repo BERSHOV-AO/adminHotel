@@ -20,9 +20,6 @@ public enum ServiceResponse {
     IMPORT_SERVICES_NOK("Услуги(сервисы) не импортированы!"),
     ERROR_IMPORT_SERVICES("Ошибка импорта услуг(сервисов)!");
 
-
-
-
     private final String message;
 
     ServiceResponse(String message) {
