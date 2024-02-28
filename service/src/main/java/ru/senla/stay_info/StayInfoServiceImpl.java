@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import ru.senla.entities.StayInfo;
 import ru.senla.enums.response.GuestResponse;
 import ru.senla.enums.response.RoomResponse;
-import ru.senla.enums.response.ServiceResponse;
 import ru.senla.enums.response.StayInfoResponse;
 import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
@@ -43,21 +42,31 @@ public class StayInfoServiceImpl implements IStayInfoService {
     @Override
     public String getBillForIdRoomAndIdGuest(int guestId, int roomId) {
 
+        if (stayInfoRepository.getMapStayInfo().isEmpty()) {
+            logger.warn(RoomResponse.ROOM_WITH_ID_DOES_NOT_EXIST.getMessage());
+            return StayInfoResponse.NO_INFORMATION_STAY_INFO.getMessage();
+        }
         if (!roomsRepository.checkRoomIDExists(roomId)) {
+            logger.warn(RoomResponse.ROOM_WITH_ID_DOES_NOT_EXIST.getMessage());
             return RoomResponse.ROOM_WITH_ID_DOES_NOT_EXIST.getMessage();
         }
         if (!guestsRepository.checkGuestIDExists(guestId)) {
+            logger.warn(GuestResponse.GUEST_WITH_ID_DOES_NOT_EXIST.getMessage());
             return GuestResponse.GUEST_WITH_ID_DOES_NOT_EXIST.getMessage();
+        } else {
+            StringBuilder str = new StringBuilder();
+            str.append("************--BILL--************" + "\n");
+            str.append("Имя гостя: " + guestsRepository.getGuestById(guestId).getLastName() + "\n");
+            str.append("Номер комнаты: " + roomsRepository.getRoomById(roomId).getRoomNumber() + "\n");
+            str.append("Счет за номер : ");
+            str.append(stayInfoRepository.getBillForRoomAndGuest(guestsRepository.getGuestById(guestId),
+                    roomsRepository.getRoomById(roomId)) + "руб." + "\n");
+            str.append("********************************");
+            logger.info(String.format("Гость с id: %d, номер с id: %d, счет за проживание равен: %.2f руб.",
+                    guestId, roomId, stayInfoRepository.getBillForRoomGuest(
+                            guestsRepository.getGuestById(guestId), roomsRepository.getRoomById(roomId))));
+            return str.toString();
         }
-
-//        if (stayInfoRepository.isMapStayInfoEmpty()) {
-//            return StayInfoResponse.NO_INFORMATION_STAY_INFO.getMessage();
-//        } else {
-//            Double bell = stayInfoRepository.getBillForRoomGuest(
-//                    guestsRepository.getGuestById(guestId), roomsRepository.getRoomById(roomId));
-//            return bell.toString();
-//        }
-        return null;
     }
 
     @Override

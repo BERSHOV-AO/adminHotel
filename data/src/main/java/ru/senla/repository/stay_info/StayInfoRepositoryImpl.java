@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class StayInfoRepositoryImpl implements IStayInfoRepository{
+public class StayInfoRepositoryImpl implements IStayInfoRepository {
 
     IStayInfoDatasource stayInfoDatasource = StayInfoDatasourceImpl.getInstance();
     IRoomsHistoryRepository roomsHistoryRepository = RoomsHistoryRepositoryImpl.getInstance();

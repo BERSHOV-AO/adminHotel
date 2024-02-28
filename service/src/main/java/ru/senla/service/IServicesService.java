@@ -1,6 +1,5 @@
 package ru.senla.service;
 
-import ru.senla.entities.Guest;
 import ru.senla.entities.Service;
 import ru.senla.enums.ServiceType;
 
@@ -25,5 +24,4 @@ public interface IServicesService {
     public List<Service> getListSortedServiceByAlphabet();
 
     public List<Service> getListSortedServiceByPrice();
-
 }

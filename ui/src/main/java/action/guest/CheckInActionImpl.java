@@ -1,7 +1,6 @@
 package action.guest;
 
 import action.api.IAction;
-import org.apache.log4j.Logger;
 import ru.senla.guest.GuestsServiceImpl;
 import ru.senla.guest.IGuestsService;
 import ru.senla.room.IRoomsService;
@@ -12,7 +11,6 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class CheckInActionImpl implements IAction {
-    final static Logger logger = Logger.getLogger(CheckInActionImpl.class);
     private static Scanner scanner = new Scanner(System.in);
     private IGuestsService guestsService = GuestsServiceImpl.getInstance();
     private IRoomsService roomsService = RoomsServiceImpl.getInstance();
@@ -35,7 +33,6 @@ public class CheckInActionImpl implements IAction {
 
         } catch (Exception e) {
             System.out.println("Не удалось зарегистрировать посетителя! " + e.getMessage());
-            logger.warn("Не удалось зарегистрировать посетителя! ", e);
         }
     }
 }

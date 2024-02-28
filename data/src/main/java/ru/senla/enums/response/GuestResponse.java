@@ -1,7 +1,6 @@
 package ru.senla.enums.response;
 
 public enum GuestResponse {
-
     GUEST_ADDED("Гость добавлен"),
     GUEST_DELETED("Гость удален"),
     EXPORT_GUESTS_OK("Посетители успешно экспортированы!"),

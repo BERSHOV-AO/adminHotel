@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GuestsRepositoryImpl implements IGuestsRepository{
+public class GuestsRepositoryImpl implements IGuestsRepository {
 
     IGuestsDatasource guestsDatasource = GuestsDatasourceImpl.getInstance();
 
@@ -117,5 +117,4 @@ public class GuestsRepositoryImpl implements IGuestsRepository{
     public void importCSVFilesToGuests() {
         guestsDatasource.setGuests(GuestImportExport.importGuests());
     }
-
 }

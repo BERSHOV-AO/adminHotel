@@ -1,8 +1,6 @@
 package ru.senla.enums.response;
 
 public enum ServiceResponse {
-
-
     NO_SERVICES_AVAILABLE("Нет доступных сервисов!"),
     SERVICE_ADDED("Сервис добавлен!"),
     ERROR_SERVICE_ADDED("Ошибка добавления услуги(сервиса)!"),
