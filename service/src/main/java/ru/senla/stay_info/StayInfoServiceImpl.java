@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import ru.senla.entities.StayInfo;
 import ru.senla.enums.response.GuestResponse;
 import ru.senla.enums.response.RoomResponse;
+import ru.senla.enums.response.ServiceResponse;
+import ru.senla.enums.response.StayInfoResponse;
 import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
 import ru.senla.repository.room.IRoomsRepository;
@@ -56,5 +58,28 @@ public class StayInfoServiceImpl implements IStayInfoService {
 //            return bell.toString();
 //        }
         return null;
+    }
+
+    @Override
+    public String exportStayInfoToFileCSV() {
+
+        try {
+            if (stayInfoRepository.getMapStayInfo().isEmpty()) {
+                logger.info(StayInfoResponse.EXPORT_STAY_INFO_NOK.getMessage());
+                return StayInfoResponse.EXPORT_STAY_INFO_NOK.getMessage();
+            } else {
+                stayInfoRepository.exportStayInfoToFileCSV();
+                logger.info(StayInfoResponse.EXPORT_STAY_INFO_OK.getMessage());
+                return StayInfoResponse.EXPORT_STAY_INFO_OK.getMessage();
+            }
+        } catch (Exception e) {
+            logger.warn(StayInfoResponse.ERROR_EXPORT_STAY_INFO.getMessage(), e);
+            return (StayInfoResponse.ERROR_EXPORT_STAY_INFO.getMessage());
+        }
+    }
+
+    @Override
+    public Map<Integer, StayInfo> printStayInfo() {
+        return stayInfoRepository.getMapStayInfo();
     }
 }
