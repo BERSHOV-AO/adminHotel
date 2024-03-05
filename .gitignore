@@ -13,6 +13,8 @@ target/
 *.iml
 *.ipr
 
+resources/data/program_log.log
+
 ### Eclipse ###
 .apt_generated
 .classpath
@@ -37,5 +39,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-
-data/program_log.log
