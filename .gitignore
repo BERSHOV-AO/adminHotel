@@ -13,6 +13,7 @@ target/
 *.iml
 *.ipr
 
+### Log ###
 resources/data/program_log.log
 
 ### Eclipse ###
