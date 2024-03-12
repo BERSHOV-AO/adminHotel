@@ -1,37 +1,31 @@
 package action.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
-import controllers.service.ServiceManager;
-import controllers.service.ServiceManagerImpl;
-import utils.ExistsEntity;
+import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.guest.IGuestsService;
+import ru.senla.service.IServicesService;
+import ru.senla.service.ServicesServiceImpl;
+import utils.InputReader;
+
+import java.util.Scanner;
 
 public class AddServicesToGuestActionImpl implements IAction {
+
+    private static Scanner scanner = new Scanner(System.in);
+    private IGuestsService guestsService = GuestsServiceImpl.getInstance();
+    private IServicesService servicesService = ServicesServiceImpl.getInstance();
+
     @Override
     public void execute() {
-
-        GuestManager guestManager = GuestManagerImpl.getInstance();
-        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
-            return;
-        }
-        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
-        if (ExistsEntity.noExistServices(serviceManager.getAllServices())) {
-            return;
-        }
-
-        System.out.println("----Список посетителей----");
-        guestManager.getAllGuests().stream().forEach(System.out::println);
-        System.out.println("----Список доступных сервисов----");
-        serviceManager.getAllServices().stream().forEach(System.out::println);
         try {
-            int guestId = ExistsEntity.getExistsGuestID(guestManager);
-            int serviceId = ExistsEntity.getExistsServiceID(serviceManager);
+            guestsService.getListGuests().stream().forEach(System.out::println);
+            servicesService.getListServices().stream().forEach(System.out::println);
 
-            guestManager.addServicesToGuest(guestManager.getGuestById(guestId),
-                    serviceManager.getServiceById(serviceId));
+            int guestId = InputReader.getIntegerInput(scanner, "Введите id гостя: ");
+            int serviceId = InputReader.getIntegerInput(scanner, "Введите id сервиса: ");
+            System.out.println(guestsService.addServicesToGuest(guestId, serviceId));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Не удалось добавить сервис посетителю " + e.getMessage());
         }
     }
 }

@@ -1,18 +1,19 @@
 package action.sorted.room;
 
 import action.api.IAction;
-import controllers.room.RoomManager;
-import controllers.room.RoomManagerImpl;
-import utils.ExistsEntity;
+import ru.senla.room.IRoomsService;
+import ru.senla.room.RoomsServiceImpl;
 
 public class RoomsSortByCapacityActionImpl implements IAction {
+    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        RoomManager roomManager = RoomManagerImpl.getInstance();
-        if (ExistsEntity.noExistRooms(roomManager.getAllRooms())) {
-            return;
+        try {
+            System.out.println("-------Sorted rooms by capacity-------");
+            roomsService.getListSortedRoomsByCapacity().stream().forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("Error sorted rooms by capacity " + e.getMessage());
         }
-        System.out.println("-------Sorted rooms by capacity-------");
-        roomManager.getSortedRoomsByCapacity().stream().forEach(System.out::println);
     }
 }

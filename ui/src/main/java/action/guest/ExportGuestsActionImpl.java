@@ -1,18 +1,19 @@
 package action.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
-import utils.ExistsEntity;
+
+import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.guest.IGuestsService;
 
 public class ExportGuestsActionImpl implements IAction {
+    private IGuestsService guestsService = GuestsServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        GuestManager guestManager = GuestManagerImpl.getInstance();
-
-        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
-            return;
+        try {
+            System.out.println(guestsService.exportGuestsToFileCSV());
+        } catch (Exception e) {
+            System.out.println("Посетители не экспортированы!" + e.getMessage());
         }
-        guestManager.exportGuestsToFileCSV();
     }
 }

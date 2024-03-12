@@ -1,18 +1,20 @@
 package action.sorted.service;
 
 import action.api.IAction;
-import controllers.service.ServiceManager;
-import controllers.service.ServiceManagerImpl;
-import utils.ExistsEntity;
+import ru.senla.service.IServicesService;
+import ru.senla.service.ServicesServiceImpl;
 
 public class ServicesSortByNameActionImpl implements IAction {
+    private IServicesService servicesService = ServicesServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
-        if (ExistsEntity.noExistServices(serviceManager.getAllServices())) {
-            return;
+
+        try {
+            System.out.println("-------Sorting services alphabetically-------");
+            servicesService.getListSortedServiceByAlphabet().stream().forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("Error sorting services alphabetically " + e.getMessage());
         }
-        System.out.println("-----Сортировка сервисов по алфавиту-----");
-        serviceManager.getListSortBySection().stream().forEach(System.out::println);
     }
 }

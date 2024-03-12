@@ -1,15 +1,15 @@
 package action.room;
 
 import action.api.IAction;
-import controllers.room.RoomManager;
-import controllers.room.RoomManagerImpl;
+import ru.senla.room.IRoomsService;
+import ru.senla.room.RoomsServiceImpl;
 
 public class ImportRoomsActionImpl implements IAction {
 
-    RoomManager roomManager = RoomManagerImpl.getInstance();
+    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
 
     @Override
     public void execute() {
-        roomManager.importCSVFilesToRooms();
+        System.out.println(roomsService.importCSVFilesToRooms());
     }
 }

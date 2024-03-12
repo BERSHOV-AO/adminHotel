@@ -1,13 +1,15 @@
 package action.service;
 
 import action.api.IAction;
-import controllers.service.ServiceManager;
-import controllers.service.ServiceManagerImpl;
+import ru.senla.service.IServicesService;
+import ru.senla.service.ServicesServiceImpl;
 
 public class ImportServicesActionImpl implements IAction {
+
+    private IServicesService servicesService = ServicesServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
-        serviceManager.importCSVFilesToServices();
+        System.out.println(servicesService.importCSVFilesToServices());
     }
 }

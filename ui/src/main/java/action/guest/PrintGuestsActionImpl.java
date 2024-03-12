@@ -1,20 +1,16 @@
 package action.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
-import utils.ExistsEntity;
+import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.guest.IGuestsService;
 
 public class PrintGuestsActionImpl implements IAction {
+    private IGuestsService guestsService = GuestsServiceImpl.getInstance();
 
     @Override
     public void execute() {
-        GuestManager guestManager = GuestManagerImpl.getInstance();
 
-        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())){
-            return;
-        }
         System.out.println("-------All Guests-------");
-        GuestManagerImpl.getInstance().getAllGuests().stream().forEach(System.out::println);
+        guestsService.getListGuests().stream().forEach(System.out::println);
     }
 }

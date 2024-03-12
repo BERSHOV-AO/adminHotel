@@ -1,18 +1,20 @@
 package action.sorted.room;
 
 import action.api.IAction;
-import controllers.room.RoomManager;
-import controllers.room.RoomManagerImpl;
-import utils.ExistsEntity;
+import ru.senla.room.IRoomsService;
+import ru.senla.room.RoomsServiceImpl;
 
 public class RoomsSortByStarsActionImpl implements IAction {
+    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        RoomManager roomManager = RoomManagerImpl.getInstance();
-        if (ExistsEntity.noExistRooms(roomManager.getAllRooms())) {
-            return;
+
+        try {
+            System.out.println("-------Sorted rooms by stars-------");
+            roomsService.getListSortedRoomsByStars().stream().forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("Error sorted rooms by stars " + e.getMessage());
         }
-        System.out.println("-------Sorted rooms by stars-------");
-        roomManager.getSortedRoomsByStars().stream().forEach(System.out::println);
     }
 }

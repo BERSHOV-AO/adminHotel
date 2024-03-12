@@ -1,17 +1,15 @@
 package action.stayInfo;
 
 import action.api.IAction;
-import controllers.stay_info.StayInfoManager;
-import controllers.stay_info.StayInfoManagerImpl;
-import utils.ExistsEntity;
+import ru.senla.stay_info.IStayInfoService;
+import ru.senla.stay_info.StayInfoServiceImpl;
 
 public class ExportStayInfoActionImpl implements IAction {
+
+    private IStayInfoService stayInfoService = StayInfoServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        StayInfoManager stayInfoManager = StayInfoManagerImpl.getInstance();
-        if (ExistsEntity.noExistStayInfo(stayInfoManager.getMapStayInfo())) {
-            return;
-        }
-        stayInfoManager.exportStayInfoToFileCSV();
+        System.out.println(stayInfoService.exportStayInfoToFileCSV());
     }
 }

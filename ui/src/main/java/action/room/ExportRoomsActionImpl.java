@@ -1,17 +1,14 @@
 package action.room;
 
 import action.api.IAction;
-import controllers.room.RoomManager;
-import controllers.room.RoomManagerImpl;
-import utils.ExistsEntity;
+import ru.senla.room.IRoomsService;
+import ru.senla.room.RoomsServiceImpl;
 
 public class ExportRoomsActionImpl implements IAction {
+    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        RoomManager roomManager = RoomManagerImpl.getInstance();
-        if (ExistsEntity.noExistRooms(roomManager.getAllRooms())) {
-            return;
-        }
-        roomManager.exportRoomsToFileCSV();
+        System.out.println(roomsService.exportRoomsToFileCSV());
     }
 }

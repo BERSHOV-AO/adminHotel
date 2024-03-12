@@ -1,28 +1,23 @@
 package action.sorted.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
-import controllers.service.ServiceManager;
-import controllers.service.ServiceManagerImpl;
-import utils.ExistsEntity;
+import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.guest.IGuestsService;
+import utils.InputReader;
+
+import java.util.Scanner;
 
 public class GuestSortServicesByPriceActionImpl implements IAction {
 
+    private static Scanner scanner = new Scanner(System.in);
+    private IGuestsService guestsService = GuestsServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        GuestManager guestManager = GuestManagerImpl.getInstance();
-        ServiceManager serviceManager = ServiceManagerImpl.getInstance();
-
-        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
-            return;
-        }
         System.out.println("-------All Guests-------");
-        guestManager.getAllGuests().stream().forEach(System.out::println);
-        int guestId = ExistsEntity.getExistsGuestID(guestManager);
-        System.out.println("У посетителя с именем " + guestManager.getGuestById(guestId).getLastName() +
-                " сортированные сервисы по цене: " + "\n");
-        serviceManager.getListServicesSortByPriceOneGuest(guestManager
-                .getGuestServices(guestManager.getGuestById(guestId)));
+        guestsService.getListGuests().stream().forEach(System.out::println);
+        int guestId = InputReader.getIntegerInput(scanner, "Введите id посетителя: ");
+        System.out.println(String.format("У посетителя с id: %d , сортированные сервисы по цене:", guestId));
+        guestsService.getListServicesOneGuestSortPriceByGuestId(guestId).stream().forEach(System.out::println);
     }
 }

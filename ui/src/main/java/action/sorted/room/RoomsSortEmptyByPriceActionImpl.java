@@ -1,18 +1,20 @@
 package action.sorted.room;
 
 import action.api.IAction;
-import controllers.room.RoomManager;
-import controllers.room.RoomManagerImpl;
-import utils.ExistsEntity;
+import ru.senla.room.IRoomsService;
+import ru.senla.room.RoomsServiceImpl;
 
 public class RoomsSortEmptyByPriceActionImpl implements IAction {
+    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        RoomManager roomManager = RoomManagerImpl.getInstance();
-        if (ExistsEntity.noExistRooms(roomManager.getAllRooms())) {
-            return;
+
+        try {
+            System.out.println("-------Sorted empty rooms by price-------");
+            roomsService.getListSortedEmptyRoomsByPrice().stream().forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("Error sorted empty rooms by price " + e.getMessage());
         }
-        System.out.println("-------Sorted empty rooms by price-------");
-        roomManager.getFreeRooms(roomManager.getSortedRoomsByPrice()).stream().forEach(System.out::println);
     }
 }

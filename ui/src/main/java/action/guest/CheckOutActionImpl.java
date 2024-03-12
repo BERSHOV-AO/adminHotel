@@ -1,32 +1,28 @@
 package action.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
-import controllers.room.RoomManager;
-import controllers.room.RoomManagerImpl;
-import controllers.stay_info.StayInfoManager;
-import controllers.stay_info.StayInfoManagerImpl;
-import utils.ExistsEntity;
+import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.guest.IGuestsService;
+import ru.senla.stay_info.IStayInfoService;
+import ru.senla.stay_info.StayInfoServiceImpl;
+import utils.InputReader;
 import utils.Printer;
 
+import java.util.Scanner;
+
 public class CheckOutActionImpl implements IAction {
+    private static Scanner scanner = new Scanner(System.in);
+    private IStayInfoService stayInfoService = StayInfoServiceImpl.getInstance();
+    private IGuestsService guestsService = GuestsServiceImpl.getInstance();
+
+
     @Override
     public void execute() {
-        StayInfoManager stayInfoManager = StayInfoManagerImpl.getInstance();
-        GuestManager guestManager = GuestManagerImpl.getInstance();
-        RoomManager roomManager = RoomManagerImpl.getInstance();
-        if (ExistsEntity.noExistStayInfo(stayInfoManager.getMapStayInfo())) {
-            return;
-        }
-
-        Printer.printStayInfo(stayInfoManager.getMapStayInfo());
-        int guestId = ExistsEntity.getExistsGuestID(guestManager);
-        int roomId = ExistsEntity.getExistsRoomID(roomManager);
-
         try {
-            stayInfoManager.checkOutGuestFromRoom(guestManager.getGuestById(guestId),
-                    roomManager.getRoomByNumber(roomId));
+            Printer.printStayInfo(stayInfoService.getMapStayInfo());
+            int guestId = InputReader.getIntegerInput(scanner, "Введите id посетителя: ");
+            int roomId = InputReader.getIntegerInput(scanner, "Введите id комнаты: ");
+            System.out.println(guestsService.checkOutGuest(guestId, roomId));
         } catch (Exception e) {
             System.out.println("Некорректный ввод данных " + e.getMessage());
         }

@@ -1,13 +1,14 @@
 package action.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
+import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.guest.IGuestsService;
 
 public class ImportGuestsActionImpl implements IAction {
+    private IGuestsService guestsService = GuestsServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        GuestManager guestManager = GuestManagerImpl.getInstance();
-        guestManager.importCSVFilesToGuests();
+        System.out.println(guestsService.importCSVFilesToGuests());
     }
 }

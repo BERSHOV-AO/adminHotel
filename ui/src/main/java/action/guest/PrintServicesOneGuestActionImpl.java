@@ -1,36 +1,22 @@
 package action.guest;
 
 import action.api.IAction;
-import controllers.guest.GuestManager;
-import controllers.guest.GuestManagerImpl;
-import models.Service;
-import utils.ExistsEntity;
+import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.guest.IGuestsService;
+import utils.InputReader;
 
-import java.util.List;
+import java.util.Scanner;
 
 public class PrintServicesOneGuestActionImpl implements IAction {
+
+    private static Scanner scanner = new Scanner(System.in);
+    private IGuestsService guestsService = GuestsServiceImpl.getInstance();
+
     @Override
     public void execute() {
-        GuestManager guestManager = GuestManagerImpl.getInstance();
-
-        if (ExistsEntity.noExistGuests(guestManager.getAllGuests())) {
-            return;
-        }
         System.out.println("-------All Guests-------");
-        guestManager.getAllGuests().stream().forEach(System.out::println);
-        List<Service> listService;
-        try {
-            int guestId = ExistsEntity.getExistsGuestID(guestManager);
-            listService = guestManager.getGuestServices(
-                    guestManager.getGuestById(guestId));
-
-            StringBuilder str = new StringBuilder();
-            str.append("Имя гостя: " + guestManager.getGuestById(guestId).getLastName() + "\n");
-            str.append("Воспользовался услугами: " + "\n");
-            str.append(listService.toString());
-            System.out.println(str);
-        } catch (Exception e) {
-            System.out.println("Не возможности распечатать сервис " + e.getMessage());
-        }
+        guestsService.getListGuests().stream().forEach(System.out::println);
+        int guestId = InputReader.getIntegerInput(scanner, "Введите id посетителя: ");
+        System.out.println(guestsService.printServicesOneGuest(guestId));
     }
 }
