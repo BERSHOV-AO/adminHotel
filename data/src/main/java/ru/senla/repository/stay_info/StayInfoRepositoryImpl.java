@@ -164,6 +164,7 @@ public class StayInfoRepositoryImpl implements IStayInfoRepository {
 
             addStayInfo(room.getRoomNumber(), new StayInfo(guest, checkInDate, checkOutDate));
             roomsHistoryRepository.addHistory(newRoomHistory);
+            room.addHistoriesRoom(newRoomHistory);
             roomsRepository.changeRoomStatus(room, RoomStatus.OCCUPIED);
             RoomHistoryExporter.exportOneRoomsHistory(newRoomHistory);
         } else {
@@ -211,7 +212,6 @@ public class StayInfoRepositoryImpl implements IStayInfoRepository {
         }
         return srvicesList;
     }
-
 
     @Override
     public double getBillServiceByGuest(Guest guest) {

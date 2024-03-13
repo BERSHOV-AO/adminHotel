@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ru.senla.entities.Room;
 import ru.senla.enums.response.RoomResponse;
 import ru.senla.enums.RoomStatus;
+import ru.senla.properties.ConfigReader;
 import ru.senla.repository.room.IRoomsRepository;
 import ru.senla.repository.room.RoomsRepositoryImpl;
 
@@ -12,6 +13,8 @@ import java.util.List;
 public class RoomsServiceImpl implements IRoomsService {
 
     final static Logger logger = Logger.getLogger(RoomsServiceImpl.class);
+
+    ConfigReader configReader = new ConfigReader();
 
     private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
 
@@ -72,12 +75,16 @@ public class RoomsServiceImpl implements IRoomsService {
     @Override
     public String changeRoomStatus(int roomId, RoomStatus status) {
         try {
-            if (roomsRepository.checkRoomIDExists(roomId)) {
-                roomsRepository.changeRoomStatus(roomsRepository.getRoomById(roomId), status);
-                logger.info(String.format("Статус номера с id %d, изменена на: " + status, roomId));
-                return RoomResponse.ROOM_STATUS_CHANGED_OK.getMessage();
+            if (configReader.isRoomStatusChangeEnabled()) {
+                if (roomsRepository.checkRoomIDExists(roomId)) {
+                    roomsRepository.changeRoomStatus(roomsRepository.getRoomById(roomId), status);
+                    logger.info(String.format("Статус номера с id %d, изменена на: " + status, roomId));
+                    return RoomResponse.ROOM_STATUS_CHANGED_OK.getMessage();
+                } else {
+                    return RoomResponse.ROOM_WITH_ID_DOES_NOT_EXIST.getMessage();
+                }
             } else {
-                return RoomResponse.ROOM_WITH_ID_DOES_NOT_EXIST.getMessage();
+                return RoomResponse.DISABLE_CHANGE_STATUS_ROOM_IN_THE_SETTINGS.getMessage();
             }
         } catch (Exception e) {
             logger.warn(RoomResponse.ERROR_CHANGING_ROOM_STATUS.getMessage(), e);

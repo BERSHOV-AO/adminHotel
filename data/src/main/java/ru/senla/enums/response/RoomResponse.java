@@ -2,6 +2,8 @@ package ru.senla.enums.response;
 
 public enum RoomResponse {
     NO_ROOMS_AVAILABLE("Нет доступных номеров!"),
+    DISABLE_CHANGE_STATUS_ROOM_IN_THE_SETTINGS(
+            "Статус номера не изменен, данная функция отключена в настройках проекта"),
     ROOM_WITH_ID_DOES_NOT_EXIST("Комнаты с данным id не существует!"),
     NUMBER_EXISTS_PLEASE_ENTER_ANOTHER_NUMBER("Номер существует, введите другой номер!"),
     ROOM_ADDED("Номер добавлен!"),

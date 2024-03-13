@@ -1,7 +1,10 @@
 package ru.senla.entities;
 
 import ru.senla.enums.RoomStatus;
+import ru.senla.properties.ConfigReader;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Room implements Entity {
@@ -12,6 +15,8 @@ public class Room implements Entity {
     private double price;
     private int capacity;
     private RoomStatus status;
+    List<RoomHistory> historiesRoom = new ArrayList<>();
+    ConfigReader configReader = new ConfigReader();
 
     public Room(Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
         this.roomNumber = roomNumber;
@@ -81,6 +86,13 @@ public class Room implements Entity {
         this.status = status;
     }
 
+    public void addHistoriesRoom(RoomHistory roomHistory) {
+        if (historiesRoom.size() >= configReader.getHistoryRecordsCount()) {
+            historiesRoom.remove(0);
+        }
+        historiesRoom.add(roomHistory);
+    }
+
     @Override
     public String toString() {
         return "Room{" +
@@ -90,6 +102,7 @@ public class Room implements Entity {
                 ", price=" + price +
                 ", capacity=" + capacity +
                 ", status=" + status +
+                ", countHistoriesGuests=" + historiesRoom.size() +
                 '}';
     }
 
