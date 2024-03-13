@@ -14,8 +14,6 @@ public class RoomsServiceImpl implements IRoomsService {
 
     final static Logger logger = Logger.getLogger(RoomsServiceImpl.class);
 
-    ConfigReader configReader = new ConfigReader();
-
     private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
 
     private static RoomsServiceImpl instance;
@@ -75,7 +73,7 @@ public class RoomsServiceImpl implements IRoomsService {
     @Override
     public String changeRoomStatus(int roomId, RoomStatus status) {
         try {
-            if (configReader.isRoomStatusChangeEnabled()) {
+            if (ConfigReader.getReader().isRoomStatusChangeEnabled()) {
                 if (roomsRepository.checkRoomIDExists(roomId)) {
                     roomsRepository.changeRoomStatus(roomsRepository.getRoomById(roomId), status);
                     logger.info(String.format("Статус номера с id %d, изменена на: " + status, roomId));

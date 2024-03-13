@@ -16,7 +16,6 @@ public class Room implements Entity {
     private int capacity;
     private RoomStatus status;
     List<RoomHistory> historiesRoom = new ArrayList<>();
-    ConfigReader configReader = new ConfigReader();
 
     public Room(Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
         this.roomNumber = roomNumber;
@@ -87,7 +86,7 @@ public class Room implements Entity {
     }
 
     public void addHistoriesRoom(RoomHistory roomHistory) {
-        if (historiesRoom.size() >= configReader.getHistoryRecordsCount()) {
+        if (historiesRoom.size() >= ConfigReader.getReader().getHistoryRecordsCount()) {
             historiesRoom.remove(0);
         }
         historiesRoom.add(roomHistory);

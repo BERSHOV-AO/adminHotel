@@ -13,12 +13,10 @@ public class MenuController {
 
         Scanner scanner = new Scanner(System.in);
 
-        boolean exit = false;
-
         navigator.setCurrentMenu(builder.getMenu());
         navigator.printMenu();
 
-        while (!exit) {
+        while (true) {
 
             Integer choice = InputReader.getIntegerInput(scanner) - 1;
 
@@ -30,8 +28,8 @@ public class MenuController {
             }
 
             if (navigator.getCurrentMenu().getMenuItems().get(choice).getNextMenu() == null) {
-                exit = true;
-                continue;
+                Serializer.serialize();
+                break;
             }
 
             navigator.setCurrentMenu(navigator.getCurrentMenu().getMenuItems().get(choice).getNextMenu());

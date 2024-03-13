@@ -7,6 +7,7 @@ import java.util.Properties;
 public class ConfigReader {
     private static final String CONFIG_FILE = "properties/resources/config.properties";
     private Properties properties;
+    private static ConfigReader reader;
 
     public ConfigReader() {
         properties = new Properties();
@@ -25,5 +26,12 @@ public class ConfigReader {
     public int getHistoryRecordsCount() {
         // количество записей в истории
         return Integer.parseInt(properties.getProperty("history_records_count"));
+    }
+
+    public static ConfigReader getReader() {
+        if (reader == null) {
+            return new ConfigReader();
+        }
+        return reader;
     }
 }
