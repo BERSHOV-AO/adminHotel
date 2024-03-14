@@ -1,5 +1,7 @@
 package ru.senla.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.senla.enums.RoomStatus;
 import ru.senla.properties.ConfigReader;
 
@@ -26,13 +28,19 @@ public class Room implements Entity {
         this.id = roomNumber;
     }
 
-    public Room(int id, Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
+    @JsonCreator
+    public Room(@JsonProperty("id") int id,
+                @JsonProperty("roomNumber") Integer roomNumber,
+                @JsonProperty("stars")  int stars,
+                @JsonProperty("price") double price,
+                @JsonProperty("capacity") int capacity,
+                @JsonProperty("status") RoomStatus status) {
+        this.id = id;
         this.roomNumber = roomNumber;
         this.stars = stars;
         this.price = price;
         this.capacity = capacity;
         this.status = status;
-        this.id = id;
     }
 
     @Override

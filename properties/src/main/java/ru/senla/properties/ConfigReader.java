@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigReader {
-    private static final String CONFIG_FILE = "properties/resources/config.properties";
+    private static final String CONFIG_FILE = "resources/config.properties";
     private Properties properties;
     private static ConfigReader reader;
 
@@ -19,12 +19,10 @@ public class ConfigReader {
     }
 
     public boolean isRoomStatusChangeEnabled() {
-        // включить изменение статуса комнаты
         return Boolean.parseBoolean(properties.getProperty("enable_room_status_change"));
     }
 
     public int getHistoryRecordsCount() {
-        // количество записей в истории
         return Integer.parseInt(properties.getProperty("history_records_count"));
     }
 

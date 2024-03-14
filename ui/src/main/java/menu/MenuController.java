@@ -1,5 +1,7 @@
 package menu;
 
+import ru.senla.room.IRoomsService;
+import ru.senla.room.RoomsServiceImpl;
 import utils.InputReader;
 
 import java.util.Scanner;
@@ -28,7 +30,7 @@ public class MenuController {
             }
 
             if (navigator.getCurrentMenu().getMenuItems().get(choice).getNextMenu() == null) {
-                Serializer.serialize();
+                RoomsServiceImpl.getInstance().serializerRooms();
                 break;
             }
 

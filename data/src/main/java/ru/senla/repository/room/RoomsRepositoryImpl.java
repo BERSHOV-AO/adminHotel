@@ -5,7 +5,9 @@ import ru.senla.datasource.room.RoomsDatasourceImpl;
 import ru.senla.entities.Room;
 import ru.senla.enums.RoomStatus;
 import ru.senla.utils.csv_utils.RoomImportExport;
+import ru.senla.utils.serialization.RoomsSerializeDeserialize;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -150,5 +152,15 @@ public class RoomsRepositoryImpl implements IRoomsRepository {
     @Override
     public void importCSVFilesToRooms() {
         roomsDatasource.setRooms(RoomImportExport.importRooms());
+    }
+
+    @Override
+    public void serializerRooms() {
+        RoomsSerializeDeserialize.serializeRoomsList(roomsDatasource.getRooms());
+    }
+
+    public void deserializeRooms() {
+        List<Room> serializerListRooms = new ArrayList<>(RoomsSerializeDeserialize.deserializeRoomsList());
+        roomsDatasource.setRooms(serializerListRooms);
     }
 }

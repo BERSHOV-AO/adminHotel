@@ -36,4 +36,8 @@ public interface IRoomsService {
     public List<Room> getListSortedEmptyRoomsByPrice();
 
     public List<Room> getListSortedEmptyRoomsByStars();
+
+    public void serializerRooms();
+
+    public void deserializeRooms();
 }

@@ -14,7 +14,7 @@ target/
 *.ipr
 
 ### Log ###
-resources/data/program_log.log
+resources/data_log/program_log.log
 
 ### Eclipse ###
 .apt_generated

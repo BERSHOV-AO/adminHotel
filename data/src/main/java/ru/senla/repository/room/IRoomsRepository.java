@@ -41,4 +41,8 @@ public interface IRoomsRepository {
     public void exportRoomsToFileCSV();
 
     public void importCSVFilesToRooms();
+
+    public void serializerRooms();
+
+    public void deserializeRooms();
 }

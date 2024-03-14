@@ -45,6 +45,7 @@ public class RoomsServiceImpl implements IRoomsService {
                 return RoomResponse.NUMBER_EXISTS_PLEASE_ENTER_ANOTHER_NUMBER.getMessage();
             }
             roomsRepository.addRoom(new Room(roomId, stars, priceDay, capacity, status));
+
             logger.info(String.format("Добавлена комната, номер: %d, количество звезд: %d, цена: %.2f," +
                     " вместимость: %d, статус: " + status, roomId, stars, priceDay, capacity));
             return RoomResponse.ROOM_ADDED.getMessage();
@@ -166,6 +167,16 @@ public class RoomsServiceImpl implements IRoomsService {
     @Override
     public List<Room> getListSortedEmptyRoomsByStars() {
         return roomsRepository.getFreeRooms(roomsRepository.getSortedRoomsByStars());
+    }
+
+    @Override
+    public void serializerRooms() {
+        roomsRepository.serializerRooms();
+    }
+
+    @Override
+    public void deserializeRooms() {
+        roomsRepository.deserializeRooms();
     }
 }
 

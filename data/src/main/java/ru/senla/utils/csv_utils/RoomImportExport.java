@@ -7,7 +7,7 @@ import java.util.List;
 
 public class RoomImportExport {
 
-    private static final String FILE_PATH = "resources/rooms.csv";
+    private static final String FILE_PATH = "resources/data_csv/rooms.csv";
 
     private static String convertToCsv(Room room) {
         StringBuilder sb = new StringBuilder();
