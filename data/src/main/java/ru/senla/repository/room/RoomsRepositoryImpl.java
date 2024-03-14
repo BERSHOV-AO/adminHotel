@@ -5,6 +5,7 @@ import ru.senla.datasource.room.RoomsDatasourceImpl;
 import ru.senla.entities.Room;
 import ru.senla.enums.RoomStatus;
 import ru.senla.utils.csv_utils.RoomImportExport;
+import ru.senla.utils.serialization.GuestsSerializeDeserialize;
 import ru.senla.utils.serialization.RoomsSerializeDeserialize;
 
 import java.util.ArrayList;
@@ -160,7 +161,9 @@ public class RoomsRepositoryImpl implements IRoomsRepository {
     }
 
     public void deserializeRooms() {
-        List<Room> serializerListRooms = new ArrayList<>(RoomsSerializeDeserialize.deserializeRoomsList());
-        roomsDatasource.setRooms(serializerListRooms);
+        if (RoomsSerializeDeserialize.deserializeRoomsList() != null) {
+            List<Room> serializerListRooms = new ArrayList<>(RoomsSerializeDeserialize.deserializeRoomsList());
+            roomsDatasource.setRooms(serializerListRooms);
+        }
     }
 }

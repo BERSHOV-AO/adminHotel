@@ -1,5 +1,7 @@
 package ru.senla.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.senla.utils.RandomNumber;
 
 import java.util.List;
@@ -14,7 +16,17 @@ public class Guest implements Entity {
         this.id = RandomNumber.getRandomID();
     }
 
+    public Guest() {
+    }
+
     public Guest(String lastName, int id) {
+        this.lastName = lastName;
+        this.id = id;
+    }
+
+    @JsonCreator
+    public Guest(@JsonProperty("id") int id,
+                 @JsonProperty("lastName") String lastName) {
         this.lastName = lastName;
         this.id = id;
     }

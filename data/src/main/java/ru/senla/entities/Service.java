@@ -1,5 +1,7 @@
 package ru.senla.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.senla.enums.ServiceType;
 import ru.senla.utils.RandomNumber;
 
@@ -25,7 +27,10 @@ public class Service implements Entity {
         this.id = RandomNumber.getRandomID();
     }
 
-    public Service(int id, ServiceType serviceType, double price) {
+    @JsonCreator
+    public Service(@JsonProperty("id") int id,
+                   @JsonProperty("serviceType") ServiceType serviceType,
+                   @JsonProperty("price") double price) {
         this.serviceType = serviceType;
         this.price = price;
         this.id = id;

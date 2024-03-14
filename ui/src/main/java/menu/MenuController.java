@@ -1,7 +1,10 @@
 package menu;
 
+import ru.senla.guest.GuestsServiceImpl;
 import ru.senla.room.IRoomsService;
 import ru.senla.room.RoomsServiceImpl;
+import ru.senla.service.ServicesServiceImpl;
+import ru.senla.stay_info.StayInfoServiceImpl;
 import utils.InputReader;
 
 import java.util.Scanner;
@@ -31,6 +34,9 @@ public class MenuController {
 
             if (navigator.getCurrentMenu().getMenuItems().get(choice).getNextMenu() == null) {
                 RoomsServiceImpl.getInstance().serializerRooms();
+                GuestsServiceImpl.getInstance().serializerGuests();
+                ServicesServiceImpl.getInstance().serializerServices();
+                //StayInfoServiceImpl.getInstance().serializerStayInfo();
                 break;
             }
 

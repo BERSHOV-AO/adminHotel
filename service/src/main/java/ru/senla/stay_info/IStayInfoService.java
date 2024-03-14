@@ -12,4 +12,6 @@ public interface IStayInfoService {
     public String exportStayInfoToFileCSV();
 
     public Map<Integer, StayInfo> printStayInfo();
+
+    public void serializerStayInfo();
 }

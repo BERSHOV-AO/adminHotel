@@ -4,14 +4,14 @@
   "stars" : 3,
   "price" : 4000.0,
   "capacity" : 2,
-  "status" : "EMPTY"
+  "status" : "OCCUPIED"
 }, {
   "id" : 2,
   "roomNumber" : 2,
   "stars" : 4,
   "price" : 4700.0,
   "capacity" : 3,
-  "status" : "EMPTY"
+  "status" : "OCCUPIED"
 }, {
   "id" : 3,
   "roomNumber" : 3,
@@ -25,19 +25,5 @@
   "stars" : 4,
   "price" : 6100.0,
   "capacity" : 4,
-  "status" : "EMPTY"
-}, {
-  "id" : 5,
-  "roomNumber" : 5,
-  "stars" : 3,
-  "price" : 7000.0,
-  "capacity" : 3,
-  "status" : "EMPTY"
-}, {
-  "id" : 7,
-  "roomNumber" : 7,
-  "stars" : 4,
-  "price" : 7500.0,
-  "capacity" : 3,
   "status" : "EMPTY"
 } ]

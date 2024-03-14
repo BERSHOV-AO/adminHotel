@@ -179,4 +179,14 @@ public class GuestsServiceImpl implements IGuestsService {
     public List<Guest> getListSortedGuestsByAlphabet() {
         return guestsRepository.getSortedGuestsByAlphabet();
     }
+
+    @Override
+    public void serializerGuests() {
+        guestsRepository.serializerGuests();
+    }
+
+    @Override
+    public void deserializeGuests() {
+        guestsRepository.deserializeGuests();
+    }
 }

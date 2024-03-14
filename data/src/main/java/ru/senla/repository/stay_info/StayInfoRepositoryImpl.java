@@ -12,6 +12,8 @@ import ru.senla.repository.room_history.RoomsHistoryRepositoryImpl;
 import ru.senla.utils.RandomNumber;
 import ru.senla.utils.csv_utils.RoomHistoryExporter;
 import ru.senla.utils.csv_utils.StayInfoExporter;
+import ru.senla.utils.serialization.ServicesSerializeDeserialize;
+import ru.senla.utils.serialization.StayInfoSerializeDeserialize;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -232,4 +234,19 @@ public class StayInfoRepositoryImpl implements IStayInfoRepository {
     public boolean isMapStayInfoEmpty() {
         return stayInfoDatasource.getInfoStorage().isEmpty();
     }
+
+    @Override
+    public void serializerStayInfo() {
+        StayInfoSerializeDeserialize.serializeMapToJsonFile(stayInfoDatasource.getInfoStorage());
+              //  serializeServicesList(servicesDatasource.getServices());
+    }
+
+//    @Override
+//    public void deserializeServices() {
+//        if (ServicesSerializeDeserialize.deserializeServicesList() != null) {
+//            List<Service> serializerListServices =
+//                    new ArrayList<>(ServicesSerializeDeserialize.deserializeServicesList());
+//            servicesDatasource.setServices(serializerListServices);
+//        }
+//    }
 }

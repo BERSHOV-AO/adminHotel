@@ -127,4 +127,14 @@ public class ServicesServiceImpl implements IServicesService {
     public List<Service> getListSortedServiceByPrice() {
         return servicesRepository.getListSortByPrice();
     }
+
+    @Override
+    public void serializerServices() {
+        servicesRepository.serializerServices();
+    }
+
+    @Override
+    public void deserializeServices() {
+        servicesRepository.deserializeServices();
+    }
 }

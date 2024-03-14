@@ -46,4 +46,6 @@ public interface IStayInfoRepository {
     public void exportStayInfoToFileCSV();
 
     public boolean isMapStayInfoEmpty();
+
+    public void serializerStayInfo();
 }

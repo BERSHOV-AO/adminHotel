@@ -2,10 +2,14 @@ package ru.senla.repository.service;
 
 import ru.senla.datasource.service.IServicesDatasource;
 import ru.senla.datasource.service.ServicesDatasourceImpl;
+import ru.senla.entities.Room;
 import ru.senla.entities.Service;
 import ru.senla.enums.ServiceType;
 import ru.senla.utils.csv_utils.ServiceImportExport;
+import ru.senla.utils.serialization.RoomsSerializeDeserialize;
+import ru.senla.utils.serialization.ServicesSerializeDeserialize;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -114,5 +118,19 @@ public class ServicesRepositoryImpl implements IServicesRepository {
     @Override
     public void importCSVFilesToServices() {
         servicesDatasource.setServices(ServiceImportExport.importServices());
+    }
+
+    @Override
+    public void serializerServices() {
+        ServicesSerializeDeserialize.serializeServicesList(servicesDatasource.getServices());
+    }
+
+    @Override
+    public void deserializeServices() {
+        if (ServicesSerializeDeserialize.deserializeServicesList() != null) {
+            List<Service> serializerListServices =
+                    new ArrayList<>(ServicesSerializeDeserialize.deserializeServicesList());
+            servicesDatasource.setServices(serializerListServices);
+        }
     }
 }

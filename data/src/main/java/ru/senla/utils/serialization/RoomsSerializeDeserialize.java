@@ -13,6 +13,20 @@ public class RoomsSerializeDeserialize {
 
     private static final String FILE_PATH = "resources/data_serializer/rooms.json";
 
+
+    // вариант с дженериком
+//    public static void serializeRoomsList(List<Room> roomsList) {
+//        DataSerializer<Room> roomDataSerializer = new DataSerializer<>();
+//        roomDataSerializer.serializeData(roomsList, FILE_PATH);
+//    }
+//
+//    public static List<Room> deserializeRoomsList() {
+//        DataSerializer<Room> roomDataSerializer = new DataSerializer<>();
+//        List<Room> deserializedRoomsList = roomDataSerializer.deserializeData(FILE_PATH);
+//        return deserializedRoomsList;
+//    }
+
+
     public static void serializeRoomsList(List<Room> roomsList) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -21,7 +35,7 @@ public class RoomsSerializeDeserialize {
             File file = new File(FILE_PATH);
             objectMapper.writeValue(file, roomsList);
 
-            System.out.println("Rooms list serialized and saved to " + FILE_PATH);
+            System.out.println("Список номеров сериализован и сохранен в " + FILE_PATH);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,7 +47,11 @@ public class RoomsSerializeDeserialize {
 
         try {
             File file = new File(FILE_PATH);
-            roomsList = Arrays.asList(objectMapper.readValue(file, Room[].class));
+            if (file.exists()) {
+                roomsList = Arrays.asList(objectMapper.readValue(file, Room[].class));
+            } else {
+                System.out.println(String.format("Файл %s не существует. Десериализация не выполнена.", FILE_PATH));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

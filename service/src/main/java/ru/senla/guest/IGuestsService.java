@@ -35,4 +35,8 @@ public interface IGuestsService {
     public List<Service> getListServicesOneGuestSortPriceByGuestId(int guestId);
 
     public List<Guest> getListSortedGuestsByAlphabet();
+
+    public void serializerGuests();
+
+    public void deserializeGuests();
 }
