@@ -10,9 +10,7 @@ import java.time.LocalDate;
 public class StayInfo implements Entity {
 
     private int id;
-    //  @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkInDate;
-   // @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkOutDate;
     private Guest guest;
 
@@ -35,7 +33,7 @@ public class StayInfo implements Entity {
 
     @JsonCreator
     public StayInfo(@JsonProperty("id") int id,
-                    @JsonProperty("guest")  Guest guest,
+                    @JsonProperty("guest") Guest guest,
                     @JsonProperty("checkInDate") @JsonFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate,
                     @JsonProperty("checkOutDate") @JsonFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate) {
         this.checkInDate = checkInDate;

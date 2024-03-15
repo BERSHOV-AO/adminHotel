@@ -5,7 +5,6 @@ import ru.senla.datasource.room.RoomsDatasourceImpl;
 import ru.senla.entities.Room;
 import ru.senla.enums.RoomStatus;
 import ru.senla.utils.csv_utils.RoomImportExport;
-import ru.senla.utils.serialization.GuestsSerializeDeserialize;
 import ru.senla.utils.serialization.RoomsSerializeDeserialize;
 
 import java.util.ArrayList;

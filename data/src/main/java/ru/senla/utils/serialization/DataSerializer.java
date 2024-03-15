@@ -30,7 +30,8 @@ public class DataSerializer<T> {
         try {
             File file = new File(filePath);
             if (file.exists()) {
-                dataList = objectMapper.readValue(file, new TypeReference<List<T>>(){});
+                dataList = objectMapper.readValue(file, new TypeReference<List<T>>() {
+                });
             } else {
                 System.out.println(String.format("Файл %s не существует. Десериализация не выполнена.", filePath));
             }

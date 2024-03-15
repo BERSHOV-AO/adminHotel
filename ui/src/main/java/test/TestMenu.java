@@ -1,9 +1,7 @@
 package test;
 
 import menu.MenuController;
-import ru.senla.enums.RoomStatus;
 import ru.senla.guest.GuestsServiceImpl;
-import ru.senla.room.IRoomsService;
 import ru.senla.room.RoomsServiceImpl;
 import ru.senla.service.ServicesServiceImpl;
 import ru.senla.stay_info.StayInfoServiceImpl;

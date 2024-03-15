@@ -1,7 +1,6 @@
 package menu;
 
 import ru.senla.guest.GuestsServiceImpl;
-import ru.senla.room.IRoomsService;
 import ru.senla.room.RoomsServiceImpl;
 import ru.senla.service.ServicesServiceImpl;
 import ru.senla.stay_info.StayInfoServiceImpl;

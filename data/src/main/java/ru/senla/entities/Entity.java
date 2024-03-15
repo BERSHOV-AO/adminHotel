@@ -1,6 +1,5 @@
 package ru.senla.entities;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 public interface Entity extends Serializable {

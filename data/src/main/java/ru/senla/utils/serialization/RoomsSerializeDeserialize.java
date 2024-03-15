@@ -13,20 +13,6 @@ public class RoomsSerializeDeserialize {
 
     private static final String FILE_PATH = "resources/data_serializer/rooms.json";
 
-
-    // вариант с дженериком
-//    public static void serializeRoomsList(List<Room> roomsList) {
-//        DataSerializer<Room> roomDataSerializer = new DataSerializer<>();
-//        roomDataSerializer.serializeData(roomsList, FILE_PATH);
-//    }
-//
-//    public static List<Room> deserializeRoomsList() {
-//        DataSerializer<Room> roomDataSerializer = new DataSerializer<>();
-//        List<Room> deserializedRoomsList = roomDataSerializer.deserializeData(FILE_PATH);
-//        return deserializedRoomsList;
-//    }
-
-
     public static void serializeRoomsList(List<Room> roomsList) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();

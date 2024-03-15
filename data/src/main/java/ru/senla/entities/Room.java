@@ -31,7 +31,7 @@ public class Room implements Entity {
     @JsonCreator
     public Room(@JsonProperty("id") int id,
                 @JsonProperty("roomNumber") Integer roomNumber,
-                @JsonProperty("stars")  int stars,
+                @JsonProperty("stars") int stars,
                 @JsonProperty("price") double price,
                 @JsonProperty("capacity") int capacity,
                 @JsonProperty("status") RoomStatus status) {

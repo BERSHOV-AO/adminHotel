@@ -3,11 +3,9 @@ package ru.senla.repository.guest;
 import ru.senla.datasource.guest.GuestsDatasourceImpl;
 import ru.senla.datasource.guest.IGuestsDatasource;
 import ru.senla.entities.Guest;
-import ru.senla.entities.Room;
 import ru.senla.entities.Service;
 import ru.senla.utils.csv_utils.GuestImportExport;
 import ru.senla.utils.serialization.GuestsSerializeDeserialize;
-import ru.senla.utils.serialization.RoomsSerializeDeserialize;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -128,7 +126,7 @@ public class GuestsRepositoryImpl implements IGuestsRepository {
 
     @Override
     public void deserializeGuests() {
-        if(GuestsSerializeDeserialize.deserializeGuestsList() != null){
+        if (GuestsSerializeDeserialize.deserializeGuestsList() != null) {
             List<Guest> serializerListGuests = new ArrayList<>(GuestsSerializeDeserialize.deserializeGuestsList());
             guestsDatasource.setGuests(serializerListGuests);
         }

@@ -2,11 +2,9 @@ package ru.senla.repository.service;
 
 import ru.senla.datasource.service.IServicesDatasource;
 import ru.senla.datasource.service.ServicesDatasourceImpl;
-import ru.senla.entities.Room;
 import ru.senla.entities.Service;
 import ru.senla.enums.ServiceType;
 import ru.senla.utils.csv_utils.ServiceImportExport;
-import ru.senla.utils.serialization.RoomsSerializeDeserialize;
 import ru.senla.utils.serialization.ServicesSerializeDeserialize;
 
 import java.util.ArrayList;
