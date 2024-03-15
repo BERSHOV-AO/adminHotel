@@ -4,14 +4,14 @@
   "stars" : 3,
   "price" : 4000.0,
   "capacity" : 2,
-  "status" : "OCCUPIED"
+  "status" : "EMPTY"
 }, {
   "id" : 2,
   "roomNumber" : 2,
   "stars" : 4,
   "price" : 4700.0,
   "capacity" : 3,
-  "status" : "OCCUPIED"
+  "status" : "EMPTY"
 }, {
   "id" : 3,
   "roomNumber" : 3,

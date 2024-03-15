@@ -96,4 +96,9 @@ public class StayInfoServiceImpl implements IStayInfoService {
     public void serializerStayInfo() {
         stayInfoRepository.serializerStayInfo();
     }
+
+    @Override
+    public void deserializeStayInfo() {
+        stayInfoRepository.deserializeStayInfo();
+    }
 }

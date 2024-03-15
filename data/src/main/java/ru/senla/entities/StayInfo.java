@@ -1,6 +1,7 @@
 package ru.senla.entities;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.senla.utils.RandomNumber;
 
@@ -9,7 +10,9 @@ import java.time.LocalDate;
 public class StayInfo implements Entity {
 
     private int id;
+    //  @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkInDate;
+   // @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkOutDate;
     private Guest guest;
 
@@ -32,9 +35,9 @@ public class StayInfo implements Entity {
 
     @JsonCreator
     public StayInfo(@JsonProperty("id") int id,
-                    @JsonProperty("guest") Guest guest,
-                    @JsonProperty("checkInDate") LocalDate checkInDate,
-                    @JsonProperty("checkOutDate") LocalDate checkOutDate) {
+                    @JsonProperty("guest")  Guest guest,
+                    @JsonProperty("checkInDate") @JsonFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate,
+                    @JsonProperty("checkOutDate") @JsonFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate) {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.guest = guest;

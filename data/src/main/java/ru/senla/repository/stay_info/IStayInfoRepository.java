@@ -48,4 +48,6 @@ public interface IStayInfoRepository {
     public boolean isMapStayInfoEmpty();
 
     public void serializerStayInfo();
+
+    public void deserializeStayInfo();
 }

@@ -36,10 +36,9 @@ public class MenuController {
                 RoomsServiceImpl.getInstance().serializerRooms();
                 GuestsServiceImpl.getInstance().serializerGuests();
                 ServicesServiceImpl.getInstance().serializerServices();
-                //StayInfoServiceImpl.getInstance().serializerStayInfo();
+                StayInfoServiceImpl.getInstance().serializerStayInfo();
                 break;
             }
-
             navigator.setCurrentMenu(navigator.getCurrentMenu().getMenuItems().get(choice).getNextMenu());
             navigator.printMenu();
         }

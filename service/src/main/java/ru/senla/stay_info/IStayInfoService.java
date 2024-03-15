@@ -14,4 +14,6 @@ public interface IStayInfoService {
     public Map<Integer, StayInfo> printStayInfo();
 
     public void serializerStayInfo();
+
+    public void deserializeStayInfo();
 }

@@ -238,15 +238,14 @@ public class StayInfoRepositoryImpl implements IStayInfoRepository {
     @Override
     public void serializerStayInfo() {
         StayInfoSerializeDeserialize.serializeMapToJsonFile(stayInfoDatasource.getInfoStorage());
-              //  serializeServicesList(servicesDatasource.getServices());
     }
 
-//    @Override
-//    public void deserializeServices() {
-//        if (ServicesSerializeDeserialize.deserializeServicesList() != null) {
-//            List<Service> serializerListServices =
-//                    new ArrayList<>(ServicesSerializeDeserialize.deserializeServicesList());
-//            servicesDatasource.setServices(serializerListServices);
-//        }
-//    }
+    @Override
+    public void deserializeStayInfo() {
+        if (StayInfoSerializeDeserialize.deserializeJsonFileToMap() != null) {
+            Map<Integer, StayInfo> infoStorage =
+                    new LinkedHashMap<>(StayInfoSerializeDeserialize.deserializeJsonFileToMap());
+            stayInfoDatasource.setStayInfo(infoStorage);
+        }
+    }
 }
