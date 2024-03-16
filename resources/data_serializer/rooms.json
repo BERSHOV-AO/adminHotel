@@ -26,4 +26,11 @@
   "price" : 6100.0,
   "capacity" : 4,
   "status" : "OCCUPIED"
+}, {
+  "id" : 5,
+  "roomNumber" : 5,
+  "stars" : 5,
+  "price" : 7200.0,
+  "capacity" : 3,
+  "status" : "EMPTY"
 } ]
