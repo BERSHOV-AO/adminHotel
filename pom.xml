@@ -13,6 +13,7 @@
         <module>data</module>
         <module>service</module>
         <module>properties</module>
+        <module>annotations</module>
     </modules>
 
     <properties>
