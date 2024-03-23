@@ -5,6 +5,7 @@ import ru.senla.datasource.stay_info.StayInfoDatasourceImpl;
 import ru.senla.entities.*;
 import ru.senla.enums.RoomHistoryStatus;
 import ru.senla.enums.RoomStatus;
+import ru.senla.properties.ConfigReader;
 import ru.senla.repository.room.IRoomsRepository;
 import ru.senla.repository.room.RoomsRepositoryImpl;
 import ru.senla.repository.room_history.IRoomsHistoryRepository;
@@ -165,7 +166,6 @@ public class StayInfoRepositoryImpl implements IStayInfoRepository {
 
             addStayInfo(room.getRoomNumber(), new StayInfo(guest, checkInDate, checkOutDate));
             roomsHistoryRepository.addHistory(newRoomHistory);
-            room.addHistoriesRoom(newRoomHistory);
             roomsRepository.changeRoomStatus(room, RoomStatus.OCCUPIED);
             RoomHistoryExporter.exportOneRoomsHistory(newRoomHistory);
         } else {
@@ -246,5 +246,22 @@ public class StayInfoRepositoryImpl implements IStayInfoRepository {
                     new LinkedHashMap<>(StayInfoSerializeDeserialize.deserializeJsonFileToMap());
             stayInfoDatasource.setStayInfo(infoStorage);
         }
+    }
+
+    public void addRoomHistoryByCount(Room room, Guest guest, LocalDate checkInDate, LocalDate checkOutDate, int countRoomHistory) {
+        List<RoomHistory> listHistoriesRoom = room.getHistoriesRoom();
+        RoomHistory roomHistory = new RoomHistory();
+        roomHistory.setId(RandomNumber.getRandomID());
+        roomHistory.setGuest(guest);
+        roomHistory.setRoom(room);
+        roomHistory.setCheckInDate(checkInDate);
+        roomHistory.setCheckOutDate(checkOutDate);
+        roomHistory.setStatus(RoomHistoryStatus.CHECKIN);
+
+        if (listHistoriesRoom.size() >= countRoomHistory) {
+            listHistoriesRoom.remove(0);
+        }
+        listHistoriesRoom.add(roomHistory);
+        room.setHistoriesRoom(listHistoriesRoom);
     }
 }

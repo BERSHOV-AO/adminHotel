@@ -50,4 +50,7 @@ public interface IStayInfoRepository {
     public void serializerStayInfo();
 
     public void deserializeStayInfo();
+
+    public void addRoomHistoryByCount(Room room, Guest guest, LocalDate checkInDate,
+                                      LocalDate checkOutDate, int countRoomHistory);
 }

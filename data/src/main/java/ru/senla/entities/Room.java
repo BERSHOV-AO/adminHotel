@@ -93,11 +93,12 @@ public class Room implements Entity {
         this.status = status;
     }
 
-    public void addHistoriesRoom(RoomHistory roomHistory) {
-        if (historiesRoom.size() >= ConfigReader.getReader().getHistoryRecordsCount()) {
-            historiesRoom.remove(0);
-        }
-        historiesRoom.add(roomHistory);
+    public List<RoomHistory> getHistoriesRoom() {
+        return historiesRoom;
+    }
+
+    public void setHistoriesRoom(List<RoomHistory> historiesRoom) {
+        this.historiesRoom = historiesRoom;
     }
 
     @Override

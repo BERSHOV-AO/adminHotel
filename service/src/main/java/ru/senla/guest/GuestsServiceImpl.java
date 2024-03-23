@@ -4,6 +4,7 @@ import ru.senla.entities.Guest;
 import ru.senla.entities.Service;
 import ru.senla.enums.response.GuestResponse;
 import ru.senla.enums.response.RoomResponse;
+import ru.senla.properties.ConfigReader;
 import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
 import ru.senla.repository.room.IRoomsRepository;
@@ -86,8 +87,13 @@ public class GuestsServiceImpl implements IGuestsService {
 
         stayInfoRepository.checkInGuestInRoom(guestsRepository.getGuestById(guestId),
                 roomsRepository.getRoomById(roomId), inDate, outDate);
+        stayInfoRepository.addRoomHistoryByCount(roomsRepository.getRoomById(roomId),
+                guestsRepository.getGuestById(guestId), inDate, outDate,
+                ConfigReader.getReader().getHistoryRecordsCount());
+
         logger.info(String.format("Заселение гостя с id: %d, в номер с id: %d, дата заселения %s, дата выселения %s"
                 , guestId, roomId, inDate.toString(), outDate.toString()));
+
         return GuestResponse.GUEST_CHECKED_INTO_THE_ROOM.getMessage();
     }
 
