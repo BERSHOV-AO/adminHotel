@@ -27,7 +27,6 @@ public class ExporterImporter<T> {
             while ((line = reader.readLine()) != null) {
                 T object = converter.apply(line);
                 data.add(object);
-
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GuestImportExport {
 
-    private static final String FILE_PATH = "resources/guest.csv";
+    private static final String FILE_PATH = "resources/data_csv/guest.csv";
 
     private static String convertToCsv(Guest guest) {
         StringBuilder sb = new StringBuilder();

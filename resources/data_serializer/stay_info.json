@@ -1,0 +1,20 @@
+{
+  "4" : {
+    "id" : 109032,
+    "guest" : {
+      "id" : 107744,
+      "lastName" : "Artem",
+      "services" : [ {
+        "id" : 187245,
+        "serviceType" : "DINNER",
+        "price" : 860.0
+      }, {
+        "id" : 418316,
+        "serviceType" : "LAUNDRY",
+        "price" : 540.0
+      } ]
+    },
+    "checkInDate" : "2024-03-15",
+    "checkOutDate" : "2024-03-19"
+  }
+}

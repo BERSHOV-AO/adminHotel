@@ -29,4 +29,8 @@ public interface IGuestsRepository {
     public void exportGuestsToFileCSV();
 
     public void importCSVFilesToGuests();
+
+    public void serializerGuests();
+
+    public void deserializeGuests();
 }

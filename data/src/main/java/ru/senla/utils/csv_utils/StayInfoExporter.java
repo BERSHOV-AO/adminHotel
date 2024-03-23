@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class StayInfoExporter {
 
-    private static final String FILE_PATH = "resources/stay_info.csv";
+    private static final String FILE_PATH = "resources/data_csv/stay_info.csv";
 
     public static void exportStayInfo(Map<Integer, StayInfo> infoStorage) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {

@@ -91,4 +91,14 @@ public class StayInfoServiceImpl implements IStayInfoService {
     public Map<Integer, StayInfo> printStayInfo() {
         return stayInfoRepository.getMapStayInfo();
     }
+
+    @Override
+    public void serializerStayInfo() {
+        stayInfoRepository.serializerStayInfo();
+    }
+
+    @Override
+    public void deserializeStayInfo() {
+        stayInfoRepository.deserializeStayInfo();
+    }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ServiceImportExport {
 
-    private static final String FILE_PATH = "resources/service.csv";
+    private static final String FILE_PATH = "resources/data_csv/service.csv";
 
     private static String convertToCsv(Service service) {
         StringBuilder sb = new StringBuilder();

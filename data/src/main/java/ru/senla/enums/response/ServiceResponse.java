@@ -5,7 +5,6 @@ public enum ServiceResponse {
     SERVICE_ADDED("Сервис добавлен!"),
     ERROR_SERVICE_ADDED("Ошибка добавления услуги(сервиса)!"),
     SERVICE_DELETED("Сервис удален!"),
-    //EXPORT_SERVICE_OK("Услуги(сервисы) успешно экспортированы!"),
     SERVICE_PRICE_CHANGE_OK("Цена услуги(сервиса) изменена!"),
     ERROR_SERVICE_PRICE_CHANGE_NOK("Ошибка, цена услуги(сервиса) не изменена!"),
     SERVICE_WITH_ID_DOES_NOT_EXIST("Услуги(сервиса) с данным id не существует!"),

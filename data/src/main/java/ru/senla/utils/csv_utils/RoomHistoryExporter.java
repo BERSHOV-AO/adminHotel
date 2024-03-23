@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class RoomHistoryExporter {
 
-    private static final String FILE_PATH = "resources/rooms_history.csv";
+    private static final String FILE_PATH = "resources/data_csv/rooms_history.csv";
 
     public static void exportOneRoomsHistory(RoomHistory roomHistory) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH,

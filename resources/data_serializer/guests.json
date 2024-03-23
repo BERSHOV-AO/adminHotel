@@ -1,0 +1,29 @@
+[ {
+  "id" : 107744,
+  "lastName" : "Artem",
+  "services" : [ {
+    "id" : 187245,
+    "serviceType" : "DINNER",
+    "price" : 860.0
+  }, {
+    "id" : 418316,
+    "serviceType" : "LAUNDRY",
+    "price" : 540.0
+  } ]
+}, {
+  "id" : 429582,
+  "lastName" : "Victor",
+  "services" : null
+}, {
+  "id" : 359528,
+  "lastName" : "Sergey",
+  "services" : null
+}, {
+  "id" : 467330,
+  "lastName" : "Aleksey",
+  "services" : null
+}, {
+  "id" : 439201,
+  "lastName" : "Ilya",
+  "services" : null
+} ]

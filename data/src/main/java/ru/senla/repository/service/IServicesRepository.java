@@ -33,4 +33,8 @@ public interface IServicesRepository {
     public void exportServicesToFileCSV();
 
     public void importCSVFilesToServices();
+
+    public void serializerServices();
+
+    public void deserializeServices();
 }

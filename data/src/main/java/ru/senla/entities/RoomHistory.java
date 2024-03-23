@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 public class RoomHistory implements Entity {
 
-
     private int id;
     private Room room;
     private Guest guest;

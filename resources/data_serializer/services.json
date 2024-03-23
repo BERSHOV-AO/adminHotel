@@ -1,0 +1,29 @@
+[ {
+  "id" : 646999,
+  "serviceType" : "BREAKFAST",
+  "price" : 456.0
+}, {
+  "id" : 736713,
+  "serviceType" : "BREAKFAST",
+  "price" : 642.0
+}, {
+  "id" : 735993,
+  "serviceType" : "LUNCH",
+  "price" : 750.0
+}, {
+  "id" : 187245,
+  "serviceType" : "DINNER",
+  "price" : 860.0
+}, {
+  "id" : 155483,
+  "serviceType" : "DINNER",
+  "price" : 920.0
+}, {
+  "id" : 418316,
+  "serviceType" : "LAUNDRY",
+  "price" : 540.0
+}, {
+  "id" : 401563,
+  "serviceType" : "LUNCH",
+  "price" : 380.0
+} ]

@@ -12,6 +12,7 @@ import ru.senla.repository.room_history.RoomsHistoryRepositoryImpl;
 import ru.senla.utils.RandomNumber;
 import ru.senla.utils.csv_utils.RoomHistoryExporter;
 import ru.senla.utils.csv_utils.StayInfoExporter;
+import ru.senla.utils.serialization.StayInfoSerializeDeserialize;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -164,6 +165,7 @@ public class StayInfoRepositoryImpl implements IStayInfoRepository {
 
             addStayInfo(room.getRoomNumber(), new StayInfo(guest, checkInDate, checkOutDate));
             roomsHistoryRepository.addHistory(newRoomHistory);
+            room.addHistoriesRoom(newRoomHistory);
             roomsRepository.changeRoomStatus(room, RoomStatus.OCCUPIED);
             RoomHistoryExporter.exportOneRoomsHistory(newRoomHistory);
         } else {
@@ -212,7 +214,6 @@ public class StayInfoRepositoryImpl implements IStayInfoRepository {
         return srvicesList;
     }
 
-
     @Override
     public double getBillServiceByGuest(Guest guest) {
         List<Service> srvicesList = getListStayInfoOneGuest(guest);
@@ -231,5 +232,19 @@ public class StayInfoRepositoryImpl implements IStayInfoRepository {
     @Override
     public boolean isMapStayInfoEmpty() {
         return stayInfoDatasource.getInfoStorage().isEmpty();
+    }
+
+    @Override
+    public void serializerStayInfo() {
+        StayInfoSerializeDeserialize.serializeMapToJsonFile(stayInfoDatasource.getInfoStorage());
+    }
+
+    @Override
+    public void deserializeStayInfo() {
+        if (StayInfoSerializeDeserialize.deserializeJsonFileToMap() != null) {
+            Map<Integer, StayInfo> infoStorage =
+                    new LinkedHashMap<>(StayInfoSerializeDeserialize.deserializeJsonFileToMap());
+            stayInfoDatasource.setStayInfo(infoStorage);
+        }
     }
 }

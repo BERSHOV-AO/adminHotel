@@ -1,5 +1,9 @@
 package menu;
 
+import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.room.RoomsServiceImpl;
+import ru.senla.service.ServicesServiceImpl;
+import ru.senla.stay_info.StayInfoServiceImpl;
 import utils.InputReader;
 
 import java.util.Scanner;
@@ -13,12 +17,10 @@ public class MenuController {
 
         Scanner scanner = new Scanner(System.in);
 
-        boolean exit = false;
-
         navigator.setCurrentMenu(builder.getMenu());
         navigator.printMenu();
 
-        while (!exit) {
+        while (true) {
 
             Integer choice = InputReader.getIntegerInput(scanner) - 1;
 
@@ -30,10 +32,12 @@ public class MenuController {
             }
 
             if (navigator.getCurrentMenu().getMenuItems().get(choice).getNextMenu() == null) {
-                exit = true;
-                continue;
+                RoomsServiceImpl.getInstance().serializerRooms();
+                GuestsServiceImpl.getInstance().serializerGuests();
+                ServicesServiceImpl.getInstance().serializerServices();
+                StayInfoServiceImpl.getInstance().serializerStayInfo();
+                break;
             }
-
             navigator.setCurrentMenu(navigator.getCurrentMenu().getMenuItems().get(choice).getNextMenu());
             navigator.printMenu();
         }

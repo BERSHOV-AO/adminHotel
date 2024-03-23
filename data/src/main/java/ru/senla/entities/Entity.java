@@ -1,6 +1,8 @@
 package ru.senla.entities;
 
-public interface Entity {
+import java.io.Serializable;
+
+public interface Entity extends Serializable {
 
     public int getId();
 

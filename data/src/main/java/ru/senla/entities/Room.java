@@ -1,7 +1,12 @@
 package ru.senla.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.senla.enums.RoomStatus;
+import ru.senla.properties.ConfigReader;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Room implements Entity {
@@ -12,6 +17,7 @@ public class Room implements Entity {
     private double price;
     private int capacity;
     private RoomStatus status;
+    List<RoomHistory> historiesRoom = new ArrayList<>();
 
     public Room(Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
         this.roomNumber = roomNumber;
@@ -22,13 +28,19 @@ public class Room implements Entity {
         this.id = roomNumber;
     }
 
-    public Room(int id, Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
+    @JsonCreator
+    public Room(@JsonProperty("id") int id,
+                @JsonProperty("roomNumber") Integer roomNumber,
+                @JsonProperty("stars") int stars,
+                @JsonProperty("price") double price,
+                @JsonProperty("capacity") int capacity,
+                @JsonProperty("status") RoomStatus status) {
+        this.id = id;
         this.roomNumber = roomNumber;
         this.stars = stars;
         this.price = price;
         this.capacity = capacity;
         this.status = status;
-        this.id = id;
     }
 
     @Override
@@ -81,6 +93,13 @@ public class Room implements Entity {
         this.status = status;
     }
 
+    public void addHistoriesRoom(RoomHistory roomHistory) {
+        if (historiesRoom.size() >= ConfigReader.getReader().getHistoryRecordsCount()) {
+            historiesRoom.remove(0);
+        }
+        historiesRoom.add(roomHistory);
+    }
+
     @Override
     public String toString() {
         return "Room{" +
@@ -90,6 +109,7 @@ public class Room implements Entity {
                 ", price=" + price +
                 ", capacity=" + capacity +
                 ", status=" + status +
+                ", countHistoriesGuests=" + historiesRoom.size() +
                 '}';
     }
 

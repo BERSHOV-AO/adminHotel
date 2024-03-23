@@ -24,4 +24,8 @@ public interface IServicesService {
     public List<Service> getListSortedServiceByAlphabet();
 
     public List<Service> getListSortedServiceByPrice();
+
+    public void serializerServices();
+
+    public void deserializeServices();
 }

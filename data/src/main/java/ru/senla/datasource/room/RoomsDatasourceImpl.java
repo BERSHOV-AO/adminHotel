@@ -35,5 +35,4 @@ public class RoomsDatasourceImpl implements IRoomsDatasource {
     public List<Room> getRooms() {
         return rooms;
     }
-
 }
