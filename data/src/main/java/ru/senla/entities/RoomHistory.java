@@ -1,5 +1,7 @@
 package ru.senla.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.senla.enums.RoomHistoryStatus;
 
 import java.time.LocalDate;
@@ -13,6 +15,25 @@ public class RoomHistory implements Entity {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private RoomHistoryStatus status;
+
+    public RoomHistory() {
+
+    }
+
+    @JsonCreator
+    public RoomHistory(@JsonProperty("id") int id,
+                       @JsonProperty("room") Room room,
+                       @JsonProperty("guest") Guest guest,
+                       @JsonProperty("checkInDate") LocalDate checkInDate,
+                       @JsonProperty("checkOutDate") LocalDate checkOutDate,
+                       @JsonProperty("status") RoomHistoryStatus status) {
+        this.id = id;
+        this.room = room;
+        this.guest = guest;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.status = status;
+    }
 
     @Override
     public int getId() {

@@ -19,6 +19,7 @@ public class Room implements Entity {
     private RoomStatus status;
     List<RoomHistory> historiesRoom = new ArrayList<>();
 
+
     public Room(Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
         this.roomNumber = roomNumber;
         this.stars = stars;
@@ -34,7 +35,20 @@ public class Room implements Entity {
                 @JsonProperty("stars") int stars,
                 @JsonProperty("price") double price,
                 @JsonProperty("capacity") int capacity,
-                @JsonProperty("status") RoomStatus status) {
+                @JsonProperty("status") RoomStatus status,
+                @JsonProperty("historiesRoom") List<RoomHistory> historiesRoom) {
+
+
+        this.id = id;
+        this.roomNumber = roomNumber;
+        this.stars = stars;
+        this.price = price;
+        this.capacity = capacity;
+        this.status = status;
+        this.historiesRoom = historiesRoom;
+    }
+
+    public Room(int id, Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
         this.id = id;
         this.roomNumber = roomNumber;
         this.stars = stars;

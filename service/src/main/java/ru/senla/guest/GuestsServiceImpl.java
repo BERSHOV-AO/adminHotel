@@ -1,10 +1,11 @@
 package ru.senla.guest;
 
+import ru.senla.annotations.ConfigProperty;
+import ru.senla.annotations.ConfigType;
 import ru.senla.entities.Guest;
 import ru.senla.entities.Service;
 import ru.senla.enums.response.GuestResponse;
 import ru.senla.enums.response.RoomResponse;
-import ru.senla.properties.ConfigReader;
 import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
 import ru.senla.repository.room.IRoomsRepository;
@@ -22,6 +23,8 @@ import java.util.List;
 public class GuestsServiceImpl implements IGuestsService {
 
     final static Logger logger = Logger.getLogger(GuestsServiceImpl.class);
+    @ConfigProperty(propertyName = "history_records_count", type = ConfigType.INTEGER)
+    private int countHistoryRecords;
     private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
     private IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
     private IStayInfoRepository stayInfoRepository = StayInfoRepositoryImpl.getInstance();
@@ -89,7 +92,7 @@ public class GuestsServiceImpl implements IGuestsService {
                 roomsRepository.getRoomById(roomId), inDate, outDate);
         stayInfoRepository.addRoomHistoryByCount(roomsRepository.getRoomById(roomId),
                 guestsRepository.getGuestById(guestId), inDate, outDate,
-                ConfigReader.getReader().getHistoryRecordsCount());
+                countHistoryRecords);
 
         logger.info(String.format("Заселение гостя с id: %d, в номер с id: %d, дата заселения %s, дата выселения %s"
                 , guestId, roomId, inDate.toString(), outDate.toString()));

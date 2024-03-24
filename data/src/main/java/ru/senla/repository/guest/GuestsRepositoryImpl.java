@@ -1,5 +1,6 @@
 package ru.senla.repository.guest;
 
+import ru.senla.annotations.di.InjectByType;
 import ru.senla.datasource.guest.GuestsDatasourceImpl;
 import ru.senla.datasource.guest.IGuestsDatasource;
 import ru.senla.entities.Guest;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 public class GuestsRepositoryImpl implements IGuestsRepository {
 
+    @InjectByType
     IGuestsDatasource guestsDatasource = GuestsDatasourceImpl.getInstance();
 
     private static GuestsRepositoryImpl instance;

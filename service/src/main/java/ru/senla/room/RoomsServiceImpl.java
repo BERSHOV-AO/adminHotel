@@ -1,6 +1,8 @@
 package ru.senla.room;
 
 import org.apache.log4j.Logger;
+import ru.senla.annotations.ConfigProperty;
+import ru.senla.annotations.ConfigType;
 import ru.senla.entities.Room;
 import ru.senla.enums.response.RoomResponse;
 import ru.senla.enums.RoomStatus;
@@ -11,6 +13,9 @@ import ru.senla.repository.room.RoomsRepositoryImpl;
 import java.util.List;
 
 public class RoomsServiceImpl implements IRoomsService {
+
+    @ConfigProperty(propertyName = "enable_room_status_change", type = ConfigType.BOOLEAN)
+    private boolean RoomStatusChangeEnabled;
 
     final static Logger logger = Logger.getLogger(RoomsServiceImpl.class);
 
@@ -73,8 +78,10 @@ public class RoomsServiceImpl implements IRoomsService {
 
     @Override
     public String changeRoomStatus(int roomId, RoomStatus status) {
+
+
         try {
-            if (ConfigReader.getReader().isRoomStatusChangeEnabled()) {
+            if (RoomStatusChangeEnabled) {
                 if (roomsRepository.checkRoomIDExists(roomId)) {
                     roomsRepository.changeRoomStatus(roomsRepository.getRoomById(roomId), status);
                     logger.info(String.format("Статус номера с id %d, изменена на: " + status, roomId));

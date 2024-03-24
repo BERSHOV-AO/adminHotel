@@ -1,10 +1,12 @@
 package ru.senla.datasource.guest;
 
+import ru.senla.annotations.di.Singleton;
 import ru.senla.entities.Guest;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Singleton
 public class GuestsDatasourceImpl implements IGuestsDatasource {
 
     private List<Guest> guests = new ArrayList<>();
