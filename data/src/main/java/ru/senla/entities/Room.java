@@ -1,6 +1,7 @@
 package ru.senla.entities;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.senla.enums.RoomStatus;
 import ru.senla.properties.ConfigReader;
@@ -17,6 +18,7 @@ public class Room implements Entity {
     private double price;
     private int capacity;
     private RoomStatus status;
+    @JsonIgnore
     List<RoomHistory> historiesRoom = new ArrayList<>();
 
 
@@ -35,8 +37,7 @@ public class Room implements Entity {
                 @JsonProperty("stars") int stars,
                 @JsonProperty("price") double price,
                 @JsonProperty("capacity") int capacity,
-                @JsonProperty("status") RoomStatus status,
-                @JsonProperty("historiesRoom") List<RoomHistory> historiesRoom) {
+                @JsonProperty("status") RoomStatus status) {
 
 
         this.id = id;
@@ -45,17 +46,16 @@ public class Room implements Entity {
         this.price = price;
         this.capacity = capacity;
         this.status = status;
-        this.historiesRoom = historiesRoom;
     }
 
-    public Room(int id, Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
-        this.id = id;
-        this.roomNumber = roomNumber;
-        this.stars = stars;
-        this.price = price;
-        this.capacity = capacity;
-        this.status = status;
-    }
+//    public Room(int id, Integer roomNumber, int stars, double price, int capacity, RoomStatus status) {
+//        this.id = id;
+//        this.roomNumber = roomNumber;
+//        this.stars = stars;
+//        this.price = price;
+//        this.capacity = capacity;
+//        this.status = status;
+//    }
 
     @Override
     public int getId() {
