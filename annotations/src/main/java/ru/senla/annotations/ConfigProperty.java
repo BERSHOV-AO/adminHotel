@@ -9,6 +9,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface ConfigProperty {
     String configName() default "resources/config.properties"; // название файла конфигурации
+
     String propertyName() default "";
+
     ConfigType type() default ConfigType.STRING;
 }
