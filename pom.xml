@@ -14,6 +14,7 @@
         <module>service</module>
         <module>properties</module>
         <module>annotations</module>
+        <module>di</module>
     </modules>
 
     <properties>
