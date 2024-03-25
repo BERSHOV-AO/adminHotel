@@ -1,21 +1,19 @@
 package ru.senla.guest;
 
+import ru.senla.ConfigurationType;
+import ru.senla.InjectDependency;
 import ru.senla.annotations.ConfigProperty;
 import ru.senla.annotations.ConfigType;
 import ru.senla.entities.Guest;
 import ru.senla.entities.Service;
 import ru.senla.enums.response.GuestResponse;
 import ru.senla.enums.response.RoomResponse;
-import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
 import ru.senla.repository.room.IRoomsRepository;
-import ru.senla.repository.room.RoomsRepositoryImpl;
 import ru.senla.repository.service.IServicesRepository;
-import ru.senla.repository.service.ServicesRepositoryImpl;
 
 import org.apache.log4j.Logger;
 import ru.senla.repository.stay_info.IStayInfoRepository;
-import ru.senla.repository.stay_info.StayInfoRepositoryImpl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,10 +23,18 @@ public class GuestsServiceImpl implements IGuestsService {
     final static Logger logger = Logger.getLogger(GuestsServiceImpl.class);
     @ConfigProperty(propertyName = "history_records_count", type = ConfigType.INTEGER)
     private int countHistoryRecords;
-    private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
-    private IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
-    private IStayInfoRepository stayInfoRepository = StayInfoRepositoryImpl.getInstance();
-    private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
+
+    @InjectDependency(ConfigurationType.REPOSITORY_GUEST)
+    private IGuestsRepository guestsRepository;
+
+    @InjectDependency(ConfigurationType.REPOSITORY_SERVICE)
+    private IServicesRepository servicesRepository;
+
+    @InjectDependency(ConfigurationType.REPOSITORY_STAY_INFO)
+    private IStayInfoRepository stayInfoRepository;
+
+    @InjectDependency(ConfigurationType.REPOSITORY_ROOM)
+    private IRoomsRepository roomsRepository;
 
     private static GuestsServiceImpl instance;
 

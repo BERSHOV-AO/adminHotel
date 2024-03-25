@@ -1,7 +1,8 @@
 package ru.senla.repository.room;
 
+import ru.senla.ConfigurationType;
+import ru.senla.InjectDependency;
 import ru.senla.datasource.room.IRoomsDatasource;
-import ru.senla.datasource.room.RoomsDatasourceImpl;
 import ru.senla.entities.Room;
 import ru.senla.enums.RoomStatus;
 import ru.senla.utils.csv_utils.RoomImportExport;
@@ -13,7 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RoomsRepositoryImpl implements IRoomsRepository {
-    IRoomsDatasource roomsDatasource = RoomsDatasourceImpl.getInstance();
+
+    @InjectDependency(ConfigurationType.DATASOURCE_ROOM)
+    IRoomsDatasource roomsDatasource;
 
     private static RoomsRepositoryImpl instance;
 

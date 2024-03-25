@@ -1,15 +1,13 @@
 package ru.senla.repository.stay_info;
 
+import ru.senla.ConfigurationType;
+import ru.senla.InjectDependency;
 import ru.senla.datasource.stay_info.IStayInfoDatasource;
-import ru.senla.datasource.stay_info.StayInfoDatasourceImpl;
 import ru.senla.entities.*;
 import ru.senla.enums.RoomHistoryStatus;
 import ru.senla.enums.RoomStatus;
-import ru.senla.properties.ConfigReader;
 import ru.senla.repository.room.IRoomsRepository;
-import ru.senla.repository.room.RoomsRepositoryImpl;
 import ru.senla.repository.room_history.IRoomsHistoryRepository;
-import ru.senla.repository.room_history.RoomsHistoryRepositoryImpl;
 import ru.senla.utils.RandomNumber;
 import ru.senla.utils.csv_utils.RoomHistoryExporter;
 import ru.senla.utils.csv_utils.StayInfoExporter;
@@ -25,9 +23,13 @@ import java.util.stream.Collectors;
 
 public class StayInfoRepositoryImpl implements IStayInfoRepository {
 
-    IStayInfoDatasource stayInfoDatasource = StayInfoDatasourceImpl.getInstance();
-    IRoomsHistoryRepository roomsHistoryRepository = RoomsHistoryRepositoryImpl.getInstance();
-    IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
+    @InjectDependency(ConfigurationType.DATASOURCE_STAY_INFO)
+    IStayInfoDatasource stayInfoDatasource;
+
+    @InjectDependency(ConfigurationType.REPOSITORY_ROOM_HISTORY)
+    IRoomsHistoryRepository roomsHistoryRepository;
+    @InjectDependency(ConfigurationType.REPOSITORY_ROOM)
+    IRoomsRepository roomsRepository;
 
     private static StayInfoRepositoryImpl instance;
 

@@ -1,7 +1,8 @@
 package ru.senla.repository.room_history;
 
+import ru.senla.ConfigurationType;
+import ru.senla.InjectDependency;
 import ru.senla.datasource.room_history.IRoomsHistoryDatasource;
-import ru.senla.datasource.room_history.RoomsHistoryDatasourceImpl;
 import ru.senla.entities.Guest;
 import ru.senla.entities.Room;
 import ru.senla.entities.RoomHistory;
@@ -12,7 +13,8 @@ import java.util.List;
 
 public class RoomsHistoryRepositoryImpl implements IRoomsHistoryRepository {
 
-    IRoomsHistoryDatasource roomsHistoryDatasource = RoomsHistoryDatasourceImpl.getInstance();
+    @InjectDependency(ConfigurationType.DATASOURCE_ROOM_HISTORY)
+    IRoomsHistoryDatasource roomsHistoryDatasource;
 
     private static RoomsHistoryRepositoryImpl instance;
 

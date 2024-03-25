@@ -1,18 +1,21 @@
 package ru.senla.service;
 
 import org.apache.log4j.Logger;
+import ru.senla.ConfigurationType;
+import ru.senla.InjectDependency;
 import ru.senla.entities.Service;
 import ru.senla.enums.response.ServiceResponse;
 import ru.senla.enums.ServiceType;
 import ru.senla.repository.service.IServicesRepository;
-import ru.senla.repository.service.ServicesRepositoryImpl;
 
 import java.util.List;
 
 public class ServicesServiceImpl implements IServicesService {
 
     final static Logger logger = Logger.getLogger(ServicesServiceImpl.class);
-    IServicesRepository servicesRepository = ServicesRepositoryImpl.getInstance();
+
+    @InjectDependency(ConfigurationType.REPOSITORY_SERVICE)
+    IServicesRepository servicesRepository;
 
     private static ServicesServiceImpl instance;
 

@@ -1,7 +1,8 @@
 package ru.senla.repository.service;
 
+import ru.senla.ConfigurationType;
+import ru.senla.InjectDependency;
 import ru.senla.datasource.service.IServicesDatasource;
-import ru.senla.datasource.service.ServicesDatasourceImpl;
 import ru.senla.entities.Service;
 import ru.senla.enums.ServiceType;
 import ru.senla.utils.csv_utils.ServiceImportExport;
@@ -13,7 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ServicesRepositoryImpl implements IServicesRepository {
-    IServicesDatasource servicesDatasource = ServicesDatasourceImpl.getInstance();
+
+    @InjectDependency(ConfigurationType.DATASOURCE_SERVICE)
+    IServicesDatasource servicesDatasource;
 
     private static ServicesRepositoryImpl instance;
 

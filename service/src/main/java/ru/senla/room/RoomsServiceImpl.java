@@ -1,14 +1,14 @@
 package ru.senla.room;
 
 import org.apache.log4j.Logger;
+import ru.senla.ConfigurationType;
+import ru.senla.InjectDependency;
 import ru.senla.annotations.ConfigProperty;
 import ru.senla.annotations.ConfigType;
 import ru.senla.entities.Room;
 import ru.senla.enums.response.RoomResponse;
 import ru.senla.enums.RoomStatus;
-import ru.senla.properties.ConfigReader;
 import ru.senla.repository.room.IRoomsRepository;
-import ru.senla.repository.room.RoomsRepositoryImpl;
 
 import java.util.List;
 
@@ -19,7 +19,8 @@ public class RoomsServiceImpl implements IRoomsService {
 
     final static Logger logger = Logger.getLogger(RoomsServiceImpl.class);
 
-    private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
+    @InjectDependency(ConfigurationType.REPOSITORY_ROOM)
+    private IRoomsRepository roomsRepository;
 
     private static RoomsServiceImpl instance;
 
