@@ -1,15 +1,36 @@
 [ {
   "id" : 1,
   "roomNumber" : 1,
-  "stars" : 2,
-  "price" : 6700.0,
-  "capacity" : 3,
+  "stars" : 1,
+  "price" : 1.0,
+  "capacity" : 1,
   "status" : "EMPTY"
 }, {
   "id" : 2,
   "roomNumber" : 2,
-  "stars" : 5,
-  "price" : 7500.0,
-  "capacity" : 4,
+  "stars" : 2,
+  "price" : 2.0,
+  "capacity" : 2,
   "status" : "OCCUPIED"
+}, {
+  "id" : 3,
+  "roomNumber" : 3,
+  "stars" : 3,
+  "price" : 3.0,
+  "capacity" : 3,
+  "status" : "UNDER_REPAIR"
+}, {
+  "id" : 71,
+  "roomNumber" : 71,
+  "stars" : 5,
+  "price" : 5500.0,
+  "capacity" : 4,
+  "status" : "EMPTY"
+}, {
+  "id" : 55,
+  "roomNumber" : 55,
+  "stars" : 3,
+  "price" : 4700.0,
+  "capacity" : 2,
+  "status" : "EMPTY"
 } ]

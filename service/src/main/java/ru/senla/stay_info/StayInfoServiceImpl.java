@@ -3,31 +3,50 @@ package ru.senla.stay_info;
 import org.apache.log4j.Logger;
 import ru.senla.ConfigurationType;
 import ru.senla.InjectDependency;
+import ru.senla.di_factory.InjectByType;
+import ru.senla.di_factory.ObjectFactory;
+import ru.senla.di_factory.Singleton;
 import ru.senla.entities.StayInfo;
 import ru.senla.enums.response.GuestResponse;
 import ru.senla.enums.response.RoomResponse;
 import ru.senla.enums.response.StayInfoResponse;
+import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
 import ru.senla.repository.room.IRoomsRepository;
+import ru.senla.repository.room.RoomsRepositoryImpl;
 import ru.senla.repository.stay_info.IStayInfoRepository;
+import ru.senla.repository.stay_info.StayInfoRepositoryImpl;
 
 import java.util.Map;
 
+@Singleton
 public class StayInfoServiceImpl implements IStayInfoService {
 
     final static Logger logger = Logger.getLogger(StayInfoServiceImpl.class);
 
-    @InjectDependency(ConfigurationType.REPOSITORY_STAY_INFO)
-    private IStayInfoRepository stayInfoRepository;
-    @InjectDependency(ConfigurationType.REPOSITORY_GUEST)
-    private IGuestsRepository guestsRepository;
+//    @InjectDependency(ConfigurationType.REPOSITORY_STAY_INFO)
+//    private IStayInfoRepository stayInfoRepository;
+//    @InjectDependency(ConfigurationType.REPOSITORY_GUEST)
+//    private IGuestsRepository guestsRepository;
+//
+//    @InjectDependency(ConfigurationType.REPOSITORY_ROOM)
+//    private IRoomsRepository roomsRepository;
 
-    @InjectDependency(ConfigurationType.REPOSITORY_ROOM)
-    private IRoomsRepository roomsRepository;
+//    private IStayInfoRepository stayInfoRepository = StayInfoRepositoryImpl.getInstance();
+//    private IGuestsRepository guestsRepository = GuestsRepositoryImpl.getInstance();
+//    private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
+
+    @InjectByType
+    private IStayInfoRepository stayInfoRepository; // = ObjectFactory.getInstance().createObject(IStayInfoRepository.class);
+    @InjectByType
+    private IGuestsRepository guestsRepository; // = ObjectFactory.getInstance().createObject(IGuestsRepository.class);
+
+    @InjectByType
+    private IRoomsRepository roomsRepository; // = ObjectFactory.getInstance().createObject(IRoomsRepository.class);
 
     private static StayInfoServiceImpl instance;
 
-    private StayInfoServiceImpl() {
+    public StayInfoServiceImpl() {
     }
 
     public static StayInfoServiceImpl getInstance() {

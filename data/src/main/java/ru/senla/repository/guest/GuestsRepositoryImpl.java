@@ -2,7 +2,12 @@ package ru.senla.repository.guest;
 
 import ru.senla.ConfigurationType;
 import ru.senla.InjectDependency;
+import ru.senla.datasource.guest.GuestsDatasourceImpl;
 import ru.senla.datasource.guest.IGuestsDatasource;
+import ru.senla.di_factory.InjectByType;
+import ru.senla.di_factory.InjectProperty;
+import ru.senla.di_factory.ObjectFactory;
+import ru.senla.di_factory.Singleton;
 import ru.senla.entities.Guest;
 import ru.senla.entities.Service;
 import ru.senla.utils.csv_utils.GuestImportExport;
@@ -13,14 +18,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Singleton
 public class GuestsRepositoryImpl implements IGuestsRepository {
 
-    @InjectDependency(ConfigurationType.DATASOURCE_GUEST)
-    IGuestsDatasource guestsDatasource;
+    //  @InjectDependency(ConfigurationType.DATASOURCE_GUEST)
+    // IGuestsDatasource guestsDatasource = GuestsDatasourceImpl.getInstance();
+    @InjectByType
+    IGuestsDatasource guestsDatasource; //= ObjectFactory.getInstance().createObject(IGuestsDatasource.class);
 
     private static GuestsRepositoryImpl instance;
 
-    private GuestsRepositoryImpl() {
+    public GuestsRepositoryImpl() {
     }
 
     public static GuestsRepositoryImpl getInstance() {

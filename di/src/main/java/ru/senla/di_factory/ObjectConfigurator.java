@@ -1,4 +1,4 @@
-package ru.senla.di;
+package ru.senla.di_factory;
 
 // должен только настраивать объект
 public interface ObjectConfigurator {

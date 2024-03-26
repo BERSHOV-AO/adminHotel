@@ -1,4 +1,4 @@
-package ru.senla.di;
+package ru.senla.di_factory;
 
 import lombok.SneakyThrows;
 
@@ -16,10 +16,10 @@ public class InjectPropertyAnnotationObjectConfigurator implements ObjectConfigu
 
     @SneakyThrows
     public InjectPropertyAnnotationObjectConfigurator() {
-        // что бы создавать map один раз, создаем ее в конструкторе
-        String path = ClassLoader.getSystemClassLoader().getResource("application.properties").getPath();
-        Stream<String> lines = new BufferedReader(new FileReader(path)).lines();
-        propertiesMap = lines.map(line -> line.split("=")).collect(toMap(arr -> arr[0], arr -> arr[1]));
+
+//        String path = ClassLoader.getSystemClassLoader().getResource("resources/config.properties").getPath();
+//        Stream<String> lines = new BufferedReader(new FileReader(path)).lines();
+//        propertiesMap = lines.map(line -> line.split("=")).collect(toMap(arr -> arr[0], arr -> arr[1]));
     }
 
     @Override

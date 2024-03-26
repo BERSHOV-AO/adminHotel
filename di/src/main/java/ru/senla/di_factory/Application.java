@@ -1,4 +1,4 @@
-package ru.senla.di;
+package ru.senla.di_factory;
 
 import java.util.Map;
 

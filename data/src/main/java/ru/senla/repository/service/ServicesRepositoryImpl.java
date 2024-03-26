@@ -3,6 +3,10 @@ package ru.senla.repository.service;
 import ru.senla.ConfigurationType;
 import ru.senla.InjectDependency;
 import ru.senla.datasource.service.IServicesDatasource;
+import ru.senla.datasource.service.ServicesDatasourceImpl;
+import ru.senla.di_factory.InjectByType;
+import ru.senla.di_factory.ObjectFactory;
+import ru.senla.di_factory.Singleton;
 import ru.senla.entities.Service;
 import ru.senla.enums.ServiceType;
 import ru.senla.utils.csv_utils.ServiceImportExport;
@@ -13,14 +17,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Singleton
 public class ServicesRepositoryImpl implements IServicesRepository {
 
-    @InjectDependency(ConfigurationType.DATASOURCE_SERVICE)
-    IServicesDatasource servicesDatasource;
+   // @InjectDependency(ConfigurationType.DATASOURCE_SERVICE)
+    //IServicesDatasource servicesDatasource =  ServicesDatasourceImpl.getInstance();
+   @InjectByType
+   IServicesDatasource servicesDatasource; // = ObjectFactory.getInstance().createObject(IServicesDatasource.class);
 
     private static ServicesRepositoryImpl instance;
 
-    private ServicesRepositoryImpl() {
+    public ServicesRepositoryImpl() {
     }
 
     public static ServicesRepositoryImpl getInstance() {

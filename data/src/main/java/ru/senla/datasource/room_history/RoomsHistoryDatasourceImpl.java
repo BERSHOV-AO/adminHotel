@@ -1,16 +1,18 @@
 package ru.senla.datasource.room_history;
 
+import ru.senla.di_factory.Singleton;
 import ru.senla.entities.RoomHistory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Singleton
 public class RoomsHistoryDatasourceImpl implements IRoomsHistoryDatasource {
     private List<RoomHistory> roomHistories = new ArrayList<>();
 
     private static RoomsHistoryDatasourceImpl instance;
 
-    private RoomsHistoryDatasourceImpl() {
+    public RoomsHistoryDatasourceImpl() {
     }
 
     public static RoomsHistoryDatasourceImpl getInstance() {

@@ -5,13 +5,20 @@ import ru.senla.ConfigurationType;
 import ru.senla.InjectDependency;
 import ru.senla.annotations.ConfigProperty;
 import ru.senla.annotations.ConfigType;
+//import ru.senla.di.InjectByType;
+//import ru.senla.di_factory.ObjectFactory;
+import ru.senla.di_factory.InjectByType;
+import ru.senla.di_factory.ObjectFactory;
+import ru.senla.di_factory.Singleton;
 import ru.senla.entities.Room;
 import ru.senla.enums.response.RoomResponse;
 import ru.senla.enums.RoomStatus;
 import ru.senla.repository.room.IRoomsRepository;
+import ru.senla.repository.room.RoomsRepositoryImpl;
 
 import java.util.List;
 
+@Singleton
 public class RoomsServiceImpl implements IRoomsService {
 
     @ConfigProperty(propertyName = "enable_room_status_change", type = ConfigType.BOOLEAN)
@@ -19,12 +26,21 @@ public class RoomsServiceImpl implements IRoomsService {
 
     final static Logger logger = Logger.getLogger(RoomsServiceImpl.class);
 
-    @InjectDependency(ConfigurationType.REPOSITORY_ROOM)
-    private IRoomsRepository roomsRepository;
+//    @InjectDependency(ConfigurationType.REPOSITORY_ROOM)
+//    private IRoomsRepository roomsRepository;
+//    @InjectByType
+@InjectByType
+private IRoomsRepository roomsRepository; // = ObjectFactory.getInstance().createObject(IRoomsRepository.class);
+
+ //   private IRoomsRepository roomsRepository = RoomsRepositoryImpl.getInstance();
+
+
+
+
 
     private static RoomsServiceImpl instance;
 
-    private RoomsServiceImpl() {
+    public RoomsServiceImpl() {
     }
 
     public static RoomsServiceImpl getInstance() {

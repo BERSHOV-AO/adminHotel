@@ -3,11 +3,17 @@ package ru.senla.repository.stay_info;
 import ru.senla.ConfigurationType;
 import ru.senla.InjectDependency;
 import ru.senla.datasource.stay_info.IStayInfoDatasource;
+import ru.senla.datasource.stay_info.StayInfoDatasourceImpl;
+import ru.senla.di_factory.InjectByType;
+import ru.senla.di_factory.ObjectFactory;
+import ru.senla.di_factory.Singleton;
 import ru.senla.entities.*;
 import ru.senla.enums.RoomHistoryStatus;
 import ru.senla.enums.RoomStatus;
 import ru.senla.repository.room.IRoomsRepository;
+import ru.senla.repository.room.RoomsRepositoryImpl;
 import ru.senla.repository.room_history.IRoomsHistoryRepository;
+import ru.senla.repository.room_history.RoomsHistoryRepositoryImpl;
 import ru.senla.utils.RandomNumber;
 import ru.senla.utils.csv_utils.RoomHistoryExporter;
 import ru.senla.utils.csv_utils.StayInfoExporter;
@@ -21,19 +27,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Singleton
 public class StayInfoRepositoryImpl implements IStayInfoRepository {
 
-    @InjectDependency(ConfigurationType.DATASOURCE_STAY_INFO)
-    IStayInfoDatasource stayInfoDatasource;
+ //   @InjectDependency(ConfigurationType.DATASOURCE_STAY_INFO)
+ @InjectByType
+    IStayInfoDatasource stayInfoDatasource; // = StayInfoDatasourceImpl.getInstance();
+ //IStayInfoDatasource stayInfoDatasource = ObjectFactory.getInstance().createObject(IStayInfoDatasource.class);
 
-    @InjectDependency(ConfigurationType.REPOSITORY_ROOM_HISTORY)
-    IRoomsHistoryRepository roomsHistoryRepository;
-    @InjectDependency(ConfigurationType.REPOSITORY_ROOM)
-    IRoomsRepository roomsRepository;
+  //  @InjectDependency(ConfigurationType.REPOSITORY_ROOM_HISTORY)
+  @InjectByType
+    IRoomsHistoryRepository roomsHistoryRepository; // = RoomsHistoryRepositoryImpl.getInstance();
+  //  @InjectDependency(ConfigurationType.REPOSITORY_ROOM)
+  @InjectByType
+    IRoomsRepository roomsRepository; // = RoomsRepositoryImpl.getInstance();;
 
     private static StayInfoRepositoryImpl instance;
 
-    private StayInfoRepositoryImpl() {
+    public StayInfoRepositoryImpl() {
     }
 
     public static StayInfoRepositoryImpl getInstance() {
