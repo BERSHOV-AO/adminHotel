@@ -41,5 +41,9 @@
 }, {
   "id" : 634193,
   "lastName" : "Ivan",
-  "services" : null
+  "services" : [ {
+    "id" : 187245,
+    "serviceType" : "DINNER",
+    "price" : 860.0
+  } ]
 } ]

@@ -2,10 +2,8 @@ package action.guest;
 
 import action.api.IAction;
 import ru.senla.di_factory.InjectByType;
-import ru.senla.guest.GuestsServiceImpl;
 import ru.senla.guest.IGuestsService;
 import ru.senla.stay_info.IStayInfoService;
-import ru.senla.stay_info.StayInfoServiceImpl;
 import utils.InputReader;
 import utils.Printer;
 
@@ -14,9 +12,9 @@ import java.util.Scanner;
 public class CheckOutActionImpl implements IAction {
     private static Scanner scanner = new Scanner(System.in);
     @InjectByType
-    private IStayInfoService stayInfoService; // = StayInfoServiceImpl.getInstance();
+    private IStayInfoService stayInfoService;
     @InjectByType
-    private IGuestsService guestsService; // = GuestsServiceImpl.getInstance();
+    private IGuestsService guestsService;
 
 
     @Override

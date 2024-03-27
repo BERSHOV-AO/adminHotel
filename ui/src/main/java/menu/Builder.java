@@ -11,15 +11,12 @@ import action.sorted.service.ServicesSortByNameActionImpl;
 import action.sorted.service.ServicesSortByPriceActionImpl;
 import action.stayInfo.ExportStayInfoActionImpl;
 import action.stayInfo.PrintStayInfoActionImpl;
-import ru.senla.repository.guest.GuestsRepositoryImpl;
-import ru.senla.repository.room.RoomsRepositoryImpl;
-import ru.senla.repository.room_history.RoomsHistoryRepositoryImpl;
-import ru.senla.repository.service.ServicesRepositoryImpl;
-import ru.senla.repository.stay_info.StayInfoRepositoryImpl;
+import ru.senla.di_factory.ApplicationContext;
 import utils.MenuTypes;
 
 public class Builder {
 
+    private ApplicationContext context;
     private static final String action = MenuTypes.ACTION.getConstant();
     private static final String main = MenuTypes.MAIN_MENU.getConstant();
 
@@ -29,81 +26,93 @@ public class Builder {
     private Menu mainMenu = new Menu(main);
 
     public Builder() {
-//        GuestsRepositoryImpl.getInstance();
-//        RoomsRepositoryImpl.getInstance();
-//        RoomsHistoryRepositoryImpl.getInstance();
-//        ServicesRepositoryImpl.getInstance();
-//        StayInfoRepositoryImpl.getInstance();
     }
 
     public Menu buildMenu() {
 
         // Room
-        roomMenu.addMenuItem(new MenuItem("Add a Room", roomMenu, new AddRoomActionImpl()));
-        roomMenu.addMenuItem(new MenuItem("Print the Rooms", roomMenu, new PrintRoomsActionImpl()));
-        roomMenu.addMenuItem(new MenuItem("Print empty Rooms", roomMenu, new PrintEmptyRoomsActionImpl()));
-        roomMenu.addMenuItem(new MenuItem("Change Room Price", roomMenu, new ChangeRoomPriceActionImpl()));
-        roomMenu.addMenuItem(new MenuItem("Change the Room's status", roomMenu, new ChangeStatusActionImpl()));
-        roomMenu.addMenuItem(new MenuItem("Print the Room details", roomMenu, new PrintDetailsActionImpl()));
+        roomMenu.addMenuItem(new MenuItem("Add a Room", roomMenu,
+                context.getObject(AddRoomActionImpl.class)));
+        roomMenu.addMenuItem(new MenuItem("Print the Rooms", roomMenu,
+                context.getObject(PrintRoomsActionImpl.class)));
+        roomMenu.addMenuItem(new MenuItem("Print empty Rooms", roomMenu,
+                context.getObject(PrintEmptyRoomsActionImpl.class)));
+        roomMenu.addMenuItem(new MenuItem("Change Room Price", roomMenu,
+                context.getObject(ChangeRoomPriceActionImpl.class)));
+        roomMenu.addMenuItem(new MenuItem("Change the Room's status",
+                roomMenu, context.getObject(ChangeStatusActionImpl.class)));
+        roomMenu.addMenuItem(new MenuItem("Print the Room details", roomMenu,
+                context.getObject(PrintDetailsActionImpl.class)));
         // Room sort
         roomMenu.addMenuItem(new MenuItem("Sort the Rooms by capacity", roomMenu,
-                new RoomsSortByCapacityActionImpl()));
-        roomMenu.addMenuItem(new MenuItem("Sort the Rooms by price", roomMenu, new RoomsSortByPriceActionImpl()));
-        roomMenu.addMenuItem(new MenuItem("Sort the Rooms by stars", roomMenu, new RoomsSortByStarsActionImpl()));
+                context.getObject(RoomsSortByCapacityActionImpl.class)));
+        roomMenu.addMenuItem(new MenuItem("Sort the Rooms by price", roomMenu,
+                context.getObject(RoomsSortByPriceActionImpl.class)));
+        roomMenu.addMenuItem(new MenuItem("Sort the Rooms by stars", roomMenu,
+                context.getObject(RoomsSortByStarsActionImpl.class)));
         roomMenu.addMenuItem(new MenuItem("Sort the empty Rooms by capacity", roomMenu,
-                new RoomsSortEmptyByCapacityActionImpl()));
+                context.getObject(RoomsSortEmptyByCapacityActionImpl.class)));
         roomMenu.addMenuItem(new MenuItem("Sort the empty Rooms by price", roomMenu,
-                new RoomsSortEmptyByPriceActionImpl()));
+                context.getObject(RoomsSortEmptyByPriceActionImpl.class)));
         roomMenu.addMenuItem(new MenuItem("Sort the empty Rooms by stars", roomMenu,
-                new RoomsSortEmptyByStarsActionImpl()));
+                context.getObject(RoomsSortEmptyByStarsActionImpl.class)));
         roomMenu.addMenuItem(new MenuItem("Export rooms to file CSV", roomMenu,
-                new ExportRoomsActionImpl()));
+                context.getObject(ExportRoomsActionImpl.class)));
         roomMenu.addMenuItem(new MenuItem("Import CSV files to Storage Rooms", roomMenu,
-                new ImportRoomsActionImpl()));
+                context.getObject(ImportRoomsActionImpl.class)));
         roomMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Service
-        serviceMenu.addMenuItem(new MenuItem("Add a Service", serviceMenu, new AddServiceActionImpl()));
-        serviceMenu.addMenuItem(new MenuItem("Print the Services", serviceMenu, new PrintServiceActionImpl()));
+        serviceMenu.addMenuItem(new MenuItem("Add a Service", serviceMenu,
+                context.getObject(AddServiceActionImpl.class)));
+        serviceMenu.addMenuItem(new MenuItem("Print the Services", serviceMenu,
+                context.getObject(PrintServiceActionImpl.class)));
         serviceMenu.addMenuItem(new MenuItem("Change the Service's price", serviceMenu,
-                new ChangeServiceOnPriceActionImpl()));
-        serviceMenu.addMenuItem(new MenuItem("Delete a Service", serviceMenu, new DeleteServiceActionImpl()));
+                context.getObject(ChangeServiceOnPriceActionImpl.class)));
+        serviceMenu.addMenuItem(new MenuItem("Delete a Service", serviceMenu,
+                context.getObject(DeleteServiceActionImpl.class)));
         // Service sort
         serviceMenu.addMenuItem(new MenuItem("Sort the Services by name", serviceMenu,
-                new ServicesSortByNameActionImpl()));
+                context.getObject(ServicesSortByNameActionImpl.class)));
         serviceMenu.addMenuItem(new MenuItem("Sort the Services by price", serviceMenu,
-                new ServicesSortByPriceActionImpl()));
+                context.getObject(ServicesSortByPriceActionImpl.class)));
         serviceMenu.addMenuItem(new MenuItem("Export services to file CSV", serviceMenu,
-                new ExportServicesActionImpl()));
+                context.getObject(ExportServicesActionImpl.class)));
         serviceMenu.addMenuItem(new MenuItem("Import CSV files to Storage Services", serviceMenu,
-                new ImportServicesActionImpl()));
+                context.getObject(ImportServicesActionImpl.class)));
         serviceMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Guest
-        guestMenu.addMenuItem(new MenuItem("Add a Guest", guestMenu, new AddGuestActionImpl()));
-        guestMenu.addMenuItem(new MenuItem("Print the Guests", guestMenu, new PrintGuestsActionImpl()));
-        guestMenu.addMenuItem(new MenuItem("Check-in the Guest", guestMenu, new CheckInActionImpl()));
+        guestMenu.addMenuItem(new MenuItem("Add a Guest", guestMenu,
+                context.getObject(AddGuestActionImpl.class)));
+        guestMenu.addMenuItem(new MenuItem("Print the Guests", guestMenu,
+                context.getObject(PrintGuestsActionImpl.class)));
+        guestMenu.addMenuItem(new MenuItem("Check-in the Guest", guestMenu,
+                context.getObject(CheckInActionImpl.class)));
         guestMenu.addMenuItem(new MenuItem("Add a Service to the Guest", guestMenu,
-                new AddServicesToGuestActionImpl()));
+                context.getObject(AddServicesToGuestActionImpl.class)));
         guestMenu.addMenuItem(new MenuItem("Print the Guest's Services", guestMenu,
-                new PrintServicesOneGuestActionImpl()));
-        guestMenu.addMenuItem(new MenuItem("Bill the Guest", guestMenu, new BillGuestActionImpl()));
-        guestMenu.addMenuItem(new MenuItem("Check-out the Guest", guestMenu, new CheckOutActionImpl()));
-        guestMenu.addMenuItem(new MenuItem("Delete the Guest", guestMenu, new DeleteGuestActionImpl()));
+                context.getObject(PrintServicesOneGuestActionImpl.class)));
+        guestMenu.addMenuItem(new MenuItem("Bill the Guest", guestMenu,
+                context.getObject(BillGuestActionImpl.class)));
+        guestMenu.addMenuItem(new MenuItem("Check-out the Guest", guestMenu,
+                context.getObject(CheckOutActionImpl.class)));
+        guestMenu.addMenuItem(new MenuItem("Delete the Guest", guestMenu,
+                context.getObject(DeleteGuestActionImpl.class)));
 
         // Guest sort
         guestMenu.addMenuItem(new MenuItem("Sort the Guest by name", guestMenu,
-                new GuestsSortByNameActionImpl()));
+                context.getObject(GuestsSortByNameActionImpl.class)));
         guestMenu.addMenuItem(new MenuItem("Sort the Guest's Services by price", guestMenu,
-                new GuestSortServicesByPriceActionImpl()));
-        guestMenu.addMenuItem(new MenuItem("Export guests to file CSV", guestMenu, new ExportGuestsActionImpl()));
+                context.getObject(GuestSortServicesByPriceActionImpl.class)));
+        guestMenu.addMenuItem(new MenuItem("Export guests to file CSV", guestMenu,
+                context.getObject(ExportGuestsActionImpl.class)));
         guestMenu.addMenuItem(new MenuItem("Import CSV files to Storage Guests", guestMenu,
-                new ImportGuestsActionImpl()));
+                context.getObject(ImportGuestsActionImpl.class)));
         guestMenu.addMenuItem(new MenuItem("Export StayInfo to File CSV", guestMenu,
-                new ExportStayInfoActionImpl()));
+                context.getObject(ExportStayInfoActionImpl.class)));
         guestMenu.addMenuItem(new MenuItem("Print StayInfo", guestMenu,
-                new PrintStayInfoActionImpl()));
-
+                context.getObject(PrintStayInfoActionImpl.class)));
         guestMenu.addMenuItem(new MenuItem("Back to Main menu", mainMenu));
 
         // Main Menu
@@ -117,6 +126,10 @@ public class Builder {
 
     public Menu getMenu() {
         return this.buildMenu();
+    }
+
+    public void getContext(ApplicationContext applicationContext) {
+        this.context = applicationContext;
     }
 }
 

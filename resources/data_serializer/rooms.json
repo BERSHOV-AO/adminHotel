@@ -40,4 +40,18 @@
   "price" : 7555.0,
   "capacity" : 1,
   "status" : "SERVICE"
+}, {
+  "id" : 100,
+  "roomNumber" : 100,
+  "stars" : 1,
+  "price" : 5757.0,
+  "capacity" : 4,
+  "status" : "EMPTY"
+}, {
+  "id" : 101,
+  "roomNumber" : 101,
+  "stars" : 5,
+  "price" : 7777.0,
+  "capacity" : 4,
+  "status" : "EMPTY"
 } ]

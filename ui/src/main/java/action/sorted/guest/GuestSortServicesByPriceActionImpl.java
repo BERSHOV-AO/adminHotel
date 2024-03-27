@@ -2,7 +2,6 @@ package action.sorted.guest;
 
 import action.api.IAction;
 import ru.senla.di_factory.InjectByType;
-import ru.senla.guest.GuestsServiceImpl;
 import ru.senla.guest.IGuestsService;
 import utils.InputReader;
 
@@ -12,7 +11,7 @@ public class GuestSortServicesByPriceActionImpl implements IAction {
 
     private static Scanner scanner = new Scanner(System.in);
     @InjectByType
-    private IGuestsService guestsService; // = GuestsServiceImpl.getInstance();
+    private IGuestsService guestsService;
 
     @Override
     public void execute() {

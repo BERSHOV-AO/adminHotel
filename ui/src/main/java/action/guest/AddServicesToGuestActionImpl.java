@@ -2,10 +2,8 @@ package action.guest;
 
 import action.api.IAction;
 import ru.senla.di_factory.InjectByType;
-import ru.senla.guest.GuestsServiceImpl;
 import ru.senla.guest.IGuestsService;
 import ru.senla.service.IServicesService;
-import ru.senla.service.ServicesServiceImpl;
 import utils.InputReader;
 
 import java.util.Scanner;
@@ -14,9 +12,9 @@ public class AddServicesToGuestActionImpl implements IAction {
 
     private static Scanner scanner = new Scanner(System.in);
     @InjectByType
-    private IGuestsService guestsService; // = GuestsServiceImpl.getInstance();
+    private IGuestsService guestsService;
     @InjectByType
-    private IServicesService servicesService; // = ServicesServiceImpl.getInstance();
+    private IServicesService servicesService;
 
     @Override
     public void execute() {

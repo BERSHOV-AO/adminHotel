@@ -4,15 +4,15 @@ import action.api.IAction;
 import ru.senla.di_factory.InjectByType;
 import ru.senla.enums.RoomStatus;
 import ru.senla.room.IRoomsService;
-import ru.senla.room.RoomsServiceImpl;
 import utils.InputReader;
 
 import java.util.Scanner;
 
 public class AddRoomActionImpl implements IAction {
     private static Scanner scanner = new Scanner(System.in);
+
     @InjectByType
-    private IRoomsService roomsService; // = RoomsServiceImpl.getInstance();
+    private IRoomsService roomsService;
 
     @Override
     public void execute() {
