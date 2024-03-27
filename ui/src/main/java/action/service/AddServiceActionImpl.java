@@ -1,6 +1,7 @@
 package action.service;
 
 import action.api.IAction;
+import ru.senla.di_factory.InjectByType;
 import ru.senla.enums.ServiceType;
 import ru.senla.service.IServicesService;
 import ru.senla.service.ServicesServiceImpl;
@@ -11,7 +12,8 @@ import java.util.Scanner;
 public class AddServiceActionImpl implements IAction {
 
     private static Scanner scanner = new Scanner(System.in);
-    private IServicesService servicesService = ServicesServiceImpl.getInstance();
+    @InjectByType
+    private IServicesService servicesService; // = ServicesServiceImpl.getInstance();
 
     @Override
     public void execute() {

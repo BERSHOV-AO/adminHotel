@@ -29,11 +29,11 @@ public class Builder {
     private Menu mainMenu = new Menu(main);
 
     public Builder() {
-        GuestsRepositoryImpl.getInstance();
-        RoomsRepositoryImpl.getInstance();
-        RoomsHistoryRepositoryImpl.getInstance();
-        ServicesRepositoryImpl.getInstance();
-        StayInfoRepositoryImpl.getInstance();
+//        GuestsRepositoryImpl.getInstance();
+//        RoomsRepositoryImpl.getInstance();
+//        RoomsHistoryRepositoryImpl.getInstance();
+//        ServicesRepositoryImpl.getInstance();
+//        StayInfoRepositoryImpl.getInstance();
     }
 
     public Menu buildMenu() {

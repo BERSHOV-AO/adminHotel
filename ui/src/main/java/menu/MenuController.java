@@ -1,8 +1,13 @@
 package menu;
 
+import ru.senla.di_factory.InjectByType;
 import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.guest.IGuestsService;
+import ru.senla.room.IRoomsService;
 import ru.senla.room.RoomsServiceImpl;
+import ru.senla.service.IServicesService;
 import ru.senla.service.ServicesServiceImpl;
+import ru.senla.stay_info.IStayInfoService;
 import ru.senla.stay_info.StayInfoServiceImpl;
 import utils.InputReader;
 
@@ -12,6 +17,17 @@ public class MenuController {
 
     private Builder builder = new Builder();
     private Navigator navigator = new Navigator();
+
+    @InjectByType
+    IRoomsService roomsService;
+    @InjectByType
+    IGuestsService guestsService;
+    @InjectByType
+    IServicesService servicesService;
+    @InjectByType
+    IStayInfoService stayInfoService;
+
+
 
     public void run() {
 
@@ -32,10 +48,10 @@ public class MenuController {
             }
 
             if (navigator.getCurrentMenu().getMenuItems().get(choice).getNextMenu() == null) {
-                RoomsServiceImpl.getInstance().serializerRooms();
-                GuestsServiceImpl.getInstance().serializerGuests();
-                ServicesServiceImpl.getInstance().serializerServices();
-                StayInfoServiceImpl.getInstance().serializerStayInfo();
+                roomsService.serializerRooms();
+                guestsService.serializerGuests();
+                servicesService.serializerServices();
+                stayInfoService.serializerStayInfo();
                 break;
             }
             navigator.setCurrentMenu(navigator.getCurrentMenu().getMenuItems().get(choice).getNextMenu());

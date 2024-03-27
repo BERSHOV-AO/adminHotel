@@ -43,12 +43,12 @@ private IRoomsRepository roomsRepository; // = ObjectFactory.getInstance().creat
     public RoomsServiceImpl() {
     }
 
-    public static RoomsServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new RoomsServiceImpl();
-        }
-        return instance;
-    }
+//    public static RoomsServiceImpl getInstance() {
+//        if (instance == null) {
+//            instance = new RoomsServiceImpl();
+//        }
+//        return instance;
+//    }
 
     @Override
     public List<Room> getListRooms() {

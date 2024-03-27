@@ -63,12 +63,12 @@ public class GuestsServiceImpl implements IGuestsService {
     public GuestsServiceImpl() {
     }
 
-    public static GuestsServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new GuestsServiceImpl();
-        }
-        return instance;
-    }
+//    public static GuestsServiceImpl getInstance() {
+//        if (instance == null) {
+//            instance = new GuestsServiceImpl();
+//        }
+//        return instance;
+//    }
 
     @Override
     public String addServicesToGuest(int guestId, int serviceId) {

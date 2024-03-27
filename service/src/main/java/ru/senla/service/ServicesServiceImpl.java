@@ -32,12 +32,12 @@ public class ServicesServiceImpl implements IServicesService {
     public ServicesServiceImpl() {
     }
 
-    public static ServicesServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new ServicesServiceImpl();
-        }
-        return instance;
-    }
+//    public static ServicesServiceImpl getInstance() {
+//        if (instance == null) {
+//            instance = new ServicesServiceImpl();
+//        }
+//        return instance;
+//    }
 
     @Override
     public List<Service> getListServices() {

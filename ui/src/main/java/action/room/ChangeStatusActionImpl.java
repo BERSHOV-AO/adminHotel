@@ -1,6 +1,7 @@
 package action.room;
 
 import action.api.IAction;
+import ru.senla.di_factory.InjectByType;
 import ru.senla.enums.RoomStatus;
 import ru.senla.room.IRoomsService;
 import ru.senla.room.RoomsServiceImpl;
@@ -11,7 +12,8 @@ import java.util.Scanner;
 public class ChangeStatusActionImpl implements IAction {
 
     private static Scanner scanner = new Scanner(System.in);
-    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
+    @InjectByType
+    private IRoomsService roomsService; // = RoomsServiceImpl.getInstance();
 
     @Override
     public void execute() {

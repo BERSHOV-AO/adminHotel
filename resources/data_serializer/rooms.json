@@ -33,4 +33,11 @@
   "price" : 4700.0,
   "capacity" : 2,
   "status" : "EMPTY"
+}, {
+  "id" : 10,
+  "roomNumber" : 10,
+  "stars" : 3,
+  "price" : 7555.0,
+  "capacity" : 1,
+  "status" : "SERVICE"
 } ]

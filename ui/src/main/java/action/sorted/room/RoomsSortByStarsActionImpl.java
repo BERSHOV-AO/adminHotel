@@ -1,11 +1,13 @@
 package action.sorted.room;
 
 import action.api.IAction;
+import ru.senla.di_factory.InjectByType;
 import ru.senla.room.IRoomsService;
 import ru.senla.room.RoomsServiceImpl;
 
 public class RoomsSortByStarsActionImpl implements IAction {
-    private IRoomsService roomsService = RoomsServiceImpl.getInstance();
+    @InjectByType
+    private IRoomsService roomsService; // = RoomsServiceImpl.getInstance();
 
     @Override
     public void execute() {

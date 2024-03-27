@@ -49,12 +49,12 @@ public class StayInfoServiceImpl implements IStayInfoService {
     public StayInfoServiceImpl() {
     }
 
-    public static StayInfoServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new StayInfoServiceImpl();
-        }
-        return instance;
-    }
+//    public static StayInfoServiceImpl getInstance() {
+//        if (instance == null) {
+//            instance = new StayInfoServiceImpl();
+//        }
+//        return instance;
+//    }
 
     @Override
     public Map<Integer, StayInfo> getMapStayInfo() {

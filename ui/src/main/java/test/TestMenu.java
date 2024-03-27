@@ -45,6 +45,32 @@ public class TestMenu {
 
     public static void main(String[] args) {
 
+        ApplicationContext context = Application.run("ru.senla", ConfigLoader.loadConfig("resources/inject.properties"));
+        IRoomsService roomsService = context.getObject(IRoomsService.class);
+        IGuestsService guestsService = context.getObject(IGuestsService.class);
+        IServicesService servicesService = context.getObject(IServicesService.class);
+        IStayInfoService stayInfoService = context.getObject(IStayInfoService.class);
+
+        roomsService.deserializeRooms();
+        guestsService.deserializeGuests();
+        servicesService.deserializeServices();
+        stayInfoService.deserializeStayInfo();
+
+        try {
+            ConfigProcessor.processConfig(roomsService);
+            ConfigProcessor.processConfig(guestsService);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        roomsService.deserializeRooms();
+        roomsService.getListRooms().forEach(System.out::println);
+        roomsService.addRoom(10,1,7555.0,3, RoomStatus.SERVICE);
+        roomsService.getListRooms().forEach(System.out::println);
+
 //        ApplicationContext context =
 //                Application.run("ru.senla", new HashMap<>(Map.of(
 //                IRoomsDatasource.class, RoomsDatasourceImpl.class ,
@@ -88,14 +114,7 @@ public class TestMenu {
 //       // IRoomsService roomsService = ObjectFactory.getInstance().createObject(IRoomsService.class);
 //       IGuestsService guestsService = GuestsServiceImpl.getInstance();
 //      //  IGuestsService guestsService = ObjectFactory.getInstance().createObject(IGuestsService.class);
-//        try {
-//            ConfigProcessor.processConfig(roomsService);
-//            ConfigProcessor.processConfig(guestsService);
-//        } catch (IllegalAccessException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+
 //
 //
 //        roomsService.deserializeRooms();
@@ -103,20 +122,16 @@ public class TestMenu {
 //        ServicesServiceImpl.getInstance().deserializeServices();
 //        StayInfoServiceImpl.getInstance().deserializeStayInfo();
 
+        //        IGuestsService guestsService = context.getObject(IGuestsService.class);
 
-        ApplicationContext context = Application.run("ru.senla", ConfigLoader.loadConfig("resources/inject.properties"));
-//        IGuestsService guestsService = context.getObject(IGuestsService.class);
-        IRoomsService roomsService = context.getObject(IRoomsService.class);
-        roomsService.deserializeRooms();
-        roomsService.getListRooms().forEach(System.out::println);
-        roomsService.addRoom(10,1,2.0,3, RoomStatus.SERVICE);
-        roomsService.getListRooms().forEach(System.out::println);
+
+
 
 //        IServicesService servicesService = context.getObject(IServicesService.class);
 //       // IStayInfoService stayInfoService = context.getObject(IStayInfoService.class);
 
-      //  MenuController menuController = context.getObject(MenuController.class);
-        MenuController menuController = new MenuController();
-        menuController.run();
+        MenuController menuController = context.getObject(MenuController.class);
+ //       MenuController menuController = new MenuController();
+       menuController.run();
     }
 }

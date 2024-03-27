@@ -1,6 +1,7 @@
 package action.guest;
 
 import action.api.IAction;
+import ru.senla.di_factory.InjectByType;
 import ru.senla.stay_info.IStayInfoService;
 import ru.senla.stay_info.StayInfoServiceImpl;
 import utils.InputReader;
@@ -10,7 +11,9 @@ import java.util.Scanner;
 
 public class BillGuestActionImpl implements IAction {
     private static Scanner scanner = new Scanner(System.in);
-    private IStayInfoService stayInfoService = StayInfoServiceImpl.getInstance();
+
+    @InjectByType
+    private IStayInfoService stayInfoService; //= StayInfoServiceImpl.getInstance();
 
 
     @Override
