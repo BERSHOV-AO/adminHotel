@@ -11,7 +11,7 @@ import action.sorted.service.ServicesSortByNameActionImpl;
 import action.sorted.service.ServicesSortByPriceActionImpl;
 import action.stayInfo.ExportStayInfoActionImpl;
 import action.stayInfo.PrintStayInfoActionImpl;
-import ru.senla.di_factory.ApplicationContext;
+import ru.senla.di.ApplicationContext;
 import utils.MenuTypes;
 
 public class Builder {

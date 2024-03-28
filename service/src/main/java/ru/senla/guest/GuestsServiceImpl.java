@@ -1,26 +1,19 @@
 package ru.senla.guest;
 
-import ru.senla.ConfigurationType;
-import ru.senla.InjectDependency;
 import ru.senla.annotations.ConfigProperty;
 import ru.senla.annotations.ConfigType;
-import ru.senla.di_factory.InjectByType;
-import ru.senla.di_factory.ObjectFactory;
-import ru.senla.di_factory.Singleton;
+import ru.senla.di.InjectByType;
+import ru.senla.di.Singleton;
 import ru.senla.entities.Guest;
 import ru.senla.entities.Service;
 import ru.senla.enums.response.GuestResponse;
 import ru.senla.enums.response.RoomResponse;
-import ru.senla.repository.guest.GuestsRepositoryImpl;
 import ru.senla.repository.guest.IGuestsRepository;
 import ru.senla.repository.room.IRoomsRepository;
-import ru.senla.repository.room.RoomsRepositoryImpl;
 import ru.senla.repository.service.IServicesRepository;
 
 import org.apache.log4j.Logger;
-import ru.senla.repository.service.ServicesRepositoryImpl;
 import ru.senla.repository.stay_info.IStayInfoRepository;
-import ru.senla.repository.stay_info.StayInfoRepositoryImpl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -58,7 +51,7 @@ public class GuestsServiceImpl implements IGuestsService {
     @InjectByType
     private IRoomsRepository roomsRepository; // = ObjectFactory.getInstance().createObject(IRoomsRepository.class);
 
-    private static GuestsServiceImpl instance;
+//    private static GuestsServiceImpl instance;
 
     public GuestsServiceImpl() {
     }

@@ -1,24 +1,16 @@
 package ru.senla.datasource.stay_info;
 
-import ru.senla.di_factory.Singleton;
+import ru.senla.di.Singleton;
 import ru.senla.entities.StayInfo;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 @Singleton
 public class StayInfoDatasourceImpl implements IStayInfoDatasource {
     private Map<Integer, StayInfo> infoStorage = new LinkedHashMap<>();
 
-    private static StayInfoDatasourceImpl instance;
-
     public StayInfoDatasourceImpl() {
-    }
-
-    public static StayInfoDatasourceImpl getInstance() {
-        if (instance == null) {
-            instance = new StayInfoDatasourceImpl();
-        }
-        return instance;
     }
 
     @Override

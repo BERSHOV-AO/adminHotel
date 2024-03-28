@@ -1,17 +1,12 @@
 package ru.senla.service;
 
 import org.apache.log4j.Logger;
-import ru.senla.ConfigurationType;
-import ru.senla.InjectDependency;
-import ru.senla.di_factory.InjectByType;
-import ru.senla.di_factory.ObjectFactory;
-import ru.senla.di_factory.Singleton;
+import ru.senla.di.InjectByType;
+import ru.senla.di.Singleton;
 import ru.senla.entities.Service;
 import ru.senla.enums.response.ServiceResponse;
 import ru.senla.enums.ServiceType;
-import ru.senla.repository.room.IRoomsRepository;
 import ru.senla.repository.service.IServicesRepository;
-import ru.senla.repository.service.ServicesRepositoryImpl;
 
 import java.util.List;
 
@@ -27,7 +22,7 @@ public class ServicesServiceImpl implements IServicesService {
     @InjectByType
     IServicesRepository servicesRepository; // = ObjectFactory.getInstance().createObject(IServicesRepository.class);
 
-    private static ServicesServiceImpl instance;
+//    private static ServicesServiceImpl instance;
 
     public ServicesServiceImpl() {
     }

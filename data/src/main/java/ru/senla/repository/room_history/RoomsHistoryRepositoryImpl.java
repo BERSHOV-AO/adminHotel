@@ -1,12 +1,8 @@
 package ru.senla.repository.room_history;
 
-import ru.senla.ConfigurationType;
-import ru.senla.InjectDependency;
 import ru.senla.datasource.room_history.IRoomsHistoryDatasource;
-import ru.senla.datasource.room_history.RoomsHistoryDatasourceImpl;
-import ru.senla.di_factory.InjectByType;
-import ru.senla.di_factory.ObjectFactory;
-import ru.senla.di_factory.Singleton;
+import ru.senla.di.InjectByType;
+import ru.senla.di.Singleton;
 import ru.senla.entities.Guest;
 import ru.senla.entities.Room;
 import ru.senla.entities.RoomHistory;
@@ -18,21 +14,10 @@ import java.util.List;
 @Singleton
 public class RoomsHistoryRepositoryImpl implements IRoomsHistoryRepository {
 
-  //  @InjectDependency(ConfigurationType.DATASOURCE_ROOM_HISTORY)
-  //  IRoomsHistoryDatasource roomsHistoryDatasource = RoomsHistoryDatasourceImpl.getInstance();
-  @InjectByType
-  IRoomsHistoryDatasource roomsHistoryDatasource; // = ObjectFactory.getInstance().createObject(IRoomsHistoryDatasource.class);
-
-    private static RoomsHistoryRepositoryImpl instance;
+    @InjectByType
+    IRoomsHistoryDatasource roomsHistoryDatasource;
 
     public RoomsHistoryRepositoryImpl() {
-    }
-
-    public static RoomsHistoryRepositoryImpl getInstance() {
-        if (instance == null) {
-            instance = new RoomsHistoryRepositoryImpl();
-        }
-        return instance;
     }
 
     @Override

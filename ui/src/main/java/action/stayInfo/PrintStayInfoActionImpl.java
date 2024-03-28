@@ -1,7 +1,7 @@
 package action.stayInfo;
 
 import action.api.IAction;
-import ru.senla.di_factory.InjectByType;
+import ru.senla.di.InjectByType;
 import ru.senla.stay_info.IStayInfoService;
 import utils.Printer;
 

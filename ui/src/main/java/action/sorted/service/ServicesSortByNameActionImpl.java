@@ -1,7 +1,7 @@
 package action.sorted.service;
 
 import action.api.IAction;
-import ru.senla.di_factory.InjectByType;
+import ru.senla.di.InjectByType;
 import ru.senla.service.IServicesService;
 
 public class ServicesSortByNameActionImpl implements IAction {

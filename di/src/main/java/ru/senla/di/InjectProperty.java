@@ -1,8 +1,9 @@
-package ru.senla.di_factory;
+package ru.senla.di;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Singleton {
+public @interface InjectProperty {
+    String value() default "";
 }

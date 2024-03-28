@@ -1,24 +1,17 @@
 package menu;
 
-import ru.senla.di_factory.Application;
-import ru.senla.di_factory.ApplicationContext;
-import ru.senla.di_factory.ConfigLoader;
-import ru.senla.di_factory.InjectByType;
-import ru.senla.guest.GuestsServiceImpl;
+import ru.senla.di.ApplicationContext;
+import ru.senla.di.InjectByType;
 import ru.senla.guest.IGuestsService;
 import ru.senla.room.IRoomsService;
-import ru.senla.room.RoomsServiceImpl;
 import ru.senla.service.IServicesService;
-import ru.senla.service.ServicesServiceImpl;
 import ru.senla.stay_info.IStayInfoService;
-import ru.senla.stay_info.StayInfoServiceImpl;
 import utils.InputReader;
 
 import java.util.Scanner;
 
 public class MenuController {
     ApplicationContext context;
-
 
     @InjectByType
     IRoomsService roomsService;
@@ -31,9 +24,9 @@ public class MenuController {
 
 
     public void run() {
-         Builder builder = context.getObject(Builder.class);
-         builder.getContext(context);
-         Navigator navigator = context.getObject(Navigator.class);
+        Builder builder = context.getObject(Builder.class);
+        builder.getContext(context);
+        Navigator navigator = context.getObject(Navigator.class);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -64,6 +57,7 @@ public class MenuController {
         scanner.close();
         System.out.println("Goodbye!");
     }
+
     public void getAppContext(ApplicationContext applicationContext) {
         this.context = applicationContext;
     }

@@ -1,6 +1,6 @@
 package ru.senla.datasource.guest;
 
-import ru.senla.di_factory.Singleton;
+import ru.senla.di.Singleton;
 import ru.senla.entities.Guest;
 
 import java.util.ArrayList;

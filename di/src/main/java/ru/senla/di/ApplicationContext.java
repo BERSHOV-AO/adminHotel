@@ -1,4 +1,4 @@
-package ru.senla.di_factory;
+package ru.senla.di;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +31,6 @@ public class ApplicationContext {
 
         if (implClass.isAnnotationPresent(Singleton.class)) {
             cache.put(type, t);
-            System.out.println(t);
-            System.out.println("cache: " + cache);
         }
         return t;
     }

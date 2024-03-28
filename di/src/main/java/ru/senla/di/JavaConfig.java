@@ -1,4 +1,4 @@
-package ru.senla.di_factory;
+package ru.senla.di;
 
 import lombok.Getter;
 import org.reflections.Reflections;

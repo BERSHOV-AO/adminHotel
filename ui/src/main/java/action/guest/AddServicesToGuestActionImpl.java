@@ -1,7 +1,7 @@
 package action.guest;
 
 import action.api.IAction;
-import ru.senla.di_factory.InjectByType;
+import ru.senla.di.InjectByType;
 import ru.senla.guest.IGuestsService;
 import ru.senla.service.IServicesService;
 import utils.InputReader;

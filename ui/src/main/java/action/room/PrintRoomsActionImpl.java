@@ -2,7 +2,7 @@ package action.room;
 
 import action.api.IAction;
 
-import ru.senla.di_factory.InjectByType;
+import ru.senla.di.InjectByType;
 import ru.senla.room.IRoomsService;
 
 public class PrintRoomsActionImpl implements IAction {

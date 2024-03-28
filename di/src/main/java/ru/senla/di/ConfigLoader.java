@@ -1,4 +1,4 @@
-package ru.senla.di_factory;
+package ru.senla.di;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -29,7 +29,6 @@ public class ConfigLoader {
         } catch (IOException e) {
             System.err.println("Error loading config file: " + e.getMessage());
         }
-
         return ifc2ImplClass;
     }
 }

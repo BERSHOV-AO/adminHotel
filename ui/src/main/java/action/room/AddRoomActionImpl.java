@@ -1,7 +1,7 @@
 package action.room;
 
 import action.api.IAction;
-import ru.senla.di_factory.InjectByType;
+import ru.senla.di.InjectByType;
 import ru.senla.enums.RoomStatus;
 import ru.senla.room.IRoomsService;
 import utils.InputReader;

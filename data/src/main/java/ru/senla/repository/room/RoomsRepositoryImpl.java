@@ -1,14 +1,8 @@
 package ru.senla.repository.room;
 
-import ru.senla.ConfigurationType;
-import ru.senla.InjectDependency;
 import ru.senla.datasource.room.IRoomsDatasource;
-import ru.senla.datasource.room.RoomsDatasourceImpl;
-//import ru.senla.di.InjectByType;
-//import ru.senla.di_factory.ObjectFactory;
-import ru.senla.di_factory.InjectByType;
-import ru.senla.di_factory.ObjectFactory;
-import ru.senla.di_factory.Singleton;
+import ru.senla.di.InjectByType;
+import ru.senla.di.Singleton;
 import ru.senla.entities.Room;
 import ru.senla.enums.RoomStatus;
 import ru.senla.utils.csv_utils.RoomImportExport;
@@ -22,25 +16,10 @@ import java.util.stream.Collectors;
 @Singleton
 public class RoomsRepositoryImpl implements IRoomsRepository {
 
-    //    @InjectDependency(ConfigurationType.DATASOURCE_ROOM)
-//    IRoomsDatasource roomsDatasource;
-//    @InjectByType
     @InjectByType
-    IRoomsDatasource roomsDatasource; // = ObjectFactory.getInstance().createObject(IRoomsDatasource.class);
-
-  //  @InjectByType
-//    IRoomsDatasource roomsDatasource = RoomsDatasourceImpl.getInstance();
-
-    private static RoomsRepositoryImpl instance;
+    IRoomsDatasource roomsDatasource;
 
     public RoomsRepositoryImpl() {
-    }
-
-    public static RoomsRepositoryImpl getInstance() {
-        if (instance == null) {
-            instance = new RoomsRepositoryImpl();
-        }
-        return instance;
     }
 
     @Override

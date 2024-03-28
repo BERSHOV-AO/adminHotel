@@ -1,7 +1,7 @@
 package action.sorted.guest;
 
 import action.api.IAction;
-import ru.senla.di_factory.InjectByType;
+import ru.senla.di.InjectByType;
 import ru.senla.guest.IGuestsService;
 
 public class GuestsSortByNameActionImpl implements IAction {

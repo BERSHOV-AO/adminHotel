@@ -1,6 +1,6 @@
 package ru.senla.datasource.room;
 
-import ru.senla.di_factory.Singleton;
+import ru.senla.di.Singleton;
 import ru.senla.entities.Room;
 
 import java.util.ArrayList;
@@ -11,16 +11,7 @@ public class RoomsDatasourceImpl implements IRoomsDatasource {
 
     private List<Room> rooms = new ArrayList<>();
 
-    private static RoomsDatasourceImpl instance;
-
     public RoomsDatasourceImpl() {
-    }
-
-    public static RoomsDatasourceImpl getInstance() {
-        if (instance == null) {
-            instance = new RoomsDatasourceImpl();
-        }
-        return instance;
     }
 
     @Override

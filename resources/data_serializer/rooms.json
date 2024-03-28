@@ -2,30 +2,30 @@
   "id" : 1,
   "roomNumber" : 1,
   "stars" : 1,
-  "price" : 1.0,
+  "price" : 5740.0,
   "capacity" : 1,
   "status" : "EMPTY"
 }, {
   "id" : 2,
   "roomNumber" : 2,
   "stars" : 2,
-  "price" : 2.0,
+  "price" : 3500.0,
   "capacity" : 2,
-  "status" : "OCCUPIED"
+  "status" : "EMPTY"
 }, {
   "id" : 3,
   "roomNumber" : 3,
   "stars" : 3,
-  "price" : 3.0,
+  "price" : 7300.0,
   "capacity" : 3,
-  "status" : "UNDER_REPAIR"
+  "status" : "EMPTY"
 }, {
   "id" : 71,
   "roomNumber" : 71,
   "stars" : 5,
   "price" : 5500.0,
   "capacity" : 4,
-  "status" : "EMPTY"
+  "status" : "OCCUPIED"
 }, {
   "id" : 55,
   "roomNumber" : 55,
